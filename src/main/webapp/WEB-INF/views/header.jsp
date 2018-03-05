@@ -29,7 +29,7 @@
 		}
 		.sidenav {
 			height: 100%;
-			width: 0;
+			width: 240px;
 			position: fixed;
 			z-index: 1;
 			top: 0;
@@ -37,6 +37,7 @@
 			background:hsla(0, 0%, 93.3%, .8);
 			overflow-x: hidden;
 			padding-top: 60px;
+			display:none;
 		}
 
 		.sidenav a {
@@ -76,10 +77,11 @@
 	</style>
 
 </head>
+
 <body>
 
-<div id="mySidenav" class="sidenav" style="margin-top: 60px;">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<div id="mySidenav" class="sidenav" style="margin-top: 60px;display:none">
+  <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
   <div class="column">
 	  <a href="index2.html">홈</a>
 	  <a href="#">인기</a>
@@ -109,14 +111,10 @@
 	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0px;height: 60px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);">
 		<div class="container-fluid" style="padding-right: 30px;padding-left: 30px;height:60px">
 			<div class="navbar-header" style="margin-top: 5px;display:flex;width:50%">
-				<div class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu">	
-					<span class="bar1"></span>
-					<span class="bar2"></span>
-					<span class="bar3"></span>
-			    </div>
-				 <a class="navbar-brand top" style="margin-right:20px" onclick="openNav()">
-					<img src="/finalp/resources/img/menu.png" alt="" style="margin-top: -2px;">
-				</a>
+				
+				<!--  <a class="navbar-brand top" href="#" style="margin-right:20px" onclick="openNav()"> -->
+					<img id="toggle" src="/finalp/resources/img/menu.png" alt="" style="margin-right:20px;float: left;height: 50px;padding: 15px 15px;font-size: 18px;line-height: 20px;" onclick="myFunction();">
+			<!-- 	</a> -->
 				<a class="navbar-brand top" href="#">
 					<img src="/finalp/resources/img/logo2.png" alt="" style="margin-top: -10px;">
 				</a>
@@ -159,15 +157,7 @@
 		</div><!-- /.container-fluid -->
 	</nav>
   
-
-
-
-   
-
-	
-	
-	
-	<!-- About -->
+<!-- About -->
 	<section class="about" id="about">
 		<div class="container about">
 			<div class="row">
@@ -247,7 +237,13 @@
 	<a href="#page-top" class="cd-top">Top</a>
 
 
+   
 
+	
+	
+	
+	
+	
 	<script>
 		// For Demo purposes only (show hover effect on mobile devices)
 		[].slice.call( document.querySelectorAll('a[href="#"') ).forEach( function(el) {
@@ -255,27 +251,35 @@
 		} );
 	</script>
 
-  	<script src="/finalp/resources/js/jquery.js"></script>
+
+
+
+    <!-- script -->
+    <script src="/finalp/resources/js/jquery.js"></script>
     <script src="/finalp/resources/js/bootstrap.min.js"></script>
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
 	
 	
 
+	<script>
+
+
+</script>
+
 <script>
 
-function openNav() {
-    document.getElementById("mySidenav").style.width = "240px";
-    document.getElementById("main").style.marginLeft = "240px";
-    
+function myFunction() {
+    var x = document.getElementById("mySidenav");
+	var y = document.getElementById("main");
+    if (x.style.display == "none") {
+        x.style.display = "block";
+		y.style.marginLeft = "240px";
+    } else {
+        x.style.display = "none";
+		y.style.marginLeft = "0";
+    }
 }
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-
-}
-
 
 </script>
 </body>
