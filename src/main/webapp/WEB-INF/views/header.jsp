@@ -24,7 +24,7 @@
 	<style>
 
 		body{
-			background-color:hsla(0, 0%, 93.3%, .4);
+			/*background-color:hsla(0, 0%, 93.3%, .4);*/
 		}
 		.sidenav {
 			height: 100%;
@@ -105,7 +105,7 @@
 				
 				<img id="toggle" src="/finalp/resources/img/menu.png" alt="" style="margin-right:20px;float: left;height: 50px;padding: 15px 15px;font-size: 18px;line-height: 20px;" onclick="myFunction();">
 				<a class="navbar-brand top" href="#">
-					<img src="/finalp/resources/img/logo2.png" alt="" style="margin-top: -10px;">
+					<img src="/finalp/resources/img/logo2.PNG" alt="" style="margin-top: -10px;">
 				</a>
 
 				<form style="margin-left:50px;margin-top:7px;display:flex">
