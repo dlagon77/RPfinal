@@ -29,22 +29,5 @@
 		]]>
 	</select>
 	
-	<insert id="InsertQb" parameterType="qboard">
-		<![CDATA[
-			INSERT INTO QNABOARD ( q_no,
-					BOARD_WRITER,
-					BOARD_TITLE,
-					BOARD_CONTENT,
-					BOARD_ORIGINAL_FILENAME,
-					BOARD_RENAME_FILENAME,
-					BOARD_REPLY_REF,
-					BOARD_REPLY_LEV,
-					BOARD_REPLY_SEQ,
-					BOARD_READCOUNT,
-					BOARD_DATE)
-			VALUES (SEQ_BNUM.NEXTVAL, #{board_writer}, 
-			#{board_title}, #{board_content}, #{board_original_filename},
-			 #{board_rename_filename}, 0, 0, 0, 0, SYSDATE)		
-		]]>
-	</insert> 
+	
 </mapper>
