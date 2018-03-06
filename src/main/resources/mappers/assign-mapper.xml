@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assignMapper">
+	
+	<resultMap id="assResultMap" type="Assignment">
+  		<result property="ass_no" column="ass_no"/>
+  		<result property="ass_comment" column="ass_comment"/>
+  		<result property="ass_reg_date" column="ass_reg_date"/>  
+  		<result property="ass_date" column="ass_date"/>
+  		<result property="ass_orfile" column="ass_orfile"/>  	
+  		<result property="ass_refile" column="ass_refile"/>
+  		<result property="ass_cate" column="ass_cate"/>  
+  		<result property="ass_title" column="ass_title"/>
+  		<result property="ass_cor_cnt" column="ass_cor_cnt"/>  	
+  		<result property="ass_pro" column="ass_pro"/>
+  		<result property="ass_answer" column="ass_answer"/>  
+  		<result property="ass_hint" column="ass_hint"/>
+  		<result property="ass_res_cod" column="ass_res_cod"/>  	
+  		<result property="ass_res_ans" column="ass_res_ans"/>
+  		<result property="ass_writer" column="ass_writer"/>  
+  		<result property="ass_maker" column="ass_maker"/>
+  		<result property="ass_lec_id" column="ass_lec_id"/>  	
+  		<result property="ass_tcate_id" column="ass_tcate_id"/>  	
+  
+	</resultMap>
+	
+	<!-- <select id="selectAll" resultMap="boardResultMap">
+		<![CDATA[
+			SELECT *
+			FROM BOARD	
+			ORDER BY BOARD_NUM DESC			
+		]]>
+	</select> -->
+	
+	<!-- 페이징 처리용 -->
+	<select id="selectAll" resultMap="assResultMap" resultType="list" 
+		parameterType="java.util.HashMap"> 
+		<![CDATA[ 
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM, ASS_NO, 
+        ASS_COMMENT, ASS_REG_DATE, ASS_DATE,  ASS_ORFILE,
+        ASS_REFILE, ASS_CATE, ASS_TITLE, ASS_COR_CNT,
+        ASS_PRO, ASS_ANSWER, ASS_HINT, ASS_RES_COD,
+        ASS_RES_ANS, ASS_WRITER, ASS_MAKER, ASS_LEC_ID
+			   FROM (SELECT ASS_NO, 
+                    ASS_COMMENT, ASS_REG_DATE, ASS_DATE,  ASS_ORFILE,
+                    ASS_REFILE, ASS_CATE, ASS_TITLE, ASS_COR_CNT,
+                    ASS_PRO, ASS_ANSWER, ASS_HINT, ASS_RES_COD,
+                    ASS_RES_ANS, ASS_WRITER, ASS_MAKER, ASS_LEC_ID
+			   		  FROM ASSIGNMENT)) 
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow} 
+		]]>
+	</select>
+	
+	<select id="listCount" resultType="integer"> 
+		<![CDATA[
+			SELECT COUNT(*) FROM ASSIGNMENT 
+		]]>		
+	</select>
+
+</mapper>

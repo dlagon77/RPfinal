@@ -17,6 +17,8 @@
 <br>준우임돠~
 <br>지혱
 </h1>
+<a href="assInsertForm.do">for assignment click here</a><br>
+<a href="assList.do">for assignment LIST click here</a><br>
 </div>
 </body>
 </html>
