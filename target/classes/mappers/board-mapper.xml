@@ -29,9 +29,9 @@
 		]]>
 	</select>
 	
-	<!--  <insert id="boardInsert" parameterType="board">
+	<insert id="InsertQb" parameterType="qboard">
 		<![CDATA[
-			INSERT INTO BOARD ( BOARD_NUM,
+			INSERT INTO QNABOARD ( q_no,
 					BOARD_WRITER,
 					BOARD_TITLE,
 					BOARD_CONTENT,
@@ -46,5 +46,5 @@
 			#{board_title}, #{board_content}, #{board_original_filename},
 			 #{board_rename_filename}, 0, 0, 0, 0, SYSDATE)		
 		]]>
-	</insert> -->
+	</insert> 
 </mapper>
