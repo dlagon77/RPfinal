@@ -36,6 +36,10 @@ section {
 
 a,a:link {
 	color: #222;
+	
+}
+.writeButton{
+	float:right;
 }
 
 a:hover,a:focus {

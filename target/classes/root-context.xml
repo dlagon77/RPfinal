@@ -11,8 +11,8 @@
 		value="oracle.jdbc.driver.OracleDriver">
 	</property>
 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-	<property name="username" value="student"></property>
-	<property name="password" value="student"></property>
+	<property name="username" value="finalp"></property>
+	<property name="password" value="finalp"></property>
 	</bean>
 
 	<bean id="sqlSession"

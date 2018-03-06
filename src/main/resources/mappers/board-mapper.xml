@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	
+	<resultMap id="QnaboardResultMap" type="QnaBoard">
+  		<result property="q_no" column="q_no"/>
+  		<result property="q_title" column="q_title"/>
+  		<result property="q_content" column="q_content"/>
+  		<result property="q_read_cnt" column="q_read_cnt"/>
+  		<result property="q_date" column="q_date"/>
+  		<result property="q_writer" column="q_writer"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="QnaboardResultMap">
+		<![CDATA[
+			SELECT *
+			FROM QNABOARD	
+			ORDER BY Q_NO DESC			
+		]]>
+	</select>
+	
+	<select id="selectQbOne" resultMap="QnaboardResultMap">
+		<![CDATA[
+			SELECT * 
+			FROM QNABOARD
+			WHERE q_no = #{q_no}
+		]]>
+	</select>
+	
+	<!--  <insert id="boardInsert" parameterType="board">
+		<![CDATA[
+			INSERT INTO BOARD ( BOARD_NUM,
+					BOARD_WRITER,
+					BOARD_TITLE,
+					BOARD_CONTENT,
+					BOARD_ORIGINAL_FILENAME,
+					BOARD_RENAME_FILENAME,
+					BOARD_REPLY_REF,
+					BOARD_REPLY_LEV,
+					BOARD_REPLY_SEQ,
+					BOARD_READCOUNT,
+					BOARD_DATE)
+			VALUES (SEQ_BNUM.NEXTVAL, #{board_writer}, 
+			#{board_title}, #{board_content}, #{board_original_filename},
+			 #{board_rename_filename}, 0, 0, 0, 0, SYSDATE)		
+		]]>
+	</insert> -->
+</mapper>
