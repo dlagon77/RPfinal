@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 <td>${ass.ass_title }</td></tr>
 <tr><th>작성자</th>
   <td>${ass.ass_writer }</td></tr>
-<%--   <c:if test="${ass.board_level eq 0}"> --%>
+
 <tr><th>첨부파일</th>
    <td>
 			<c:if test="${!empty ass.ass_orfile }">
@@ -30,7 +31,7 @@
 		</c:if> 
    </td>
 </tr>
-<!-- </c:if> -->
+
 <tr><th>내 용</th>
    <td>${ass.ass_comment }</td></tr>
 <%--    <c:if test="${ bone.board_level<2}">
