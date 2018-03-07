@@ -150,6 +150,12 @@ public class AssignController{
 		return "ass/assListView";
 	}
 	
+	@RequestMapping("assDetailForm.do")
+	public String assSelectOneMethod(Assignment ass,Model model) {
+		Assignment ass1=assignService.selectAss(ass);
+		model.addAttribute("ass",ass1);
+		return "ass/assDetail";
+	}
 	
 	
 	

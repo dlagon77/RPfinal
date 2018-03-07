@@ -23,4 +23,8 @@ public class AssignDao {
 		return a;
 	}
 
+	public Assignment selectAss(Assignment ass) {
+		return mybatis.selectOne("assignMapper.selectAss",ass);
+	}
+
 }

@@ -59,5 +59,10 @@
 			SELECT COUNT(*) FROM ASSIGNMENT 
 		]]>		
 	</select>
+	<select id="selectAss" resultType="Assignment" parameterType="Assignment">
+	<![CDATA[
+		SELECT * FROM ASSIGNMENT WHERE ASS_NO=#{ass_no}
+	]]>
+	</select>
 
 </mapper>

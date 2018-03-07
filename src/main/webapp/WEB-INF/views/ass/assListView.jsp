@@ -33,14 +33,19 @@
 						<tr>
 							<td>${row.ass_no }</td>
 							<td class="title">
-							<c:if test="${empty loginUser }">${row.ass_title }</c:if>
-							<c:url var="bdetail" value="bdetail.do">
+<%-- 							<c:if test="${empty loginUser }">${row.ass_title }</c:if>
+							<c:url var="assdetail" value="assdetail.do">
 								<c:param name="currentPage" value="${currentPage }" />
 								<c:param name="ass_no" value="${row.ass_no }" />
 							</c:url>
 							<c:if test="${!empty loginUser }">
-								<a href="${bdetail }" name="title">${row.ass_title }</a>
-							</c:if>								
+								<a href="${assdetail }" name="title">${row.ass_title }</a>
+							</c:if>		 --%>	
+								<c:url var="assdetail" value="assDetailForm.do">
+								<c:param name="currentPage" value="${currentPage }" />
+								<c:param name="ass_no" value="${row.ass_no }" />	
+								</c:url>			
+								<a href="${assdetail }" name="title">${row.ass_title }</a>
 							</td>
 							<td>${row.ass_date }</td>
 						</tr>

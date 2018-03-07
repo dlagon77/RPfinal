@@ -26,5 +26,10 @@ public class AssignServiceImpl implements AssignService{
 		return assignDao.listCount();
 	}
 
+	@Override
+	public Assignment selectAss(Assignment ass) {
+		return assignDao.selectAss(ass);
+	}
+
 
 }
