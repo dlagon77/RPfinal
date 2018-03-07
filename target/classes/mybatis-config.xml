@@ -4,12 +4,15 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-
+		<typeAlias type="com.rp.finalp.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.rp.finalp.board.model.vo.QnaBoard" alias="QnaBoard" />
+		<typeAlias type="com.rp.finalp.assign.model.vo.Assignment" alias="Assignment" />
 
 	</typeAliases>
 
 	<mappers>
+		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" /> 
+		<mapper resource="mappers/assign-mapper.xml" /> 
 	</mappers>
 </configuration>

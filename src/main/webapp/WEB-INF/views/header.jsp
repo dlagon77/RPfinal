@@ -91,7 +91,7 @@
 	  <span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">aeoufseu</span>
 	    <a href="#">About</a>
 	    <a href="qblist.do">게시판</a>
-	    <a href="#">Clients</a>
+	    <a href="stinsertpage.do">Clients</a>
 	    <a href="#">Contact</a>
 	  </div>
 </div>
