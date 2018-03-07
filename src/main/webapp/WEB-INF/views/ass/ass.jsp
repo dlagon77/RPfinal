@@ -41,6 +41,7 @@
 	</div>
 	<div class="java" style="flaot:left;display:inline-block;border:1px solid black">
 		<h1> JAVA COMPILER</h1>
+		Enter Your Tutor_NO : <input type="text" id="tutorno" onblur="check()">
 		Enter Class Name : <input type="text" id="class" onblur="check()"> <br><br>
 		<button onclick="compile()">COMPILE</button>
 		<button onclick="run()">RUN</button>
@@ -49,7 +50,8 @@
 		<br>
 
 		<textarea rows="32" cols="65" id="maincode" name="maincode" style="overflow:auto;"></textarea> <br><br><br>
-		<textarea rows="16" cols="65" id="output" name="output" style="overflow:auto;"></textarea>
+		<textarea rows="16" cols="65" id="output" name="output" style="overflow:auto;"></textarea> <br><br><br>
+		<button onclick="subass()">제출하기</button>
 	</div>
 </div>
 </body>

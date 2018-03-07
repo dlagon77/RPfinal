@@ -157,7 +157,22 @@ public class AssignController{
 		return "ass/assDetail";
 	}
 	
-	
+	@RequestMapping(value = "submitAssign.do", method = RequestMethod.POST)
+	public void submitAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		String path = request.getSession().getServletContext().getRealPath("/");
+		PrintWriter out = response.getWriter();
+		String filename = request.getParameter("className")+".java";
+		String tutorno = request.getParameter("tutorno");
+		File fn = new File(path+"//Files//Classes//"+tutorno);
+		fn.mkdirs();
+		fn = new File(path+"//Files//Classes//"+tutorno+"//"+filename);
+		FileOutputStream fos = new FileOutputStream(fn);
+		System.out.println(request.getParameter("code"));
+		byte[] sourcecode = request.getParameter("code").getBytes();
+		fos.write(sourcecode);
+
+		fos.close();
+	}
 	
 	
 	

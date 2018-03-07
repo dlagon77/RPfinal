@@ -73,3 +73,32 @@ function empty() {
   	document.getElementById("output").value="";
 	
 }
+
+function subass() {
+	console.log("submiting");
+	if(document.getElementById("maincode")==""){
+		alert("Insert some code please !");
+	}
+	else{
+		//code = maincode
+		//classname = class
+		var code=encodeURIComponent(document.getElementById("maincode").value);
+		var url = "submitAssign.do?code=" + code + "&className=" + document.getElementById("class").value + "&tutorno=" + document.getElementById("tutorno").value;
+		
+		if(window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }  
+
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+            }
+        }
+        xmlhttp.open("POST",url,true);
+        xmlhttp.send();
+	}
+	console.log("submited !!");
+}
