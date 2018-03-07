@@ -318,16 +318,16 @@
 				<h2 style="width:8%;font-weight:600">풀기</h2>
 				</div>
 				<div style="display:flex;margin-bottom: 20px;">
-					<p>Enter Class Name : &nbsp;</p>
-					<input type="text" id="class">
+					<p>Enter Your Tutor_NO : <p><input type="text" id="tutorno" onblur="check()">
+					<p>Enter Class Name : <p><input type="text" id="class" onblur="check()">
 				</div>
 				<div style="display:flex;width: fit-content;">
-					<button class="compileButton">Compile</button>
-					<button class="compileButton">Run</button>
-					<button class="compileButton">Clear</button>
-					<button class="compileButton">제출</button>
+					<button class="compileButton" onclick="compile()">Compile</button>
+					<button class="compileButton" onclick="run()">Run</button>
+					<button class="compileButton" onclick="empty()">Clear</button>
+					<button class="compileButton" onclick="subass()">제출</button>
 				</div>
-				<textarea class="form-control" aria-label="With textarea" rows="30"></textarea>
+				<textarea class="form-control" aria-label="With textarea" rows="30" id="maincode" name="maincode" style="overflow:auto;"></textarea>
 				
 				</section>
 			</div>
@@ -335,7 +335,7 @@
 				<section id="sampleoutput" style="padding-top:30px">
 				<div style="padding-top:179px"></div>
 				
-				<textarea class="form-control" aria-label="With textarea" rows="30"></textarea>
+				<textarea class="form-control" aria-label="With textarea" rows="30" id="output" name="output" style="overflow:auto;"></textarea>
 				</section>
 			</div>
 				
@@ -398,6 +398,7 @@
     <script src="/finalp/resources/js/bootstrap.min.js"></script>
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
+	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
 	
 
 	
