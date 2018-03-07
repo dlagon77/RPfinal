@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Tutor Home</title>
-<style>
+<style type="text/css">
 	#navbar{
 		 overflow: hidden;
 	}
@@ -16,7 +16,7 @@
 		width: 100%
 	}
 	.navbar-brand{
-			font-size:16px;
+			font-size:16px!important;
 	}
 		.navbar-brand .a:hover {
 			color:black;

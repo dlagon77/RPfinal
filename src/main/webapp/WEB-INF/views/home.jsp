@@ -19,6 +19,8 @@
 </h1>
 <a href="assInsertForm.do">for assignment click here</a><br>
 <a href="assList.do">for assignment LIST click here</a><br>
+<a href="taskList.do">for taskList click here</a>
+<a href="taskDetail.do">for taskDetail click here</a>
 </div>
 </body>
 </html>
