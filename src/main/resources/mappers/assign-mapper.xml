@@ -50,7 +50,7 @@
                     ASS_PRO, ASS_ANSWER, ASS_HINT, ASS_RES_COD,
                     ASS_RES_ANS, ASS_WRITER, ASS_MAKER, ASS_LEC_ID
 			   		  FROM ASSIGNMENT)) 
-		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow} 
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}  ORDER BY RNUM DESC
 		]]>
 	</select>
 	
