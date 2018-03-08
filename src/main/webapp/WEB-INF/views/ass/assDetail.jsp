@@ -44,10 +44,10 @@
 									<c:param name="board_num" value="${bone.board_num }"/>
 									</c:url>
 									<a href="${bup}">수정페이지로 이동</a>&nbsp; 
-				<c:url var="bdel" value="bdelete.do">
-									<c:param name="board_num" value="${bone.board_num }"/>
+				<c:url var="assdel" value="assdelete.do">
+									<c:param name="ass_no" value="${ass.ass_no}"/>
 									</c:url>
-									<a href="${bdel}">글 삭제</a>	<!-- 삭제할 땐 레벨이 2 미만이면 이후 레벨들도 같이 지워져야 됨 -->
+									<a href="${assdel}">글 삭제</a>	<!-- 삭제할 땐 레벨이 2 미만이면 이후 레벨들도 같이 지워져야 됨 -->
 	</c:if>
 </th></tr>
   

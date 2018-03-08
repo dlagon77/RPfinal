@@ -31,5 +31,11 @@ public class AssignServiceImpl implements AssignService{
 		return assignDao.selectAss(ass);
 	}
 
+	@Override
+	public int assDeleteone(Assignment ass) {
+		return assignDao.assDeleteone(ass);
+		
+	}
+
 
 }

@@ -64,5 +64,12 @@
 		SELECT * FROM ASSIGNMENT WHERE ASS_NO=#{ass_no}
 	]]>
 	</select>
+	<delete id="assDelete" parameterType="Assignment">
+		<![CDATA[
+		DELETE FROM ASSIGNMENT WHERE ASS_NO=#{ass_no}
+		]]>
+	
+	</delete>
+
 
 </mapper>

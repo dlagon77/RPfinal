@@ -1,6 +1,7 @@
 package com.rp.finalp.assign.controller;
 
 import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -231,6 +232,13 @@ public class AssignController{
 		   e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping("/assdelete.do")
+	public String assdeleteMethod(Assignment ass) {
+		System.out.println(ass);
+		assignService.assDeleteone(ass);
+		return "redirect:assList.do";
 	}
 	
 	

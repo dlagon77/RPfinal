@@ -26,4 +26,8 @@ public class AssignDao {
 		return mybatis.selectOne("assignMapper.selectAss",ass);
 	}
 
+	public int assDeleteone(Assignment ass) {
+		return mybatis.delete("assignMapper.assDelete",ass);
+	}
+
 }
