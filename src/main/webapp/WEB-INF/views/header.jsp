@@ -108,8 +108,8 @@
 			<div class="navbar-header" style="margin-top: 5px;display:flex;width:50%">
 				
 				<img id="toggle" src="/finalp/resources/img/menu.png" alt="" style="margin-right:20px;float: left;height: 50px;padding: 15px 15px;font-size: 18px;line-height: 20px;" onclick="myFunction();">
-				<a class="navbar-brand top" href="#">
-					<img src="/finalp/resources/img/logo2.PNG" alt="" style="margin-top: -10px;">
+				<a href="home.do">
+					<img src="/finalp/resources/img/logo2.PNG" alt="">
 				</a>
 
 				<form style="margin-left:50px;margin-top:7px;display:flex">
