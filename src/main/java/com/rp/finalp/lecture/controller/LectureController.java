@@ -32,4 +32,9 @@ public class LectureController {
 		return "tutor/tutorListView";
 	}
 	
+	@RequestMapping("testDetailView.do")
+	public String testDetailViewMethod() {
+		return "tutor/testDetailView";
+	}
+	
 }

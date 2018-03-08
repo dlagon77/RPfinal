@@ -22,6 +22,7 @@
 <a href="taskList.do">for taskList click here</a><br>
 <a href="taskDetail.do">for taskDetail click here</a><br>
 <a href="tutorHome.do">for tutorHome click here</a><br>
+<a href="testDetailView.do">for testDetailView click here</a><br>
 <!doctype html>
 <html lang="en">
  <head>

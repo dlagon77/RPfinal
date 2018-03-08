@@ -190,8 +190,8 @@
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
 			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
 			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span><div class="selected"></div></a>
 
 			  <form style="margin-top:7px;display:flex">
 			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
@@ -290,15 +290,6 @@
 				</div>
 			</section>
 
-			<section id="description" style="padding-top:30px">
-				<div class="headline">
-					<h2 style="width: 4%;font-weight:600">Hint</h2>
-				</div>
-				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p>두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
-				</div>
-			</section>
-
 
 			<section id="description" style="padding-top:30px">
 				<div class="headline">
@@ -341,7 +332,19 @@
 			</div>
 				
 			</div>
-			<hr>
+			
+
+			<section id="description" style="padding-top:30px">
+				<div class="headline">
+					<h2 style="width: 19%;font-weight:600">관련 강의 및 카테고리</h2>
+				</div>
+				<div style="font-size:medium; line-height:30px;" id="problem_description">
+					<ul>
+							<li><a href="/problem/1001">1001번. A-B</a></li>
+							<li><a href="/problem/1008">1008번. A/B</a></li>
+					</ul>
+				</div>
+			</section>
 			
 
 
