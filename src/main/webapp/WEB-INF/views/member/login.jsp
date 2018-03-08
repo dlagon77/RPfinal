@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">로그인 화면</div>
       <div class="card-body">
-        <form>
+        <form action="login.do" method="post">
           <div class="form-group">
             <label for="exampleInputEmail1">아이디입력</label>
             <input class="form-control" id="exampleInputEmail1" type="email" name="mem_id" aria-describedby="emailHelp" placeholder="아이디입력" required>
@@ -33,7 +33,7 @@
                 <input class="form-check-input" type="checkbox"> 비밀번호 기억하기 </label>
             </div>
           </div> -->
-          <a class="btn btn-primary btn-block" href="index.jsp">로그인</a>
+          <input type="submit" class="btn btn-primary btn-block">로그인
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="/semi/views/login/enrolll.html">회원가입하기</a>

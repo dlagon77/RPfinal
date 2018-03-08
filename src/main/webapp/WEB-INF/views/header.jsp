@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,9 +94,12 @@
 	    <a href="qblist.do">게시판</a>
 	    <a href="stinsertpage.do">Clients</a>
 	    <a href="#">Contact</a>
+	    <a href="stumypage.do">수강생 마이페이지 테스트</a>
+	    <a href="tumypage.do">강사 마이페이지 테스트</a>
+   
 	  </div>
+	    
 </div>
-
 
 <div id="main" style="margin-top:60px">
 
@@ -127,8 +131,16 @@
 				</div>
 			   </button>
 			   </li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#portfolio">Logout</a></li>
+			   <c:if test="${ sessionScope.loginUser eq null }">
+			   		<li><a href="#about">/사용자이름칸/</a></li>
+					<li><a href="loginpage.do">login</a></li>
+			   </c:if>
+				<c:if test="${ sessionScope.loginUser ne null }">
+				  	<li><a href="#about">${loginUser.mem_name}</a></li>
+					<li><a href="logout.do">Logout</a></li>
+				</c:if>
+
+				
 			  </ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
