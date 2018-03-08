@@ -29,9 +29,9 @@
 		<tbody>
 			<c:choose>
 				<c:when test="${fn:length(assList) > 0}">
-					<c:forEach items="${assList }" var="row">
+					<c:forEach items="${assList}" var="row">
 						<tr>
-							<td>${row.ass_no }</td>
+							<td>${row.ass_no}</td>
 							<td class="title">
 <%-- 							<c:if test="${empty loginUser }">${row.ass_title }</c:if>
 							<c:url var="assdetail" value="assdetail.do">
@@ -45,7 +45,7 @@
 								<c:param name="currentPage" value="${currentPage }" />
 								<c:param name="ass_no" value="${row.ass_no }" />	
 								</c:url>			
-								<a href="${assdetail }" name="title">${row.ass_title }</a>
+								<a href="${assdetail}" name="title">${row.ass_title }</a>
 							</td>
 							<td>${row.ass_date }</td>
 						</tr>

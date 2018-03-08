@@ -20,11 +20,11 @@
 <tr><th>첨부파일</th>
    <td>
 			<c:if test="${!empty ass.ass_orfile }">
-			<c:url var="downfile" value="assdownfile.do">
+			<c:url var="assdownfile" value="assdownfile.do">
 				<c:param name="rfile" value="${ass.ass_refile }" />
 				<c:param name="ofile" value="${ass.ass_orfile }" />
 			</c:url>
-			<a href="${downfile }">${ass.ass_orfile }</a>
+			<a href="${assdownfile }">${ass.ass_orfile }</a>
 			</c:if>
 			<c:if test="${empty ass.ass_orfile }">
 			첨부파일 없음
@@ -52,6 +52,5 @@
 </th></tr>
   
 </table>
-<c:import url="../footer.jsp" />
 </body>
 </html>

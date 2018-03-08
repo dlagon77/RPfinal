@@ -19,7 +19,6 @@ public class AssignDao {
 	
 	public int listCount() {
 		int a= mybatis.selectOne("assignMapper.listCount");
-		System.out.println(a);
 		return a;
 	}
 

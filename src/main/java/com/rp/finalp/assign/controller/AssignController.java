@@ -1,7 +1,9 @@
 package com.rp.finalp.assign.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.assign.service.AssignService;
@@ -170,10 +174,64 @@ public class AssignController{
 		System.out.println(request.getParameter("code"));
 		byte[] sourcecode = request.getParameter("code").getBytes();
 		fos.write(sourcecode);
-
+		String compilecmd ="javac -d " + path + "\\Files\\Classes\\" + tutorno + " \\" + path + "\\Files\\" + filename;
+		Process error = Runtime.getRuntime().exec(compilecmd);
+		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
+		String res="";
+		while(true){
+			String str = br.readLine();
+			if(str!=null){
+				res+=str;
+				res+="\n";
+			}
+			else{
+				break;
+			}
+		}
+		if(res.equals("")){
+			res="Compiled Successfully";
+		}
+		out.println(res);
+		br.close();
 		fos.close();
 	}
 	
+	@RequestMapping("/assdownfile.do")
+	public void fileDownload(
+			@RequestParam(value="rfile") String rfileName, 
+			@RequestParam(value="ofile") String ofileName,
+			HttpServletResponse response,
+			HttpServletRequest request){
+		// 프로젝트 내에 파일이 저장된 곳의 위치를 얻어옴
+		String saveFolder = request.getSession()
+			   .getServletContext().getRealPath("/Files/");			 
+		BufferedInputStream buf = null;
+		ServletOutputStream downOut = null;
+			 
+		try {		  
+		   downOut = response.getOutputStream();
+		   File downfile = new File(saveFolder + "/" + ofileName);
+		   response.setContentType("text/plain; charset=utf-8");		
+			//한글 파일명 인코딩 처리
+			response.addHeader("Content-Disposition", "attachment; filename=\"" + 
+			 new String(ofileName.getBytes("UTF-8"), "ISO-8859-1") + 
+			 "\"");
+		   response.setContentLength((int)downfile.length());
+				  
+		   FileInputStream input = new FileInputStream(downfile);
+		   buf = new BufferedInputStream(input);
+		   int readBytes = 0;
+
+		   while ((readBytes = buf.read()) != -1){
+			downOut.write(readBytes);
+		   }
+		   downOut.close();
+		   buf.close();
+		} catch (Exception e) {
+		   e.printStackTrace();
+		}
+		
+	}
 	
 	
 }
