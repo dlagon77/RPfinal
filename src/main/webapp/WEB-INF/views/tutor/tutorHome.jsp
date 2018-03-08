@@ -118,7 +118,8 @@
 			<div class="row">
 
 				<div class="col-md-7 big-letter">
-				<iframe width="734" height="400" src="https://www.youtube.com/embed/_ZPAReBKF6k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="734" height="400" src="https://www.youtube.com/embed/LrhWec60va4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				
 					<p style="font-size:14px;color:gray;float:right">
 						조회수 10회
 					</p>

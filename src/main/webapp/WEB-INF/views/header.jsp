@@ -84,7 +84,7 @@
 	  <div class="column">
 		  <a href="#">홈</a>
 		  <a href="#">인기</a>
-		  <a href="#">강사</a>
+		  <a href="tutorListView.do">강사</a>
 		  <a href="#">test</a>
 	  </div>
 

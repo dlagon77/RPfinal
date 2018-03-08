@@ -21,4 +21,15 @@ public class LectureController {
 	public String taskDetailViewMethod() {
 		return "tutor/taskDetail";
 	}
+	
+	@RequestMapping(value = "tutorHome.do", method = RequestMethod.GET)
+	public String tutorHomeMethod() {
+		return "tutor/tutorHome";
+	}
+	
+	@RequestMapping("tutorListView.do")
+	public String tutorListViewMethod() {
+		return "tutor/tutorListView";
+	}
+	
 }
