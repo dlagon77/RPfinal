@@ -116,24 +116,32 @@
 
 	<div style="background-color:hsla(0, 0%, 93.3%, .4);">
 	
-		<div class="container about" style="display:flex;width:1284px"">
 		
-			<div class="profile" style="height: 96px;position: relative;display: flex;">
-				<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-					<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+		<div class="container about" style="display:flex;width:1284px"">
+			<div class="col-lg-9" style="display: inline-flex">
+				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
+					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
+						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+					</div>
+				</div>
+
+				<div class="desc">
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">김재석</h3>
+					<h5 style="padding-left:10px;color:gray!important">수강생 25명</h5>
+				</div>
+
+				<div style="margin-top: 25px;margin-left:10px">
+					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
+						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
+					</button>
+				</div>
+
+			</div>
+			<div class="col-lg-3">
+				<div style="margin-left: 75%;margin-top: 25px;">
+					<button class="applyButton">수강신청</button>
 				</div>
 			</div>
-
-			<div class="desc">
-				<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;">김재석</h3>
-				<h5 style="padding-left:10px;color:gray">수강생 25명</h5>
-			</div>
-
-			<div style="margin-left: 75%;margin-top: 25px;">
-			<button class="applyButton">수강신청</button>
-			</div>
-
-
 		</div>
 
 	</div>
