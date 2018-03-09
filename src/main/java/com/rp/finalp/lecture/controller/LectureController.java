@@ -2,8 +2,10 @@ package com.rp.finalp.lecture.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rp.finalp.lecture.model.service.LectureService;
 
@@ -30,6 +32,19 @@ public class LectureController {
 	@RequestMapping("testDetailView.do")
 	public String testDetailViewMethod() {
 		return "tutor/testDetailView";
+	}
+	
+	@RequestMapping("lecturePlayList.do")
+	public String lecturePlayListView() {
+		
+		return "tutor/lecturePlayList";
+	}
+	
+	@RequestMapping("lectureDeatil.do")
+	public String lectureDeatilView(@RequestParam(value="videoId") String videoId, Model model) {
+		model.addAttribute("videoId", videoId);
+		
+		return "tutor/lectureDetail";
 	}
 	
 }
