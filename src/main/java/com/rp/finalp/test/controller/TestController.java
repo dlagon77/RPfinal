@@ -1,7 +1,6 @@
-package com.rp.finalp.assign.controller;
+package com.rp.finalp.test.controller;
 
 import java.io.BufferedInputStream;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,20 +23,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.rp.finalp.assign.model.service.AssignService;
 import com.rp.finalp.assign.model.vo.Assignment;
+import com.rp.finalp.test.model.service.TestService;
+import com.rp.finalp.test.model.vo.Test;
 
 @Controller
-public class AssignController{
+public class TestController {
 	@Autowired
-	private AssignService assignService;
+	private TestService testService;
 	
-	@RequestMapping(value = "assInsertForm.do", method = RequestMethod.GET)
-	public String assInsertFormMethod() {
-		return "ass/ass";
+	@RequestMapping(value = "testInsertForm.do", method = RequestMethod.GET)
+	public String testInsertFormMethod() {
+		return "test/test";
 	}
 	
-	@RequestMapping(value = "compileAssign.do", method = RequestMethod.POST)
+	@RequestMapping(value = "compileTest.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		String path = request.getSession().getServletContext().getRealPath("/");
 		PrintWriter out = response.getWriter();
@@ -77,8 +77,8 @@ public class AssignController{
 		*/
 	}
 	
-	@RequestMapping(value = "runAssign.do", method = RequestMethod.POST)
-	public void runAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+	@RequestMapping(value = "runTest.do", method = RequestMethod.POST)
+	public void runTestMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		PrintWriter out = response.getWriter();
 		String filename = request.getParameter("classname").trim();
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -121,15 +121,15 @@ public class AssignController{
 		}
 	}
 	
-	@RequestMapping("assList.do")
-	public String assListMethod(Model model, HttpServletRequest request) {
+	@RequestMapping("testList.do")
+	public String testListMethod(Model model, HttpServletRequest request) {
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		int limit = 10;
-		int listCount = assignService.listCount();
+		int listCount = testService.listCount();
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;
@@ -140,30 +140,30 @@ public class AssignController{
 		map.put("startRow", startRow);
 		map.put("endRow",endRow);
 		
-		List<Assignment> list = assignService.selectAssignList(map);
+		List<Test> list = testService.selectTestList(map);
 		
 		if(maxPage < endPage)
 			endPage = maxPage;
 		
-		model.addAttribute("assList",list);
+		model.addAttribute("testList",list);
 		model.addAttribute("limit",limit);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("maxPage",maxPage);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		
-		return "ass/assListView";
+		return "test/testListView";
 	}
 	
-	@RequestMapping("assDetailForm.do")
-	public String assSelectOneMethod(Assignment ass,Model model) {
-		Assignment ass1=assignService.selectAss(ass);
-		model.addAttribute("ass",ass1);
-		return "ass/assDetail";
+	@RequestMapping("testDetailForm.do")
+	public String testSelectOneMethod(Test test,Model model) {
+		Test test1=testService.selectTest(test);
+		model.addAttribute("test",test1);
+		return "test/testDetail";
 	}
 	
-	@RequestMapping(value = "submitAssign.do", method = RequestMethod.POST)
-	public void submitAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+	@RequestMapping(value = "submitTest.do", method = RequestMethod.POST)
+	public void submitTestMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		String path = request.getSession().getServletContext().getRealPath("/");
 		PrintWriter out = response.getWriter();
 		String filename = request.getParameter("className")+".java";
@@ -197,7 +197,7 @@ public class AssignController{
 		fos.close();
 	}
 	
-	@RequestMapping("/assdownfile.do")
+	@RequestMapping("/testdownfile.do")
 	public void fileDownload(
 			@RequestParam(value="rfile") String rfileName, 
 			@RequestParam(value="ofile") String ofileName,
@@ -234,11 +234,9 @@ public class AssignController{
 		
 	}
 	
-	@RequestMapping("/assdelete.do")
-	public String assdeleteMethod(Assignment ass) {
-		assignService.assDeleteone(ass);
+	@RequestMapping("/testdelete.do")
+	public String assdeleteMethod(Test test) {
+		testService.testDeleteone(test);
 		return "redirect:assList.do";
 	}
-	
-	
 }

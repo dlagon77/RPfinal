@@ -1,4 +1,4 @@
-package com.rp.finalp.assign.service;
+package com.rp.finalp.assign.model.service;
 
 import java.util.*;
 
