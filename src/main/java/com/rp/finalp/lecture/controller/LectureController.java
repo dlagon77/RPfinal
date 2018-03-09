@@ -27,11 +27,6 @@ public class LectureController {
 		return "tutor/tutorHome";
 	}
 	
-	@RequestMapping("tutorListView.do")
-	public String tutorListViewMethod() {
-		return "tutor/tutorListView";
-	}
-	
 	@RequestMapping("testDetailView.do")
 	public String testDetailViewMethod() {
 		return "tutor/testDetailView";

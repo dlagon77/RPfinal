@@ -94,6 +94,13 @@ public class MemberController {
 		return "member/stEnroll";
 	}
 	
+	@RequestMapping("tutorList.do")
+	public String selectTutorList() {
+		
+		
+		
+		return "tutor/tutorListView";
+	}
 	
 	
 
