@@ -7,6 +7,7 @@
 		<typeAlias type="com.rp.finalp.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.rp.finalp.board.model.vo.QnaBoard" alias="QnaBoard" />
 		<typeAlias type="com.rp.finalp.assign.model.vo.Assignment" alias="Assignment" />
+		<typeAlias type="com.rp.finalp.test.model.vo.Test" alias="Test" />
 
 	</typeAliases>
 
@@ -14,5 +15,6 @@
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" /> 
 		<mapper resource="mappers/assign-mapper.xml" /> 
+		<mapper resource="mappers/test-mapper.xml" /> 
 	</mappers>
 </configuration>

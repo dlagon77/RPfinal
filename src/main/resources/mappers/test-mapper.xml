@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="testMapper">
+	
+	<resultMap id="testResultMap" type="Test">
+  		<result property="test_no" column="test_no"/>
+  		<result property="test_comment" column="test_comment"/>
+  		<result property="test_reg_date" column="test_reg_date"/>  
+  		<result property="test_date" column="test_date"/>  		
+  		<result property="test_orfile" column="test_orfile"/>  	
+  		<result property="test_refile" column="test_refile"/>
+  		<result property="test_cate" column="test_cate"/>  
+  		<result property="test_title" column="test_title"/>  		
+  		<result property="test_cor_cnt" column="test_cor_cnt"/>  	
+  		<result property="test_pro" column="test_pro"/>
+  		<result property="test_answer" column="test_answer"/>    		
+  		<result property="test_res_cod" column="test_res_cod"/>  	
+  		<result property="test_res_ans" column="test_res_ans"/>
+  		<result property="test_writer" column="test_writer"/>  
+  		<result property="test_maker" column="test_maker"/>  		
+  		<result property="test_lec_id" column="test_lec_id"/>  	
+  		<result property="test_tcate_id" column="test_tcate_id"/>  	
+  
+	</resultMap>
+
+	
+	<!-- 페이징 처리용 -->
+	<select id="selectAll" resultMap="testResultMap" resultType="list" 
+		parameterType="java.util.HashMap"> 
+		<![CDATA[ 
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM,
+	        TEST_NO,TEST_COMMENT,TEST_REG_DATE,
+			TEST_DATE,TEST_ORFILE,TEST_REFILE,
+			TEST_CATE,TEST_TITLE,TEST_COR_CNT,
+			TEST_PRO,TEST_ANSWER,TEST_RES_COD,
+			TEST_RES_ANS,TEST_WRITER,TEST_MAKER,
+			TEST_LEC_ID,TEST_TCATE_ID
+		FROM (SELECT TEST_NO,
+			TEST_COMMENT,TEST_REG_DATE,TEST_DATE,
+			TEST_ORFILE,TEST_REFILE,TEST_CATE,
+			TEST_TITLE,TEST_COR_CNT,TEST_PRO,
+			TEST_ANSWER,TEST_RES_COD,TEST_RES_ANS,
+			TEST_WRITER,TEST_MAKER,TEST_LEC_ID,
+			TEST_TCATE_ID  FROM TEST)) 
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}  ORDER BY RNUM DESC
+
+		]]>
+	</select>
+	
+	<select id="listCount" resultType="integer"> 
+		<![CDATA[
+			SELECT COUNT(*) FROM TEST
+		]]>		
+	</select>
+	<select id="selectTest" resultType="Test" parameterType="Test">
+	<![CDATA[
+		SELECT * FROM TEST WHERE TEST_NO=#{test_no}
+	]]>
+	</select>
+	<delete id="testDelete" parameterType="Test">
+		<![CDATA[
+		DELETE FROM TEST WHERE TEST_NO=#{test_no}
+		]]>
+	
+	</delete>
+
+
+</mapper>
