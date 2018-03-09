@@ -8,15 +8,7 @@
 </head>
 <body>
 <c:import url="header.jsp" />
-<h1>
-잘들 나오시는감?
-<br>재석이 화이팅!^.~
-<br>재석이 별루!^.~승우짱
-<br>재석가모니
-<br>시현문시현문시현시현^,~
-<br>준우임돠~
-<br>지혱
-</h1>
+<h1> 화면 준비중입니다.. </h1>
 <a href="assInsertForm.do">for assignment click here</a><br>
 <a href="assList.do">for assignment LIST click here</a><br>
 <a href="taskList.do">for taskList click here</a><br>
