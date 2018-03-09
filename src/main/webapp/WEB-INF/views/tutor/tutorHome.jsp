@@ -98,10 +98,10 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="tutorHome.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
+			  <a href="lecturePlayList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
 			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
