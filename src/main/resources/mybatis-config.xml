@@ -8,6 +8,7 @@
 		<typeAlias type="com.rp.finalp.board.model.vo.QnaBoard" alias="QnaBoard" />
 		<typeAlias type="com.rp.finalp.assign.model.vo.Assignment" alias="Assignment" />
 		<typeAlias type="com.rp.finalp.test.model.vo.Test" alias="Test" />
+		<typeAlias type="com.rp.finalp.common.model.vo.Mysubsc" alias="Mysubsc" />
 
 	</typeAliases>
 
