@@ -176,12 +176,23 @@
 								          	${loginUser.mem_name}
 										  </a>
 								      <ul class="dropdown-menu" style="display: none;">
+								<c:url var="stusub" value="stumypage.do">
+									<c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
+								</c:url> 
 										<c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
-											<li><a href="stumypage.do">내 프로필(학생회원)</a></li>
+											<li><a href="profpage.do">내 프로필(학생회원)</a></li>
+<!-- 											<li><a href="stumypage.do">마이페이지</a></li> -->
+											<li><a id="stusubsc" href="${stusub}">내 강좌 홈</a></li> 	
 										</c:if>
 										<c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
-											<li><a href="tumypage.do">내 프로필(강사회원)</a></li>
+											<li><a href="profpage.do">내 프로필(강사회원)</a></li>
+											<li><a href="tumypage.do">마이페이지</a></li>
 										</c:if>
+<%-- 								<c:url var="stusub" value="stusubsc.do"> --%>
+<%-- 									<c:param name="mem_no" value="${loginUser.mem_no }" /> --%>
+<%-- 								</c:url>  --%>
+<%-- 							<a id="stusubsc" href="${stusub}" class="list-group-item active">구독중인 강사 목록</a>   --%>
+<%-- 									    <li><a id="stusubsc" href="${stusub}">내 강좌</a></li> --%>
 									    <li><a href="#">쪽지함(준비중)</a></li>
 									    <li class="divider"></li>
 									    <li><a href="logout.do">로그아웃</a></li>
