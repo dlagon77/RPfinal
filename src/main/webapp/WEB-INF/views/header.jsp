@@ -3,16 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Real Programmer</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
    <!-- Css -->
     <link href="/finalp/resources/css/bootstrap.css" rel="stylesheet">
 	<link href="/finalp/resources/css/style.css" rel="stylesheet">
-
 
 
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
@@ -94,9 +95,6 @@
 	    <a href="qblist.do">게시판</a>
 	    <a href="stinsertpage.do">Clients</a>
 	    <a href="#">Contact</a>
-	    <a href="stumypage.do">수강생 마이페이지 테스트</a>
-	    <a href="tumypage.do">강사 마이페이지 테스트</a>
-   
 	  </div>
 	    
 </div>
@@ -111,36 +109,89 @@
 				<a href="home.do">
 					<img src="/finalp/resources/img/logo2.PNG" alt="">
 				</a>
-
 				<form style="margin-left:50px;margin-top:7px;display:flex">
 				    <input type="text" placeholder="강좌를 검색해보세요" style="height: 35px;width:350px;padding: 0 15px;border: 1px solid #37474f;background: transparent;">
 					<button type="submit" class="button button--ujarak button--border-thin button--text-thick" style="height: 35px;margin:0">SEARCH</button>
 				</form>
-
 			</div>
-
-			
-
 			<div class="collapse navbar-collapse" id="main-menu">
 			   <ul class="nav navbar-nav navbar-right">
-
 				<li>
 			   <button style="background: none;border: none;outline: none;display: flex;">
 				<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-					<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+				 <c:if test="${ sessionScope.loginUser ne null }">
+<!-- 					<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;"> -->
+					
+					<!-- 사용자그림 font awesome 라이브러리 -->
+					 <div style="font-size:4rem;color:Tomato;margin-top: 5px;">
+						<i class="fas fa-user-circle" style="display: block;margin-left: auto;margin-right: auto;"></i>
+					</div> 
+					
+			  	 </c:if>
 				</div>
 			   </button>
 			   </li>
 			   <c:if test="${ sessionScope.loginUser eq null }">
-			   		<li><a href="#about">/사용자이름칸/</a></li>
-					<li><a href="loginpage.do">login</a></li>
+					<li><a href="loginpage.do">로그인</a></li>
+			   		<li><a href="#about">회원가입</a></li>
 			   </c:if>
+			   
+<!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->	   
+	<script>
+    $(function(){
+    $(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                $(this).toggleClass('open');
+//                 $('b', this).toggleClass("caret caret-up");                
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                $(this).toggleClass('open');
+//                 $('b', this).toggleClass("caret caret-up");                
+            });
+    });
+    
+</script>
+<style>
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 2.5;
+    color: #333;
+    white-space: nowrap;
+}
+</style>
+			   
+			   <!-- ===회원 로그인 시 18.03.11 JOONWOO ===  -->	
 				<c:if test="${ sessionScope.loginUser ne null }">
-				  	<li><a href="#about">${loginUser.mem_name}</a></li>
-					<li><a href="logout.do">Logout</a></li>
+<%-- 				  	<li><a href="#about">${loginUser.mem_name}</a></li> --%>
+<%-- 				  	<a href="#about">${loginUser.mem_name}</a></li> --%>
+				  	<li class="dropdown">
+<!-- 							<ul class="nav navbar-nav navbar-right">	 -->
+<!-- 							        <li class="dropdown"> -->
+								          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								          	${loginUser.mem_name}
+										  </a>
+								      <ul class="dropdown-menu" style="display: none;">
+										<c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
+											<li><a href="stumypage.do">내 프로필(학생회원)</a></li>
+										</c:if>
+										<c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
+											<li><a href="tumypage.do">내 프로필(강사회원)</a></li>
+										</c:if>
+									    <li><a href="#">쪽지함(준비중)</a></li>
+									    <li class="divider"></li>
+									    <li><a href="logout.do">로그아웃</a></li>
+								      </ul>
+<!-- 							        </li> -->
+<!-- 							</ul> -->
+<!-- 					<li><a href="logout.do">로그아웃</a></li> -->
 				</c:if>
 
-				
+<!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->	   		
 			  </ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
