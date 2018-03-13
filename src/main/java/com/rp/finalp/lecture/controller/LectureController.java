@@ -35,15 +35,17 @@ public class LectureController {
 	}
 	
 	@RequestMapping("lecturePlayList.do")
-	public String lecturePlayListView() {
-		
+	public String lecturePlayListView() {	
 		return "tutor/lecturePlayList";
 	}
 	
 	@RequestMapping("lectureDeatil.do")
-	public String lectureDeatilView(@RequestParam(value="videoId") String videoId, Model model) {
-		model.addAttribute("videoId", videoId);
+	public String lectureDeatilView(@RequestParam(value="videoId") String videoId, Model model,@RequestParam(value="videoTitle") String videoTitle) {
 		
+		model.addAttribute("videoId", videoId);
+		model.addAttribute("videoTitle", videoTitle);
+		lectureService.addReadCount(videoId);
+		model.addAttribute("Lecture", lectureService.selectReadCount(videoId));
 		return "tutor/lectureDetail";
 	}
 	

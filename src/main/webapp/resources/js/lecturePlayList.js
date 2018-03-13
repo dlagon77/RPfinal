@@ -28,14 +28,25 @@ $(document).ready(function(){
 					console.log(item);
 					videoTitle = item.snippet.title;
 					videoId = item.snippet.resourceId.videoId;
-					var iframeStyle = 'style="margin-top:25px; width:320px; height:180px;" scrolling = "no" frameborder="0"';
-					var aTagStyle = '"style="text-decoration:none; color:black;"';
+					var iframeStyle = 'style="width:320px; height:180px;" scrolling = "no" frameborder="0"';
+					var aTagStyle = 'style="text-decoration:none; color:black;"';
+					var pTagStyle = 'style="display:inline; vertical-align: top; padding-top: 25px; font-weight: 700;"';
 					
 					/*output = '<a href="home.do"><li><iframe src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></li>' +videoTitle +'</a>';*/
-					output = '<li><a href="lectureDeatil.do?videoId='+videoId+aTagStyle+'>'+'<iframe '+iframeStyle+' src=\"//img.youtube.com/vi/'+videoId+'/mqdefault.jpg\" ></iframe><p style="display:inline;">' +videoTitle+'</p></a></li>';
+					/*output = '<li><a style="text-decoration:none; color:black;" href="lectureDeatil.do?videoId='+videoId+'&videoTitle='+videoTitle+'">'
+						   + '<iframe '+iframeStyle+' src=\"//img.youtube.com/vi/'+videoId+'/mqdefault.jpg\" ></iframe>'
+						   + '<p>'+videoTitle+'</p></a></li>';*/
+					
+					output = '<li><a href="lectureDeatil.do?videoId='+videoId+'&videoTitle='+videoTitle+'">'
+							+'<img src=\"//img.youtube.com/vi/'+videoId+'/mqdefault.jpg\">'
+							+'<p>'+videoTitle+'</p></a></li>';
+					output2 = '<li><a href="lectureDeatil.do?videoId='+videoId+'&videoTitle='+videoTitle+'">'
+					+'<img src=\"//img.youtube.com/vi/'+videoId+'/mqdefault.jpg\">'
+					+'<div style="display: inline-block;"><p>'+videoTitle+'</p></div></a></li>';
 					
 					//Append to results listStyleType
 					$('#results').append(output);
+					$('#videoListView').append(output2);
 				})
 			}
 	);

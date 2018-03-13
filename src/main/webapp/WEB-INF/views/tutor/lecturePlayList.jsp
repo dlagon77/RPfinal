@@ -7,10 +7,21 @@
 <meta charset="UTF-8">
 <title>lecture play list</title>
   <style>
-
+	
 	#container{
 		width: 1000px;
 		margin: auto;
+	}
+	
+	#container p{
+		display: inline; 
+		vertical-align: top; 
+		padding-top: 25px; 
+		font-weight: 700;
+	}
+	
+	#container img{
+		margin-bottom: 30px;
 	}
 	
 	#navbar{
@@ -58,6 +69,7 @@
 		outline:none;
 		border:none;
 	}
+	
 	
   </style>
   <script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
@@ -116,5 +128,6 @@
 	<div id="container">
 		<ul id="results" style="list-style:none;"></ul>
 	</div>
+	
 </body>
 </html>

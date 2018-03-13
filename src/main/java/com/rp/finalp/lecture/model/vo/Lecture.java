@@ -14,11 +14,12 @@ public class Lecture implements java.io.Serializable{
 	private String lec_link;
 	private String lec_title;
 	private String lec_restrict;
+	private int lec_readcount;
 	
 	public Lecture() {}
 
 	public Lecture(int tutor_no, int lec_id, String lec_cate, String lec_con, String lec_link, String lec_title,
-			String lec_restrict) {
+			String lec_restrict, int lec_readcount) {
 		super();
 		this.tutor_no = tutor_no;
 		this.lec_id = lec_id;
@@ -27,6 +28,7 @@ public class Lecture implements java.io.Serializable{
 		this.lec_link = lec_link;
 		this.lec_title = lec_title;
 		this.lec_restrict = lec_restrict;
+		this.lec_readcount = lec_readcount;
 	}
 
 	public int getTutor_no() {
@@ -85,6 +87,14 @@ public class Lecture implements java.io.Serializable{
 		this.lec_restrict = lec_restrict;
 	}
 
+	public int getLec_readcount() {
+		return lec_readcount;
+	}
+
+	public void setLec_readcount(int lec_readcount) {
+		this.lec_readcount = lec_readcount;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -93,10 +103,9 @@ public class Lecture implements java.io.Serializable{
 	public String toString() {
 		return "Lecture [tutor_no=" + tutor_no + ", lec_id=" + lec_id + ", lec_cate=" + lec_cate + ", lec_con="
 				+ lec_con + ", lec_link=" + lec_link + ", lec_title=" + lec_title + ", lec_restrict=" + lec_restrict
-				+ "]";
+				+ ", lec_readcount=" + lec_readcount + "]";
 	}
-	
-	
+
 	
 	
 }
