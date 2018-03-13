@@ -29,21 +29,28 @@
 		]]>
 	</select>
 
-	<!-- <select id="selectAll" resultMap=""> <![CDATA[ select * from member 
-		]]> </select> -->
-
-	<insert id="insertMember" parameterType="Member" useGeneratedKeys="true">
+<!-- <select id="selectAll" resultMap="">
 		<![CDATA[
-		insert into member values (#{mem_no}, #{mem_id}, #{mem_pwd}, 
-		#{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth},  
-		#{mem_black}, #{mem_cate}, #{mem_inter}, #{mem_orfile}, #{mem_refile})
+		select * from member
+		]]>
+	</select> -->
+
+	 <insert id="insertMember" parameterType="Member" >
+		<![CDATA[
+		INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
+		#{mem_name}, #{mem_phone},25, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
+		#{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content})
 		]]>
 	</insert>
+	
+	
+	<!-- 준우추가 180313 -->
 	<select id="mysubscribe" resultMap="resultmysubsc">
 		<![CDATA[
 			SELECT * FROM MYSUBSCRIBE WHERE APP_STUDENT_NO = #{mem_no}
 		]]>
-	</select>	
+	</select>
+		
 	
 
 </mapper>
