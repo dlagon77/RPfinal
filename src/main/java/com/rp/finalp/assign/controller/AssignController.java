@@ -1,7 +1,6 @@
 package com.rp.finalp.assign.controller;
 
 import java.io.BufferedInputStream;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,9 +24,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rp.finalp.assign.model.service.AssignService;
 import com.rp.finalp.assign.model.vo.Assignment;
+import com.rp.finalp.member.model.service.MemberService;
+import com.rp.finalp.member.model.vo.Member;
 
 @Controller
 public class AssignController{
@@ -111,7 +116,7 @@ public class AssignController{
 					}
 				}
 			}
-			out.println(res);
+			out.print(res);
 			bin.close();
 			berr.close();
 			out.close();
@@ -239,6 +244,5 @@ public class AssignController{
 		assignService.assDeleteone(ass);
 		return "redirect:assList.do";
 	}
-	
 	
 }

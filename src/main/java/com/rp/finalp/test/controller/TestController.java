@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,12 +18,16 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.test.model.service.TestService;
@@ -238,5 +244,49 @@ public class TestController {
 	public String assdeleteMethod(Test test) {
 		testService.testDeleteone(test);
 		return "redirect:assList.do";
+	}
+	
+	@RequestMapping(value="teststart.do",method=RequestMethod.POST)
+	public void test3Method(HttpServletResponse response)throws IOException{
+
+		//List를 json 배열로 만들어서, 뷰로 리턴 처리함
+		List<Test> list = testService.selectTestAll();
+
+		
+		//전송용 최종 json 객체 생성
+		JSONObject sendJson = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr로 복사하기
+		for(Test test : list) {
+			//user 정보 저장할 json 객체 생성
+			JSONObject jtest = new JSONObject();
+			jtest.put("question", test.getTest_pro());
+			jtest.put("answer", test.getTest_answer());
+/*			jtest.put("testno", test.getTest_no());
+			jtest.put("comment", test.getTest_comment());
+			jtest.put("regdate", test.getTest_reg_date());
+			jtest.put("date",test.getTest_date());
+			jtest.put("orfile",test.getTest_orfile());
+			jtest.put("refile",test.getTest_refile());
+			jtest.put("cate",test.getTest_cate());
+			jtest.put("title",test.getTest_title());
+			jtest.put("cnt",test.getTest_cor_cnt());
+			jtest.put("cod",test.getTest_res_cod());
+			jtest.put("ans",test.getTest_res_ans());
+			jtest.put("writer",test.getTest_writer());
+			jtest.put("maker",test.getTest_maker());
+			jtest.put("lec",test.getTest_lec_id());
+			jtest.put("tcate",test.getTest_tcate_id());*/
+
+			jarr.add(jtest);
+		}
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out=response.getWriter();
+		out.println(sendJson.toJSONString());
+		out.flush();
+		out.close();
+				
 	}
 }

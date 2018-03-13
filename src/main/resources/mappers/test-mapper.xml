@@ -66,6 +66,12 @@
 		]]>
 	
 	</delete>
+	
+		<select id="selectAllTest" resultMap="testResultMap" resultType="list"> 
+		<![CDATA[ 
+		SELECT * FROM TEST
+		]]>
+	</select>
 
 
 </mapper>

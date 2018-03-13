@@ -37,7 +37,7 @@
 		<div class="question" style="overflow:auto;"></div>
 		<div class="question"></div>
 		<br><br>
-		<div class="answer"></div>
+		<div id="an" class="answer">abc</div>
 	</div>
 	<div class="java" style="flaot:left;display:inline-block;border:1px solid black">
 		<h1> JAVA COMPILER</h1>
@@ -51,8 +51,43 @@
 
 		<textarea rows="32" cols="65" id="maincode" name="maincode" style="overflow:auto;"></textarea> <br><br><br>
 		<textarea rows="16" cols="65" id="output" name="output" style="overflow:auto;"></textarea> <br><br><br>
-		<button onclick="subass()">제출하기</button>
+		<button id="subutton" onclick="subass()">제출하기</button>
 	</div>
 </div>
+
+<script>
+window.onload=startass; 
+</script>
+<script>
+function run() {
+	
+	var url = "runAssign.do?classname=" + document.getElementById("class").value;
+	
+	if(window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+     }
+     else{
+         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+     }  
+	var button_joinus = document.getElementById('subutton');
+	xmlhttp.onreadystatechange=function(){
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+        	document.getElementById("output").innerHTML=xmlhttp.responseText;  
+       	if(document.getElementById('an').innerHTML==document.getElementById("output").innerHTML){
+
+      	
+       		/* button_joinus.enabled = true; */
+      		button_joinus.disabled = false;
+       	}
+        }
+    }
+     xmlhttp.open("POST",url,true);
+     xmlhttp.send();
+}
+  function startass(){
+	var button_joinus1 = document.getElementById('subutton');
+	button_joinus.disabled = true;
+}  
+</script>
 </body>
-</html>.
+</html>

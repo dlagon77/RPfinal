@@ -30,4 +30,8 @@ public class TestDao {
 	public int testDeleteone(Test test) {
 		return mybatis.delete("testMapper.testDelete",test);
 	}
+
+	public List<Test> selectTestAll() {
+		return mybatis.selectList("testMapper.selectAllTest");
+	}
 }

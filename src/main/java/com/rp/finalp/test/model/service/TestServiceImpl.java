@@ -35,4 +35,9 @@ public class TestServiceImpl implements TestService{
 		return testDao.testDeleteone(test);
 	}
 
+	@Override
+	public List<Test> selectTestAll() {
+		return testDao.selectTestAll();
+	}
+
 }

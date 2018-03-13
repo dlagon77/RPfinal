@@ -10,5 +10,6 @@ public interface TestService {
 	List<Test> selectTestList(HashMap<String, Object> map);
 	int listCount();
 	Test selectTest(Test test);
+	List<Test> selectTestAll();
 	int testDeleteone(Test test); 
 }
