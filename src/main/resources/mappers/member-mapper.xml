@@ -3,7 +3,24 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-	
+
+	<resultMap id="resultmysubsc" type="Mysubsc">
+		<result property="mem_no" column="mem_no" />
+<!-- 		<result property="mem_id" column="mem_id" /> -->
+		<result property="app_student_no" column="app_student_no"/>
+<!-- 		<result property="mem_pwd" column="mem_pwd" /> -->
+		<result property="mem_name" column="mem_name" />
+<!-- 		<result property="mem_phone" column="mem_phone" /> -->
+<!-- 		<result property="mem_age" column="mem_age" /> -->
+<!-- 		<result property="mem_gen" column="mem_gen" /> -->
+<!-- 		<result property="mem_birth" column="mem_birth" /> -->
+<!-- 		<result property="mem_black" column="mem_black" /> -->
+<!-- 		<result property="mem_cate" column="mem_cate" /> -->
+<!-- 		<result property="mem_inter" column="mem_inter" /> -->
+		<result property="mem_orfile" column="mem_orfile" />
+<!-- 		<result property="mem_refile" column="mem_refile" /> -->
+ 	</resultMap>
+
 	<select id="loginMember" resultType="Member" parameterType="Member">
 		<![CDATA[
 			SELECT * FROM MEMBER 
@@ -12,18 +29,21 @@
 		]]>
 	</select>
 
-	<!-- <select id="selectAll" resultMap="">
-		<![CDATA[
-		select * from member
-		]]>
-	</select> -->
-	
- 	<insert id="insertMember" parameterType="Member" 
-		useGeneratedKeys="true">
+	<!-- <select id="selectAll" resultMap=""> <![CDATA[ select * from member 
+		]]> </select> -->
+
+	<insert id="insertMember" parameterType="Member" useGeneratedKeys="true">
 		<![CDATA[
 		insert into member values (#{mem_no}, #{mem_id}, #{mem_pwd}, 
 		#{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth},  
 		#{mem_black}, #{mem_cate}, #{mem_inter}, #{mem_orfile}, #{mem_refile})
 		]]>
-	</insert> 
+	</insert>
+	<select id="mysubscribe" resultMap="resultmysubsc">
+		<![CDATA[
+			SELECT * FROM MYSUBSCRIBE WHERE APP_STUDENT_NO = #{mem_no}
+		]]>
+	</select>	
+	
+
 </mapper>
