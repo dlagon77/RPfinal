@@ -1,5 +1,10 @@
 package com.rp.finalp.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.member.model.service.MemberService;
@@ -52,10 +60,10 @@ public class MemberController {
 		}
 		return "home";
 	}
-	@RequestMapping(value="/stinsertpage.do")
+	/*@RequestMapping(value="/stinsertpage.do")
 	public String moveToInserpage() {
 		return "member/stinsertForm";
-	}
+	}*/
 	
 	/* 로그인 페이지로 이동 */
 	@RequestMapping(value="/loginpage.do")
@@ -64,16 +72,42 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@RequestMapping(value="/stinsert.do", method=RequestMethod.POST)
-	public String insertMember(Member member, Model model) {
-		System.out.println("insert : " + member);
+	@RequestMapping(value="/proinsert.do", method=RequestMethod.POST)
+	public String insertProMember(Member member, Model model, HttpServletRequest request) throws IOException{
 		
+		System.out.println("insert : " + member);
+		//파일 업로드 처리
+				MultipartHttpServletRequest multipartRequest =
+						(MultipartHttpServletRequest)request;
+				MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+				
+				// 웹서버 컨테이너 경로 추출함 
+/*			    String root = request.getSession().getServletContext().getRealPath("/");*/
+				 String root = "C:/JHfinalProject/finalp/target/m2e-wtp/web-resources/";
+			    // 파일 저장 경로 정함
+			    String savePath = root + "uploadFiles/";
+			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
+			 
+				
+				if(!uploadFile.isEmpty()){
+					String ofileName = uploadFile.getOriginalFilename();
+					
+					long currentTime = System.currentTimeMillis();  
+				    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+					String rfileName = simDf.format(new Date(currentTime)) +"."
+							+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
+					uploadFile.transferTo(new File(savePath + rfileName));
+								
+					member.setMem_orfile(ofileName);
+					member.setMem_refile(rfileName);
+		}	
+				
 		int result = memberService.insertMember(member);
 		String viewName = null;
 		if(result > 0)
 			viewName = "home";
 		else {			
-			model.addAttribute("message", "회원가입실패");
+			model.addAttribute("message", "강사회원가입실패");
 			viewName = "minsertFail";
 		}
 		return viewName;
@@ -117,5 +151,13 @@ public class MemberController {
 		
 		return "tutor/tutorHome";
 	}
-
+	//회원가입 이메일 중복 체크
+	@ResponseBody
+    @RequestMapping(value = "/checkSignup", method = RequestMethod.POST)
+    public String checkSignup(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        int rowcount = MemberService.checkSignup(id);
+        
+        return String.valueOf(rowcount);
+    }
 }

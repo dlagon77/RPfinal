@@ -17,5 +17,7 @@ public interface MemberService {
 	int selectTutorCount();
 	int selectReviewCount(int tutor_no);
 	List<Member> selectReview(int tutor_no);
+	//아이디중복확인
+	int checkSignup(String id);
 	
 }

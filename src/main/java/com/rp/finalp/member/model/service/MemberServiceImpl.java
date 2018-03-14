@@ -71,4 +71,8 @@ public class MemberServiceImpl implements MemberService {
 			
 			return memberDao.selectReviewCount(tutor_no);
 		}
+		@Override
+		public int checkSignup(String id) {
+			return memberDao.checkSignup(id);
+		}
 	}

@@ -10,19 +10,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<!-- 지혜 -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
    <!-- Css -->
     <link href="/finalp/resources/css/bootstrap.css" rel="stylesheet">
 	<link href="/finalp/resources/css/style.css" rel="stylesheet">
-
-
+	
+  <!-- 지혜 -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+	
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/finalp/resources/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="/finalp/resources/css/set1.css" />
-
+	
 	<!--button css-->
 	<link rel="stylesheet" type="text/css" href="resources/css/buttons.css" />
-
+	
 	<style>
 
 		body{
@@ -133,7 +138,63 @@
 			   </li>
 			   <c:if test="${ sessionScope.loginUser eq null }">
 					<li><a href="loginpage.do">로그인</a></li>
-			   		<li><a href="#about">회원가입</a></li>
+					<div class="container">
+  <!-- Trigger the modal with a button -->
+  <!-- class="btn btn-info btn-lg" -->
+  <button type="button" data-toggle="modal" data-target="#myModal">login</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" style="top:40px; left:50px;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        
+		<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        
+		<div class="modal-body">
+          <body class="bg-dark">
+  <div class="container" style="margin-top: 60px;">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">로그인</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">아이디입력</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="아이디입력">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">비밀번호입력</label>
+            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="비밀번호입력">
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <!--label class="form-check-label">
+                <input class="form-check-input" type="checkbox">비밀번호 기억하기 </label-->
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" href="index.jsp">로그인</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="/semi/views/login/enrolll.html">회원가입하기</a>
+          <a class="d-block small" href="/semi/views/login/findpwd.html">ID/PW찾기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+		 
+          
+        </div>
+        
+		<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+			   		<li><a href="proinsertpage.do">회원가입</a></li>
 			   </c:if>
 			   
 <!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->	   

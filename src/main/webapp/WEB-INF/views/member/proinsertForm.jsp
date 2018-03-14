@@ -9,12 +9,35 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>강사 회원가입</title>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		  $('#checkbtn').on('click', function(){
+	            $.ajax({
+	                type: 'POST',
+	                url: '/mate/checkSignup',
+	                data: {
+	                    "id" : $('#id').val()
+	                },
+	                success: function(data){
+	                    if($.trim(data) == 0){
+	                        $('#checkMsg').html('<p style="color:blue">사용가능</p>');
+	                    }
+	                    else{
+	                        $('#checkMsg').html('<p style="color:red">사용불가능</p>');
+	                    }
+	                }
+	            });    //end ajax    
+	        });    //end on 
+	});
+</script>
+
 <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/finalp/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/finalp/resources/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <!-- Custom style -->
-    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="/finalp/resources/css/style.css" media="screen" title="no title" charset="utf-8">
 	<style>
 		nav.n1{
 		float:left;
@@ -27,7 +50,7 @@
 		text-align:center;
 	}
 
-	#profile{
+	#output{
 		width:200px;
 		height: 220px;
 	}
@@ -44,57 +67,81 @@
           <h1>강사회원가입</h1>
 		</div>
 		
+		<form action="proinsert.do" method="post" id="form1" enctype="multipart/form-data">
+		
 		<nav class="n1">
 			<h4>프로필사진</h4>
+			<img id="output"/>
+			<input type="file" accept="image/*" id="fileUp" name="uploadFile" onchange="mem_refile(event)"/>
+		<script>
+  			var mem_refile = function(event) {
+    			var output = document.getElementById('output');
+    			output.src = URL.createObjectURL(event.target.files[0]);
+  			};
+		</script>
 			
-			<img id="profile" src="강준.JPG"></img>
-			<br>
-				<button class="btn">사진넣기</button>
 		</nav>
 		
         <div class="col-md-6 col-md-offset-3">
 		
 		
-          <form role="form">
+
             <div class="form-group">
               <label for="InputEmail">이메일ID</label>
-              <input type="email" class="form-control" id="InputEmail" placeholder="이메일 주소">
+              <input type="email" class="form-control" id="InputEmail" name="mem_id" placeholder="이메일 주소">
+              <div id="checkMsg"></div>
             </div>
+            
+			<div class="form-group">
+    			<button type="submit" id="checkbtn" class="btn btn-default">중복확인</button>
+			</div>
+			
             <div class="form-group">
               <label for="InputPassword1">비밀번호</label>
-              <input type="password" class="form-control" id="InputPassword1" placeholder="비밀번호">
+              <input type="password" class="form-control" id="InputPassword1"  name="mem_pwd" placeholder="비밀번호">
             </div>
             <div class="form-group">
               <label for="InputPassword2">비밀번호 재확인</label>
-              <input type="password" class="form-control" id="InputPassword2" placeholder="비밀번호 재확인">
+              <input type="password" class="form-control" id="InputPassword2"  name="mem_pwd" placeholder="비밀번호 재확인">
               <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요!</p>
             </div>
 				
 			<div class="form-group">
 			<label for="carrier">경력</label>
-			<input type="text" class="form-control" id="username" placeholder="1">
-			<input type="text" class="form-control" id="username" placeholder="2">
-			<input type="text" class="form-control" id="username" placeholder="3">
-			<input type="text" class="form-control" id="username" placeholder="4">
+			<input type="text" class="form-control" id="username" name="mem_career" placeholder="1">
+			<input type="text" class="form-control" id="username" name="mem_career" placeholder="2">
+			<input type="text" class="form-control" id="username" name="mem_career" placeholder="3">
+			<input type="text" class="form-control" id="username" name="mem_career" placeholder="4">
 			</div>
 
             <div class="form-group">
-              <label for="username">이름</label>
-              <input type="text" class="form-control" id="username" placeholder="이름을 입력해 주세요">
+              <label for="mem_name">이름</label>
+              <input type="text" class="form-control" id="username" name="mem_name" placeholder="이름을 입력해 주세요">
+            </div>
+            
+             <div class="form-group">
+              <label for="mem_phone">핸드폰번호</label>
+              <input type="text" class="form-control" id="username" name="mem_phone" placeholder="'-'를 넣어주세요">
             </div>
 
 			<div class="form-group">
-			<label for="username">성별</label>
+			<label for="mem_gen">성별</label>
 				<div class="col-sm-12 text-center">
-					<button class="btn btn-primary" type="submit">남자<i class="fa fa-check spaceLeft"></i></button>
-					<button type="submit" class="btn btn-info">여자<i class="fa fa-check spaceLeft"></i></button>
+					<!-- <button class="btn btn-primary" type="submit">남자<i class="fa fa-check spaceLeft"></i></button>
+					<button type="submit" class="btn btn-info">여자<i class="fa fa-check spaceLeft"></i></button> -->
+					<input type="radio" name="mem_gen" value="M"> 남 
+      				<input type="radio" name="mem_gen" value="F"> 여
 				</div>
 			</div>
 
             <div class="form-group">
-              <label for="username">생년월일</label>
+            
+              <!-- <label for="mem_birth">생년월일</label>
+              <input type="text" id="mem_births" name="mem_birth" list="birthday">
               <div class="input-group">
-               <select name="birth1">
+              <datalist id="birthday"> -->
+              <input type="hidden" name="mem_birth" value="03/01/2004">
+               <!-- select name="mem_birth">
        <option value="2013">2013</option>
        <option value="2012">2012</option>
        <option value="2011">2011</option>
@@ -168,8 +215,8 @@
        <option value="29">29</option>
        <option value="30">30</option>
        <option value="31">31</option>
-     </select>일<br><br>
-
+     </select>일<br><br> -->
+	</datalist>
 
 				<!--select name="job" class="form-control" placeholder="생일   년(4자)   월">
 				<input type="tel" class="form-control" id="username" placeholder="- 없이 입력해 주세요">
@@ -180,43 +227,69 @@
             </div>
             <div class="form-group">
               <label for="username">전공분야</label>
+              <input type="text" name="mem_inter" list="interestValues">
               <div class="input-group">
-              <p>
-				<input type="checkbox" id="checkbox1" checked="checked" />
+              <!--p-->
+                <datalist id="interestValues">
+                	<option value="CSS"/>CSS
+                	<option value="HTML"/>HTML
+					<option value="JSP" />JSP
+					<option value="ORACLE" />ORACLE
+					<option value="JAVA" />JAVA
+					<option value="C++" />C++
+					<option value="SPRING" />SPRING
+				</datalist>	
+				<!-- <input type="checkbox" id="checkbox1" name="mem_inter" checked="checked" />
 				<label for="checkbox1">CSS</label>&nbsp;
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
 				<label for="checkbox2">HTML</label>
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
 				<label for="checkbox2">JSP</label>
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter" />
 				<label for="checkbox2">ORACLE</label>
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
 				<label for="checkbox2">Frame Work</label>
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
 				<label for="checkbox2">JAVA</label>
-				<input type="checkbox" id="checkbox2" />
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
 				<label for="checkbox2">C++</label>
-				<input type="checkbox" id="checkbox2" />
-				<label for="checkbox2">Spring</label>
-			  </p>
+				<input type="checkbox" id="checkbox2" name="mem_inter"/>
+				<label for="checkbox2">Spring</label> -->
+			  <!--  /p-->
 				
 				
               </div>
             </div>
            
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-info">강사회원가입<i class="fa fa-check spaceLeft"></i></button>
-              <!--button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button-->
-			  <button class="btn btn-danger" type="submit">가입취소<i class="fa fa-times spaceLeft"></i></button>
+           <div class="form-group">
+              <label for="mem_class">홈페이지제목</label>
+              <input type="text" class="form-control" id="memclass" name="mem_class" placeholder="이름을 입력해 주세요">
             </div>
-          </form>
+            
+            <div class="form-group">
+              <label for="mem_content">홈페이지설명</label>
+              <input type="text" class="form-control" id="memcontent" name="mem_content" placeholder="이름을 입력해 주세요">
+            </div>
+            
+            <!-- <div class="form-group text-center">
+              <button type="submit" class="btn btn-info">강사회원가입<i class="fa fa-check spaceLeft"></i></button>
+              button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button
+			  <button class="btn btn-danger" type="submit">가입취소<i class="fa fa-times spaceLeft"></i></button>
+            </div> -->
+    
         </div>
-
+	   </form>
+	   <div class="form-group text-center">
+              <button type="submit" class="btn btn-info" form="form1">강사회원가입<i class="fa fa-check spaceLeft"></i></button>
+              <!--button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button-->
+			  <button class="btn btn-danger" type="submit" form="form1">가입취소<i class="fa fa-times spaceLeft"></i></button>
+        </div>
       </article>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/finalp/resources/js/jbootstrap.min.js"></script>
+    
 </body>
 </html>

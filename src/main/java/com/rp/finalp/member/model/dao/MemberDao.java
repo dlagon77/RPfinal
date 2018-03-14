@@ -45,6 +45,12 @@ public class MemberDao {
 	public int selectReviewCount(int tutor_no) {
 		return mybatis.selectOne("memberMapper.selectReviewCount",tutor_no);
 	}
+	
+	//id 중복확인
+	public int checkSignup(String id) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("memberMapper.checkSignup");
+	}
 }
 
 
