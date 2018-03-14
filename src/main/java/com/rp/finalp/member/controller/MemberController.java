@@ -31,6 +31,7 @@ public class MemberController {
 		}
 		Member loginUser = memberService.loginCheck(member);				
 		if(loginUser !=null) {
+			session.setMaxInactiveInterval(10*60);
 			session.setAttribute("loginUser", loginUser);
 			System.out.println("로긴성공!"+loginUser);
 			return "home";

@@ -23,6 +23,11 @@ public class MemberDao {
 		return mybatis.insert("memberMapper.insertMember", member);		
 	}
 
+	public int updateMemberImg(Member member) {
+		return mybatis.update("memberMapper.updateMemberImg", member);
+	}
+
+
 }
 
 

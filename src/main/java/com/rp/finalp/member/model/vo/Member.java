@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Member implements java.io.Serializable{
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1123L;
 	
 	private int mem_no;        //회원번호
 	private String mem_id;     //이메일(아이디)

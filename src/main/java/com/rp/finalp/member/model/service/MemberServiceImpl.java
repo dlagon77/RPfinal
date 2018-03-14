@@ -44,4 +44,10 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 
+		@Override
+		public int updateMemberImg(Member member) {
+			return memberDao.updateMemberImg(member);
+		}
+
+		
 	}

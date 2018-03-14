@@ -11,4 +11,6 @@ public interface MemberService {
 	int updateMember(Member member);
 	int deleteMember(String userId);
 	ArrayList<Member> memberAll();
+	int updateMemberImg(Member member);
+	
 }
