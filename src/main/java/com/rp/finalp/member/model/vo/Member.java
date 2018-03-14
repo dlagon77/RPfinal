@@ -1,5 +1,7 @@
 package com.rp.finalp.member.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,10 +25,46 @@ public class Member implements java.io.Serializable{
 	private String mem_class; //강사홈제목
 	private String mem_content; //강사홈섦명
 	
+	private int apply_count; //수강생 수
+	private int lecture_count; //강의동영상 수 
+	
+	//리뷰때문에 추가한 변수들
+	private int rev_star; //받은 별점
+	private String rev_con; //리뷰 내용
+	private Date rev_date; //리뷰등록날짜
+	private int rev_no; //리뷰 번호
 
 
 	public Member() {}
 
+	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
+			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
+			String mem_refile, String mem_career, String mem_class, String mem_content, int apply_count,
+			int lecture_count, int rev_star, String rev_con, Date rev_date,int rev_no) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_id = mem_id;
+		this.mem_pwd = mem_pwd;
+		this.mem_name = mem_name;
+		this.mem_phone = mem_phone;
+		this.mem_age = mem_age;
+		this.mem_gen = mem_gen;
+		this.mem_birth = mem_birth;
+		this.mem_black = mem_black;
+		this.mem_cate = mem_cate;
+		this.mem_inter = mem_inter;
+		this.mem_orfile = mem_orfile;
+		this.mem_refile = mem_refile;
+		this.mem_career = mem_career;
+		this.mem_class = mem_class;
+		this.mem_content = mem_content;
+		this.apply_count = apply_count;
+		this.lecture_count = lecture_count;
+		this.rev_star = rev_star;
+		this.rev_con = rev_con;
+		this.rev_date = rev_date;
+		this.rev_no = rev_no;
+	}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
 			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
@@ -70,6 +108,55 @@ public class Member implements java.io.Serializable{
 		this.mem_content = mem_content;
 	}
 
+	
+
+	public int getApply_count() {
+		return apply_count;
+	}
+
+	public void setApply_count(int apply_count) {
+		this.apply_count = apply_count;
+	}
+
+	public int getLecture_count() {
+		return lecture_count;
+	}
+
+	public void setLecture_count(int lecture_count) {
+		this.lecture_count = lecture_count;
+	}
+
+	public int getRev_star() {
+		return rev_star;
+	}
+
+	public void setRev_star(int rev_star) {
+		this.rev_star = rev_star;
+	}
+
+	public String getRev_con() {
+		return rev_con;
+	}
+
+	public void setRev_con(String rev_con) {
+		this.rev_con = rev_con;
+	}
+
+	public Date getRev_date() {
+		return rev_date;
+	}
+
+	public void setRev_date(Date rev_date) {
+		this.rev_date = rev_date;
+	}
+
+	public int getRev_no() {
+		return rev_no;
+	}
+
+	public void setRev_no(int rev_no) {
+		this.rev_no = rev_no;
+	}
 
 	public int getMem_no() {
 		return mem_no;

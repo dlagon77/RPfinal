@@ -196,9 +196,9 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
 			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
@@ -224,7 +224,7 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li class="active"><a href="/problem/1000">1000번</a></li>
+				<li class="active"><a href="/problem/1000">${ass_sub_no }</a></li>
 				<li><a href="/problem/status/1000">맞은 사람</a></li>
 
 				<li><a href="/short/status/1000">숏코딩</a></li>
@@ -261,8 +261,7 @@
 
 			<div class="page-header">
 				<h1 style="font-weight:600">
-					<span id="problem_title" class="">A+B</span>
-					<span class="label label-light-green">풀이</span>
+					<span id="problem_title" class="">${assignment.ass_title }</span>
 				</h1>
 			</div>
 			
@@ -271,18 +270,18 @@
 				<table class="table" id="problem-info">
 				<thead>
 				<tr>
-					<th style="width:25%;">제출</th>
-					<th style="width:25%;">정답</th>
+					<th style="width:25%;">제한시간</th>
+					<th style="width:25%;">카테고리</th>
 					<th style="width:25%;">맞은 사람</th>
 					<th style="width:25%;">정답 비율</th>
 				</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>101913</td>
-						<td>46887</td>
-						<td>35673</td>
-						<td>47.836%</td>
+						<td>-</td>
+						<td>${assignment.ass_cate }</td>
+						<td>${assignment.ass_cor_cnt }</td>
+						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
 					</tr>
 				</tbody>
 				</table>
@@ -294,7 +293,7 @@
 					<h2 style="width: 4%;font-weight:600">문제</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p>두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+					<p>${assignment.ass_pro }</p>
 				</div>
 			</section>
 
@@ -303,7 +302,7 @@
 					<h2 style="width: 4%;font-weight:600">Hint</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p>두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+					<p>${assignment.ass_hint }</p>
 				</div>
 			</section>
 
@@ -313,7 +312,7 @@
 					<h2 style="width: 9%;font-weight:600">예제 정답</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<pre class="sampledata" id="sample-input-1">1 2</pre>
+					<pre class="sampledata" id="sample-input-1">${assignment.ass_answer }</pre>
 				</div>
 			</section>
 

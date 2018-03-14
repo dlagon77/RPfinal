@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.member.model.vo.Member;
 
@@ -22,6 +23,9 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService; 
 	//IoC(제어반전) = DI(Dependancy Injection : 의존성 주입) + AOP
+	
+	@Autowired
+	private LectureService lectureService;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String loginMethod(Member member, HttpSession session) {	
@@ -95,14 +99,23 @@ public class MemberController {
 		return "member/stEnroll";
 	}
 	
-	@RequestMapping("tutorList.do")
-	public String selectTutorList() {
+	@RequestMapping("/tutorListView.do")
+	public String selectTutorList(Member member, Model model) {
 		
-		
-		
+		model.addAttribute("tList",memberService.selectTutorList());
+		model.addAttribute("tCount",memberService.selectTutorCount());
 		return "tutor/tutorListView";
 	}
 	
-	
+	@RequestMapping("/tutorHome.do")
+	public String tutorHomeMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
+		
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("reviewCount",memberService.selectReviewCount(tutor_no));
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		model.addAttribute("review",memberService.selectReview(tutor_no));
+		
+		return "tutor/tutorHome";
+	}
 
 }

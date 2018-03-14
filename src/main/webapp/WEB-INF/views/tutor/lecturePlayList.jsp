@@ -91,8 +91,8 @@
 			</div>
 
 			<div class="desc">
-				<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;">김재석</h3>
-				<h5 style="padding-left:10px;color:gray">수강생 25명</h5>
+				<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;">${Lecture.mem_name }</h3>
+				<h5 style="padding-left:10px;color:gray">수강생 ${Lecture.apply_count }명</h5>
 			</div>
 
 			<div style="margin-left: 75%;margin-top: 25px;">
@@ -110,9 +110,9 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="lecturePlayList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span><div class="selected"></div></a>
-			  <a href="taskList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span><div class="selected"></div></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a"></span></a>
 

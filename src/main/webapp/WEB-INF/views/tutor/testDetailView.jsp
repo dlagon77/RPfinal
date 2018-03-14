@@ -271,7 +271,7 @@
 				<table class="table" id="problem-info">
 				<thead>
 				<tr>
-					<th style="width:25%;">제출</th>
+					<th style="width:25%;">제한시간</th>
 					<th style="width:25%;">정답</th>
 					<th style="width:25%;">맞은 사람</th>
 					<th style="width:25%;">정답 비율</th>
@@ -279,7 +279,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>101913</td>
+						<td>-</td>
 						<td>46887</td>
 						<td>35673</td>
 						<td>47.836%</td>

@@ -38,5 +38,13 @@ public class AssignServiceImpl implements AssignService{
 		
 	}
 
+	@Override
+	public List<Assignment> selectTutorAssList(int tutor_no){
+		return assignDao.selectTutorAssList(tutor_no);
+	}
 
+	@Override
+	public Assignment assDetail(int ass_no) {
+		return assignDao.assDetail(ass_no);
+	}
 }

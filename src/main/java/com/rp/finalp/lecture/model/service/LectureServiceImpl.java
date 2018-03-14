@@ -21,6 +21,13 @@ public class LectureServiceImpl implements LectureService{
 		return lectureDao.addReadCount(videoId);
 	}
 	
+	@Override
+	public Lecture selectTutorLecture(int tutor_no) {
+		System.out.println(tutor_no);
+		return lectureDao.selectTutorLecture(tutor_no);
+
+	}
+	
 	
 	
 }

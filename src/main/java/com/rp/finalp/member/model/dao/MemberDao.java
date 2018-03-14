@@ -1,5 +1,7 @@
 package com.rp.finalp.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,7 +29,22 @@ public class MemberDao {
 		return mybatis.update("memberMapper.updateMemberImg", member);
 	}
 
-
+	public List<Member> selectTutorList() {
+		return mybatis.selectList("memberMapper.selectTutorList");
+		
+	}
+	
+	public int selectTutorCount() {
+		return mybatis.selectOne("memberMapper.selectTutorCount");
+	}
+	
+	public List<Member> selectReview(int tutor_no) {
+		return mybatis.selectList("memberMapper.selectReview",tutor_no);
+	}
+	
+	public int selectReviewCount(int tutor_no) {
+		return mybatis.selectOne("memberMapper.selectReviewCount",tutor_no);
+	}
 }
 
 

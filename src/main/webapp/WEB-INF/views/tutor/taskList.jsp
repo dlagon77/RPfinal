@@ -126,8 +126,8 @@
 				</div>
 
 				<div class="desc">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">김재석</h3>
-					<h5 style="padding-left:10px;color:gray!important">수강생 25명</h5>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
+					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 
 				<div style="margin-top: 25px;margin-left:10px">
@@ -149,9 +149,9 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="lecturePlayList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
@@ -188,39 +188,48 @@
 				<table class="table table-striped table-bordered sortable-table clickable-table" id="problemset">
 				<thead>
 				<tr>
-					<th style="width:10%" data-sort="int">문제 번호</th>
-					<th style="width:47%" data-sort="string">제목</th>
-					<th style="width:20%" data-sort="string">카테고리</th>
-					<th style="width:10%" data-sort="int">맞은 사람</th>
-					<th style="width:5%" data-sort="int">제출</th>
-					<th style="width:8%" data-sort="float">정답 비율</th>
+					<th style="width:10%;text-align: center;" data-sort="int">문제 번호</th>
+					<th style="width:10%;text-align: center;" data-sort="int">등록 날짜</th>
+					<th style="width:40%;text-align: center;" data-sort="string">제목</th>
+					<th style="width:20%;text-align: center;" data-sort="string">카테고리</th>
+					<th style="width:10%;text-align: center;" data-sort="int">맞은 사람</th>
+					<th style="width:10%;text-align: center;" data-sort="float">정답 비율</th>
 				</tr>
 				</thead>
 
 				<tbody>
+					<c:set value="0" var="assign_no"/>
+					<c:forEach items="${assignList }" var="row">
+					<c:set value="${assign_no+1 }" var="assign_no"/>
 					<tr>
-						<td class="list_problem_id">1000</td>
-						<td class="click-this"><a href="/problem/1000">A+B</a></td>
+					
+					
+						<td class="list_problem_id">${assign_no }</td>
+						<td>${row.ass_reg_date }</td>
+						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}">${row.ass_title }</a></td>
 						<td>
-							
+							<span class="badge badge-info">${row.ass_cate }</span>
 						</td>
-						<td><a href="#">235</a></td>
-						<td><a href="#">1123</a></td>
-						<td>47.837%</td>
+						<td><a href="#">${row.ass_cor_cnt }</a></td>
+						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
+					
 					</tr>
-					<tr>
+					</c:forEach>
+					<!-- <tr>
 						<td class="list_problem_id">1003</td>
+						<td>18/03/13</td>
 						<td class="click-this"><a href="/problem/1003">피보나치 함수</a></td>
 						<td>
 							
 						</td>
 						<td><a href="#">334</a></td>
-						<td><a href="#">786</a></td>
+
 						<td>41.608%</td>
 					</tr>
 											
 					<tr>
 						<td class="list_problem_id">1008</td>
+						<td>18/03/13</td>
 						<td class="click-this"><a href="#">A/B</a></td>
 						<td>
 							<span class="badge badge-info">분류1</span>
@@ -229,24 +238,23 @@
 							<span class="badge badge-purple">분류4</span>
 						</td>
 						<td><a href="#">170</a></td>
-						<td><a href="#">601</a></td>
 						<td>35.179%</td>
 					</tr>
 											
 					<tr>
 						<td class="list_problem_id">1014</td>
+						<td>18/03/13</td>
 						<td class="click-this"><a href="/problem/1014">컨닝</a></td>
 						<td>
 							<span class="badge badge-from">배열</span>
 							<span class="badge badge-default">변수</span>
 						</td>
 						<td><a href="/status/?problem_id=1014&amp;result_id=4">360</a></td>
-						<td><a href="#">2352</a></td>
 						<td>37.267%</td>
 					</tr>
 											
 											
-											
+											 -->
 				</tbody>
 				</table>
 			</div>

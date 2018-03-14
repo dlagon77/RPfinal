@@ -1,6 +1,7 @@
 package com.rp.finalp.member.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,25 @@ public class MemberServiceImpl implements MemberService {
 			return memberDao.updateMemberImg(member);
 		}
 
+		@Override 
+		public List<Member> selectTutorList(){
+			return memberDao.selectTutorList();
+		}
 		
+		@Override
+		public int selectTutorCount() {
+			return memberDao.selectTutorCount();
+		}
+
+		@Override
+		public List<Member> selectReview(int tutor_no) {
+			
+			return memberDao.selectReview(tutor_no);
+		}
+
+		@Override
+		public int selectReviewCount(int tutor_no) {
+			
+			return memberDao.selectReviewCount(tutor_no);
+		}
 	}

@@ -10,5 +10,8 @@ public interface AssignService {
 	List<Assignment> selectAssignList(HashMap<String, Object> map);
 	int listCount();
 	Assignment selectAss(Assignment ass);
-	int assDeleteone(Assignment ass); 
+	int assDeleteone(Assignment ass);
+	List<Assignment> selectTutorAssList(int tutor_no); 
+	
+	Assignment assDetail(int ass_no);
 }

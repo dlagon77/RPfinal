@@ -52,6 +52,12 @@
 			outline:none;
 			border:none;
 		}
+		
+		#deapply{
+			background-color: hsl(0, 0%, 93.3%);
+			color: hsla(0, 0%, 6.7%, .6);
+			visibility:hidden;
+		}
 </style>
 
 	<!-- 별점플러그인 관련 링크 -->
@@ -75,20 +81,23 @@
 				</div>
 
 				<div class="desc">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">김재석</h3>
-					<h5 style="padding-left:10px;color:gray!important">수강생 25명</h5>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
+					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
-
+				
+				<c:if test="${loginUser.mem_no eq tutor_no }">
 				<div style="margin-top: 25px;margin-left:10px">
 					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
 						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
 					</button>
 				</div>
-
+				</c:if>
+				
 			</div>
 			<div class="col-lg-3">
 				<div style="margin-left: 75%;margin-top: 25px;">
-					<button class="applyButton">수강신청</button>
+					<button id="apply" class="applyButton" onclick="document.getElementById('deapply').style.visibility='visible'">수강신청</button>
+					<button id="deapply" class="applyButton">수강중 4명</button>
 				</div>
 			</div>
 		</div>
@@ -98,9 +107,9 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
-			  <a href="lecturePlayList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
@@ -123,19 +132,18 @@
 			<div class="row">
 
 				<div class="col-md-7 big-letter">
-				<iframe width="734" height="400" src="https://www.youtube.com/embed/LrhWec60va4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="734" height="400" src="https://www.youtube.com/embed/${Lecture.lec_link }" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				
 					<p style="font-size:14px;color:gray;float:right">
-						조회수 10회
+						조회수 ${Lecture.lec_readcount }회
 					</p>
 					<br>
 				</div>
 				<div class="col-md-5">
-					<h4>배열 기초 강의</h4>
+					<h4>${Lecture.lec_title }</h4>
 					<br>
 					<p>
-						배열(Array)은 연관된 정보를 그룹핑 하는데 사용한다.
-						이해를 돕기 위해서 비유를 들어보겠다. (비유는 이해를 돕기 위한 것일 뿐이다. 비유가 오히려 이해에 방해가 될 수 있다. 비유가 도움되지 않는다면 뒤어서 언급될 기술적인 설명을 보자.
+						${Lecture.lec_con }
 					</p>
 					<br>
 					<img class="pull-right" src="/finalp/resources/img/logo2.PNG" alt="signature">
@@ -149,7 +157,7 @@
 
 	<!--<div class="container">-->
 	<div style="display:flex">
-	<h4>평가 13개</h4>
+	<h4>평가 ${reviewCount }개</h4>
 	</div>
 	<section class="about" id="about" style="width:1284px;padding-top:0">
 		<div class="row">
@@ -166,7 +174,7 @@
 		
 					<form style="width:100%">
 					  <div class="form-group" style="font-size:15px;padding-top: 50px;">
-						<input type="text" class="messageInput" id="inputAddress" placeholder="댓글 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
+						<input type="text" class="messageInput" id="inputAddress" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
 						<select id="example">
 						  <option value="1">1</option>
 						  <option value="2">2</option>
@@ -181,16 +189,17 @@
 				</div>
 				<!-- 리뷰 등록 템플릿 끝 -->
 
+				<c:forEach items="${review }" var="row">
 				<!-- 댓글 리스트 폼 -->
 				<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
 					<button style="background: none;border: none;outline: none;display: flex;">
 					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				   </button>
-				   <p>content dienlvnso soenvkd slaiencl  감사합니다 잘 들었습니다!!</p>
+				   <p>${row.rev_con }</p>
 				   <div style="margin-top:1%;position: absolute;left: 87%;">
-					   <select id="example2">
+					   <select id="p${row.rev_no }">
 						  <option value="1">1</option>
 						  <option value="2">2</option>
 						  <option value="3">3</option>
@@ -200,42 +209,10 @@
 					</div>
 				</div>
 				<!-- 댓글 리스트 폼 끝--> 
+				
+				</c:forEach>
 
-				<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
-					<button style="background: none;border: none;outline: none;display: flex;">
-					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
-					</div>
-				   </button>
-				   <p>content dienlvnso soenvkd slaiencl  eonvieonvon vnod</p>
-				   <div style="margin-top:1%;position: absolute;left: 87%;">
-					   <select id="example3">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
-					<button style="background: none;border: none;outline: none;display: flex;">
-					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
-					</div>
-				   </button>
-				   <p>content dienlvnso soenvkd slaiencl  eonvieonvon vnod</p>
-				   <div style="margin-top:1%;position: absolute;left: 87%;">
-					   <select id="example4">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						</select>
-					</div>
-				</div>
+				
 
 
 			</div><!--col-md-7-->
@@ -278,18 +255,49 @@
 	<!-- 별점플러그인 관련 스크립트 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="/finalp/resources/js/jquery.barrating.min.js"></script>
+	
+	<!-- 수강신청 ajax -->
+	<script type="text/javascript">
+   $(function(){
+      $('#apply').on("click", function(){
+         //alert("테스트1 버튼 클릭됨!");
+         $.ajax({
+        	 url: "apply.do",
+        	 data: {st_no : ${loginUser.mem_no}, tutor_no : ${tutor_no}},
+        	 type: "post",
+        	 success: function(result){
+        		 if(result == "ok")
+        			 alert("전송 성공!");
+        		 else
+        			 alert("전송 실패!");
+        	 },
+        	 error: function(request, status, errorData){
+        		 alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+        	 }
+         });
+         
+      });
+      </script>
+	
+	
+	
+	<c:forEach items="${review }" var="row">
+	<script type="text/javascript">
+	
+	   $(function() {
+		  $('#p${row.rev_no}').barrating({
+			theme: 'fontawesome-stars',
+			readonly : true,
+			initialRating : ${row.rev_star}
+			
+		  });
+	   });
+	   
+	</script>
+	</c:forEach>
 	<script type="text/javascript">
 	   $(function() {
-		  $('#example').barrating({
-			theme: 'fontawesome-stars'
-		  });
-		   $('#example2').barrating({
-			theme: 'fontawesome-stars'
-		  });
-		  $('#example3').barrating({
-			theme: 'fontawesome-stars'
-		  });
-		  $('#example4').barrating({
+		   $('#example').barrating({
 			theme: 'fontawesome-stars'
 		  });
 	   });

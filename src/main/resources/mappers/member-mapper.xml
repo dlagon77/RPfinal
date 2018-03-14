@@ -77,6 +77,36 @@
  	]]>
 	</update>
 		
+	<!-- 재석추가 180314 -->
+	<select id="selectTutorList" resultType="Member">
+		<![CDATA[
+			select *
+			from tutorList
+		]]>
+	</select>
+
+	<select id="selectTutorCount" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from tutorList where mem_class is not null
+		]]>
+	</select>
 	
+	<select id="selectReview" resultType="Member" parameterType="Integer">
+		<![CDATA[
+			select mem_refile, rev_star, rev_con, rev_date, rev_no
+			from review 
+			join member on (mem_no = rev_mem_no)
+			where tutor_id = #{tutor_no}
+		]]>
+	</select>
+	
+	<select id="selectReviewCount" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from review
+			where tutor_id = #{tutor_no}
+		]]>
+	</select>
 
 </mapper>

@@ -70,6 +70,29 @@
 		]]>
 	
 	</delete>
-
+	
+	<!-- 재석추가부분 -->
+	<resultMap id="tutorAssList" type="Assignment">
+  		<result property="ass_no" column="ass_no"/>
+  		<result property="ass_reg_date" column="ass_reg_date"/>  
+  		<result property="ass_cate" column="ass_cate"/>  
+  		<result property="ass_title" column="ass_title"/>
+  		<result property="ass_cor_cnt" column="ass_cor_cnt"/>  	
+	</resultMap>
+	
+	<select id="selectTutorAssList" resultMap="tutorAssList" resultType="list" 
+		parameterType="java.util.HashMap"> 
+		<![CDATA[ 
+		select ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt
+		from assignment
+		where ass_maker = #{tutor_no} and ass_writer is null
+		]]>
+	</select>
+	
+	<select id="assDetail" resultType="Assignment" parameterType="int">
+	<![CDATA[
+		SELECT * FROM ASSIGNMENT WHERE ASS_NO=#{ass_no}
+	]]>
+	</select>
 
 </mapper>

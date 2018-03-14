@@ -21,5 +21,10 @@ public class LectureDao {
 	public int addReadCount(String videoId) {
 		return mybatis.update("lectureMapper.addReadCount", videoId);
 	}
+	
+	public Lecture selectTutorLecture(int tutor_no) {
+		
+		return mybatis.selectOne("lectureMapper.lectureView",tutor_no);
+	}
 
 }

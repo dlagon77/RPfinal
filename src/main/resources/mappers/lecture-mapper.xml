@@ -21,4 +21,19 @@
 	</select>
 
 
+	<!-- 재석추가 180314 -->
+	<select id="lectureView" resultType="Lecture" parameterType="Integer">
+		<![CDATA[
+			select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date
+			from 
+			(select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date
+			from member m
+			join lecture on (mem_no=tutor_no)
+			join tutorList t using (mem_no)
+			where tutor_no = #{tutor_no} order by lec_date desc)
+			where rownum=1
+		]]>
+		
+	</select>
+
 </mapper>

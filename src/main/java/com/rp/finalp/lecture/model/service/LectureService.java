@@ -7,5 +7,7 @@ public interface LectureService {
 	Lecture selectReadCount(String videoId);
 
 	int addReadCount(String videoId);
+	
+	Lecture selectTutorLecture(int tutor_no);
 
 }

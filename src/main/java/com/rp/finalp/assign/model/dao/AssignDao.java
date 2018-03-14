@@ -29,5 +29,13 @@ public class AssignDao {
 	public int assDeleteone(Assignment ass) {
 		return mybatis.delete("assignMapper.assDelete",ass);
 	}
+	
+	public List<Assignment> selectTutorAssList(int tutor_no){
+		return mybatis.selectList("assignMapper.selectTutorAssList",tutor_no);
+	}
+	
+	public Assignment assDetail(int ass_no) {
+		return mybatis.selectOne("assignMapper.assDetail",ass_no);
+	}
 
 }
