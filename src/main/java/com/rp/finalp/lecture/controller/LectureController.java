@@ -59,5 +59,15 @@ public class LectureController {
 		model.addAttribute("Lecture", lectureService.selectReadCount(videoId));
 		return "tutor/lectureDetail";
 	}
+
+	@RequestMapping("classManage.do")
+	public String classManageMethod() {
+		return "tutor/classManage";
+	}
+	
+	@RequestMapping("classManageLecture.do")
+	public String classManageLectureMethod(){
+		return "tutor/classManageLecture";
+	}
 	
 }

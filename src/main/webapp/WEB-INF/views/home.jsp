@@ -17,7 +17,8 @@
 <a href="taskDetail.do">for taskDetail click here</a><br>
 <a href="tutorHome.do">for tutorHome click here</a><br>
 <a href="testDetailView.do">for testDetailView click here</a><br>
-<a href="lecturePlayList.do">for youtubePlayList cilck here</a>
+<a href="lecturePlayList.do">for youtubePlayList cilck here</a><br>
+<a href="classManage.do">for classManagement cilck here</a>
 <!doctype html>
 <html lang="en">
  <head>
