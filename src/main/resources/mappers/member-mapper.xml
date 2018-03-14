@@ -6,21 +6,12 @@
 
 	<resultMap id="resultmysubsc" type="Mysubsc">
 		<result property="mem_no" column="mem_no" />
-<!-- 		<result property="mem_id" column="mem_id" /> -->
 		<result property="app_student_no" column="app_student_no"/>
-<!-- 		<result property="mem_pwd" column="mem_pwd" /> -->
 		<result property="mem_name" column="mem_name" />
-<!-- 		<result property="mem_phone" column="mem_phone" /> -->
-<!-- 		<result property="mem_age" column="mem_age" /> -->
-<!-- 		<result property="mem_gen" column="mem_gen" /> -->
-<!-- 		<result property="mem_birth" column="mem_birth" /> -->
-<!-- 		<result property="mem_black" column="mem_black" /> -->
-<!-- 		<result property="mem_cate" column="mem_cate" /> -->
-<!-- 		<result property="mem_inter" column="mem_inter" /> -->
-<!-- 		<result property="mem_orfile" column="mem_orfile" /> -->
 		<result property="mem_refile" column="mem_refile" />
   	</resultMap>
-<!-- 		<resultMap id="resultMember" type="member">
+  	
+	<resultMap id="resultMember" type="member">
 		<result property="mem_no" column="mem_no" />
 		<result property="mem_id" column="mem_id" />
 		<result property="app_student_no" column="app_student_no"/>
@@ -35,10 +26,7 @@
 		<result property="mem_inter" column="mem_inter" />
 		<result property="mem_orfile" column="mem_orfile" />
 		<result property="mem_refile" column="mem_refile" />
-		<result property="mem_career" column="mem_career" />
-		<result property="mem_class" column="mem_class" />
-		<result property="mem_content" column="mem_content" />
- 	</resultMap> -->
+ 	</resultMap> 
  	
 
 	<select id="loginMember" resultType="Member" parameterType="Member">
@@ -65,6 +53,7 @@
 	
 	
 	<!-- 준우추가 180313 -->
+
 	<select id="mysubscribe" resultMap="resultmysubsc">
 		<![CDATA[
 			SELECT * FROM MYSUBSCRIBE WHERE APP_STUDENT_NO = #{mem_no}
@@ -74,6 +63,12 @@
 	<update id="updateMemberImg" parameterType="Member">
  	<![CDATA[
  		update member set mem_orfile = #{mem_orfile}, mem_refile = #{mem_refile} where mem_no=#{mem_no}
+ 	]]>
+	</update>
+	
+	<update id="updateMemberPassword" parameterType="Member">
+ 	<![CDATA[
+ 		update member set mem_pwd = #{mem_pwd} where mem_no=#{mem_no}
  	]]>
 	</update>
 		
