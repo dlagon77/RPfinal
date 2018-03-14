@@ -51,6 +51,15 @@
 		]]>
 	</insert>
 	
+	<!-- 지혜 아이디중복검사 -->
+	<select id="checkId" parameter Type="Member"  resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT NVL(COUNT(*),0)
+			FROM MEMBER WHERE MEM_ID=#{id}
+		]]>
+	</select>
+	
+	
 	
 	<!-- 준우추가 180313 -->
 
