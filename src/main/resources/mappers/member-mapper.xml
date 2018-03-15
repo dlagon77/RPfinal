@@ -4,113 +4,113 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 
-	<resultMap id="resultmysubsc" type="Mysubsc">
-		<result property="mem_no" column="mem_no" />
-		<result property="app_student_no" column="app_student_no"/>
-		<result property="mem_name" column="mem_name" />
-		<result property="mem_refile" column="mem_refile" />
-  	</resultMap>
-  	
-	<resultMap id="resultMember" type="member">
-		<result property="mem_no" column="mem_no" />
-		<result property="mem_id" column="mem_id" />
-		<result property="app_student_no" column="app_student_no"/>
-		<result property="mem_pwd" column="mem_pwd" />
-		<result property="mem_name" column="mem_name" />
-		<result property="mem_phone" column="mem_phone" />
-		<result property="mem_age" column="mem_age" />
-		<result property="mem_gen" column="mem_gen" />
-		<result property="mem_birth" column="mem_birth" />
-		<result property="mem_black" column="mem_black" />
-		<result property="mem_cate" column="mem_cate" />
-		<result property="mem_inter" column="mem_inter" />
-		<result property="mem_orfile" column="mem_orfile" />
-		<result property="mem_refile" column="mem_refile" />
- 	</resultMap> 
- 	
+   <resultMap id="resultmysubsc" type="Mysubsc">
+      <result property="mem_no" column="mem_no" />
+      <result property="app_student_no" column="app_student_no"/>
+      <result property="mem_name" column="mem_name" />
+      <result property="mem_refile" column="mem_refile" />
+     </resultMap>
+     
+   <resultMap id="resultMember" type="member">
+      <result property="mem_no" column="mem_no" />
+      <result property="mem_id" column="mem_id" />
+      <result property="app_student_no" column="app_student_no"/>
+      <result property="mem_pwd" column="mem_pwd" />
+      <result property="mem_name" column="mem_name" />
+      <result property="mem_phone" column="mem_phone" />
+      <result property="mem_age" column="mem_age" />
+      <result property="mem_gen" column="mem_gen" />
+      <result property="mem_birth" column="mem_birth" />
+      <result property="mem_black" column="mem_black" />
+      <result property="mem_cate" column="mem_cate" />
+      <result property="mem_inter" column="mem_inter" />
+      <result property="mem_orfile" column="mem_orfile" />
+      <result property="mem_refile" column="mem_refile" />
+    </resultMap> 
+    
 
-	<select id="loginMember" resultType="Member" parameterType="Member">
-		<![CDATA[
-			SELECT * FROM MEMBER 
-			WHERE MEM_ID = #{mem_id} 
-			AND MEM_PWD = #{mem_pwd}
-		]]>
-	</select>
+   <select id="loginMember" resultType="Member" parameterType="Member">
+      <![CDATA[
+         SELECT * FROM MEMBER 
+         WHERE MEM_ID = #{mem_id} 
+         AND MEM_PWD = #{mem_pwd}
+      ]]>
+   </select>
 
 <!-- <select id="selectAll" resultMap="">
-		<![CDATA[
-		select * from member
-		]]>
-	</select> -->
+      <![CDATA[
+      select * from member
+      ]]>
+   </select> -->
 
-	 <insert id="insertMember" parameterType="Member" >
-		<![CDATA[
-		INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
-		#{mem_name}, #{mem_phone},25, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
-		#{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content})
-		]]>
-	</insert>
-	
-	<!-- 지혜 아이디중복검사 -->
-	<select id="checkId" parameter Type="Member"  resultType="java.lang.Integer">
-		<![CDATA[
-			SELECT NVL(COUNT(*),0)
-			FROM MEMBER WHERE MEM_ID=#{id}
-		]]>
-	</select>
-	
-	
-	
-	<!-- 준우추가 180313 -->
+    <insert id="insertMember" parameterType="Member" >
+      <![CDATA[
+      INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
+      #{mem_name}, #{mem_phone},25, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
+      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content})
+      ]]>
+   </insert>
+   
+   <!-- 지혜 아이디중복검사 -->
+   <select id="checkId" parameterType="Member"  resultType="java.lang.Integer">
+      <![CDATA[
+         SELECT NVL(COUNT(*),0)
+         FROM MEMBER WHERE MEM_ID=#{mem_id}
+      ]]>
+   </select>
+   
+   
+   
+   <!-- 준우추가 180313 -->
 
-	<select id="mysubscribe" resultMap="resultmysubsc">
-		<![CDATA[
-			SELECT * FROM MYSUBSCRIBE WHERE APP_STUDENT_NO = #{mem_no}
-		]]>
-	</select>
-	
-	<update id="updateMemberImg" parameterType="Member">
- 	<![CDATA[
- 		update member set mem_orfile = #{mem_orfile}, mem_refile = #{mem_refile} where mem_no=#{mem_no}
- 	]]>
-	</update>
-	
-	<update id="updateMemberPassword" parameterType="Member">
- 	<![CDATA[
- 		update member set mem_pwd = #{mem_pwd} where mem_no=#{mem_no}
- 	]]>
-	</update>
-		
-	<!-- 재석추가 180314 -->
-	<select id="selectTutorList" resultType="Member">
-		<![CDATA[
-			select *
-			from tutorList
-		]]>
-	</select>
+   <select id="mysubscribe" resultMap="resultmysubsc">
+      <![CDATA[
+         SELECT * FROM MYSUBSCRIBE WHERE APP_STUDENT_NO = #{mem_no}
+      ]]>
+   </select>
+   
+   <update id="updateMemberImg" parameterType="Member">
+    <![CDATA[
+       update member set mem_orfile = #{mem_orfile}, mem_refile = #{mem_refile} where mem_no=#{mem_no}
+    ]]>
+   </update>
+   
+   <update id="updateMemberPassword" parameterType="Member">
+    <![CDATA[
+       update member set mem_pwd = #{mem_pwd} where mem_no=#{mem_no}
+    ]]>
+   </update>
+      
+   <!-- 재석추가 180314 -->
+   <select id="selectTutorList" resultType="Member">
+      <![CDATA[
+         select *
+         from tutorList
+      ]]>
+   </select>
 
-	<select id="selectTutorCount" resultType="Integer">
-		<![CDATA[
-			select count(*)
-			from tutorList where mem_class is not null
-		]]>
-	</select>
-	
-	<select id="selectReview" resultType="Member" parameterType="Integer">
-		<![CDATA[
-			select mem_refile, rev_star, rev_con, rev_date, rev_no
-			from review 
-			join member on (mem_no = rev_mem_no)
-			where tutor_id = #{tutor_no}
-		]]>
-	</select>
-	
-	<select id="selectReviewCount" resultType="Integer">
-		<![CDATA[
-			select count(*)
-			from review
-			where tutor_id = #{tutor_no}
-		]]>
-	</select>
+   <select id="selectTutorCount" resultType="Integer">
+      <![CDATA[
+         select count(*)
+         from tutorList where mem_class is not null
+      ]]>
+   </select>
+   
+   <select id="selectReview" resultType="Member" parameterType="Integer">
+      <![CDATA[
+         select mem_refile, rev_star, rev_con, rev_date, rev_no
+         from review 
+         join member on (mem_no = rev_mem_no)
+         where tutor_id = #{tutor_no}
+      ]]>
+   </select>
+   
+   <select id="selectReviewCount" resultType="Integer">
+      <![CDATA[
+         select count(*)
+         from review
+         where tutor_id = #{tutor_no}
+      ]]>
+   </select>
 
 </mapper>

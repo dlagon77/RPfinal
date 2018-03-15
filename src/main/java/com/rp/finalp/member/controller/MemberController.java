@@ -113,6 +113,18 @@ public class MemberController {
 		return viewName;
 	}
 	
+	@RequestMapping(value="/proinsertpage.do")
+	public String moveToInsertpage() {
+		System.out.println("회원가입페이지");
+		return "member/proinsertForm";     //jsp파일 이름
+	}
+	
+	//아이디 중복
+	@RequestMapping(value = "/proinsert.do", method = RequestMethod.POST)
+		public @ResponseBody int idCheck(Member member, Model model) {
+			return memberService.checkId(member);
+	}
+	
 	/*@RequestMapping(value="/proinsert.do", method=RequestMethod.POST)
 	public String insertMember(Member member, Model model) {
 		//System.out.println("insert : " + member);
@@ -152,12 +164,12 @@ public class MemberController {
 		return "tutor/tutorHome";
 	}
 	//회원가입 이메일 중복 체크
-	@ResponseBody
+	/*@ResponseBody
     @RequestMapping(value = "/checkSignup", method = RequestMethod.POST)
     public String checkSignup(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
-        int rowcount = MemberService.checkSignup(id);
+        int rowcount = memberService.checkSignup(id);
         
         return String.valueOf(rowcount);
-    }
+    }*/
 }
