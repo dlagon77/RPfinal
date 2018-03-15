@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-   <title>RP's Home</title>
+   <title>RP's Home~</title> 
 </head>
 <body>
 <c:import url="header.jsp" />
