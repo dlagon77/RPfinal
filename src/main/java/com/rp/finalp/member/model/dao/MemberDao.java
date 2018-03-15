@@ -47,9 +47,8 @@ public class MemberDao {
 	}
 	
 	//id 중복확인
-	public int checkSignup(String id) {
-		// TODO Auto-generated method stub
-		return mybatis.selectOne("memberMapper.checkSignup");
+	public int checkId(Member member) {
+		return mybatis.selectOne("memberMapper.checkId", member);
 	}
 }
 
