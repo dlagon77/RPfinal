@@ -94,7 +94,7 @@
         <a href="#"><i class="xi-home xi-x"></i>&nbsp;&nbsp;&nbsp; 홈</a>
         <a href="#"><i class="xi-equalizer xi-x"></i>&nbsp;&nbsp;&nbsp; 인기</a>
         <a href="tutorListView.do"><i class="xi-users xi-x"></i>&nbsp;&nbsp;&nbsp; 강사</a>
-        <a href="#"><i class="xi-keyboard xi-x"></i>&nbsp;&nbsp;&nbsp; test</a>
+        <a href="#"><i class="xi-keyboard xi-x"></i>&nbsp;&nbsp;&nbsp;test</a>
      </div>
 
       <div class="column">
