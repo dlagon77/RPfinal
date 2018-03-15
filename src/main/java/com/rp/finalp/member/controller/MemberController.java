@@ -120,7 +120,7 @@ public class MemberController {
 	}
 	
 	//아이디 중복
-	@RequestMapping(value = "/proinsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkId.do", method = RequestMethod.POST)
 		public @ResponseBody int idCheck(Member member, Model model) {
 			return memberService.checkId(member);
 	}
