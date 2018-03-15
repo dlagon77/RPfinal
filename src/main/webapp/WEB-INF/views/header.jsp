@@ -28,6 +28,9 @@
    <!--button css-->
    <link rel="stylesheet" type="text/css" href="resources/css/buttons.css" />
    
+   <!-- XEicon -->
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+   
    <style>
 
       body{
@@ -88,18 +91,18 @@
 
 <div id="mySidenav" class="sidenav" style="margin-top: 60px;display:none;">
      <div class="column">
-        <a href="#">홈</a>
-        <a href="#">인기</a>
-        <a href="tutorListView.do">강사</a>
-        <a href="#">test</a>
+        <a href="#"><i class="xi-home xi-x"></i>&nbsp;&nbsp;&nbsp; 홈</a>
+        <a href="#"><i class="xi-equalizer xi-x"></i>&nbsp;&nbsp;&nbsp; 인기</a>
+        <a href="tutorListView.do"><i class="xi-users xi-x"></i>&nbsp;&nbsp;&nbsp; 강사</a>
+        <a href="#"><i class="xi-keyboard xi-x"></i>&nbsp;&nbsp;&nbsp; test</a>
      </div>
 
       <div class="column">
      <span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">aeoufseu</span>
-       <a href="#">About</a>
-       <a href="qblist.do">게시판</a>
-       <a href="stinsertpage.do">Clients</a>
-       <a href="#">Contact</a>
+       <a href="#"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; About</a>
+       <a href="qblist.do"><i class="xi-align-left xi-x"></i>&nbsp;&nbsp;&nbsp; 게시판</a>
+       <a href="stinsertpage.do"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; Clients</a>
+       <a href="#"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; Contact</a>
      </div>
        
 </div>
