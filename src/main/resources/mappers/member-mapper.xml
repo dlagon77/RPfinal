@@ -26,10 +26,6 @@
       <result property="mem_inter" column="mem_inter" />
       <result property="mem_orfile" column="mem_orfile" />
       <result property="mem_refile" column="mem_refile" />
-      <result property="mem_career" column="mem_career" />
-      <result property="mem_class" column="mem_class" />
-      <result property="mem_content" column="mem_content" />
-      <result property="mem_channel_id" column="mem_channel_id" />
     </resultMap> 
     
 
@@ -51,7 +47,7 @@
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
       #{mem_name}, #{mem_phone},25, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
-      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content},#{mem_channel_id})
+      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content})
       ]]>
    </insert>
    
