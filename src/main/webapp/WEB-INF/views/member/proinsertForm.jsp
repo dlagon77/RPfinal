@@ -10,7 +10,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>강사 회원가입</title>
 
-<script type="text/javascript">
+<script>
+	
+	//아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위해 변수설정
+	var idCheck = 0;
+	var pwdCheck = 0;
+	function checkId() {
+        var inputed = $('.emailId').val();
+        $.ajax({
+            data : {
+                emailId : inputed
+            },
+            url : "checkId.do",
+            success : function(data) {
+                if(inputed=="" && data=='0') {
+                    $(".btn btn-info").prop("disabled", true);
+                    $(".btn btn-info").css("background-color", "#aaaaaa");
+                    $("#checkaa").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                } else if (data == '0') {
+                    $("#checkaa").css("background-color", "#B0F6AC");
+                    idCheck = 1;
+                    if(idCheck==1 && pwdCheck == 1) {
+                        $(".btn btn-info").prop("disabled", false);
+                        $(".btn btn-info").css("background-color", "#4CAF50");
+                        signupCheck();
+                    } 
+                } else if (data == '1') {
+                    $(".btn btn-info").prop("disabled", true);
+                    $(".btn btn-info").css("background-color", "#aaaaaa");
+                    $("#checkaa").css("background-color", "#FFCECE");
+                    idCheck = 0;
+                } 
+            }
+        });
+    }
+	
+	//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
+    function checkPwd() {
+        var inputed = $('.pass').val();
+        var reinputed = $('#InputPassword2').val();
+        if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){
+            $(".btn btn-info").prop("disabled", true);
+            $(".btn btn-info").css("background-color", "#aaaaaa");
+            $("#InputPassword2").css("background-color", "#FFCECE");
+        }
+        else if (inputed == reinputed) {
+            $("#InputPassword2").css("background-color", "#B0F6AC");
+            pwdCheck = 1;
+            if(idCheck==1 && pwdCheck == 1) {
+                $(".btn btn-info").prop("disabled", false);
+                $(".btn btn-info").css("background-color", "#4CAF50");
+                signupCheck();
+            }
+        } else if (inputed != reinputed) {
+            pwdCheck = 0;
+            $(".btn btn-info").prop("disabled", true);
+            $(".btn btn-info").css("background-color", "#aaaaaa");
+            $("#InputPassword2").css("background-color", "#FFCECE");
+            
+        }
+    }
+    //닉네임과 이메일 입력하지 않았을 경우 가입버튼 비활성화
+    function signupCheck() {
+        var inputMail = $("#inputMail").val();
+        var email = $("#email").val();
+        if(inputMail=="" || email=="") {
+            $(".btn btn-info").prop("disabled", true);
+            $(".btn btn-info").css("background-color", "#aaaaaa");
+        } else {
+        }
+    }
+    //캔슬버튼 눌렀을 눌렀을시 인풋박스 클리어
+    $(".btn btn-danger").click(function(){
+            $(".emailId").val(null);
+            $(".pass").val('');
+            $(".btn btn-info").prop("disabled", true);
+            $(".btn btn-info").css("background-color", "#aaaaaa");
+    });
+</script>
+
+
+<!-- 아마 필요없을껑 -->
+<!-- <script type="text/javascript">
 	$(document).ready(function(){
 		  $('#checkbtn').on('click', function(){
 	            $.ajax({
@@ -30,7 +112,7 @@
 	            });    //end ajax    
 	        });    //end on 
 	});
-</script>
+</script> -->
 
 <!-- Bootstrap -->
     <link href="/finalp/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -88,17 +170,17 @@
 
             <div class="form-group">
               <label for="InputEmail">이메일ID</label>
-              <input type="email" class="form-control" id="InputEmail" name="mem_id" placeholder="이메일 주소">
-              <div id="checkMsg"></div>
+              <input type="email" class="emailId" id="InputEmail" name="mem_id" placeholder="이메일 주소">
+              <!-- div id="checkMsg"></div-->
             </div>
             
-			<div class="form-group">
+			<!-- div class="form-group">
     			<button type="submit" id="checkbtn" class="btn btn-default">중복확인</button>
-			</div>
+			</div-->
 			
             <div class="form-group">
               <label for="InputPassword1">비밀번호</label>
-              <input type="password" class="form-control" id="InputPassword1"  name="mem_pwd" placeholder="비밀번호">
+              <input type="password" class="pass" id="InputPassword1"  name="mem_pwd" placeholder="비밀번호">
             </div>
             <div class="form-group">
               <label for="InputPassword2">비밀번호 재확인</label>
