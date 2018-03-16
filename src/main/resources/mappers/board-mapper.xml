@@ -13,21 +13,149 @@
   		<result property="q_writer" column="q_writer"/>
 	</resultMap>
 	
-	<select id="selectAll" resultMap="QnaboardResultMap">
-		<![CDATA[
-			SELECT *
-			FROM QNABOARD	
-			ORDER BY Q_NO DESC			
+	
+	
+	<select id="selectAll" resultMap="QnaboardResultMap" resultType="QnaBoard" 
+		parameterType="java.util.HashMap">
+		<![CDATA[ 
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM, q_no, 
+					q_title, q_content, q_read_cnt, q_date,
+					q_writer 
+			   FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO)
+			   		  order by q_no desc)) 
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}  
 		]]>
+	</select>
+	
+	<select id="listCount" resultType="int"> 
+		<![CDATA[
+			SELECT COUNT(*) FROM QNABOARD 
+		]]>		
 	</select>
 	
 	<select id="selectQbOne" resultMap="QnaboardResultMap">
 		<![CDATA[
 			SELECT * 
-			FROM QNABOARD
+			FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO)
+			   		  order by q_no desc)
 			WHERE q_no = #{q_no}
 		]]>
 	</select>
 	
+    <insert id="InsertQb" parameterType="QnaBoard" useGeneratedKeys="true" >
+		<![CDATA[
+			INSERT INTO QNABOARD VALUES (seq_qnum.nextval, #{q_title}, 
+			#{q_content}, 0, SYSDATE, #{q_writer}, 2)		
+		]]>
+	</insert>
 	
+    <delete id="DeleteQb">
+    	<![CDATA[
+    		DELETE FROM QNABOARD WHERE Q_NO = #{q_no}
+    	]]>
+    </delete>
+    
+    <update id="RcUpdateQb">
+    	<![CDATA[
+    		UPDATE QNABOARD SET Q_READ_CNT = Q_READ_CNT + 1
+    		WHERE Q_NO = #{q_no}
+    	]]>
+    </update>
+    
+    <update id="UpdateQb" parameterType="QnaBoard" >
+    	<![CDATA[
+    		UPDATE QNABOARD SET
+            Q_TITLE = #{q_title}, Q_CONTENT = #{q_content} 
+            WHERE Q_NO = #{q_no}
+    	]]>
+    </update>
+    
+    <select id="qbstitle" resultMap="QnaboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO))
+    		WHERE Q_TITLE LIKE '%'||#{q_title}||'%' 
+    		ORDER BY Q_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbscontent" resultMap="QnaboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO))
+	  		WHERE Q_CONTENT LIKE '%'||#{q_content}||'%' 
+    		ORDER BY Q_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbstc" resultMap="QnaboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO))
+    		WHERE Q_TITLE LIKE '%'||#{q_title}||'%' OR Q_CONTENT LIKE '%'||#{q_content}||'%' 
+    		ORDER BY Q_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbswriter" resultMap="QnaboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT q_no, q_title, 
+			   				q_content, q_read_cnt, 
+			   				q_date, mem_name as q_writer 
+			   		  FROM QNABOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO))
+    		WHERE Q_WRITER LIKE '%'||#{q_writer}||'%' 
+    		ORDER BY Q_NO DESC
+    	]]>
+    </select>
+
+	<resultMap id="QReplyResultMap" type="Q_Reply">
+  		<result property="q_re_no" column="q_re_no"/>
+  		<result property="q_no" column="q_no"/>
+  		<result property="q_re_con" column="q_re_con"/>
+  		<result property="q_re_sdate" column="q_re_sdate"/>
+  		<result property="q_re_writer" column="q_re_writer"/>
+  		<result property="mem_no" column="mem_no"/>
+	</resultMap>
+	
+    <insert id="rinsert" parameterType="Q_Reply">
+        INSERT INTO Q_REPLY VALUES (seq_qreply.NEXTVAL, #{q_no}, #{q_re_con}, sysdate, #{q_re_writer})
+    </insert>
+    
+ 
+    <select id="qbrlist" resultMap="QReplyResultMap" resultType="Q_Reply">
+        SELECT q_re_no, q_no, q_re_con, q_re_date as q_re_sdate, mem_name as q_re_writer, mem_no
+        FROM Q_Reply
+        JOIN MEMBER ON (mem_no=q_re_writer)
+        WHERE Q_NO = #{q_no} ORDER BY Q_RE_DATE DESC
+    </select> 
+
+	<delete id="qbrdelete">
+    	<![CDATA[
+    		DELETE FROM Q_REPLY WHERE Q_RE_NO = #{q_re_no}
+    	]]>
+    </delete>
+
 </mapper>

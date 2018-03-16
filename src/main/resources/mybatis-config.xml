@@ -10,7 +10,8 @@
 		<typeAlias type="com.rp.finalp.test.model.vo.Test" alias="Test" />
 		<typeAlias type="com.rp.finalp.lecture.model.vo.Lecture" alias="Lecture" />
 		<typeAlias type="com.rp.finalp.common.model.vo.Mysubsc" alias="Mysubsc" />
-
+		<typeAlias type="com.rp.finalp.board.model.vo.Q_Reply" alias="Q_Reply" />
+		
 	</typeAliases>
 
 	<mappers>
