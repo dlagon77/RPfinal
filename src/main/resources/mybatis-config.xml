@@ -11,6 +11,12 @@
 		<typeAlias type="com.rp.finalp.lecture.model.vo.Lecture" alias="Lecture" />
 		<typeAlias type="com.rp.finalp.common.model.vo.Mysubsc" alias="Mysubsc" />
 		<typeAlias type="com.rp.finalp.board.model.vo.Q_Reply" alias="Q_Reply" />
+		<typeAlias type="com.rp.finalp.board.model.vo.QnaBoard" alias="QnaBoard" />
+		<typeAlias type="com.rp.finalp.admin.model.vo.Member" alias="AdminMember" />
+		<typeAlias type="com.rp.finalp.admin.model.vo.Board" alias="Board" />
+		<typeAlias type="com.rp.finalp.admin.model.vo.Contact" alias="Contact" />
+		<typeAlias type="com.rp.finalp.admin.model.vo.Reply" alias="Reply" />
+		<typeAlias type="com.rp.finalp.admin.model.vo.Keyword" alias="Keyword" />
 		
 	</typeAliases>
 
@@ -20,5 +26,6 @@
 		<mapper resource="mappers/assign-mapper.xml" /> 
 		<mapper resource="mappers/test-mapper.xml" />
 		<mapper resource="mappers/lecture-mapper.xml" />  
+		<mapper resource="mappers/admin-mapper.xml" /> 
 	</mappers>
 </configuration>

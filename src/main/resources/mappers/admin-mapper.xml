@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+	
+	
+	<!-- 회원프로필 관련 -->
+		
+		<!-- 회원 전체조회  -->
+			<resultMap id="MemberResultMap" type="AdminMember">
+		  		<result property="mem_no" column="mem_no"/>
+		  		<result property="mem_id" column="mem_id"/>
+		  		<result property="mem_pwd" column="mem_pwd"/>
+		  		<result property="mem_name" column="mem_name"/>
+		  		<result property="mem_phone" column="mem_phone"/>
+		  		<result property="mem_age" column="mem_age"/>
+		  		<result property="mem_gen" column="mem_gen"/>
+		  		<result property="mem_birth" column="mem_birth"/>
+		  		<result property="mem_black" column="mem_black"/>
+		  		<result property="mem_cate" column="mem_cate"/>
+		  		<result property="mem_inter" column="mem_inter"/>
+		  		<result property="mem_orfile" column="mem_orfile"/>
+		  		<result property="mem_refile" column="mem_refile"/>
+		  		<result property="boardcount" column="boardcount"/>
+		  		<result property="replycount" column="replycount"/>
+			</resultMap>
+			
+			<select id="selectMemberAll" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT M.mem_no,M.mem_id,M.mem_pwd,M.mem_name,M.mem_phone,M.mem_age,M.mem_gen,M.mem_birth,M.mem_black,M.mem_cate,
+					M.mem_inter,M.mem_orfile,M.mem_refile,B.BOARDCOUNT,R.REPLYCOUNT FROM MEMBER M
+					JOIN BOARDCOUNT B ON (M.MEM_NO=B.MEM_NO)
+					JOIN REPLYCOUNT R ON (R.MEM_NO=B.MEM_NO)
+					WHERE M.MEM_CATE = 'S'
+				]]>
+			</select>
+		<!-- 회원 전체조회 END -->
+		
+		<!-- 강사 전체조회 -->
+			<select id="selectTutorAll" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT * FROM MEMBER
+					WHERE MEM_CATE = 'T'
+				]]>
+			</select>
+		<!-- 강사 전체조회  END-->
+		
+		<!-- 회원 탈퇴 -->
+			
+			<delete id="deleteMember" parameterType="AdminMember">
+				<![CDATA[
+					DELETE FROM MEMBER
+					WHERE MEM_NO = #{mem_no}
+				]]>
+			</delete>
+		
+		<!-- 회원 탈퇴  END-->
+		
+		
+		<!-- 모달 리스트들 -->
+			 
+			<select id="modalBoard" parameterType="Board" resultMap="BoardResultMap">
+				<![CDATA[
+					
+					SELECT * FROM BOARD
+					WHERE BWRITER = #{mem_no}
+                    
+				]]>
+			</select> 
+			
+			<resultMap id="ReplyResultMap" type="Reply">
+		  		<result property="re_no" column="re_no"/>
+		  		<result property="b_no" column="b_no"/>
+		  		<result property="re_con" column="re_con"/>
+		  		<result property="re_writer" column="re_writer"/>
+		  		<result property="re_cateid" column="re_cateid"/>
+		  		<result property="btitle" column="btitle"/>
+		  		<result property="re_date" column="re_date"/>
+			</resultMap>
+			
+			
+			<select id="modalReply" parameterType="Reply" resultMap="ReplyResultMap">
+				<![CDATA[
+					SELECT * FROM QNAREPLY
+					WHERE RE_WRITER = #{mem_no}            
+				]]>
+			</select>
+			
+			<select id="modalReply2" parameterType="Reply" resultMap="ReplyResultMap">
+				<![CDATA[
+					SELECT * FROM TIPREPLY
+					WHERE RE_WRITER = #{mem_no}            
+				]]>
+			</select>
+		<!-- 모달 리스트들 END -->
+		
+	<!--  회원프로필 관련  END -->
+
+
+	<!-- 게시물관리 관련 -->
+		
+		<!-- 게시물 전체 조회 -->
+			<resultMap id="BoardResultMap" type="Board">
+		  		<result property="bno" column="bno"/>
+		  		<result property="btitle" column="btitle"/>
+		  		<result property="bcontent" column="bcontent"/>
+		  		<result property="breadcnt" column="breadcnt"/>
+		  		<result property="bdate" column="bdate"/>
+		  		<result property="bwriter" column="bwriter"/>
+		  		<result property="bcateid" column="bcateid"/>
+			</resultMap>
+			
+			<select id="selectBoardAll" resultMap="BoardResultMap" parameterType="int">
+				<![CDATA[
+					select BNO,BTITLE,BCONTENT,BREADCNT,BDATE,mem_name as bwriter,BCATEID from board
+					join member on(mem_no=bwriter)
+					where rownum < #{size}
+				]]>
+			</select>
+		<!-- 게시물 전체 조회 END-->
+		
+		<!-- 게시물 작성자 조회 -->
+			<select id="searchWriterBoard" parameterType="Board" resultMap="BoardResultMap">
+				<![CDATA[
+					select BNO,BTITLE,BCONTENT,BREADCNT,BDATE,mem_name as bwriter,BCATEID from board
+					join member on(mem_no=bwriter)
+					where bcateid = #{bcateid} and mem_name like '%'||#{bwriter}||'%'
+				]]>
+			</select>
+		<!-- 게시물 작성자 조회 END-->
+		
+		<!-- 게시물 제목 조회 -->
+			<select id="searchTitleBoard" parameterType="Board" resultMap="BoardResultMap">
+				<![CDATA[
+					select BNO,BTITLE,BCONTENT,BREADCNT,BDATE,mem_name as bwriter,BCATEID from board
+					join member on(mem_no=bwriter)
+					where bcateid = #{bcateid} and btitle like '%'||#{btitle}||'%'
+				]]>
+			</select>
+		<!-- 게시물 제목 조회 END-->	
+		
+		<!-- QNA 게시물 삭제 -->
+			<delete id="deleteQnaBoard" parameterType="Board">
+				<![CDATA[
+					DELETE FROM QNABOARD WHERE Q_NO = ${bno}
+				]]>
+			</delete>
+		<!-- QNA 게시물 삭제 END -->
+		
+		<!-- TIP 게시물 삭제 -->
+			<delete id="deleteTipBoard" parameterType="Board">
+				<![CDATA[
+					DELETE FROM TIPBOARD WHERE TIP_NO = ${bno}
+				]]>
+			</delete>
+		<!-- TIP 게시물 삭제 END -->
+		
+	<!-- 게시물관리 관련 END-->
+	
+	<!-- 1대1 문의 관련 -->
+	
+		<!-- 1대1 문의 전체 조회 -->
+			<resultMap id="ContactResultMap" type="Contact">
+		  		<result property="inq_no" column="inq_no"/>
+		  		<result property="inq_title" column="inq_title"/>
+		  		<result property="inq_content" column="inq_content"/>
+		  		<result property="inq_date" column="inq_date"/>
+		  		<result property="inq_writer" column="inq_writer"/>
+		  		<result property="inq_reply" column="inq_reply"/>
+		  		<result property="inq_tcate_id" column="inq_tcate_id"/>
+			</resultMap>
+			
+			<select id="selectContactAll" resultMap="ContactResultMap">
+				<![CDATA[
+					SELECT inq_no,inq_title,inq_content,inq_date,mem_name as inq_writer,inq_reply,inq_tcate_id
+					FROM INQBOARD
+					JOIN MEMBER ON(MEM_NO=INQ_WRITER)
+					WHERE INQ_YN = 'N'
+				]]>
+			</select>
+		<!-- 1대1 문의 전체 조회 END -->
+		
+		<!-- 1대1 문의 답변 -->
+			<update id="sendContact" parameterType="Contact">
+				<![CDATA[
+					UPDATE INQBOARD SET INQ_RECEIVER = #{inq_reply},
+										INQ_YN = 'Y'
+					WHERE INQ_NO = #{inq_no}
+				]]>
+			</update>
+		<!-- 1대1 문의 답변 END -->
+		
+	<!-- 1대1 문의 관련 END -->
+	
+	<!-- 댓글 삭제 -->
+	
+		<delete id="deleteQnaReply" parameterType="Reply">
+			<![CDATA[
+					DELETE FROM Q_REPLY
+					WHERE Q_RE_NO = #{re_no}
+				]]>
+		</delete>
+		
+		<delete id="deleteTipReply" parameterType="Reply">
+			<![CDATA[
+					DELETE FROM T_REPLY
+					WHERE T_RE_NO = #{re_no}
+				]]>
+		</delete>
+	
+	<!-- 댓글 삭제  END-->
+	
+	<!-- 금지어  -->
+		
+		<resultMap id="KeywordResultMap" type="Keyword">
+		  		<result property="key_no" column="key_no"/>
+		  		<result property="key_word" column="key_word"/>
+		  		<result property="key_date" column="key_date"/>
+		</resultMap>
+		
+		<!-- 금지어 리스트 -->
+			<select id="selectKeyAll" resultMap="KeywordResultMap">
+					<![CDATA[
+						SELECT * FROM KEYWORD
+					]]>
+			</select>
+		<!-- 금지어 리스트 END-->
+		
+		<!-- 금지어 등록 -->
+			<insert id="insertKeyword" parameterType="Keyword">
+					<![CDATA[
+						INSERT INTO KEYWORD VALUES((SELECT MAX(KEY_NO)+1 FROM KEYWORD),#{key_word},sysdate)
+					]]>
+			</insert>
+		<!-- 금지어 등록 END-->
+		
+		<!-- 금지어 삭제 -->
+			<delete id="keywordDelete" parameterType="Keyword">
+					<![CDATA[
+						DELETE FROM KEYWORD
+						WHERE KEY_NO = #{key_no}
+					]]>
+			</delete>
+		<!-- 금지어 삭제 END-->
+		
+	<!-- 금지어 END-->
+	
+	<!-- 블랙리스트 -->
+	
+		<!-- 블랙리스트 추가 -->
+			<update id="blackplus" parameterType="AdminMember">
+				<![CDATA[
+						UPDATE MEMBER SET MEM_BLACK = 'Y'
+						WHERE MEM_NO = #{mem_no}
+					]]>
+			</update>
+		<!-- 블랙리스트 추가 END-->
+			
+		<!-- 블랙리스트 해제 -->
+			<update id="blackminus" parameterType="AdminMember">
+				<![CDATA[
+						UPDATE MEMBER SET MEM_BLACK = 'N'
+						WHERE MEM_NO = #{mem_no}
+					]]>
+			</update>
+		<!-- 블랙리스트 해제 END-->
+		
+	<!-- 블랙리스트 END-->
+	
+	
+	<!-- 금지어포함게시물 END-->
+	
+		<select id="kBoardAll" resultMap="BoardResultMap" parameterType="Keyword">
+			<![CDATA[
+				select BNO,BTITLE,BCONTENT,BREADCNT,BDATE,mem_name as bwriter,BCATEID from board
+				join member on(mem_no=bwriter)
+				where bcontent like '%'||#{key_word}||'%'
+			]]>
+		</select>
+	
+	<!-- 금지어포함게시물 END-->
+	
+</mapper>
