@@ -13,7 +13,7 @@
 <script>
 	
 	//아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위해 변수설정
-	var idCheck = 0;
+	<!-- var idCheck = 0;
 	var pwdCheck = 0;
 	function checkId() {
         var inputed = $('.emailId').val();
@@ -88,7 +88,7 @@
             $(".btn btn-info").prop("disabled", true);
             $(".btn btn-info").css("background-color", "#aaaaaa");
     });
-</script>
+</script> -->
 
 
 <!-- 아마 필요없을껑 -->
@@ -141,6 +141,36 @@
 		margin-left: 5%;
 	}
 	
+	.emailId{
+   display: block;
+   width: 100%;
+   height: 34px;
+   padding: 6px 12px;
+   font-size: 14px;
+   line-height: 1.42857143;
+   background-color: #fff;
+   background-image: none;
+   border:1px solid #ccc;
+   border-radius:4px;
+   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+}
+	.pass{
+   display: block;
+   width: 100%;
+   height: 34px;
+   padding: 6px 12px;
+   font-size: 14px;
+   line-height: 1.42857143;
+   background-color: #fff;
+   background-image: none;
+   border:1px solid #ccc;
+   border-radius:4px;
+   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+}
   </style>
 </head>
 <body>
@@ -170,7 +200,7 @@
 
             <div class="form-group">
               <label for="InputEmail">이메일ID</label>
-              <input type="email" class="emailId" id="InputEmail" name="mem_id" placeholder="이메일 주소">
+              <input type="email" required class="emailId" oninput="checkId()" id="checkaa" name="mem_id" placeholder="이메일 주소">
               <!-- div id="checkMsg"></div-->
             </div>
             
@@ -180,11 +210,11 @@
 			
             <div class="form-group">
               <label for="InputPassword1">비밀번호</label>
-              <input type="password" class="pass" id="InputPassword1"  name="mem_pwd" placeholder="비밀번호">
+              <input type="password" required class="pass" id="InputPassword1"  oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호">
             </div>
             <div class="form-group">
               <label for="InputPassword2">비밀번호 재확인</label>
-              <input type="password" class="form-control" id="InputPassword2"  name="mem_pwd" placeholder="비밀번호 재확인">
+              <input type="password" class="form-control" id="InputPassword2"  oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호 재확인">
               <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요!</p>
             </div>
 				
@@ -343,6 +373,11 @@
               </div>
             </div>
            
+            <div class="form-group">
+              <label for="mem_content">강사 유튜브 채널 ID</label>
+              <input type="text" class="form-control" id="memcontent" name="mem_channel_id" placeholder="유튜브채널ID입력">
+            </div>
+           
            <div class="form-group">
               <label for="mem_class">홈페이지제목</label>
               <input type="text" class="form-control" id="memclass" name="mem_class" placeholder="이름을 입력해 주세요">
@@ -364,7 +399,7 @@
 	   <div class="form-group text-center">
               <button type="submit" class="btn btn-info" form="form1">강사회원가입<i class="fa fa-check spaceLeft"></i></button>
               <!--button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button-->
-			  <button class="btn btn-danger" type="submit" form="form1">가입취소<i class="fa fa-times spaceLeft"></i></button>
+			  <button class="btn btn-danger" type="submit" form="form1" onclick='$("#_joinsung").css("display", "none")'>가입취소<i class="fa fa-times spaceLeft"></i></button>
         </div>
       </article>
 
