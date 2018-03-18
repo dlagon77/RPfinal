@@ -179,7 +179,7 @@
 
 				<div style="margin-top: 25px;margin-left:10px">
 					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
-						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
+						<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 					</button>
 				</div>
 

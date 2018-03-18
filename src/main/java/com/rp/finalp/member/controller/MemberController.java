@@ -2,12 +2,17 @@ package com.rp.finalp.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rp.finalp.lecture.model.service.LectureService;
+import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.member.model.vo.Member;
 
@@ -154,12 +160,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/tutorHome.do")
-	public String tutorHomeMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
+	public String tutorHomeMethod(@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
 		
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("reviewCount",memberService.selectReviewCount(tutor_no));
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("review",memberService.selectReview(tutor_no));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
 		
 		return "tutor/tutorHome";
 	}
@@ -172,4 +180,60 @@ public class MemberController {
         
         return String.valueOf(rowcount);
     }*/
+	
+	@RequestMapping("/apply.do")
+	public String apply(@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="mem_no") int mem_no,@RequestParam(value="pageName") String pageName,Lecture lecture,Model model) {
+		int result=memberService.insertApply(lecture);
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("mem_no",mem_no);
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		return "redirect:"+pageName;
+	}
+	
+	@RequestMapping("/deapply.do")
+	public String deapply(@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="mem_no") int mem_no,@RequestParam(value="pageName") String pageName,Lecture lecture,Model model) {
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("mem_no",mem_no);
+		int result = memberService.deApply(lecture);
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		return "redirect:"+pageName;
+	}
+
+	@RequestMapping("/insertReview.do")
+	public void insertReview(Model model,Member member,HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		int result = memberService.insertReview(member);
+		if(result>0) {
+			out.append("ok");
+		}
+		else {
+			out.append("fail");
+		}
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/selectReview.do",method=RequestMethod.POST)
+	public void selectReview(@RequestParam(value="tutor_no") int tutor_no,Member member,Model model,HttpServletResponse response) throws IOException {
+		
+		response.setContentType("application/json; charset=utf-8");
+		List<Member> list = memberService.selectReview(tutor_no);
+		JSONObject job = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		for(Member m : list) {
+			JSONObject job2 = new JSONObject();
+			job2.put("rev_no", m.getRev_no());
+			job2.put("mem_refile", m.getMem_refile());
+			job2.put("rev_con", m.getRev_con());
+			job2.put("rev_star", m.getRev_star());
+			jarr.add(job2);
+		}
+		job.put("reviewList", jarr);
+		PrintWriter out = response.getWriter();
+		out.println(job.toJSONString());
+		out.flush();
+		out.close();
+	}
 }

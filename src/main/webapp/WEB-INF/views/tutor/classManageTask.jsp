@@ -190,6 +190,36 @@
 		background: #2CC185;
 		color: #fff;
 	}
+	
+	.section-column section-column-padding{
+		margin-top: 5px;
+	    margin-bottom: 15px;
+	    background-color: #fff;
+	    border-radius: 2px;
+	    /* box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); */
+	    transition: box-shadow .15s ease-in-out;
+	    margin-top: 5px;
+	    margin-bottom: 15px;
+	    /* box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); */
+	    padding: 30px;
+	}
+	
+	.input-block{
+		    background-color: transparent;
+		    color: #757575;
+		    vertical-align: middle;
+		    border-top: 0;
+		    border-left: 0;
+		    border-right: 0;
+		    border-bottom: 1px solid #9e9e9e;
+		    border-radius: 0;
+		    width: 100%;
+		    min-height: 45px;
+		    font-weight: 400;
+		    font-size: 16px;
+		    outline: none;
+	}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script>
@@ -237,7 +267,7 @@
 						<hr/>
 						<li><a href="classManageLecture.do?tutor_no=${tutor_no }"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
 						<hr/>
-						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
+						<li><a href="#"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
 						<hr/>
 						<li><a href="#"><i class="xi-documents-o xi-2x"></i><p>&nbsp;&nbsp;시험</p></a></li>
 						<hr/>
@@ -272,16 +302,153 @@
 				<div class="tabs tabs-style-bar">
 					<nav>
 						<ul>
-							<li><a href="#" name="item" onclick="showDiv1();" ><span>Overview</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv2();"><span>Upload</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();" ><span>OVERVIEW</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv2();"><span>과제 출제</span></a></li>
 							<li><a href="#" name="item" onclick="showDiv3();"><span>Settings</span></a></li>
 						</ul>
 					</nav>
 				</div>
 				
+				
+				
 				<div id="section1" style="display:block;">
 					
+						<div class="content-container" style="display: table-cell;width: 100%;vertical-align: top;">
+					      <section class="section-column section-column-padding" style="padding:30px">
+					        <form class="text-fields text-field-horizontal" method="post" style="display: table;width: 100%;table-layout: fixed;">
+					          <input type="hidden" name="csrfmiddlewaretoken" value="vUT8gYeX8sfbB0dnwx1rd1ESbSRXV5YnWPrYQmTvL9HcBxiCnvkHyMIexkffSKkh">
+					          
+					  <div class="course-basic-form">
+					    <div class="text-field-horizontal" style="display: table;width: 100%;table-layout: fixed;">
+					      
+					      <div class="control" style="display: table-row;">
+					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 제목</div>
+					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					          <input class="input-block" type="text" maxlength="50" name="name" value="ㅁㄴㅇㄹ" placeholder="과제의 제목을 입력해주세요.">
+					        </div>
+					      </div>
+					      
+					      <div class="control" style="display: table-row;">
+					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">추가 Comment</div>
+					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					          <input class="input-block" type="text" maxlength="50" name="name" value="ㅁㄴㅇㄹ" placeholder="과제에 덧붙일 말을 추가해주세요.">
+					        </div>
+					      </div>
+					      
+					      <div class="control" style="display: table-row;">
+					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 내용</div>
+					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					        </div>
+					      </div>
+					      
+					      <div class="control" style="display: table-row;">
+					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 정답</div>
+					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></pre>
+					        </div>
+					      </div>
+					    
+					      <div class="control" style="display: table-row;">
+					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">Hint</div>
+					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					          <input class="input-block" type="text" maxlength="50" name="name" value="ㅁㄴㅇㄹ">
+					        </div>
+					      </div>
+					      
+					      
+					      
+					    </div>
+					  </div>
+					
+					          <br><br>
+					          <div class="clearfix">
+					            
+					              <div class="pull-left">
+					                <span class="btn-flat modal-btn danger" data-target="#delete-course-modal">
+					                  과제 삭제하기
+					                </span>
+					              </div>
+					            
+					            <div class="pull-right">
+					              <a href="/course/draft/4412/" target="_blank" class="btn-flat">
+					                
+					                  미리보기
+					                
+					              </a>
+					              
+					  <button class="btn-flat" name="next" type="submit" value="/teach/course/4412/content/basic/">등록하기</button>
+					  <button class="btn-flat" type="submit" name="next" value="/teach/course/4412/content/introduction/">
+					    저장하고 다음 단계로</button>
+					
+					            </div>
+					          </div>
+					        </form>
+					        
+					          
+					
+					<div id="delete-course-modal" class="modal fade hide">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <div class="modal-title">
+					          정말로 이 강좌를 삭제하시겠습니까?
+					        </div>
+					        <div class="modal-header-menu">
+					          <span class="modal-close confirm-cancel">×</span>
+					        </div>
+					      </div>
+					      <div class="modal-body form-container">
+					        <p>
+					          강좌를 삭제하시게 되면 강좌에 업로드된 강의 및 참고자료를 모두 잃게 됩니다.
+					        </p>
+					      </div>
+					      <div class="modal-footer">
+					        <div class="btn-flat modal-btn color-red-500" data-target="#real-delete-course-modal">
+					          강좌 삭제
+					        </div>
+					        <div class="btn-flat confirm-cancel modal-close">
+					          취소하기
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					<div id="real-delete-course-modal" class="modal fade hide">
+					  <div class="modal-dialog">
+					    <form class="modal-content" method="POST" action="/teach/course/4412/delete/">
+					      <input type="hidden" name="csrfmiddlewaretoken" value="vUT8gYeX8sfbB0dnwx1rd1ESbSRXV5YnWPrYQmTvL9HcBxiCnvkHyMIexkffSKkh">
+					      <div class="modal-header">
+					        <div class="modal-title">
+					          "정말로" 이 강좌를 삭제하시겠습니까?
+					        </div>
+					        <div class="modal-header-menu">
+					          <span class="modal-close confirm-cancel">×</span>
+					        </div>
+					      </div>
+					      <div class="modal-body form-container">
+					        아래 버튼을 누르시면 회원님께서 강좌를 제작하기 위해 준비한 모든 활동의 결과물을 잃게 됩니다.
+					      </div>
+					      <div class="modal-footer">
+					        <div class="btn-flat confirm-cancel modal-close">
+					          취소하기
+					        </div>
+					        <button class="btn-flat delete-course-btn color-red-500">
+					          과제 삭제
+					        </button>
+					      </div>
+					    </form>
+					  </div>
+					</div>
+					
+					        
+					      </section>
+					      
+					    </div>
 				</div>
+				
+				
 				
 				<!-- 강의 업로드 -->
 				<div id="section2" style="display:none;">

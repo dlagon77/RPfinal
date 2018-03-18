@@ -99,11 +99,11 @@
 				<div class="menu">
 					<ul>
 						
-						<li><a href="classManage.do"><i class="xi-layout-aside-o xi-2x"></i><p>&nbsp;&nbsp;대쉬보드</p></a></li>
+						<li><a href="classManage.do?tutor_no=${tutor_no }"><i class="xi-layout-aside-o xi-2x"></i><p>&nbsp;&nbsp;대쉬보드</p></a></li>
 						<hr/>
-						<li><a href="classManageLecture.do"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
+						<li><a href="classManageLecture.do?tutor_no=${tutor_no }"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
 						<hr/>
-						<li><a href="#"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
+						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
 						<hr/>
 						<li><a href="#"><i class="xi-documents-o xi-2x"></i><p>&nbsp;&nbsp;시험</p></a></li>
 						<hr/>
@@ -115,16 +115,16 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
 				<div class="tutorname">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">김재석</h3>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
 				</div>
 				
 				<div class="student">
-					<h5 style="padding-left:10px">수강생  25명</h5>				
+					<h5 style="padding-left:10px">수강생  ${Lecture.apply_count }명</h5>				
 				</div>
 				<div class="home-btn">
 					<a href="tutorHome.do"><i class="xi-home xi-3x"></i></a>

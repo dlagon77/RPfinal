@@ -67,12 +67,22 @@
 						
 					
 						<!-- 강사 템플릿 -->
-						<c:url var="tdetail" value="tutorHome.do">
-							<c:param name="tutor_no" value="${row.mem_no }" />
-						</c:url>
+						<c:if test="${loginUser.mem_no !=null }">
+							<c:url var="tdetail" value="tutorHome.do">
+								<c:param name="tutor_no" value="${row.mem_no }" />
+								<c:param name="mem_no" value="${loginUser.mem_no }" />
+							</c:url>
+						</c:if>
+						
+						<c:if test="${loginUser.mem_no == null }">
+							<c:url var="tdetail" value="loginpage.do">
+								
+							</c:url>
+						</c:if>
+						
 						<a href="${tdetail }" style="text-decoration:none">
 						<section id="description" style="padding-top:30px;display:flex">
-			
+						
 						<div class="col-md-10" style="display:flex">
 			
 							<div class="avatar" style="width:246px">
@@ -80,7 +90,7 @@
 									<img height="136" width="136" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 								</div>
 							</div>
-			
+							
 							<div id="info">
 								<h3 id="home-title" class="" style="padding-top: 10px;">
 								 <span class="className">${row.mem_class}</span>
@@ -91,14 +101,19 @@
 								</div>
 								<span id="description" style="color:gray">${row.mem_content } </span>
 							  </div>
-			
+						
 						</div><!--col-md-10-->
 						
 						<div class="col-md-2">
 							<div class="button" style="margin-top: 40px;left: 25%;">
-								<button class="applyButton">수강신청</button>
+								<button id="apply" class="applyButton">자세히 보기</button>
 							</div>
 						</div>
+						
+						
+						
+
+						
 						
 						</section>
 						</a>

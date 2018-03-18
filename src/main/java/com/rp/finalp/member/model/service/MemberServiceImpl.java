@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rp.finalp.member.model.service.MemberService;
+import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.dao.MemberDao;
 import com.rp.finalp.member.model.vo.Member;
 
@@ -75,5 +76,26 @@ public class MemberServiceImpl implements MemberService {
 		public int checkId(Member member) {
 			
 			return memberDao.checkId(member);
+		}
+		
+		
+		@Override
+		public int insertApply(Lecture lecture) {
+			return memberDao.insertApply(lecture);
+		}
+		
+		@Override
+		public int checkApply(Lecture lecture) {
+			return memberDao.checkApply(lecture);
+		}
+
+		@Override
+		public int deApply(Lecture lecture) {
+			return memberDao.deApply(lecture);
+		}
+
+		@Override
+		public int insertReview(Member member) {
+			return memberDao.insertReview(member);
 		}
 	}

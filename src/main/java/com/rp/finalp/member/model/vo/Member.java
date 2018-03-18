@@ -30,6 +30,7 @@ public class Member implements java.io.Serializable{
 	private int lecture_count; //강의동영상 수 
 	
 	//리뷰때문에 추가한 변수들
+	private int tutor_id; //별점을 줄 강사번호
 	private int rev_star; //받은 별점
 	private String rev_con; //리뷰 내용
 	private Date rev_date; //리뷰등록날짜
@@ -41,7 +42,7 @@ public class Member implements java.io.Serializable{
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
 			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
 			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id, int apply_count,
-			int lecture_count, int rev_star, String rev_con, Date rev_date,int rev_no) {
+			int lecture_count, int rev_star, String rev_con, Date rev_date,int rev_no,int tutor_id) {
 		super();
 		this.mem_no = mem_no;
 		this.mem_id = mem_id;
@@ -66,6 +67,7 @@ public class Member implements java.io.Serializable{
 		this.rev_con = rev_con;
 		this.rev_date = rev_date;
 		this.rev_no = rev_no;
+		this.tutor_id = tutor_id;
 	}
 
 	
@@ -307,6 +309,16 @@ public class Member implements java.io.Serializable{
 	public void setRev_no(int rev_no) {
 		this.rev_no = rev_no;
 	}
+	
+	
+
+	public int getTutor_id() {
+		return tutor_id;
+	}
+
+	public void setTutor_id(int tutor_id) {
+		this.tutor_id = tutor_id;
+	}
 
 	@Override
 	public String toString() {
@@ -314,9 +326,13 @@ public class Member implements java.io.Serializable{
 				+ ", mem_phone=" + mem_phone + ", mem_age=" + mem_age + ", mem_gen=" + mem_gen + ", mem_birth="
 				+ mem_birth + ", mem_black=" + mem_black + ", mem_cate=" + mem_cate + ", mem_inter=" + mem_inter
 				+ ", mem_orfile=" + mem_orfile + ", mem_refile=" + mem_refile + ", mem_career=" + mem_career
-				+ ", mem_class=" + mem_class + ", mem_content=" + mem_content + "]";
+				+ ", mem_class=" + mem_class + ", mem_content=" + mem_content + ", mem_channel_id=" + mem_channel_id
+				+ ", apply_count=" + apply_count + ", lecture_count=" + lecture_count + ", tutor_id=" + tutor_id
+				+ ", rev_star=" + rev_star + ", rev_con=" + rev_con + ", rev_date=" + rev_date + ", rev_no=" + rev_no
+				+ "]";
 	}
 
+	
 	
 	
 }

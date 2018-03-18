@@ -13,11 +13,8 @@
 <a href="assList.do">for assignment LIST click here</a><br>
 <a href="testInsertForm.do">for test click here</a><br>
 <a href="testList.do">for test LIST click here</a><br><br>
-<a href="taskList.do">for taskList click here</a><br>
-<a href="taskDetail.do">for taskDetail click here</a><br>
-<a href="tutorHome.do">for tutorHome click here</a><br>
 <a href="testDetailView.do">for testDetailView click here</a><br>
-<a href="lecturePlayList.do">for youtubePlayList cilck here</a><br>
+
 <a href="classManage.do">for classManagement cilck here</a><br>
 <a href="blist.do">관리자 페이지</a><br>
 <!doctype html>

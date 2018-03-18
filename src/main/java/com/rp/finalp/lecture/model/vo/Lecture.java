@@ -22,11 +22,13 @@ public class Lecture implements java.io.Serializable{
 	private Date lec_date;
 	private String mem_name;
 	private int apply_count;
+	private int mem_no;
+	private String mem_refile;
 	
 	public Lecture() {}
 
 	public Lecture(int tutor_no, int lec_id, String lec_cate, String lec_con, String lec_link, String lec_title,
-			String lec_restrict, Date lec_date, int lec_readcount,String mem_name,int apply_count) {
+			String lec_restrict, Date lec_date, int lec_readcount,String mem_name,int apply_count,int mem_no,String mem_refile) {
 		super();
 		this.tutor_no = tutor_no;
 		this.lec_id = lec_id;
@@ -39,6 +41,8 @@ public class Lecture implements java.io.Serializable{
 		this.lec_readcount = lec_readcount;
 		this.mem_name = mem_name;
 		this.apply_count = apply_count;
+		this.mem_no = mem_no;
+		this.mem_refile=mem_refile;
 	}
 	
 	public Lecture(int tutor_no, int lec_id, String lec_cate, String lec_con, String lec_link, String lec_title,
@@ -68,6 +72,14 @@ public class Lecture implements java.io.Serializable{
 
 	
 	
+	public int getMem_no() {
+		return mem_no;
+	}
+
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
+	}
+
 	public Date getLec_date() {
 		return lec_date;
 	}
@@ -158,6 +170,16 @@ public class Lecture implements java.io.Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	
+
+	public String getMem_refile() {
+		return mem_refile;
+	}
+
+	public void setMem_refile(String mem_refile) {
+		this.mem_refile = mem_refile;
 	}
 
 	@Override

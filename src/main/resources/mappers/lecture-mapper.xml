@@ -23,10 +23,10 @@
 
 	<!-- 재석추가 180314 -->
 	<select id="lectureView" resultType="Lecture" parameterType="Integer">
-		<![CDATA[
-			select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date
+		<![CDATA[	
+			select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date,mem_refile
 			from 
-			(select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date
+			(select mem_name, apply_count, lec_link, lec_readcount, lec_title, lec_con, lec_date,t.mem_refile
 			from member m
 			join lecture on (mem_no=tutor_no)
 			join tutorList t using (mem_no)

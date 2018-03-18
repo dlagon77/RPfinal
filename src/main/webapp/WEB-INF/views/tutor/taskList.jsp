@@ -108,6 +108,10 @@
 		.badge-from{
 			background:#428bca!important;
 		}
+		#deapply{
+			background-color: hsl(0, 0%, 93.3%);
+			color: hsla(0, 0%, 6.7%, .6);
+		}
 </style>
 </head>
 <body>
@@ -130,28 +134,73 @@
 					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 
-				<div style="margin-top: 25px;margin-left:10px">
-					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
-						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
-					</button>
-				</div>
+				<c:if test="${loginUser.mem_no eq tutor_no }">
+					<div style="margin-top: 25px;margin-left:10px">
+						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
+							<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+						</button>
+					</div>
+				</c:if>
 
 			</div>
 			<div class="col-lg-3">
 				<div style="margin-left: 75%;margin-top: 25px;">
-					<button class="applyButton">수강신청</button>
+					<c:if test="${checkApply eq 0 }">
+						<c:url var="apply" value="apply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="taskList.do" />
+						</c:url>
+						
+						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+					</c:if>
+					<c:if test="${checkApply gt 0 }">
+						<c:url var="deapply" value="deapply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="taskList.do" />
+						</c:url>
+						<button id="deapply" class="applyButton" data-toggle="modal" data-target="#exampleModal">
+							<img src="/finalp/resources/img/check.png">&nbsp;수강중 ${Lecture.apply_count }명
+						</button>
+						
+						<!-- 수강신청취소 Modal -->
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">수강 신청 취소</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        정말로 수강을 취소하시겠습니까?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						        <button type="button" class="btn btn-primary" onclick="location.href='${deapply}'">수강 취소</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</c:if>
+					
 				</div>
 			</div>
 		</div>
+		
+		
 
 	</div>
 
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">

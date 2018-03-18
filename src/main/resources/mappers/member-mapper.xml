@@ -116,5 +116,28 @@
          where tutor_id = #{tutor_no}
       ]]>
    </select>
+   
+   <insert id="apply" parameterType="Integer">
+		<![CDATA[
+			insert into apply values (#{tutor_no}, #{mem_no})
+		]]>
+	</insert>
+	
+	<delete id="deleteApply">
+		<![CDATA[
+			delete from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no}
+		]]>
+	</delete>
+	
+	<select id="checkApply" resultType="Integer">
+		<![CDATA[
+			select count(*) from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no}
+		]]>
+	</select>
+	<insert id="insertReview" parameterType="Member">
+		<![CDATA[
+			insert into review values (#{tutor_id},review_sequence.NEXTVAL,#{rev_con},sysdate,#{mem_no},1,#{rev_star})
+		]]>
+	</insert>
 
 </mapper>

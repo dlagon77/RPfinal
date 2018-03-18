@@ -56,13 +56,21 @@
 		#deapply{
 			background-color: hsl(0, 0%, 93.3%);
 			color: hsla(0, 0%, 6.7%, .6);
-			visibility:hidden;
+		}
+		#apply{
+			
 		}
 </style>
 
 	<!-- 별점플러그인 관련 링크 -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/finalp/resources/css/fontawesome-stars.css">
+	
+	
+	
+	
+	
+	
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -76,18 +84,18 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
 				<div class="desc">
 					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
-					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
+					<h5 id="count" style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 				
 				<c:if test="${loginUser.mem_no eq tutor_no }">
 				<div style="margin-top: 25px;margin-left:10px">
-					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
+					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
 					</button>
 				</div>
@@ -96,11 +104,55 @@
 			</div>
 			<div class="col-lg-3">
 				<div style="margin-left: 75%;margin-top: 25px;">
-					<button id="apply" class="applyButton" onclick="document.getElementById('deapply').style.visibility='visible'">수강신청</button>
-					<button id="deapply" class="applyButton">수강중 4명</button>
+					<c:if test="${checkApply eq 0 }">
+						<c:url var="apply" value="apply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="tutorHome.do" />
+						</c:url>
+						
+						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+					</c:if>
+					<c:if test="${checkApply gt 0 }">
+						<c:url var="deapply" value="deapply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="tutorHome.do" />
+						</c:url>
+						<button id="deapply" class="applyButton" data-toggle="modal" data-target="#exampleModal">
+							<img src="/finalp/resources/img/check.png">&nbsp;수강중 ${Lecture.apply_count }명
+						</button>
+						
+						<!-- 수강신청취소 Modal -->
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">수강 신청 취소</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        정말로 수강을 취소하시겠습니까?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						        <button type="button" class="btn btn-primary" onclick="location.href='${deapply}'">수강 취소</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</c:if>
+					
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		
 
 	</div>
 
@@ -108,8 +160,8 @@
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
 			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
-			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
@@ -168,14 +220,19 @@
 				<div class="message" style="display:flex;width:750px;margin-bottom: 50px;">
 					<button style="background: none;border: none;outline: none;display: flex;">
 					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<c:if test="${loginUser.mem_refile == null }">
+							<img height="45" width="45" src="/finalp/resources/img/logo2.PNG" style="display: block;margin-left: auto;margin-right: auto;">
+						</c:if>
+						<c:if test="${loginUser.mem_refile != null }">
+							<img height="45" width="45" src="/finalp/resources/img/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						</c:if>
 					</div>
 				   </button>
 		
 					<form style="width:100%">
 					  <div class="form-group" style="font-size:15px;padding-top: 50px;">
-						<input type="text" class="messageInput" id="inputAddress" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
-						<select id="example">
+						<input type="text" class="messageInput" id="inputReviewContent" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
+						<select id="star">
 						  <option value="1">1</option>
 						  <option value="2">2</option>
 						  <option value="3">3</option>
@@ -183,35 +240,38 @@
 						  <option value="5">5</option>
 						</select>
 					  </div>
-
-					  <button type="submit" class="btn btn-primary" style="float:right">리뷰등록</button>
+					
+					  <button type="button" id="inputReviewButton" class="btn btn-primary" style="float:right" onclick="insertReview();">리뷰등록</button>
 					</form>
 				</div>
 				<!-- 리뷰 등록 템플릿 끝 -->
-
+				
+				<div id="review">
 				<c:forEach items="${review }" var="row">
 				<!-- 댓글 리스트 폼 -->
-				<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
-					<button style="background: none;border: none;outline: none;display: flex;">
-					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+				
+					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
+						<button style="background: none;border: none;outline: none;display: flex;">
+						<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
+							<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						</div>
+					   </button>
+					   <p>${row.rev_con }</p>
+					   <div style="margin-top:1%;position: absolute;left: 87%;">
+						   <select id="p${row.rev_no }">
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							</select>
+						</div>
 					</div>
-				   </button>
-				   <p>${row.rev_con }</p>
-				   <div style="margin-top:1%;position: absolute;left: 87%;">
-					   <select id="p${row.rev_no }">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						</select>
-					</div>
-				</div>
+				
 				<!-- 댓글 리스트 폼 끝--> 
 				
 				</c:forEach>
-
+				</div>
 				
 
 
@@ -256,29 +316,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="/finalp/resources/js/jquery.barrating.min.js"></script>
 	
-	<!-- 수강신청 ajax -->
-	<script type="text/javascript">
-   $(function(){
-      $('#apply').on("click", function(){
-         //alert("테스트1 버튼 클릭됨!");
-         $.ajax({
-        	 url: "apply.do",
-        	 data: {st_no : ${loginUser.mem_no}, tutor_no : ${tutor_no}},
-        	 type: "post",
-        	 success: function(result){
-        		 if(result == "ok")
-        			 alert("전송 성공!");
-        		 else
-        			 alert("전송 실패!");
-        	 },
-        	 error: function(request, status, errorData){
-        		 alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
-        	 }
-         });
-         
-      });
-      </script>
+	<!-- <script type="text/javascript">
+		$(function(){
+			$('#apply').on(click)
+		})
 	
+	</script> -->
 	
 	
 	<c:forEach items="${review }" var="row">
@@ -297,7 +340,7 @@
 	</c:forEach>
 	<script type="text/javascript">
 	   $(function() {
-		   $('#example').barrating({
+		   $('#star').barrating({
 			theme: 'fontawesome-stars'
 		  });
 	   });
@@ -316,7 +359,90 @@
 			navbar.classList.remove("sticky");
 		  }
 		}
+		
 </script>
+
+<script type="text/javascript">
+	
+	    	  function insertReview(){
+	    		  var content = $('#inputReviewContent').val();
+		    	  var star = $('#star option:selected').val();
+
+		     
+		         //alert("테스트1 버튼 클릭됨!");
+		         $.ajax({
+		        	 url: "insertReview.do",
+		        	 data: {"tutor_id" : ${tutor_no}, "rev_con" : content, "mem_no" : ${loginUser.mem_no}, "rev_star" : star },
+		        	 type: "post",
+		        	 success: function(result){
+		        		 if(result=="ok"){
+		        			 alert("리뷰 등록 성공!");
+		        			 listReview();
+		        		 }
+		        		 else{
+		        			 alert("리뷰 등록 fail!");
+		        		 } 
+		        	 },
+		        	 error: function(request, status, errorData){
+		        		 alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+		        	 }
+		         });
+	    	  }
+	    	  
+	    	  function listReview(){
+	    		  
+	    		  $.ajax({
+			        	url: "selectReview.do",
+			        	data: {"tutor_no" : ${tutor_no}},
+			        	type: "post",
+			        	dataType: "json",
+			        	success: function(result){
+			        		$('#review').html("");
+			        		var jsonStr = JSON.stringify(result);
+			        		var json = JSON.parse(jsonStr);
+			        		var tag = "";
+			        		for(var i = 0; i<json.reviewList.length;i++){
+			        			
+			        			tag = 
+			        			'<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">'
+								+'<button style="background: none;border: none;outline: none;display: flex;">'
+								+'<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">'
+									+'<img height="45" width="45" src="/finalp/resources/img/'+json.reviewList[i].mem_refile+'" style="display: block;margin-left: auto;margin-right: auto;">'
+								+'</div>'
+							   +'</button>'
+							   +'<p>'+json.reviewList[i].rev_con+'</p>'
+							   +'<div style="margin-top:1%;position: absolute;left: 87%;">'
+								   +'<select id="p'+json.reviewList[i].rev_no+'">'
+									  +'<option value="1">1</option>'
+									  +'<option value="2">2</option>'
+									  +'<option value="3">3</option>'
+									  +'<option value="4">4</option>'
+									  +'<option value="5">5</option>'
+									  +'</select>'
+									  +'</div>'
+									  +'</div>';
+									  $('#review').append(tag);	  
+			        			starScript(json.reviewList[i].rev_no,json.reviewList[i].rev_star);
+			        		}
+			        		//$('#review').html(tag);
+			        	},
+			        	error: function(request, status, errorData){
+			        		alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+			        	}
+			         });
+	    	  }
+		         
+       		function starScript(no,star){
+			  $('#p'+no).barrating({
+				theme: 'fontawesome-stars',
+				readonly : true,
+				initialRating : star
+			  });
+      			   
+       		}
+
+	</script>
+
 </div>
 
 

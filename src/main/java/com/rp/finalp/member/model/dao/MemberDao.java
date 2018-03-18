@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.vo.Member;
 
 @Repository("memberDao")
@@ -49,6 +50,23 @@ public class MemberDao {
 	//id 중복확인
 	public int checkId(Member member) {
 		return mybatis.selectOne("memberMapper.checkId", member);
+	}
+	
+	public int insertApply(Lecture lecture) {
+		return mybatis.insert("memberMapper.apply",lecture);
+		
+	}
+
+	public int checkApply(Lecture lecture) {
+		return mybatis.selectOne("memberMapper.checkApply",lecture);
+	}
+
+	public int deApply(Lecture lecture) {
+		return mybatis.delete("memberMapper.deleteApply",lecture);
+	}
+
+	public int insertReview(Member member) {
+		return mybatis.insert("memberMapper.insertReview",member);
 	}
 }
 

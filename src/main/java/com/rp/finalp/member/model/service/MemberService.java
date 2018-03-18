@@ -3,6 +3,7 @@ package com.rp.finalp.member.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.vo.Member;
 
 
@@ -20,6 +21,12 @@ public interface MemberService {
 	
 	//아이디중복확인
 	int checkId(Member member); 
+	
+	
+	int insertApply(Lecture lecture);
+	int checkApply(Lecture lecture);
+	int deApply(Lecture lecture);
+	int insertReview(Member member);
 	
 	
 }
