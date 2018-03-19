@@ -98,7 +98,8 @@
    </div><!-- /container -->
 
 <!--    <script src="http://code.jQuery.com/jquery-latest.min.js"></script>-->
-    <script src="//ajax.googleapis.com/ajx/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- 밑에 jquery는 없는 경로라서 주석 -->
+<!--     <script src="//ajax.googleapis.com/ajx/libs/jquery/1.10.2/jquery.min.js"></script> -->
     <script>
       $(function(){
          function fetchHtml(){
