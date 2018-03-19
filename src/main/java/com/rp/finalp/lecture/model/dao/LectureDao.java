@@ -44,5 +44,9 @@ public class LectureDao {
 	public List<Member> applyClassList(int tutor_no) {
 		return mybatis.selectList("lectureMapper.applyClassList", tutor_no);
 	}
+	
+	public List<Lecture> selectLectureList(int tutor_no) {
+		return mybatis.selectList("lectureMapper.selectlectureList",tutor_no);
+	}
 
 }

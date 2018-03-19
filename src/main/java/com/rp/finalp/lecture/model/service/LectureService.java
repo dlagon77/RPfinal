@@ -18,5 +18,7 @@ public interface LectureService {
 	int insertLecture(Lecture lecture);
 
 	List<Member> applyClassList(int tutor_no);
+	
+	List<Lecture> selectLectureList(int tutor_no);
 
 }

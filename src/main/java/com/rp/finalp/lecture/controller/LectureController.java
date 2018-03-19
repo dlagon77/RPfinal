@@ -97,6 +97,8 @@ public class LectureController {
 	public String classManageTaskMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		List<Lecture> list = lectureService.selectLectureList(tutor_no);
+		model.addAttribute("lectureList",list);
 		return "tutor/classManageTask";
 	}
 	

@@ -64,4 +64,23 @@
 	                		where app_tutor_no = #{tutor_no})
 		]]>
 	</select>
+	
+	<resultMap id="LectureResultMap" type="Lecture">
+  		<result property="mem_name" column="mem_name"/>
+  		<result property="lec_link" column="lec_link"/>
+  		<result property="lec_readcount" column="lec_readcount"/>
+  		<result property="lec_title" column="lec_title"/>
+  		<result property="lec_con" column="lec_con"/>
+  		<result property="lec_date" column="lec_date"/>
+  		<result property="lec_id" column="lec_id"/>
+	</resultMap>
+	
+	<select id="selectlectureList" resultMap="LectureResultMap" parameterType="Lecture">
+		<![CDATA[
+			select mem_name, lec_link, lec_readcount, lec_title, lec_con, lec_date,lec_id
+			from member m
+			join lecture on (mem_no=tutor_no)
+			where tutor_no = #{tutor_no} order by lec_date desc
+		]]>
+	</select>
 </mapper>
