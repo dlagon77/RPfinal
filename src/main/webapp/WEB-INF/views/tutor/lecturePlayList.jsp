@@ -13,12 +13,12 @@
 		margin: auto;
 	}
 	
-	#container p{
+/* 	#container p{
 		display: inline; 
 		vertical-align: top; 
 		padding-top: 25px; 
 		font-weight: 700;
-	}
+	} */
 	
 	#container img{
 		margin-bottom: 30px;
@@ -70,14 +70,28 @@
 		border:none;
 	}
 	
-	.style1{
+	.styleVideoId{	
 		display: inline-block;
+		margin-right: 16px;
 	}
 	
-	.style2{
+	.styleTitle{
+		width: 600px;
+		height: 180px;
 		display:inline-block;
 		font-size: 20px;
 		vertical-align: top;
+	}
+	.styleTitle p{
+		font-size: 15px;
+	}
+	.styleDescription{
+		display:inline-block;
+	}
+	
+	.styleTime{
+		display:inline-block;
+
 	}
 	
   </style>
@@ -171,7 +185,7 @@
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
 			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="lecturePlayList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span><div class="selected"></div></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span><div class="selected"></div></a>
 			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a"></span></a>
@@ -218,6 +232,42 @@
 			}
 		}) */
 	
+		/* var channelID = '${channelId}';
+		var apiKey = 'AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw';
+	
+		$.ajax({
+			url:'https://www.googleapis.com/youtube/v3/search?key=' + apiKey +'&channelId=' + channelID + '&part=snippet,id&order=date&maxResults=20',
+			dataType: 'jsonp',
+			success: function(data){
+				$.each(data.items, function(key, value){
+					var fragment = $(document.createDocumentFragment());
+					var temp = value.snippet.publishedAt;
+					var time = temp.substring(0,10);
+					fragment
+						.append([
+							'<li>',
+								'<a href="lectureDeatil.do?videoId='+value.id.videoId+'&videoTitle='+value.snippet.title+'">',
+									'<div class="styleVideoId">',
+										'<img src=\"//img.youtube.com/vi/'+value.id.videoId+'/mqdefault.jpg\">',
+									'</div>',
+									'<div class="styleTitle">',
+										'<strong>'+'&nbsp;&nbsp;&nbsp;' + value.snippet.title + '</strong>',
+									'</div>',
+									'<div class="styleDescription">',
+										'<p>'+'&nbsp;&nbsp;&nbsp;' + value.snippet.description + '</p>',
+									'</div>',
+									'<div class="styleTime">',
+										'<p>'+'&nbsp;&nbsp;&nbsp;' + time + '</p>',
+									'</div>',
+								
+								'</a>',
+							'</li>'
+						].join(''));
+					$('#results').append(fragment);
+				});
+			}
+		}) */
+		
 		var channelID = '${channelId}';
 		var apiKey = 'AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw';
 	
@@ -227,17 +277,26 @@
 			success: function(data){
 				$.each(data.items, function(key, value){
 					var fragment = $(document.createDocumentFragment());
+					var temp = value.snippet.publishedAt;
+					var time = temp.substring(0,10);
 					fragment
 						.append([
 							'<li>',
-								'<a href="lectureDeatil.do?videoId='+value.id.videoId+'&videoTitle='+value.snippet.title+'">',
-									'<div class="style1">',
-										'<img src=\"//img.youtube.com/vi/'+value.id.videoId+'/mqdefault.jpg\">',
+								
+									'<div class="styleVideoId">',
+										'<a href="lectureDeatil.do?videoId='+value.id.videoId+'&videoTitle='+value.snippet.title+'&videoDescription='+value.snippet.description+'&videoTime='+time+'">',
+											'<img src=\"//img.youtube.com/vi/'+value.id.videoId+'/mqdefault.jpg\">',
+										'</a>',
 									'</div>',
-									'<div class="style2">',
-										'<strong>'+'&nbsp;&nbsp;&nbsp;' + value.snippet.title + '</strong>',
+									'<div class="styleTitle">',
+										'<strong style="font-size:24px;">' + value.snippet.title + '</strong>',
+										'<p>'+ value.snippet.description + '</p>',
+										
+										'<div class="styleTime">',
+											'<p> '+ time + '</p>',
+										'</div>',
 									'</div>',
-								'</a>',
+								
 							'</li>'
 						].join(''));
 					$('#results').append(fragment);

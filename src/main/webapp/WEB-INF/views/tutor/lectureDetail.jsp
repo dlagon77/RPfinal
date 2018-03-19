@@ -41,7 +41,8 @@
 	
 		<div class="desc">
 			<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${ videoTitle }</h3>
-			<h5 style="padding-left:10px;color:gray!important">조회수 ${ Lecture.lec_readcount }</h5>
+			<h5 style="padding-left:10px;color:gray!important;">조회수 ${ Lecture.lec_readcount }</h5>
+			<h5 style="padding-left:10px;color:gray!important;">${ videoTime }</h5>
 			<hr>
 		</div>
 		

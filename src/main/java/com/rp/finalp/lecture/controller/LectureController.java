@@ -64,10 +64,12 @@ public class LectureController {
 	}
 	
 	@RequestMapping("lectureDeatil.do")
-	public String lectureDeatilView(@RequestParam(value="videoId") String videoId, Model model,@RequestParam(value="videoTitle") String videoTitle) {
+	public String lectureDeatilView(@RequestParam(value="videoId") String videoId, Model model,@RequestParam(value="videoTitle") String videoTitle, @RequestParam(value="videoDescription")String videoDescription, @RequestParam(value="videoTime")String videoTime) {
 		
 		model.addAttribute("videoId", videoId);
 		model.addAttribute("videoTitle", videoTitle);
+		model.addAttribute("videoDescription", videoDescription);
+		model.addAttribute("videoTime", videoTime);
 		lectureService.addReadCount(videoId);
 		model.addAttribute("Lecture", lectureService.selectReadCount(videoId));
 		return "tutor/lectureDetail";
