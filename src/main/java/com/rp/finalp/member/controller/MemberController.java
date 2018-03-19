@@ -168,6 +168,8 @@ public class MemberController {
 		model.addAttribute("review",memberService.selectReview(tutor_no));
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
+		int checkReady=memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		
 		return "tutor/tutorHome";
 	}
@@ -188,6 +190,8 @@ public class MemberController {
 		model.addAttribute("mem_no",mem_no);
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		return "redirect:"+pageName;
 	}
 	

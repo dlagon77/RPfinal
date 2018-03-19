@@ -27,6 +27,7 @@ public interface MemberService {
 	int checkApply(Lecture lecture);
 	int deApply(Lecture lecture);
 	int insertReview(Member member);
+	int checkReady(Lecture lecture);
 	
 	
 }

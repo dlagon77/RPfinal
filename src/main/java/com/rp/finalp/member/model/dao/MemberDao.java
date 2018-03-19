@@ -68,6 +68,10 @@ public class MemberDao {
 	public int insertReview(Member member) {
 		return mybatis.insert("memberMapper.insertReview",member);
 	}
+
+	public int checkReady(Lecture lecture) {
+		return mybatis.selectOne("memberMapper.checkReady",lecture);
+	}
 }
 
 

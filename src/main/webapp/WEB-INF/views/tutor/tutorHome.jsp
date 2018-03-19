@@ -57,8 +57,21 @@
 			background-color: hsl(0, 0%, 93.3%);
 			color: hsla(0, 0%, 6.7%, .6);
 		}
-		#apply{
-			
+		#applyready{
+			background-color: burlywood;
+			border-radius: 2px;
+			color: white;
+			padding: 13px 20px;
+			white-space: nowrap;
+			font-size: 1.4rem;
+			font-weight: 500;
+			letter-spacing: .007px;
+			display: flex;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			outline:none;
+			border:none;
 		}
 </style>
 
@@ -68,8 +81,8 @@
 	
 	
 	
-	
-	
+	<!-- icon관련 링크 -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	
 </head>
 <body>
@@ -104,7 +117,7 @@
 			</div>
 			<div class="col-lg-3">
 				<div style="margin-left: 75%;margin-top: 25px;">
-					<c:if test="${checkApply eq 0 }">
+					<c:if test="${checkReady eq 0 && checkApply eq 0}">
 						<c:url var="apply" value="apply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>
 							<c:param name="tutor_no" value="${tutor_no }" />
@@ -113,6 +126,13 @@
 						
 						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
 					</c:if>
+					
+					
+					<c:if test="${checkReady gt 0}">
+						<button id="applyready" class="applyButton" disabled><i class="xi-spinner-1 xi-spin xi-x"></i>&nbsp;&nbsp;수강대기</i></button>
+					</c:if>
+					
+					
 					<c:if test="${checkApply gt 0 }">
 						<c:url var="deapply" value="deapply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>

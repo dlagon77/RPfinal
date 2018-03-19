@@ -131,7 +131,7 @@
 	
 	<select id="checkApply" resultType="Integer">
 		<![CDATA[
-			select count(*) from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no}
+			select count(*) from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no} and app_y='Y'
 		]]>
 	</select>
 	<insert id="insertReview" parameterType="Member">
@@ -139,5 +139,11 @@
 			insert into review values (#{tutor_id},review_sequence.NEXTVAL,#{rev_con},sysdate,#{mem_no},1,#{rev_star})
 		]]>
 	</insert>
+	
+	<select id="checkReady" resultType="Integer">
+		<![CDATA[
+			select count(*) from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no} and app_y is null
+		]]>
+	</select>
 
 </mapper>

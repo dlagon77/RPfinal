@@ -98,4 +98,9 @@ public class MemberServiceImpl implements MemberService {
 		public int insertReview(Member member) {
 			return memberDao.insertReview(member);
 		}
+
+		@Override
+		public int checkReady(Lecture lecture) {
+			return memberDao.checkReady(lecture);
+		}
 	}
