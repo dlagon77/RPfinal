@@ -21,14 +21,14 @@
 	}	
 	.container{
 		width:1000px;
-		height: 950px;
+		height: 1000px;
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
 	}
 	.sideMenu{
 		width: 250px;
-		height: 500px;
+		height: 455px;
 		background-color: white;
 		float: left;	
 	}
@@ -46,7 +46,7 @@
 	}
 	.content{
 		width: 800px;
-		height: 800px;
+		height: 850px;
 		background-color: white;
 		display: inline-block;
 		margin-left: 25px;
@@ -196,21 +196,21 @@
 	function showDiv1(){
 		$("#section1").attr("style", "display:block");
 		$("#section2").attr("style", "display:none");
-		$("#section3").attr("style", "display:none");
+/* 		$("#section3").attr("style", "display:none"); */
 	}
 	
 	function showDiv2(){
 		$("#section1").attr("style", "display:none");
 		$("#section2").attr("style", "display:block");
-		$("#section3").attr("style", "display:none"); 
+/* 		$("#section3").attr("style", "display:none");  */
 	}
 	
 		
-	function showDiv3(){
+/* 	function showDiv3(){
 		$("#section1").attr("style", "display:none");
 		$("#section2").attr("style", "display:none"); 
 		$("#section3").attr("style", "display:block");
-	}
+	} */
 	
 </script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -233,9 +233,9 @@
 				<div class="menu">
 					<ul>
 						
-						<li><a href="classManage.do?tutor_no=${tutor_no }"><i class="xi-layout-aside-o xi-2x"></i><p>&nbsp;&nbsp;대쉬보드</p></a></li>
+						<li><a href="classManage.do?tutor_no=${tutor_no}"><i class="xi-layout-aside-o xi-2x"></i><p>&nbsp;&nbsp;대쉬보드</p></a></li>
 						<hr/>
-						<li><a href="classManageLecture.do?tutor_no=${tutor_no }"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
+						<li><a href="classManageLecture.do?tutor_no=${tutor_no}"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
 						<hr/>
 						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
 						<hr/>
@@ -250,19 +250,19 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
 				<div class="tutorname">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${ Lecture.mem_name }</h3>
 				</div>
 				
 				<div class="student">
 					<h5 style="padding-left:10px">수강생  ${Lecture.apply_count }명</h5>				
 				</div>
 				<div class="home-btn">
-					<a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}"><i class="xi-home xi-3x"></i></a>
+					<a href="tutorHome.do?tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}"><i class="xi-home xi-3x"></i></a>
 				</div>
 			</div>
 			
@@ -274,13 +274,13 @@
 						<ul>
 							<li><a href="#" name="item" onclick="showDiv1();" ><span>Overview</span></a></li>
 							<li><a href="#" name="item" onclick="showDiv2();"><span>Upload</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv3();"><span>Settings</span></a></li>
+<!-- 							<li><a href="#" name="item" onclick="showDiv3();"><span>Settings</span></a></li> -->
 						</ul>
 					</nav>
 				</div>
 				
 				<div id="section1" style="display:block;">
-					
+				
 				</div>
 				
 				<!-- 강의 업로드 -->
@@ -288,7 +288,7 @@
 					<div class="uploadExplain">
 						<img style="box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;" width="700px;" height="350px;" src="/finalp/resources/img/lectureUpload.png">
 						<br><br>
-						<p style="font-weight:600; font-size: 14px;">Youtube 업로드 하실 때 입력하신 속성(①videoID ②강의 제목 ③강의 설명)들을 아래 박스에도 그대로 써주세요:D  </p>
+						<p style="font-weight:600; font-size: 14px;">1. 본인의 Youtube 채널에  강의를 먼저 등록해 주세요 <br>2. Youtube 업로드 하실 때 입력하신 속성(①videoID ②강의 제목 ③강의 설명)들을 아래 박스에도 그대로 써주세요:D <br>3. 강의 등록 버튼을 눌러주세요</p>
 					</div>
 					
 					<!-- 업로드버튼 -->
@@ -339,11 +339,6 @@
 					
 				</div>
 				<!-- 강의 업로드 끝 -->
-				
-				
-				<div id="section3" style="display:none;">
-				
-				</div>
 				
 					
 				

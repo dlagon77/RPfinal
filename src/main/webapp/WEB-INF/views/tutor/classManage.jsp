@@ -28,7 +28,7 @@
 	}
 	.sideMenu{
 		width: 250px;
-		height: 500px;
+		height: 455px;
 		background-color: white;
 		float: left;	
 	}
@@ -65,7 +65,7 @@
 	.home-btn{
 		display: inline-block;
 		vertical-align: bottom;
-		margin-left: 430px;	
+		margin-left: 507px;	
 	}
 	.summary{
 		margin-left: 30px;
@@ -78,7 +78,7 @@
 		color: gray;
 	}
 	.summary-ul i{vertical-align: middle;}
-	#applyTitle{margin-left: 50px;}
+	#applyTitle{margin-left: 10px;} 
 	.studentApply{margin-top: 50px;}
 	.studentApplyTable{border: 1px solid #c6c6c6}
 </style>
@@ -115,19 +115,19 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
 				<div class="tutorname">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${ Lecture.mem_name }</h3>
 				</div>
 				
-				<div class="student">
-					<h5 style="padding-left:10px">수강생  ${Lecture.apply_count }명</h5>				
-				</div>
+				<!-- <div class="student">
+					<h5 style="padding-left:10px">수강생  25명</h5>				
+				</div> -->
 				<div class="home-btn">
-					<a href="tutorHome.do"><i class="xi-home xi-3x"></i></a>
+					<a href="tutorHome.do?tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}"><i class="xi-home xi-3x"></i></a>
 				</div>
 			</div>
 			
@@ -136,7 +136,7 @@
 					<ul class="summary-ul">
 						<li>동영상 &nbsp; 0개</li>
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
-						<li>수강생&nbsp;  0명</li>
+						<li>수강생&nbsp;  ${ Lecture.apply_count }명</li>
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
 						<li>과제 &nbsp; 0개</li>
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
@@ -147,35 +147,35 @@
 				<div class="studentApply">
 					<div><i id="applyTitle" class="xi-view-list xi-2x" style="float:left; color: gray;"></i><p class = "historytitle" style="margin-bottom:20px; color: gray;">&nbsp; 수강 신청</p></div>
 						
-					<table class = "studentApplyTable" align="center" border="1" cellspacing="0" width="700px">
+					<table class = "table table-bordered table-hover" align="center" border="1" cellspacing="0" width="700px">
 						<tr align="center" height="35px" ><th style="text-align:center; color:gray;" width="80px">번호</th><th style="text-align:center; color:gray;" width="200px">신청자</th><th style="text-align:center; color:gray;">상태</th></tr>		
 						<%
-							int selectNum = 1;
 							int acceptNum = 1;
 						%>
+						<c:forEach var="member" items="${list }">
 							<tr align="center">
 								<td align="center"><%= acceptNum++ %></td>
-								<td align="center"><a href="javasciprt:('준비중입니다.');"></a></td>
+								<td align="center"><a href="javasciprt:('준비중입니다.');"></a>${member.mem_name}</td>
 								
 								<td>
-									<form action="/doubleb/matchinghistoryupdate" method="post">
-										<input type="hidden" name="mnoa" value="">
-										<input type="hidden" name="num" value="<%= selectNum%>">
-										<input type="hidden" name="matchingno" value="">
-										<input type="hidden" name="mno" value="">
-										
+									<form action="applyClass.do" method="post">									
 											
-										<input type="radio" id="accept" name="select<%= selectNum %>" value="수락">&nbsp;수락
-										<input type="radio" id="reject" name="select<%= selectNum++ %>" value="거절" style="margin-left:60px; margin-top:5px;">&nbsp;거절
-										
+										<label class="checkbox-inline"> 
+											<input type="checkbox" id="accept" name="select" value="수락"> 수락 
+										</label> 
+										<label class="checkbox-inline" style="margin-left: 50px;"> 
+											<input type="checkbox" id="reject" name="select" value="거절"> 거절 
+										</label>
+
 										<div style="float:right">
-											<input type="submit" value="확정하기" align="right">
+											<input type="submit" class="btn btn-warning btn-xs" value="확정하기" align="right">
 										</div>
 										
 									</form>
 								</td>
 								
 							</tr>
+						</c:forEach>
 					
 					</table>
 						
@@ -184,5 +184,17 @@
 					
 		</div>
 	</div>
+	
+<script type="text/javascript">
+	//체크박스가 하나만 클릭될수 있도록 처리
+	$(document).ready(function() {
+	    $('input[type="checkbox"][name="select"]').click(function(){
+	        if ($(this).prop('checked')) {
+	            $('input[type="checkbox"][name="select"]').prop('checked', false);
+	            $(this).prop('checked', true);
+	        }
+	    });
+	});
+</script>
 </body>
 </html>

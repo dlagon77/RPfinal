@@ -95,7 +95,7 @@
 				
 				<c:if test="${loginUser.mem_no eq tutor_no }">
 				<div style="margin-top: 25px;margin-left:10px">
-					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManage.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
 					</button>
 				</div>

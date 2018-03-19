@@ -32,7 +32,6 @@
 	
 </style>
  <script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="/finalp/resources/js/lecturePlayList.js"></script>
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -49,9 +48,9 @@
 		
 	</div>
 	
-	<div id="videoList">
+	<!-- <div id="videoList">
 		<ul id="videoListView" style="list-style:none;"></ul>
-	</div>
+	</div> -->
 	
 </body>
 </html>
