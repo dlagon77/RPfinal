@@ -425,6 +425,7 @@
 			        			starScript(json.reviewList[i].rev_no,json.reviewList[i].rev_star);
 			        		}
 			        		//$('#review').html(tag);
+			        		$('#inputReviewContent').val("");
 			        	},
 			        	error: function(request, status, errorData){
 			        		alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);

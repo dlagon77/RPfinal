@@ -155,6 +155,53 @@
 		.compileButton:hover{
 			background-color:#285e8e;
 		}
+	.deleteButton{
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	}
+	.deleteButton:hover {
+		color:#f44336;
+	}
+	.deleteButton2 {
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	    color: #2196f3;
+	}
+	
+	.deleteTaskButton {
+		border: none;
+	    outline: none;
+	    color: #f44336;
+	    background: none;
+	    font-size: 15px;
+	    margin-right: 20px;
+		
+	}
+	
+	.deleteTaskButton:hover{
+		font-weight:bold;
+		
+	}
+	
+	.deleteTaskButton2 {
+		border: none;
+	    outline: none;
+	    color: #2196f3;
+	    background: none;
+	    font-size: 14px;
+	    margin-right: 20px;
+		
+	}
+	.deleteTaskButton2:hover{
+		font-weight:bold;
+		
+	}
 </style>
 </head>
 <body>
@@ -168,18 +215,18 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
 				<div class="desc">
-					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">김재석</h3>
-					<h5 style="padding-left:10px;color:gray!important">수강생 25명</h5>
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
+					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 
 				<div style="margin-top: 25px;margin-left:10px">
 					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
-						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
+						<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 					</button>
 				</div>
 
@@ -259,11 +306,35 @@
 					
 
 
-			<div class="page-header">
+			<div class="page-header" style="display:flex">
 				<h1 style="font-weight:600">
 					<span id="problem_title" class="">${assignment.ass_title }</span>
 				</h1>
+				 <button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" style="margin-left: 70%;">과제 삭제하기</button>
 			</div>
+			
+			<!-- 과제 삭제 모달 시작 -->
+			<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content" style="border-radius: 3px;">
+					      <div class="modal-header" style="border-bottom:0">
+					        <h4 class="modal-title" id="exampleModalLabel" style="font-weight:400">정말로 이 과제를 삭제하시겠습니까?</h4>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      	<span style="font-size:13px">과제를 삭제하시게 되면 연관된 자료 또한 모두 삭제됩니다.</span>
+					      </div>
+					      <div class="modal-footer"  style="border-top:0;padding-top:0">
+					      	<button type="button" class="deleteTaskButton" >과제 삭제</button>
+					        <button type="button" class="deleteTaskButton2" data-dismiss="modal">취소</button>
+					        
+					      </div>
+					    </div>
+					  </div>
+					</div>
+			<!-- 과제 삭제 모달 끝 -->
 			
 
 			<div class="table-responsive">

@@ -93,27 +93,77 @@
 	<div style="background-color:hsla(0, 0%, 93.3%, .4);">
 	
 		<div class="container about" style="display:flex;width:1284px"">
-		
-			<div class="profile" style="height: 96px;position: relative;display: flex;">
-				<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-					<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+			<div class="col-lg-9" style="display: inline-flex">
+				<div class="profile" style="height: 96px;position: relative;display: flex;">
+					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
+						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+					</div>
+				</div>
+	
+				<div class="desc">
+					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;">${Lecture.mem_name }</h3>
+					<h5 style="padding-left:10px;color:gray">수강생 ${Lecture.apply_count }명</h5>
+				</div>
+				
+				<c:if test="${loginUser.mem_no eq tutor_no }">
+					<div style="margin-top: 25px;margin-left:10px">
+						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManage.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+							<img height="40" width="50" src="/finalp/resources/img/setting1.png">
+						</button>
+					</div>
+				</c:if>
+			</div>
+			
+			<div class="col-lg-3">
+				<div style="margin-left: 75%;margin-top: 25px;">
+					<c:if test="${checkApply eq 0 }">
+						<c:url var="apply" value="apply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="lecturePlayList.do" />
+						</c:url>
+						
+						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+					</c:if>
+					<c:if test="${checkApply gt 0 }">
+						<c:url var="deapply" value="deapply.do">
+							<c:param name="mem_no" value="${loginUser.mem_no }"/>
+							<c:param name="tutor_no" value="${tutor_no }" />
+							<c:param name="pageName" value="lecturePlayList.do" />
+						</c:url>
+						<button id="deapply" class="applyButton" data-toggle="modal" data-target="#exampleModal">
+							<img src="/finalp/resources/img/check.png">&nbsp;수강중 ${Lecture.apply_count }명
+						</button>
+						
+						<!-- 수강신청취소 Modal -->
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">수강 신청 취소</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        정말로 수강을 취소하시겠습니까?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						        <button type="button" class="btn btn-primary" onclick="location.href='${deapply}'">수강 취소</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</c:if>
+					
+					
+					
+					
 				</div>
 			</div>
-
-			<div class="desc">
-				<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;">${Lecture.mem_name }</h3>
-				<h5 style="padding-left:10px;color:gray">수강생 ${Lecture.apply_count }명</h5>
-			</div>
-
-			<div style="margin-left: 75%;margin-top: 25px;">
-			<button class="applyButton">수강신청</button>
-			</div>
-
-
 		</div>
-		
-		
-		
 
 	</div>
 

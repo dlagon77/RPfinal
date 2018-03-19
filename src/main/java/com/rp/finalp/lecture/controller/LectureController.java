@@ -100,6 +100,7 @@ public class LectureController {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		List<Lecture> list = lectureService.selectLectureList(tutor_no);
+		model.addAttribute("assignList",assignService.selectTutorAssList(tutor_no));
 		model.addAttribute("lectureList",list);
 		return "tutor/classManageTask";
 	}

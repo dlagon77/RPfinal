@@ -119,7 +119,7 @@
    
    <insert id="apply" parameterType="Integer">
 		<![CDATA[
-			insert into apply values (#{tutor_no}, #{mem_no})
+			insert into apply values (#{tutor_no}, #{mem_no}, null)
 		]]>
 	</insert>
 	

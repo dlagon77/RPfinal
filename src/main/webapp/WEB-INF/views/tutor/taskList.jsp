@@ -125,7 +125,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -264,46 +264,6 @@
 					
 					</tr>
 					</c:forEach>
-					<!-- <tr>
-						<td class="list_problem_id">1003</td>
-						<td>18/03/13</td>
-						<td class="click-this"><a href="/problem/1003">피보나치 함수</a></td>
-						<td>
-							
-						</td>
-						<td><a href="#">334</a></td>
-
-						<td>41.608%</td>
-					</tr>
-											
-					<tr>
-						<td class="list_problem_id">1008</td>
-						<td>18/03/13</td>
-						<td class="click-this"><a href="#">A/B</a></td>
-						<td>
-							<span class="badge badge-info">분류1</span>
-							<span class="badge badge-primary">분류2</span>
-							<span class="badge badge-light-green">분류3</span>
-							<span class="badge badge-purple">분류4</span>
-						</td>
-						<td><a href="#">170</a></td>
-						<td>35.179%</td>
-					</tr>
-											
-					<tr>
-						<td class="list_problem_id">1014</td>
-						<td>18/03/13</td>
-						<td class="click-this"><a href="/problem/1014">컨닝</a></td>
-						<td>
-							<span class="badge badge-from">배열</span>
-							<span class="badge badge-default">변수</span>
-						</td>
-						<td><a href="/status/?problem_id=1014&amp;result_id=4">360</a></td>
-						<td>37.267%</td>
-					</tr>
-											
-											
-											 -->
 				</tbody>
 				</table>
 			</div>

@@ -278,40 +278,35 @@
 		display: table-cell;vertical-align: middle;padding: 8px 20px;
 	}
 	
-	.effect-lily > * {
-    display: table-cell;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    }
+.badge {
+			display: inline-block!important;
+			padding: .45em .5em!important;
+			font-size: 75%!important;
+			font-weight: 700!important;
+			line-height: 1!important;
+			text-align: center!important;
+			white-space: nowrap!important;
+			vertical-align: baseline!important;
+			border-radius: .25rem!important;
+		}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script>
 	function showDiv1(){
 		$("#section1").attr("style", "display:block");
-		$("#section2").attr("style", "display:none");
 		$("#section3").attr("style", "display:none");
 		$("#section4").attr("style", "display:none");
 	}
 	
-	function showDiv2(){
-		$("#section1").attr("style", "display:none");
-		$("#section2").attr("style", "display:block");
-		$("#section3").attr("style", "display:none"); 
-		$("#section4").attr("style", "display:none");
-	}
-	
-		
 	function showDiv3(){
 		$("#section1").attr("style", "display:none");
-		$("#section2").attr("style", "display:none"); 
 		$("#section3").attr("style", "display:block");
 		$("#section4").attr("style", "display:none");
 	}
 	
 	function showDiv4(){
 		$("#section1").attr("style", "display:none");
-		$("#section2").attr("style", "display:none"); 
 		$("#section3").attr("style", "display:none");
 		$("#section4").attr("style", "display:block");
 	}
@@ -376,19 +371,58 @@
 				<div class="tabs tabs-style-bar">
 					<nav>
 						<ul>
-							<li><a href="#" name="item" onclick="showDiv1();" ><span>OVERVIEW</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv2();"><span>과제 출제</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv3();"><span>Settings</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv4();" ><span>OVERVIEW</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>과제 출제</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>Settings</span></a></li>
 						</ul>
 					</nav>
 				</div>
 				
+				<div id="section4" style="display:block;">
+					<h2>Assignment List</h2>
+					<div class="grid">
+
+						<table class="table table-striped table-bordered sortable-table clickable-table" id="problemset" style="font-size:13px">
+				<thead>
+				<tr>
+					<th style="width:10%;text-align: center;" data-sort="int">문제 번호</th>
+					<th style="width:20%;text-align: center;" data-sort="int">등록 날짜</th>
+					<th style="width:35%;text-align: center;" data-sort="string">제목</th>
+					<th style="width:15%;text-align: center;" data-sort="string">카테고리</th>
+					<th style="width:10%;text-align: center;" data-sort="int">맞은 사람</th>
+					<th style="width:10%;text-align: center;" data-sort="float">정답 비율</th>
+				</tr>
+				</thead>
+
+				<tbody>
+					<c:set value="0" var="assign_no"/>
+					<c:forEach items="${assignList }" var="row">
+					<c:set value="${assign_no+1 }" var="assign_no"/>
+					<tr>
+					
+						<td class="list_problem_id">${assign_no }</td>
+						<td>${row.ass_reg_date }</td>
+						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}">${row.ass_title }</a></td>
+						<td>
+							<span class="badge badge-info">${row.ass_cate }</span>
+						</td>
+						<td><a href="#">${row.ass_cor_cnt }</a></td>
+						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
+					
+					</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+
+					</div>
+					
+				</div>
 				
-				
-				<div id="section1" style="display:block;">
+				<div id="section1" style="display:none;">
 					
 						<div class="content-container" style="display: table-cell;width: 100%;vertical-align: top;">
-					      <section class="section-column section-column-padding" style="padding:30px">
+					      <section class="section-column section-column-padding" style="padding:30px;font-size:16px">
+					      
 					        <form class="text-fields text-field-horizontal" action="makeAss.do" method="post" style="display: table;width: 100%;table-layout: fixed;" id="makeAssForm">
 					          <input type="hidden" name="ass_maker" value=${tutor_no }>
 					          
@@ -396,43 +430,43 @@
 					    <div class="text-field-horizontal" style="display: table;width: 100%;table-layout: fixed;">
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 제목</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">과제 제목</div>
+					        <div class="control-input">
 					          <input class="input-block" type="text" maxlength="50" name="ass_title" placeholder="과제의 제목을 입력해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 카테고리</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">과제 카테고리</div>
+					        <div class="control-input">
 					          <input class="input-block" type="text" maxlength="50" name="ass_cate" placeholder="과제 카테고리를 입력해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">추가 Comment</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">추가 Comment</div>
+					        <div class="control-input">
 					          <input class="input-block" type="text" maxlength="50" name="ass_comment" placeholder="과제에 덧붙일 말을 추가해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 내용</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">과제 내용</div>
+					        <div class="control-input">
 					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ass_pro" form="makeAssForm"></textarea>
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">과제 정답</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">과제 정답</div>
+					        <div class="control-input">
 					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ass_answer" form="makeAssForm"></textarea></pre>
 					        </div>
 					      </div>
 					    
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label" style="width: 200px;display: table-cell;vertical-align: middle;padding: 8px 20px;">Hint</div>
-					        <div class="control-input" style="display: table-cell;vertical-align: middle;padding: 8px 20px;">
+					        <div class="control-label">Hint</div>
+					        <div class="control-input">
 					          <input class="input-block" type="text" maxlength="50"  name="ass_hint" placeholder="과제에 덧붙일 힌트를 추가해주세요.">
 					        </div>
 					      </div>
@@ -445,17 +479,9 @@
 					          <br><br>
 					          <div class="clearfix">
 					            
-					              <div class="pull-left">
-					                <span class="btn-flat modal-btn danger" data-target="#delete-course-modal">
-					                  과제 삭제하기
-					                </span>
-					              </div>
-					            
 					            <div class="pull-right">
-					              <a href="/course/draft/4412/" target="_blank" class="btn-flat">
-					                
-					                  미리보기
-					                
+					              <a href="/course/draft/4412/" target="_blank" class="btn-flat">  
+					                  미리보기 
 					              </a>
 					    <input type="submit" value="제출">          
 					<!--   <button class="btn-flat" name="next" type="submit" >등록하기</button> -->
@@ -465,96 +491,12 @@
 					            </div>
 					          </div>
 					        </form>
-
-					        
-					          
-					<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content" style="border-radius: 3px;">
-					      <div class="modal-header" style="border-bottom:0">
-					        <h4 class="modal-title" id="exampleModalLabel" style="font-weight:400">정말로 이 과제를 삭제하시겠습니까?</h4>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					      	<span style="font-size:13px">과제를 삭제하시게 되면 연관된 자료 또한 모두 삭제됩니다.</span>
-					      </div>
-					      <div class="modal-footer"  style="border-top:0;padding-top:0">
-					      	<button type="button" class="deleteTaskButton" >과제 삭제</button>
-					        <button type="button" class="deleteTaskButton2" data-dismiss="modal">취소</button>
-					        
-					      </div>
-					    </div>
-					  </div>
-					</div>
 					
 					        
 					      </section>
 					      
 					    </div>
 				</div>
-				
-				
-				
-				
-				<!-- 강의 업로드 -->
-				<div id="section2" style="display:none;">
-					<div class="uploadExplain">
-						<img style="box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;" width="700px;" height="350px;" src="/finalp/resources/img/lectureUpload.png">
-						<br><br>
-						<p style="font-weight:600; font-size: 14px;">Youtube 업로드 하실 때 입력하신 속성(①videoID ②강의 제목 ③강의 설명)들을 아래 박스에도 그대로 써주세요:D  </p>
-					</div>
-					
-					<!-- 업로드버튼 -->
-					<div class="uploadBox">
-						<!-- <a href="https://www.youtube.com/upload" target="blank"><i class="xi-folder-upload-o xi-4x"></i></a> -->
-						<button  onclick="window.open('https://www.youtube.com/upload')" type="button" class="btn btn-danger btn-lg">Youtube 업로드</button>
-					</div>
-					
-					<div>
-						<form class="form-horizontal" role="form" action="insertLecture.do"> 
-							<div class="form-group"> 
-								<label for="inputPassword3" class="col-sm-2 control-label">비디오 ID</label> 
-								<div class="col-sm-10"> 
-									<input type="text" class="form-control" id="inputPassword3" name="lec_link" placeholder="1.videoID"> 
-								</div> 
-							</div>
-							<div class="form-group"> 
-								<label for="inputEmail3" class="col-sm-2 control-label">제목</label> 
-								<div class="col-sm-10"> 
-									<input type="text" class="form-control" id="inputEmail3" name="lec_title" placeholder="2.title"> 
-								</div> 
-							</div> 
-							<div class="form-group"> 
-								<label for="inputPassword3" class="col-sm-2 control-label">내용</label> 
-								<div class="col-sm-10"> 
-									<input type="text" class="form-control" id="inputPassword3" name="lec_con" placeholder="3.content"> 
-								</div> 
-							</div>
-							
-	
-							<!-- <div class="form-group"> 
-								<div class="col-sm-offset-2 col-sm-10"> 
-									<div class="checkbox"> 
-										<label> <input type="checkbox"> Remember me </label> 
-									</div> 
-								</div> 
-							</div>  -->
-							<input type="hidden" name ="tutor_no" value="${tutor_no}">
-							<div class="form-group"> 
-								<div class="col-sm-offset-2 col-sm-10"> 
-									<button type="submit" class="btn btn-success">강의 등록</button>
-									
-									
-								</div> 
-							</div> 
-						</form>
-					</div>
-					
-				</div>
-				<!-- 강의 업로드 끝 -->
-				
 				
 				<div id="section3" style="display:none;">
 				
