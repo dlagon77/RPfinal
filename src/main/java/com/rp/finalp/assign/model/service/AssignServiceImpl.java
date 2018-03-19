@@ -47,4 +47,14 @@ public class AssignServiceImpl implements AssignService{
 	public Assignment assDetail(int ass_no) {
 		return assignDao.assDetail(ass_no);
 	}
+
+	@Override
+	public int insertAss(Assignment ass) {
+		return assignDao.insertAss(ass);
+	}
+
+	@Override
+	public int makeAss(Assignment ass) {
+		return assignDao.makeAss(ass);
+	}
 }

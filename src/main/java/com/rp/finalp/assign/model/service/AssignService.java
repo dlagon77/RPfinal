@@ -14,4 +14,6 @@ public interface AssignService {
 	List<Assignment> selectTutorAssList(int tutor_no); 
 	
 	Assignment assDetail(int ass_no);
+	int insertAss(Assignment ass);
+	int makeAss(Assignment ass);
 }

@@ -1,6 +1,7 @@
 package com.rp.finalp.assign.controller;
 
 import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +42,12 @@ public class AssignController{
 	public String assInsertFormMethod() {
 		return "ass/ass";
 	}
+	
+	@RequestMapping(value = "assMakeForm.do", method = RequestMethod.GET)
+	public String assMakeFormMethod() {
+		return "ass/assMakeForm";
+	}
+	
 	
 	@RequestMapping(value = "compileAssign.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -245,4 +252,40 @@ public class AssignController{
 		return "redirect:assList.do";
 	}
 	
+	@RequestMapping(value="test1.do",method=RequestMethod.POST)
+	public void test1Method(Assignment ass,
+			HttpServletResponse response) throws IOException{
+		assignService.insertAss(ass);
+/*		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out=response.getWriter();*/
+/*		if(name.equals("신사임당")) {
+			out.append("ok");
+			out.flush();
+		}else {
+			out.append("fail");
+			out.flush();
+		}*/
+/*		out.print(user);
+		out.flush();
+		out.close();*/
+	}
+	
+	@RequestMapping(value="makeAss.do",method=RequestMethod.POST)
+	public String assMakeMethod(Assignment ass,
+			HttpServletResponse response) throws IOException{
+		assignService.makeAss(ass);
+		return "home";
+/*		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out=response.getWriter();*/
+/*		if(name.equals("신사임당")) {
+			out.append("ok");
+			out.flush();
+		}else {
+			out.append("fail");
+			out.flush();
+		}*/
+/*		out.print(user);
+		out.flush();
+		out.close();*/
+	}
 }

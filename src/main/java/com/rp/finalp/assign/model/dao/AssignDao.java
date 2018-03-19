@@ -38,4 +38,12 @@ public class AssignDao {
 		return mybatis.selectOne("assignMapper.assDetail",ass_no);
 	}
 
+	public int insertAss(Assignment ass) {
+		return mybatis.insert("assignMapper.insertAss", ass);
+	}
+
+	public int makeAss(Assignment ass) {
+		return mybatis.insert("assignMapper.makeAss", ass);
+	}
+
 }

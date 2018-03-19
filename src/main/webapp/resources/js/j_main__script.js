@@ -44,8 +44,7 @@ function  compile() {
 	console.log("compiled !!");
 }
 
-
-/*function run() {
+function run() {
 	
 	var url = "runAssign.do?classname=" + document.getElementById("class").value;
 	
@@ -55,26 +54,26 @@ function  compile() {
      else{
          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
      }  
-
+	var button_joinus = document.getElementById('subutton');
 	xmlhttp.onreadystatechange=function(){
         if(xmlhttp.readyState==4 && xmlhttp.status==200){
-        	document.getElementById("output").innerHTML=xmlhttp.responseText;  
-       	if(document.getElementById('an').innerHTML==document.getElementById("output").innerHTML){
-        	document.getElementById("output").innerHTML=(document.getElementById('an').innerHTML==document.getElementById("output").innerHTML);
-      		var button_joinus = document.getElementById('subutton');
-       		 button_joinus.enabled = true; 
-      		button_joinus.disabled = true;
+        	document.getElementById("output").innerHTML=xmlhttp.responseText; 
+       	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
+
+      	
+      		button_joinus.disabled = false;
        	}else{
-       		document.getElementById("output").innerHTML=bbb;
+       		button_joinus.disabled = true;
        	}
         }
     }
      xmlhttp.open("POST",url,true);
      xmlhttp.send();
-}*/
- function startass(){
+}
+
+function startass(){
 	var button_joinus1 = document.getElementById('subutton');
-	button_joinus.disabled = false;
+	button_joinus1.disabled = true;
 }
 
 
