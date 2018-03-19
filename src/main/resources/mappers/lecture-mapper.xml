@@ -61,7 +61,7 @@
 			from member
 			where mem_no in (select app_student_no
 	                		from apply
-	                		where app_tutor_no = #{tutor_no})
+	                		where app_tutor_no = #{tutor_no} and app_y is null)
 		]]>
 	</select>
 	
@@ -83,4 +83,23 @@
 			where tutor_no = #{tutor_no} order by lec_date desc
 		]]>
 	</select>
+	
+	<update id="applySuccess" parameterType="Lecture">
+		<![CDATA[
+			update apply
+			set app_y = 'Y'
+			where app_tutor_no = #{tutor_no} and app_student_no=(select mem_no
+                                            					from member
+                                            					where mem_name=#{mem_name})
+		]]>
+	</update>
+	
+	<delete id="applyFail" parameterType="Lecture">
+		<![CDATA[
+			delete from apply
+			where app_tutor_no = #{tutor_no} and app_student_no=(select mem_no
+                                            					from member
+                                            					where mem_name=#{mem_name})
+		]]>
+	</delete>
 </mapper>

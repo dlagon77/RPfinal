@@ -150,6 +150,7 @@
 					<table class = "table table-bordered table-hover" align="center" border="1" cellspacing="0" width="700px">
 						<tr align="center" height="35px" ><th style="text-align:center; color:gray;" width="80px">번호</th><th style="text-align:center; color:gray;" width="200px">신청자</th><th style="text-align:center; color:gray;">상태</th></tr>		
 						<%
+							int selectNum = 1;
 							int acceptNum = 1;
 						%>
 						<c:forEach var="member" items="${list }">
@@ -159,12 +160,15 @@
 								
 								<td>
 									<form action="applyClass.do" method="post">									
-											
+										<input type="hidden" name="selectNum" value="<%=selectNum%>">
+										<input type="hidden" name="mem_name" value="${ member.mem_name }">
+										<input type="hidden" name="tutor_no" value="${ tutor_no }">
+										
 										<label class="checkbox-inline"> 
-											<input type="checkbox" id="accept" name="select" value="수락"> 수락 
+											<input type="checkbox" id="accept" name="select<%= selectNum %>" value="수락"> 수락 
 										</label> 
 										<label class="checkbox-inline" style="margin-left: 50px;"> 
-											<input type="checkbox" id="reject" name="select" value="거절"> 거절 
+											<input type="checkbox" id="reject" name="select<%= selectNum++ %>" value="거절"> 거절 
 										</label>
 
 										<div style="float:right">

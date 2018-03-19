@@ -49,4 +49,14 @@ public class LectureDao {
 		return mybatis.selectList("lectureMapper.selectlectureList",tutor_no);
 	}
 
+
+	public int applySuccess(Lecture lecture) {
+		return mybatis.update("lectureMapper.applySuccess", lecture);
+	}
+
+
+	public int applyFail(Lecture lecture) {
+		return mybatis.delete("lectureMapper.applyFail", lecture);
+	}
+
 }

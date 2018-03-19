@@ -49,6 +49,16 @@ public class LectureServiceImpl implements LectureService{
 	public List<Lecture> selectLectureList(int tutor_no) {
 		return lectureDao.selectLectureList(tutor_no);
 	}
+
+	@Override
+	public int applySuccess(Lecture lecture) {
+		return lectureDao.applySuccess(lecture);
+	}
+
+	@Override
+	public int applyFail(Lecture lecture) {
+		return lectureDao.applyFail(lecture);
+	}
 	
 	
 	

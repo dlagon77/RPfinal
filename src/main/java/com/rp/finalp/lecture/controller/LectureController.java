@@ -2,6 +2,8 @@ package com.rp.finalp.lecture.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,7 +105,17 @@ public class LectureController {
 	}
 	
 	@RequestMapping("applyClass.do")
-	public void applyClassMethod() {
+	public String applyClassMethod(@RequestParam(value="tutor_no") int tutor_no, Lecture lecture, Model model, HttpServletRequest rq) {
+		String selectNum = "select"+rq.getParameter("selectNum");
+		String status = rq.getParameter(selectNum);
 		
+		if(status.equals("수락")) {
+			lectureService.applySuccess(lecture);
+		}else {
+			lectureService.applyFail(lecture);
+		}
+		model.addAttribute("tutor_no", tutor_no);
+		
+		return "redirect:classManage.do";
 	}
 }

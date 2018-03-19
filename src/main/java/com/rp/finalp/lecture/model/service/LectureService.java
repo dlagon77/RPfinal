@@ -21,4 +21,8 @@ public interface LectureService {
 	
 	List<Lecture> selectLectureList(int tutor_no);
 
+	int applySuccess(Lecture lecture);
+
+	int applyFail(Lecture lecture);
+
 }
