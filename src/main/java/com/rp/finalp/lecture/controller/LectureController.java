@@ -1,5 +1,7 @@
 package com.rp.finalp.lecture.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import com.rp.finalp.assign.model.service.AssignService;
 import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.service.MemberService;
+import com.rp.finalp.member.model.vo.Member;
 
 @Controller
 public class LectureController {
@@ -45,8 +48,6 @@ public class LectureController {
 		return "tutor/taskDetail";
 	}
 	
-
-	
 	@RequestMapping("testDetailView.do")
 	public String testDetailViewMethod() {
 		return "tutor/testDetailView";
@@ -54,10 +55,9 @@ public class LectureController {
 	
 	@RequestMapping("lecturePlayList.do")
 	public String lecturePlayListView(@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="mem_no") int mem_no,Model model,Lecture lecture) {
-		model.addAttribute("tutor_no",tutor_no);
-		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
-		int checkApply=memberService.checkApply(lecture);
-		model.addAttribute("checkApply",checkApply);
+		model.addAttribute("tutor_no", tutor_no);
+		model.addAttribute("Lecture",  lectureService.selectTutorLecture(tutor_no));
+		model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
 		return "tutor/lecturePlayList";
 	}
 	
@@ -75,6 +75,8 @@ public class LectureController {
 	public String classManageMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		List<Member> list = lectureService.applyClassList(tutor_no);
+		model.addAttribute("list", list);
 		return "tutor/classManage";
 	}
 	
@@ -85,6 +87,12 @@ public class LectureController {
 		return "tutor/classManageLecture";
 	}
 	
+	@RequestMapping("insertLecture.do")
+	public void insertLectureMethod(Lecture lecture, Model model) {
+		System.out.println(lecture);
+		lectureService.insertLecture(lecture);
+	}
+	
 	@RequestMapping("classManageTask.do")
 	public String classManageTaskMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
 		model.addAttribute("tutor_no",tutor_no);
@@ -92,4 +100,8 @@ public class LectureController {
 		return "tutor/classManageTask";
 	}
 	
+	@RequestMapping("applyClass.do")
+	public void applyClassMethod() {
+		
+	}
 }

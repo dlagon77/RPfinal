@@ -1,10 +1,13 @@
 package com.rp.finalp.lecture.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rp.finalp.lecture.model.dao.LectureDao;
 import com.rp.finalp.lecture.model.vo.Lecture;
+import com.rp.finalp.member.model.vo.Member;
 
 @Service("lectureService")
 public class LectureServiceImpl implements LectureService{
@@ -23,10 +26,26 @@ public class LectureServiceImpl implements LectureService{
 	
 	@Override
 	public Lecture selectTutorLecture(int tutor_no) {
-		System.out.println(tutor_no);
 		return lectureDao.selectTutorLecture(tutor_no);
 
 	}
+
+	@Override
+	public String selectChannelId(int tutor_no) {
+		return lectureDao.selectChannelId(tutor_no);
+	}
+
+	@Override
+	public int insertLecture(Lecture lecture) {
+		return lectureDao.insertLecture(lecture);
+	}
+
+	@Override
+	public List<Member> applyClassList(int tutor_no) {
+		return lectureDao.applyClassList(tutor_no);
+	}
+	
+	
 	
 	
 	

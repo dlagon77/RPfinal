@@ -35,5 +35,33 @@
 		]]>
 		
 	</select>
-
+	
+	<select id="selectChannelId" resultType="String" parameterType="Integer">
+		<![CDATA[
+			select mem_channel_id
+			from member
+			join lecture on (mem_no = tutor_no)
+			where tutor_no = #{tutor_no} and rownum=1
+		]]>
+		
+	</select>
+	<insert id="insertLectre"  parameterType="Lecture">
+		<![CDATA[
+			insert into lecture values(#{tutor_no}, lec_id.nextval, null, #{lec_con}, #{lec_link}, #{lec_title}, default, sysdate, 0)
+		]]>
+	</insert>
+	
+	<resultMap type="Member" id="memberNameList">
+		<result property="mem_name" column="mem_name"/>
+	</resultMap>
+	
+	<select id="applyClassList" resultMap="memberNameList" resultType="list" parameterType="Integer"> 
+		<![CDATA[ 
+			select mem_name
+			from member
+			where mem_no in (select app_student_no
+	                		from apply
+	                		where app_tutor_no = #{tutor_no})
+		]]>
+	</select>
 </mapper>
