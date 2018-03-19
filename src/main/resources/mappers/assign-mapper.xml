@@ -81,7 +81,7 @@
 	</resultMap>
 	
 	<select id="selectTutorAssList" resultMap="tutorAssList" resultType="list" 
-		parameterType="java.util.HashMap"> 
+		parameterType="java.util.HashMap"> 					
 		<![CDATA[ 
 		select ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt
 		from assignment
@@ -96,7 +96,7 @@
 	</select>
 	
 	<insert id="insertAss" parameterType="Assignment"><![CDATA[
-		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,#{ass_comment},null,#{ass_date},#{ass_orfile},'123abc.java',#{ass_cate},null,0,null,null,null,null,null,#{ass_writer},null,null,5)
+		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,null,null,sysdate,#{ass_orfile},'123abc.java',#{ass_cate},null,0,null,null,null,null,null,#{ass_writer},null,null,5)
 	]]></insert>
 	
 	<insert id="makeAss" parameterType="Assignment"><![CDATA[

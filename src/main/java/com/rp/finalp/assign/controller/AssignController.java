@@ -19,9 +19,15 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -252,40 +258,29 @@ public class AssignController{
 		return "redirect:assList.do";
 	}
 	
+
 	@RequestMapping(value="test1.do",method=RequestMethod.POST)
-	public void test1Method(Assignment ass,
+	public void test1Method(Assignment ass, @RequestParam("submit") String submit,
 			HttpServletResponse response) throws IOException{
+		System.out.println(ass);
 		assignService.insertAss(ass);
-/*		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out=response.getWriter();*/
-/*		if(name.equals("신사임당")) {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out=response.getWriter();
+		if(submit.equals("sub")) {
 			out.append("ok");
 			out.flush();
 		}else {
 			out.append("fail");
 			out.flush();
-		}*/
-/*		out.print(user);
-		out.flush();
-		out.close();*/
+		}
+		out.close();
 	}
-	
+
 	@RequestMapping(value="makeAss.do",method=RequestMethod.POST)
 	public String assMakeMethod(Assignment ass,
 			HttpServletResponse response) throws IOException{
 		assignService.makeAss(ass);
 		return "home";
-/*		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out=response.getWriter();*/
-/*		if(name.equals("신사임당")) {
-			out.append("ok");
-			out.flush();
-		}else {
-			out.append("fail");
-			out.flush();
-		}*/
-/*		out.print(user);
-		out.flush();
-		out.close();*/
+
 	}
 }

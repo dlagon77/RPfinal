@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +156,7 @@
 		.compileButton:hover{
 			background-color:#285e8e;
 		}
-	.deleteButton{
+			.deleteButton{
 		border: none;
 	    outline: none;
 	    background: none;
@@ -215,7 +216,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -310,7 +311,7 @@
 				<h1 style="font-weight:600">
 					<span id="problem_title" class="">${assignment.ass_title }</span>
 				</h1>
-				 <button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" style="margin-left: 70%;">과제 삭제하기</button>
+								 <button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" style="margin-left: 70%;">과제 삭제하기</button>
 			</div>
 			
 			<!-- 과제 삭제 모달 시작 -->
@@ -335,7 +336,6 @@
 					  </div>
 					</div>
 			<!-- 과제 삭제 모달 끝 -->
-			
 
 			<div class="table-responsive">
 				<table class="table" id="problem-info">
@@ -383,7 +383,7 @@
 					<h2 style="width: 9%;font-weight:600">예제 정답</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<pre class="sampledata" id="sample-input-1">${assignment.ass_answer }</pre>
+					<pre class="sampledata" id="an">${assignment.ass_answer }</pre>
 				</div>
 			</section>
 
@@ -404,7 +404,7 @@
 					<button class="compileButton" onclick="compile()">Compile</button>
 					<button class="compileButton" onclick="run()">Run</button>
 					<button class="compileButton" onclick="empty()">Clear</button>
-					<button class="compileButton" onclick="subass()">제출</button>
+					<button class="compileButton" id="subutton" onclick="subass()">제출</button>
 				</div>
 				<textarea class="form-control" aria-label="With textarea" rows="30" id="maincode" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
 				
@@ -420,10 +420,6 @@
 				
 			</div>
 			<hr>
-			
-
-
-
 
 		</div>
 
@@ -444,9 +440,8 @@
 
 
 
-
+<input text="hidden" id="abc" value=${assignment.ass_cate } >
 	</section>
-	
 	
 
 	
@@ -478,9 +473,37 @@
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
+	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
 
-	
+<script type="text/javascript">
+
+$(function(){
+ 	$("#subutton").on("click",function(){
+
+  $.ajax({
+			url:"test1.do",
+
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
+
+	          type : "post",
+	          success : function(result){
+	              if(result == "ok"){
+	                  alert("Success");
+	               }else{
+	                  alert("Fail");
+	               }	         
+	          },
+	          error : function(request,status, errorData){
+	             alert("error code : " + request.status + "\n"
+	                   + "message : " + request.responseText + "\n"
+	                   + "error : " + errorData);
+	          }
+		}); 
+	});  
+
+});
+</script>	
 
 
 
@@ -524,6 +547,9 @@ function myFunction() {
 </div>
 
 </body>
+<script>
+window.onload=startass; 
+</script>
 </html>
 
 
