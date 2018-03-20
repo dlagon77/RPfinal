@@ -33,59 +33,58 @@ cursor:pointer;
 	$('#stumyboard').addClass('list-group-item');
 </script>
 
-		<div class="panel panel-default" style="margin-top: 0px;margin-left: 20px;">
+		<div class="panel panel-default" style="margin-top: 0px;margin-left: 20px; display: inline-block;">
 			<div class="panel-body" style="display:  inline-flex;">
 				<div class="list-group" style="background-color:#A9A9F5;">
 					<h3>구독중인 강사님</h3>
 				</div>
 			</div>
-			<div class="panel-body" style="display:  inline-flex;">
 			
-            <c:choose>
-				<c:when test="${fn:length(mysubsc) > 0}">
-					<c:forEach items="${mysubsc }" var="row">
-						<tr>
-<%-- 							<td>${row.mem_no }</td> --%>
-<%-- 							<td>${row.app_student_no }</td> --%>
-<%-- 							<td>${row.mem_name }</td> --%>
-<%-- 							<td>${row.mem_orfile }</td> --%>
-						</tr>
+			 <!-- style="display:  inline-flex;" -->
+			<c:set var="i" value="0" /> 
+			<c:set var="j" value="3" />
+				<c:forEach items="${mysubsc }" var="row">
+					<c:if test="${i%j == 0}">
+						<div class="panel-body" style="display:  inline-flex;">
+					</c:if>
 					
-				
-				<div class="bluck" style="width: 200px; margin-right: 30px;">
-					<div class="cuadro_intro_hover " style="background-color: #cccccc;">
-						<p style="text-align: center;">
-							<img src="/finalp/resources/img/profileupload/${row.mem_orfile }" class="img-responsive" alt="">
-						</p>
-					<div class="caption">
-						<div class="blur"></div>
-						<div class="caption-text">
-							<h3	class="img-h3" style="border-top: 2px solid white; border-bottom: 2px solid white; padding: 10px;">${row.mem_name }</h3>
-							<p> 
-							- ${row.mem_name } 강사님 -
-								</p>
-							<a class=" btn btn-default" href="tutorHome.do" ><span class="glyphicon glyphicon-plus" style="color:black;">
-									방송국가기</span></a>
-						</div>
-					</div>
-					<!--END DIV class caption -->
-				</div>
-				<!-- END DIV class cuadro_intro_hover -->
-			</div>
-			<!-- END DIV Class bluck -->
+											<div class="bluck" style="width: 200px; margin-right: 30px;">
+											<div class="cuadro_intro_hover " style="background-color: #cccccc;">
+												<p style="text-align: center;">
+													<img src="/finalp/resources/img/profileupload/${row.mem_refile }" class="img-responsive" alt="">
+												</p>
+											<div class="caption">
+												<div class="blur"></div>
+												<div class="caption-text">
+													<h3	class="img-h3" style="border-top: 2px solid white; border-bottom: 2px solid white; padding: 10px;">${row.mem_name }</h3>
+													<p> 
+													- ${row.mem_name } 강사님 -
+														</p>
+													<a class=" btn btn-default" href="tutorHome.do" ><span class="glyphicon glyphicon-plus" style="color:black;">
+															방송국가기</span></a>
+												</div>
+											</div>
+											<!--END DIV class caption -->
+											</div>
+										<!-- END DIV class cuadro_intro_hover -->
+										</div>
+						<c:if test="${i%j== j-1}">
+							</div>
+						</c:if>
+					<c:set var="i" value="${i+1 }" />
 			</c:forEach>
-			</c:when>
-				<c:otherwise>
+			<!-- END DIV Class bluck -->
+		
+			<%-- 	<c:otherwise>
 					<tr>
 						<td colspan="4">조회된 결과가 없습니다.</td>
 					</tr>
-				</c:otherwise>
-			</c:choose>
+				</c:otherwise> --%>
+<%-- 			</c:choose> --%>
 <%-- 	<c:forEach var="i" begin="1" end="4" step="1">			 --%>
 
-<%-- 	</c:forEach> --%>
+	
 
-		</div>
 		
 		<!--===== END DIV class panel-body ===== -->
 				</div>

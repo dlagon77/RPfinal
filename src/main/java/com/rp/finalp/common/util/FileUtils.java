@@ -3,7 +3,9 @@ package com.rp.finalp.common.util;
 import java.io.File;
 import java.util.Iterator;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ public class FileUtils {
 		
 		// 경로 지정 : 웹 서비스 root 경로에 resources/upload 폴더 안
 		this.filePath = request.getSession().getServletContext().getRealPath("/") + "resources/img/profileupload/";
+//		this.filePath = "C:/finalProject/finalp/target/m2e-wtp/web-resources/uploadFiles/";
+		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
     	
@@ -53,6 +57,7 @@ public class FileUtils {
 	/** 정해진 경로의 파일을 삭제하는 메소드 */
 	public void deleteFile(HttpServletRequest request) {
 		this.filePath = request.getSession().getServletContext().getRealPath("/") + "resources/img/profileupload/";
+//		this.filePath = "C:/finalProject//finalp/target/m2e-wtp/web-resources/uploadFiles/";
 		String fileName = request.getParameter("prevfile");
 		
 		File file = new File(filePath + fileName);
