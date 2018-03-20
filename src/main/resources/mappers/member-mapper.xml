@@ -145,5 +145,34 @@
 			select count(*) from apply where app_tutor_no=#{tutor_no} and app_student_no=#{mem_no} and app_y is null
 		]]>
 	</select>
-
+	
+	
+	<resultMap id="today" type="Member">
+      <result property="v_date" column="v_date" />
+     </resultMap>
+	
+ 	<select id="todaycheck" resultMap="today">
+	      <![CDATA[
+	         SELECT * FROM (SELECT * FROM VISITOR
+			ORDER BY 2 desc)
+			where rownum = 1
+	      ]]>
+   	</select>
+   	
+   	 <update id="updateCount" parameterType="Member">
+	    <![CDATA[
+	      	UPDATE VISITOR SET
+			V_COUNT = (SELECT MAX(V_COUNT) + 1 FROM VISITOR
+			                                 WHERE V_DATE like sysdate)
+			WHERE V_DATE like SYSDATE
+	    ]]>
+	 </update>
+   	
+   	<insert id="insertCount">
+   		 <![CDATA[
+	      	INSERT INTO VISITOR VALUES(1,SYSDATE)
+	    ]]>
+   	</insert>
+	
+	
 </mapper>

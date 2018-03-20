@@ -103,4 +103,19 @@ public class MemberServiceImpl implements MemberService {
 		public int checkReady(Lecture lecture) {
 			return memberDao.checkReady(lecture);
 		}
+
+		@Override
+		public Member todaycheck() {
+			return memberDao.todaycheck();
+		}
+
+		@Override
+		public int updateCount(Member today) {
+			return memberDao.updateCount(today);
+		}
+
+		@Override
+		public void insertCount() {
+			memberDao.insertCount();
+		}
 	}

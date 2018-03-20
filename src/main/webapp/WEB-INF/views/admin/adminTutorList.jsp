@@ -17,7 +17,7 @@
 
 
  <style>
-	#memberprofile{
+	.memberprofile{
 		border:1px solid #e8e3e3;
 		width:230px;
 		height:130px;
@@ -145,6 +145,9 @@
                 <li>
                     <a href="kblist.do">금지어 포함 게시물</a>
                 </li>
+                <li>
+                	<a href="chart.do">통계</a>
+                </li>
                 
             </ul>
         </div>
@@ -156,13 +159,16 @@
 				 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">관리자 메뉴</a>
 				   
 				   <h1 style="margin-top:40px; font-family: 'Nanum Pen Script', cursive;"><i class="xi-emoticon-cool-o xi-x"></i>&nbsp;강사 관리</h1>
+				   <div id="div1" style="width:200px;height:90px;padding:10px;border:1px solid #aaaaaa;margin-left:1100px;margin-top:-77px;background-color:red;" ondrop="drop(event)" ondragover="allowDrop(event)">
+				   <i class="xi-trash-o xi-4x" style="margin-left:58px;"></i>
+				   </div>
 					<hr>
 				   <div style="background-color:#efeded; display:flex;">
 						<div style="padding:10px;">
 					 
 					 <!-- 회원 프로필 -->
 					 <c:forEach items="${tlist}" var="list">
-						  <div id="memberprofile" style="background-color:white" >
+						  <div id="${list.mem_no }" class="memberprofile" style="background-color:white" draggable="true" ondragstart="drag(event)">
 							
 							<c:if test="${!empty list.mem_refile }">
 								<img id="profileImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCfuJiJoyelLhmMxfYr5u3FuPK9skk214NZ2d4ynHTOuln5BFEA">
@@ -180,9 +186,9 @@
 								
 								<div style="maring-top:1%">
 									<ul>
-										<li id="a" data-toggle="modal" onclick="board(${list.mem_no})">업로드한 강의 : <a style="margin-left:5px;"> ${list.boardcount}</a> 개</li>
-										<li id="b" data-toggle="modal" onclick="reply(${list.mem_no})">수강생 인원 : <a  style="margin-left:5px;"> ${list.replycount}</a> 개</li>
-										<li id="c">리뷰 개수 : <a id="c" style="margin-left:5px;"> 8개</a></li>
+										<li id="a" data-toggle="modal" onclick="lecture(${list.mem_no})">업로드한 강의 : <a style="margin-left:5px;"> ${list.lecturecount}</a>&nbsp;개</li>
+										<li id="b" data-toggle="modal" onclick="student(${list.mem_no})">수강생 인원 : <a  style="margin-left:5px;"> ${list.studentcount}</a>&nbsp;명</li>
+										<li id="c" data-toggle="modal" onclick="review(${list.mem_no})">리뷰 개수 : <a id="c" style="margin-left:5px;">${list.reviewcount}</a>&nbsp;개</li>
 									</ul>
 								</div>
 						</div>
@@ -269,9 +275,9 @@
 								
 					  <!-- 회원 상세보기 Modal END -->	
 					  		
-					  <!-- 게시물 갯수 Modal -->		
+					  <!-- 수강생 인원 Modal -->		
 					  	
-					  	<div class="modal fade" id="board" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+					  	<div class="modal fade" id="student" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 							<div class="modal-dialog">
 									<div class="modal-content">
 									  <div class="modal-header">
@@ -284,11 +290,11 @@
 										<table class="type09">
 											<thead>
 											<tr>
-												<th style="text-align:center;" scope="cols">게시판 유형</th>
-												<th style="text-align:center;" scope="cols">게시물 제목</th>
+												<th scope="cols">수강생</th>
+												<th scope="cols"></th>
 											</tr>
 											</thead>
-											<tbody id="boardbody">
+											<tbody id="studentbody">
 											
 											</tbody>
 										</table>
@@ -302,12 +308,51 @@
 							</div>
 						</div>
 						
-						<!-- 게시물 갯수 Modal END -->
+						<!-- 수강생 인원 Modal END -->
 						
-						<!-- 댓글 갯수 Modal -->		
+						<!-- 강의 갯수 Modal -->		
 					  	
-					  	<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-							<div class="modal-dialog" style="max-width:1000px;">
+					  	<div class="modal fade" id="lecture" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+							<div class="modal-dialog" style="max-width:800px;">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+										<h4 class="modal-title" id="myModalLabel" style="position: absolute;">강의 상세보기</h4>
+									  </div>
+									  <div class="modal-body">
+										
+
+										<table class="type09">
+											<thead>
+											<tr>
+												<th  scope="cols">강의 제목</th>
+												<th  scope="cols">강의  내용</th>
+											</tr>
+											</thead>
+											<tbody id="lecturebody">
+											
+											</tbody>
+										</table>
+										
+
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									  </div>
+									</div>
+							</div>
+						</div>
+						
+						<!-- 강의 갯수 Modal END -->
+						
+					</c:forEach>
+					
+					
+					
+					<!-- 리뷰 갯수 Modal -->		
+					  	
+					  	<div class="modal fade" id="review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+							<div class="modal-dialog" style="max-width:700px;">
 									<div class="modal-content">
 									  <div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -319,13 +364,10 @@
 										<table class="type09">
 											<thead>
 											<tr>
-												<th  scope="cols">게시판 유형</th>
-												<th  scope="cols">게시글 제목</th>
-												<th style="width:400px;"scope="cols">댓글 내용</th>
-												<th scope="cols"></th>
+												<th  scope="cols" style="width:700px;">리뷰내용</th>
 											</tr>
 											</thead>
-											<tbody id="replybody">
+											<tbody id="reviewbody">
 											
 											</tbody>
 										</table>
@@ -339,16 +381,14 @@
 							</div>
 						</div>
 						
-						<!-- 댓글 갯수 Modal END -->
-						
-					</c:forEach>
-					
+						<!-- 리뷰 갯수 Modal END -->
 				
 
 					</div>
 				</div>
                
             </div>
+            
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -365,9 +405,9 @@
         $("#wrapper").toggleClass("toggled");
     });
     
-    function board(no){
+    function student(no){
     	$.ajax({
-    		url:"modalBoard.do",
+    		url:"modalStudent.do",
     		dataType:"json",
     		type:"post",
     		data:{"mem_no":no},
@@ -375,21 +415,18 @@
     			var jsonStr = JSON.stringify(result);
     			var json = JSON.parse(jsonStr);
     			var tag = "";
-    			for(var i =0; i < json.m.length; i++){
-    				if(json.m[i].bcateid == 2){
-    				tag += "<tr>"
-							+"<th scope='row'>QNA게시판</th>"
-							+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
+    			if( json.s.length > 0){
+	    			for(var i =0; i < json.s.length; i++){
+	    				tag += "<tr>"
+							+"<th scope='row'>수강생 이름</th>"
+							+"<td>"+decodeURIComponent(json.s[i].mem_name,"utf-8")+"</td>"
 						    +"</tr>";
-    				}else{
-    					tag += "<tr>"
-							+"<th scope='row'>꿀팁게시판</th>"
-							+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
-						    +"</tr>";
-    				}
-    			}
-    			$("#boardbody").html(tag);
-    			$("#board").modal();
+	    			}
+	    			$("#studentbody").html(tag);
+	    			$("#student").modal();
+    			}else{
+       				alert("정보가 없습니다.");
+       			}
     		},
     		error: function(request, status, errorData){
                 alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
@@ -398,9 +435,9 @@
     		
     	});
     }
-    	function reply(no){
+    	function lecture(no){
         	$.ajax({
-        		url:"modalReply.do",
+        		url:"modalLecture.do",
         		dataType:"json",
         		type:"post",
         		data:{"mem_no":no},
@@ -408,37 +445,67 @@
         			var jsonStr = JSON.stringify(result);
         			var json = JSON.parse(jsonStr);
         			var tag = "";
-        			for(var i =0; i < json.r.length; i++){
-        				if(json.r[i].bcateid == 2){
-        				tag += "<tr>"
-    							+"<th scope='row'>QNA게시판</th>"
-    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
-    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
-    							+"<td><button id='delete'>탈퇴</button></td>"
-    						    +"</tr>";
-        				}else{
-        					tag += "<tr>"
-    							+"<th scope='row'>꿀팁게시판</th>"
-    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
-    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
-    							+"<td><button id='delete' style='width:100px;' onclick='replydelete("+json.r[i].re_no+","+json.r[i].re_cateid+")'>삭제</button></td>"
-    						    +"</tr>";
-        				}
-        			}
-        			$("#replybody").html(tag);
-        			$("#reply").modal();
+        			if( json.l.length > 0){
+	        			for(var i =0; i < json.l.length; i++){
+	        				tag += "<tr>"
+	    							+"<td>"+decodeURIComponent(json.l[i].lec_title,"utf-8")+"</td>"
+	    							+"<td>"+decodeURIComponent(json.l[i].lec_con,"utf-8")+"</td>"
+	    						    +"</tr>";
+	        			}
+	        			$("#lecturebody").html(tag);
+	        			$("#lecture").modal();
+        			}else{
+           				alert("정보가 없습니다.");
+           			}
         		},
         		error: function(request, status, errorData){
                     alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
-                 }
-        		
-        		
+                 }     		
         	});
+    	}	
+        function review(no){
+            $.ajax({
+            	url:"modalReview.do",
+            	dataType:"json",
+            	type:"post",
+            	data:{"mem_no":no},
+            	success:function(result){
+            		var jsonStr = JSON.stringify(result);
+            		var json = JSON.parse(jsonStr);
+            		var tag = "";
+            		if(json.r.length > 0){
+    	        		for(var i =0; i < json.r.length; i++){
+    	        			tag += "<tr>"
+    	    						+"<td>"+decodeURIComponent(json.r[i].rev_con,"utf-8")+"</td>"
+    	    					    +"</tr>";		
+   	        			}
+   	        			$("#reviewbody").html(tag);
+   	        			$("#review").modal();
+           			}else{
+           				alert("정보가 없습니다.");
+           			}
+           		},
+           		error: function(request, status, errorData){
+                      alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+                }           		
+            });	
     }
-    
-    	function replydelete(re_no,re_cateid){
-    		document.location.href='rdelete.do?re_no='+re_no+'&re_cateid='+re_cateid;
-    	}
+        
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+        	var data = ev.dataTransfer.getData("text");
+        	alert(data);
+           location.href="tdelete.do?mem_no="+data;
+           
+        }
     </script>
 </body>
 </html>

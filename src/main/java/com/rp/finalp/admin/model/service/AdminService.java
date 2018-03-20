@@ -41,4 +41,16 @@ public interface AdminService {
 
 	List<Board> kBoardList();
 
+	List<Member> modalClass(Member member);
+
+	List<Member> modalReview(Member member);
+
+	List<Member> modalLecture(Member member);
+
+	List<Member> modalStudent(Member member);
+
+	List<Chart> stlist();
+
+	List<Chart> dalist();
+
 }

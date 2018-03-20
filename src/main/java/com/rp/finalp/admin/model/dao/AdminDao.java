@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rp.finalp.admin.model.vo.Board;
+import com.rp.finalp.admin.model.vo.Chart;
 import com.rp.finalp.admin.model.vo.Contact;
 import com.rp.finalp.admin.model.vo.Keyword;
 import com.rp.finalp.admin.model.vo.Member;
@@ -117,6 +118,32 @@ public class AdminDao {
 		}
 		
 		return blist;
+	}
+
+	public List<Member> modalClass(Member member) {
+		return mybatis.selectList("adminMapper.modalClass", member);
+	}
+
+	public List<Member> modalReview(Member member) {
+		return mybatis.selectList("adminMapper.modalReview", member);
+	}
+
+	public List<Member> modalLecture(Member member) {
+		return mybatis.selectList("adminMapper.modalLecture", member);
+	}
+
+	public List<Member> modalStudent(Member member) {
+		return mybatis.selectList("adminMapper.modalStudent", member);
+	}
+
+	public List<Chart> stlist() {
+		return mybatis.selectList("adminMapper.stlist");
+	}
+
+	public List<Chart> dalist() {
+		List<Chart> list = mybatis.selectList("adminMapper.dalist");
+		System.out.println(list.toString());
+		return mybatis.selectList("adminMapper.dalist");
 	}
 	
 }

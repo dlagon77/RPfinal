@@ -18,6 +18,7 @@
 		<typeAlias type="com.rp.finalp.admin.model.vo.Contact" alias="Contact" />
 		<typeAlias type="com.rp.finalp.admin.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.rp.finalp.admin.model.vo.Keyword" alias="Keyword" />
+		<typeAlias alias="Chart" type="com.rp.finalp.admin.model.vo.Chart"/>
 		
 	</typeAliases>
 

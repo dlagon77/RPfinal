@@ -72,6 +72,18 @@ public class MemberDao {
 	public int checkReady(Lecture lecture) {
 		return mybatis.selectOne("memberMapper.checkReady",lecture);
 	}
+
+	public Member todaycheck() {
+		return mybatis.selectOne("memberMapper.todaycheck");
+	}
+
+	public int updateCount(Member today) {
+		return mybatis.update("memberMapper.updateCount",today);
+	}
+
+	public void insertCount() {
+		mybatis.insert("memberMapper.insertCount");
+	}
 }
 
 

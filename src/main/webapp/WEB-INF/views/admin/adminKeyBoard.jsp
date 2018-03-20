@@ -101,8 +101,11 @@
                 <li>
                     <a href="clist.do">문의 관리</a>
                 </li>
-                 <li>
+                <li>
                     <a href="kblist.do">금지어 포함 게시물</a>
+                </li>
+                <li>
+                	<a href="chart.do">통계</a>
                 </li>
             </ul>
         </div>

@@ -24,6 +24,12 @@
 		  		<result property="mem_refile" column="mem_refile"/>
 		  		<result property="boardcount" column="boardcount"/>
 		  		<result property="replycount" column="replycount"/>
+		  		<result property="studentcount" column="studentcount"/>
+		  		<result property="lecturecount" column="lecturecount"/>
+		  		<result property="reviewcount" column="reviewcount"/>
+		  		<result property="lec_title" column="lec_title"/>
+		  		<result property="lec_con" column="lec_con"/>
+		  		<result property="rev_con" column="rev_con"/>
 			</resultMap>
 			
 			<select id="selectMemberAll" resultMap="MemberResultMap">
@@ -40,8 +46,11 @@
 		<!-- 강사 전체조회 -->
 			<select id="selectTutorAll" resultMap="MemberResultMap">
 				<![CDATA[
-					SELECT * FROM MEMBER
-					WHERE MEM_CATE = 'T'
+					 SELECT * FROM MEMBER
+                    LEFT JOIN STUDENTCOUNT S ON (MEM_NO=S.TUTOR_NO)
+                    LEFT JOIN LECTURECOUNT L ON (MEM_NO=L.TUTOR_NO)
+                    LEFT JOIN REVIEWCOUNT R ON (MEM_NO=R.TUTOR_NO)
+                    WHERE MEM_CATE = 'T'
 				]]>
 			</select>
 		<!-- 강사 전체조회  END-->
@@ -93,6 +102,37 @@
 					WHERE RE_WRITER = #{mem_no}            
 				]]>
 			</select>
+				
+			<select id="modalClass" parameterType="Member" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT mem_name FROM APPLY
+					JOIN MEMBER ON(MEM_NO=APP_TUTOR_NO)
+					WHERE APP_STUDENT_NO = #{mem_no}       
+				]]>
+			</select>
+			
+			<select id="modalReview" parameterType="Member" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT * FROM REVIEW
+					WHERE TUTOR_ID = #{mem_no}       
+				]]>
+			</select>
+			
+			<select id="modalLecture" parameterType="Member" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT * FROM LECTURE
+					WHERE TUTOR_NO = #{mem_no}       
+				]]>
+			</select>
+			
+			<select id="modalStudent" parameterType="Member" resultMap="MemberResultMap">
+				<![CDATA[
+					SELECT * FROM MEMBER
+                    JOIN APPLY ON(MEM_NO=APP_STUDENT_NO)
+                    WHERE APP_TUTOR_NO =#{mem_no}       
+				]]>
+			</select>
+			
 		<!-- 모달 리스트들 END -->
 		
 	<!--  회원프로필 관련  END -->
@@ -280,5 +320,40 @@
 		</select>
 	
 	<!-- 금지어포함게시물 END-->
+	
+	<!-- 차트-->
+		
+		<resultMap id="ChartResultMap" type="Chart">
+		  		<result property="v_date" column="v_date"/>
+		  		<result property="v_count" column="v_count"/>
+		  		<result property="studentcount" column="studentcount"/>
+		  		<result property="tutorcount" column="tutorcount"/>
+		</resultMap>
+		
+		<!-- 수강생강사비율 -->
+		
+			<select id="stlist" resultMap="ChartResultMap">
+				<![CDATA[
+					SELECT (SELECT COUNT(*) FROM MEMBER WHERE MEM_CATE = 'T') AS TUTORCOUNT,
+					(SELECT COUNT(*) FROM MEMBER WHERE MEM_CATE = 'S') AS STUDENTCOUNT FROM DUAL
+				]]>
+			</select>
+		
+		<!-- 수강생강사비율 END-->
+	
+		<!-- 날짜차트 -->
+		
+			<select id="dalist" resultMap="ChartResultMap">
+				<![CDATA[
+					SELECT * FROM VISITOR
+					WHERE V_DATE BETWEEN SYSDATE-7 AND SYSDATE
+					ORDER BY 2	
+				]]>
+			</select>
+		
+		<!-- 날짜차트 END-->
+		
+	<!-- 차트 END-->
+	
 	
 </mapper>

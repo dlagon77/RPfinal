@@ -52,6 +52,13 @@ public class MemberController {
 			session.setMaxInactiveInterval(10*60);
 			session.setAttribute("loginUser", loginUser);
 			System.out.println("로긴성공!"+loginUser);
+			Member today  = memberService.todaycheck();
+			System.out.println(today.toString());
+			int check = memberService.updateCount(today);
+			System.out.println(check+""+today.getV_date());
+			if(check == 0) {
+				memberService.insertCount();
+			}
 			return "home";
 		}else {
 			return "member/loginFail";

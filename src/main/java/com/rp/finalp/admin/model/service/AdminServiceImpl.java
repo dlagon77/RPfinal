@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rp.finalp.admin.model.dao.AdminDao;
 import com.rp.finalp.admin.model.vo.Board;
+import com.rp.finalp.admin.model.vo.Chart;
 import com.rp.finalp.admin.model.vo.Contact;
 import com.rp.finalp.admin.model.vo.Keyword;
 import com.rp.finalp.admin.model.vo.Member;
@@ -103,5 +104,37 @@ public class AdminServiceImpl implements AdminService{
 	public List<Board> kBoardList() {
 		return aDao.kBoardList();
 	}
+
+	@Override
+	public List<Member> modalClass(Member member) {
+		return aDao.modalClass(member);
+	}
+
+	@Override
+	public List<Member> modalReview(Member member) {
+		return aDao.modalReview(member);
+	}
+
+	@Override
+	public List<Member> modalLecture(Member member) {
+		return aDao.modalLecture(member);
+	}
+
+	@Override
+	public List<Member> modalStudent(Member member) {
+		return aDao.modalStudent(member);
+	}
+
+	@Override
+	public List<Chart> stlist() {
+		return aDao.stlist();
+	}
+
+	@Override
+	public List<Chart> dalist() {
+		return aDao.dalist();
+	}
+	
+	
 	
 }

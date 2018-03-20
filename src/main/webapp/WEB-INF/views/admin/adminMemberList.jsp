@@ -143,6 +143,9 @@
                 <li>
                     <a href="kblist.do">금지어 포함 게시물</a>
                 </li>
+                <li>
+                	<a href="chart.do">통계</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -178,7 +181,7 @@
 									<ul>
 										<li id="a" data-toggle="modal" onclick="board(${list.mem_no})">작성한 게시물 : <a style="margin-left:5px;"> ${list.boardcount}</a> 개</li>
 										<li id="b" data-toggle="modal" onclick="reply(${list.mem_no})">작성한 댓글 : <a  style="margin-left:5px;"> ${list.replycount}</a> 개</li>
-										<li id="c">구독중인 강의 : <a id="c" style="margin-left:5px;"> 8개</a></li>
+										<li id="c" data-toggle="modal" onclick="tclass(${list.mem_no})">수강중인 강사목록 <a id="c" style="margin-left:5px;"></a></li>
 									</ul>
 								</div>
 						</div>
@@ -337,6 +340,42 @@
 						
 						<!-- 댓글 갯수 Modal END -->
 						
+						
+						<!-- 강의 갯수 Modal -->		
+					  	
+					  	<div class="modal fade" id="class" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+							<div class="modal-dialog" style="max-width:500px;">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+										<h4 class="modal-title" id="myModalLabel" style="position: absolute;">강사 상세보기</h4>
+									  </div>
+									  <div class="modal-body">
+										
+
+										<table class="type09">
+											<thead>
+											<tr>
+												<th scope="cols">강사</th>
+												<th scope="cols"></th>
+											</tr>
+											</thead>
+											<tbody id="classbody">
+												
+											</tbody>
+										</table>
+										
+
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									  </div>
+									</div>
+							</div>
+						</div>
+						
+						<!-- 강의 갯수 Modal END -->
+						
 					</c:forEach>
 					
 				
@@ -384,21 +423,25 @@
     			var jsonStr = JSON.stringify(result);
     			var json = JSON.parse(jsonStr);
     			var tag = "";
-    			for(var i =0; i < json.m.length; i++){
-    				if(json.m[i].bcateid == 2){
-    				tag += "<tr>"
-							+"<th scope='row'>QNA게시판</th>"
-							+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
-						    +"</tr>";
-    				}else{
-    					tag += "<tr>"
-							+"<th scope='row'>꿀팁게시판</th>"
-							+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
-						    +"</tr>";
-    				}
+    			if( json.m.length > 0){
+	    			for(var i =0; i < json.m.length; i++){
+	    				if(json.m[i].bcateid == 2){
+	    				tag += "<tr>"
+								+"<th scope='row'>QNA게시판</th>"
+								+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
+							    +"</tr>";
+	    				}else{
+	    					tag += "<tr>"
+								+"<th scope='row'>꿀팁게시판</th>"
+								+"<td>"+decodeURIComponent(json.m[i].btitle,"utf-8")+"</td>"
+							    +"</tr>";
+	    				}
+	    			}
+	    			$("#boardbody").html(tag);
+    				$("#board").modal();
+    			}else{
+    				alert("정보가 없습니다.");
     			}
-    			$("#boardbody").html(tag);
-    			$("#board").modal();
     		},
     		error: function(request, status, errorData){
                 alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
@@ -417,25 +460,29 @@
         			var jsonStr = JSON.stringify(result);
         			var json = JSON.parse(jsonStr);
         			var tag = "";
-        			for(var i =0; i < json.r.length; i++){
-        				if(json.r[i].bcateid == 2){
-        				tag += "<tr>"
-    							+"<th scope='row'>QNA게시판</th>"
-    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
-    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
-    							+"<td><button id='delete'>탈퇴</button></td>"
-    						    +"</tr>";
-        				}else{
-        					tag += "<tr>"
-    							+"<th scope='row'>꿀팁게시판</th>"
-    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
-    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
-    							+"<td><button id='delete' style='width:100px;' onclick='replydelete("+json.r[i].re_no+","+json.r[i].re_cateid+")'>삭제</button></td>"
-    						    +"</tr>";
-        				}
+        			if( json.r.length > 0){
+	        			for(var i =0; i < json.r.length; i++){
+	        				if(json.r[i].bcateid == 2){
+	        				tag += "<tr>"
+	    							+"<th scope='row'>QNA게시판</th>"
+	    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
+	    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
+	    							+"<td><button id='delete' style='width:100px;' onclick='replydelete("+json.r[i].re_no+","+json.r[i].re_cateid+")'>삭제</button></td>"
+	    						    +"</tr>";
+	        				}else{
+	        					tag += "<tr>"
+	    							+"<th scope='row'>꿀팁게시판</th>"
+	    							+"<td>"+decodeURIComponent(json.r[i].btitle,"utf-8")+"</td>"
+	    							+"<td>"+decodeURIComponent(json.r[i].re_con,"utf-8")+"</td>"
+	    							+"<td><button id='delete' style='width:100px;' onclick='replydelete("+json.r[i].re_no+","+json.r[i].re_cateid+")'>삭제</button></td>"
+	    						    +"</tr>";
+	        				}
+	        			}
+	        			$("#replybody").html(tag);
+	        			$("#reply").modal();
+        			}else{
+        				alert("정보가 없습니다.");
         			}
-        			$("#replybody").html(tag);
-        			$("#reply").modal();
         		},
         		error: function(request, status, errorData){
                     alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
@@ -445,6 +492,40 @@
         	});
     }
     
+    	function tclass(no){
+    		
+    		$.ajax({
+        		url:"modalClass.do",
+        		dataType:"json",
+        		type:"post",
+        		data:{"mem_no":no},
+        		success:function(result){
+        			var jsonStr = JSON.stringify(result);
+        			var json = JSON.parse(jsonStr);
+        			var tag = "";
+        			if( json.c.length > 0){
+	        			for(var i =0; i < json.c.length; i++){
+	        				tag += "<tr>"
+	    							+"<th scope='row'>강사 이름</th>"
+	    							+"<td>"+decodeURIComponent(json.c[i].mem_name,"utf-8")+"</td>"
+	    						    +"</tr>";
+	        				
+	        			}
+	        			$("#classbody").html(tag);
+	        			$("#class").modal();
+        			}else{
+        				alert("정보가 없습니다.");
+        			}
+        		},
+        		error: function(request, status, errorData){
+                    alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+                 }
+        		
+        		
+        	});
+    		
+    	}
+    	
     	function replydelete(re_no,re_cateid){
     		document.location.href='rdelete.do?re_no='+re_no+'&re_cateid='+re_cateid;
     	}

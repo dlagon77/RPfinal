@@ -19,7 +19,13 @@ public class Member implements java.io.Serializable{
 	private String mem_refile;
 	private int boardcount;
 	private int replycount;
-	
+	private int studentcount;
+	private int lecturecount;
+	private int reviewcount;
+	private String lec_title;
+	private String lec_con;
+	private String rev_con;
+
 	public Member() {}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
@@ -39,6 +45,56 @@ public class Member implements java.io.Serializable{
 		this.mem_inter = mem_inter;
 		this.mem_orfile = mem_orfile;
 		this.mem_refile = mem_refile;
+	}
+	
+	
+	
+	public String getLec_title() {
+		return lec_title;
+	}
+
+	public void setLec_title(String lec_title) {
+		this.lec_title = lec_title;
+	}
+
+	public String getLec_con() {
+		return lec_con;
+	}
+
+	public void setLec_con(String lec_con) {
+		this.lec_con = lec_con;
+	}
+
+	public String getRev_con() {
+		return rev_con;
+	}
+
+	public void setRev_con(String rev_con) {
+		this.rev_con = rev_con;
+	}
+
+	public int getStudentcount() {
+		return studentcount;
+	}
+
+	public void setStudentcount(int studentcount) {
+		this.studentcount = studentcount;
+	}
+
+	public int getLecturecount() {
+		return lecturecount;
+	}
+
+	public void setLecturecount(int lecturecount) {
+		this.lecturecount = lecturecount;
+	}
+
+	public int getReviewcount() {
+		return reviewcount;
+	}
+
+	public void setReviewcount(int reviewcount) {
+		this.reviewcount = reviewcount;
 	}
 
 	public Member(int boardcount) {

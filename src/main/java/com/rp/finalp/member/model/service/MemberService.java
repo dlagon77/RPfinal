@@ -28,6 +28,8 @@ public interface MemberService {
 	int deApply(Lecture lecture);
 	int insertReview(Member member);
 	int checkReady(Lecture lecture);
-	
+	Member todaycheck();
+	int updateCount(Member today);
+	void insertCount(); 
 	
 }

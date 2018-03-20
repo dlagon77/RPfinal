@@ -37,6 +37,7 @@ public class Member implements java.io.Serializable{
 	private int rev_no; //리뷰 번호
 
 
+	private Date v_date;
 	public Member() {}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
@@ -126,6 +127,14 @@ public class Member implements java.io.Serializable{
 	}
 
 	
+	public Date getV_date() {
+		return v_date;
+	}
+
+	public void setV_date(Date v_date) {
+		this.v_date = v_date;
+	}
+
 	public int getMem_no() {
 		return mem_no;
 	}

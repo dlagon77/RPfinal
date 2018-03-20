@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rp.finalp.admin.model.service.AdminService;
 import com.rp.finalp.admin.model.vo.Board;
+import com.rp.finalp.admin.model.vo.Chart;
 import com.rp.finalp.admin.model.vo.Contact;
 import com.rp.finalp.admin.model.vo.Keyword;
 import com.rp.finalp.admin.model.vo.Member;
@@ -201,12 +202,115 @@ public class AdminController {
 		out.close();
 	}
 	
+	@RequestMapping(value="/modalClass.do", method=RequestMethod.POST)
+	public void modalClassMethod(Member member,HttpServletResponse response) throws IOException{
+		
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		List<Member> list = aService.modalClass(member);
+		
+		for(Member m : list) {
+			JSONObject j = new JSONObject();
+			j.put("mem_name",m.getMem_name());
+		
+			jarr.add(j);
+		}
+		
+		json.put("c", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(json.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/modalReview.do", method=RequestMethod.POST)
+	public void modalReviewMethod(Member member,HttpServletResponse response) throws IOException{
+		
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		List<Member> list = aService.modalReview(member);
+		
+		for(Member m : list) {
+			JSONObject j = new JSONObject();
+			j.put("rev_con",m.getRev_con());
+			jarr.add(j);
+		}
+		
+		json.put("r", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(json.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/modalLecture.do", method=RequestMethod.POST)
+	public void modalLectureMethod(Member member,HttpServletResponse response) throws IOException{
+		
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		List<Member> list = aService.modalLecture(member);
+
+		for(Member m : list) {
+			JSONObject j = new JSONObject();
+			j.put("lec_title",m.getLec_title());
+			j.put("lec_con",m.getLec_con());
+			jarr.add(j);
+		}
+		
+		json.put("l", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(json.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/modalStudent.do", method=RequestMethod.POST)
+	public void modalStudentMethod(Member member,HttpServletResponse response) throws IOException{
+		
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		
+		List<Member> list = aService.modalStudent(member);
+		
+		for(Member m : list) {
+			JSONObject j = new JSONObject();
+			j.put("mem_name",m.getMem_name());
+		
+			jarr.add(j);
+		}
+		
+		json.put("s", jarr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println(json.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
 	@RequestMapping("/mdelete.do")
 	public String memberDeleteMethod(Member member) {
 		System.out.println(member.getMem_no());
 		int a = aService.memberDelete(member);
 		System.out.println(a);
 		return "redirect:mlist.do";
+	}
+	
+	@RequestMapping("/tdelete.do")
+	public String tutorDeleteMethod(Member member) {
+		System.out.println(member.getMem_no());
+		int a = aService.memberDelete(member);
+		System.out.println(a);
+		return "redirect:tlist.do";
 	}
 	
 	@RequestMapping("/rdelete.do")
@@ -258,5 +362,13 @@ public class AdminController {
 	public String kBoardList(Model model) {
 		model.addAttribute("kblist", aService.kBoardList());
 		return "admin/adminKeyBoard";
+	}
+	
+	@RequestMapping("/chart.do")
+	public String chart(Model model) {
+		System.out.println(aService.dalist().toString());
+		model.addAttribute("datelist",aService.dalist());
+		model.addAttribute("stlist", aService.stlist());
+		return "admin/adminChart";
 	}
 }	
