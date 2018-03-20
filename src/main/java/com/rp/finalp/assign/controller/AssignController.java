@@ -201,7 +201,7 @@ public class AssignController{
 		byte[] sourcecode = request.getParameter("code").getBytes();
 		fos.write(sourcecode);
 		String compilecmd ="javac -d " + path + "\\Files\\Classes\\" + tutorno + " \\" + path + "\\Files\\" + filename;
-		Process error = Runtime.getRuntime().exec(compilecmd);
+/*		Process error = Runtime.getRuntime().exec(compilecmd);
 		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
 		String res="";
 		while(true){
@@ -216,9 +216,9 @@ public class AssignController{
 		}
 		if(res.equals("")){
 			res="Compiled Successfully";
-		}
-		out.println(res);
-		br.close();
+		}*/
+/*		out.println(res);
+		br.close();*/
 		fos.close();
 	}
 	

@@ -397,7 +397,7 @@
 				<section id="sampleinput" style="padding-top:0">
 				
 				<div style="display:flex;margin-bottom: 20px;">
-					<p>Enter Your Tutor_NO : <p><input type="text" id="tutorno" onblur="check()">
+					<p>Tutor_NO : <p><input type="text" id="tutorno" onblur="check()" value="  ${tutor_no }" style="border: 0px solid;" readonly>
 					<p>Enter Class Name : <p><input type="text" id="class" onblur="check()">
 				</div>
 				<div style="display:flex;width: fit-content;">
@@ -440,7 +440,7 @@
 
 
 
-<input text="hidden" id="abc" value=${assignment.ass_cate } >
+<input type="hidden" id="abc" value=${assignment.ass_cate } >
 	</section>
 	
 
