@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <!-- 지혜 -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
    <!-- Css -->
     <link href="/finalp/resources/css/bootstrap.css" rel="stylesheet">
@@ -29,7 +29,7 @@
    <link rel="stylesheet" type="text/css" href="resources/css/buttons.css" />
    
    <!-- XEicon -->
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+   <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    
    <style>
 
@@ -83,8 +83,24 @@
          border-bottom:1px solid #d3d3d3;
          padding: 12px 0;
       }
-   </style>
+	.dropdown-menu>li>a {
+	    display: block;
+	    padding: 3px 20px;
+	    clear: both;
+	    font-weight: 400;
+	    line-height: 2.5;
+	    color: #333;
+	    white-space: nowrap;
+	}
 
+
+	.profile-img{
+ 		width:36px;
+ 		height:36px; 
+		border-radius: 100%;
+		margin-top:7px;
+	}
+</style>
 </head>
 
 <body>
@@ -127,23 +143,45 @@
             <li>
             <button style="background: none;border: none;outline: none;display: flex;">
             <div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
+          
              <c:if test="${ sessionScope.loginUser ne null }">
-<!--                <img height="45" width="45" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;"> -->
-               
+                  <c:if test="${ sessionScope.loginUser.mem_refile ne null }">
+<!--                   	<i class="fas fa-user-circle" style="display: block;margin-left: auto;margin-right: auto;"></i> -->
+<%-- 	                  <img src="/finalp/resources/img/profileupload/${ sessionScope.loginUser.mem_refile }" class="profile-img" /> --%>
+						<img src="/finalp/resources/img/profileupload/default-user.png" class="profile-img" />
+                  </c:if>
+			</c:if>                  
+             <c:if test="${ sessionScope.loginUser ne null }">			
                <!-- 사용자그림 font awesome 라이브러리 -->
-                <div style="font-size:4rem;color:Tomato;margin-top: 5px;">
-                  <i class="fas fa-user-circle" style="display: block;margin-left: auto;margin-right: auto;"></i>
-               </div> 
+                  <c:if test="${ sessionScope.loginUser.mem_refile eq null }">
+	                <div style="font-size:4rem;color:Tomato;margin-top: 5px;">
+<!-- 	                  	<i class="fas fa-user-circle" style="display: block; margin-left: auto; margin-right: auto;"></i> -->
+						<img src="/finalp/resources/img/profileupload/default-user.png" class="profile-img" />
+	                </div> 
+                  </c:if>
+			</c:if>                  
                
-               </c:if>
             </div>
             </button>
             </li>
             <c:if test="${ sessionScope.loginUser eq null }">
-               <li><a href="loginpage.do">로그인</a></li>
+            	 <li><a data-toggle="modal" data-target="#loginModal1q" style="cursor:pointer;">로그인</a></li>
+<!--                <li><a href="loginpage.do">로그인</a></li> -->
                   <li><a href="proinsertpage.do">회원가입</a></li>
             </c:if>
             
+<!-- === LOGIN MODAL TEST 18.03.18 JOONWOO ===  -->
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/finalp/resources/mypage/logintestmodal/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/finalp/resources/mypage/logintestmodal/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/finalp/resources/mypage/logintestmodal/css/main.css">
+<!--===============================================================================================-->
+<script src="/finalp/resources/mypage/logintestmodal/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<!-- === LOGIN MODAL TEST 18.03.18 JOONWOO ===  -->            
+
 <!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->      
    <script>
     $(function(){
@@ -161,25 +199,9 @@
     });
     
 </script>
-<style>
-.dropdown-menu>li>a {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: 400;
-    line-height: 2.5;
-    color: #333;
-    white-space: nowrap;
-}
-</style>
-            
             <!-- ===회원 로그인 시 18.03.11 JOONWOO ===  -->   
             <c:if test="${ sessionScope.loginUser ne null }">
-<%--                  <li><a href="#about">${loginUser.mem_name}</a></li> --%>
-<%--                  <a href="#about">${loginUser.mem_name}</a></li> --%>
                  <li class="dropdown">
-<!--                      <ul class="nav navbar-nav navbar-right">    -->
-<!--                              <li class="dropdown"> -->
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                      ${loginUser.mem_name}
                                 </a>
@@ -189,75 +211,107 @@
                         </c:url> 
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
                                  <li><a href="profpage.do">내 프로필(학생회원)</a></li>
-<!--                                  <li><a href="stumypage.do">마이페이지</a></li> -->
                                  <li><a id="stusubsc" href="${stusub}">내 강좌 홈</a></li>    
                               </c:if>
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
                                  <li><a href="profpage.do">내 프로필(강사회원)</a></li>
                                  <li><a href="tumypage.do">마이페이지</a></li>
                               </c:if>
-<%--                         <c:url var="stusub" value="stusubsc.do"> --%>
-<%--                            <c:param name="mem_no" value="${loginUser.mem_no }" /> --%>
-<%--                         </c:url>  --%>
-<%--                      <a id="stusubsc" href="${stusub}" class="list-group-item active">구독중인 강사 목록</a>   --%>
-<%--                                <li><a id="stusubsc" href="${stusub}">내 강좌</a></li> --%>
                                <li><a href="#">쪽지함(준비중)</a></li>
                                <li class="divider"></li>
                                <li><a href="logout.do">로그아웃</a></li>
                               </ul>
-<!--                              </li> -->
-<!--                      </ul> -->
-<!--                <li><a href="logout.do">로그아웃</a></li> -->
             </c:if>
 
-<!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->            
+<!-- === HOVER DROPDOWN MENU TEST 18.03.11 JOONWOO ===  -->   
+<!--===============================================================================================-->
+     
            </ul>
          </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
    </nav>
-
-   
-
    <a href="#page-top" class="cd-top">Top</a>
 
+<!-- LOGIN MODAL TEST -->
+<!--===============================================================================================-->
+  <!-- Modal -->
+		<div class="modal fade" id="loginModal1q">
+			<div class="modal-dialog">
 
-   
-   <script>
-      // For Demo purposes only (show hover effect on mobile devices)
-      [].slice.call( document.querySelectorAll('a[href="#"') ).forEach( function(el) {
-         el.addEventListener( 'click', function(ev) { ev.preventDefault(); } );
-      } );
-   </script>
+				<!-- Modal content-->
+				<div class="container-login100">
+					<div class="wrap-login1000">
+						<form action="login.do" method="post" class="login100-form validate-form">
+							<span class="login100-form-title p-b-26"> Login </span>
+							<span class="login100-form-title p-b-48"> 
+								<img src="http://cfile24.uf.tistory.com/image/99669F3A5AADD1BE038E83" style="margin-top: 10px;">
+							</span>
 
+							<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+								<input class="input100" type="email" name="mem_id" style="outline: none;border: none;">
+								<span class="focus-input100" data-placeholder="Email"></span>
+							</div>
+
+							<div class="wrap-input100 validate-input" data-validate="Enter password">
+								<span class="btn-show-pass"> <i class="zmdi zmdi-eye"></i></span> 
+								<input class="input100" type="password" name="mem_pwd" style="outline: none;border: none;"> 
+								<span class="focus-input100" data-placeholder="Password"></span>
+							</div>
+							
+							<div class="wrap-login100-form-btn">
+								<div class="login100-form-bgbtn"></div>
+								<button class="login100-form-btn">Login</button>
+							</div>
+							
+							<div class="margin1">
+								<span class="txt1"> Don’t have an account? </span>
+								<a class="txt2" href="#"> &nbsp;Sign Up </a>
+							</div>
+							
+							<div class="margin2">
+								<a class="txt2" href="#"> forgot ID?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a> 
+								<a class="txt2" href="#"> forgot PW? </a>
+							</div>
+						</form>
+						<div class="modal-footerr">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--===============================================================================================-->    
+<!-- LOGIN MODAL TEST END-->
+
+	   <script>
+	      // For Demo purposes only (show hover effect on mobile devices)
+	      [].slice.call( document.querySelectorAll('a[href="#"') ).forEach( function(el) {
+	         el.addEventListener( 'click', function(ev) { ev.preventDefault(); } );
+	      } );
+	   </script>
 
     <!-- script -->
-    <script src="/finalp/resources/js/jquery.js"></script>
-    <script src="/finalp/resources/js/bootstrap.min.js"></script>
-   <script src="/finalp/resources/js/modernizr.js"></script>
-   <script src="/finalp/resources/js/script.js"></script>
+		<script src="/finalp/resources/js/jquery.js"></script>
+		<script src="/finalp/resources/js/bootstrap.min.js"></script>
+		<script src="/finalp/resources/js/modernizr.js"></script>
+		<script src="/finalp/resources/js/script.js"></script>
+		<script src="/finalp/resources/mypage/logintestmodal/js/main.js"></script>
 
-
-<script>
-
-function myFunction() {
-    var x = document.getElementById("mySidenav");
-   var y = document.getElementById("main");
-   var b = document.getElementById("banner");
-    if (x.style.display == "none") {
-        x.style.display = "block";
-      y.style.marginLeft = "240px";
-      b.style.height = "265px";
-      
-    } else {
-        x.style.display = "none";
-      y.style.marginLeft = "0";
-      b.style.height = "305px";
-      
-    }
-}
-
-</script>
-
-
+		<script>
+		function myFunction() {
+		    var x = document.getElementById("mySidenav");
+		   var y = document.getElementById("main");
+		   var b = document.getElementById("banner");
+		    if (x.style.display == "none") {
+		        x.style.display = "block";
+		      y.style.marginLeft = "240px";
+		      b.style.height = "265px";
+		    } else {
+		        x.style.display = "none";
+		      y.style.marginLeft = "0";
+		      b.style.height = "305px";
+		    }
+		}
+		</script>
 </body>
 </html>
