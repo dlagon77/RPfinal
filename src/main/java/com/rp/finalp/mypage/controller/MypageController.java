@@ -229,10 +229,10 @@ public class MypageController {
 	}
 	
 	// 마이페이지 - 상세보기 : 수정페이지 이동
-	@RequestMapping(value = "/serviceModifyPage.do")
+	@RequestMapping(value = "/MyWriteQNAModifyPage.do")
 	public String mywriteModifyView(Model model, @RequestParam("no") int no) {
 		model.addAttribute("myqnaboardupdate", mypService.selectmyQnaList(no));
-		return "mypage/serviceModifyView";
+		return "mypage/mywriteqnaModifyView";
 	}
 	
 	// 마이페이지 - 상세보기 : 내가 쓴 QNA게시판 글 보기 
@@ -240,7 +240,7 @@ public class MypageController {
 	public String mywritedetail(Model model, @RequestParam("sno") int sno) {
 		model.addAttribute("myqnaboard", mypService.selectmyQnaList(sno));
 		System.out.println("Controller : mywriteqnalist");
-		return "mypage/serviceDetailView";
+		return "mypage/mywriteqnaDetailView";
 	}
 	
 	// 마이페이지 - 상세보기에서: 내가 쓴 QNA게시판 글 보기 : 삭제
