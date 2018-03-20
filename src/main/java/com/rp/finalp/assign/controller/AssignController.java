@@ -68,6 +68,7 @@ public class AssignController{
 		byte[] sourcecode = request.getParameter("code").getBytes();
 		fos.write(sourcecode);
 		String compilecmd ="javac -d " + path + "\\Files\\Classes\\ " + path + "\\Files\\" + filename;
+		//에러에 대한 처리
 		Process error = Runtime.getRuntime().exec(compilecmd);
 		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
 		String res="";
@@ -107,9 +108,10 @@ public class AssignController{
 		try{
 			exe.waitFor();
 			BufferedReader bin = new BufferedReader(new InputStreamReader(exe.getInputStream()));
+			//에러처리
 			BufferedReader berr = new BufferedReader(new InputStreamReader(exe.getErrorStream()));
 			String res="";
-			while(true){
+/*			while(true){
 				String temp=bin.readLine();
 				if(temp==null){
 					break;
@@ -117,15 +119,20 @@ public class AssignController{
 				else{
 					res+=temp;
 				}
+			}*/
+			String temp=null;
+			while ((temp = bin.readLine()) != null) {
+				res+=temp;
+				res+="\n";
 			}
 			if(res.equals("")){
 				while(true){
-					String temp = berr.readLine();
+					String temp1 = berr.readLine();
 					if(temp==null){
 						break;
 					}
 					else{
-						res+=temp;
+						res+=temp1;
 					}
 				}
 			}
