@@ -10,6 +10,7 @@
 
 <style>
 .tableone{
+text-align: -webkit-center;
 font-size:  18px;
 font-weight:  bold;
 margin-right: 0px;
@@ -107,6 +108,14 @@ input {
 		<div class="tablethr">
 			<div class="tableone">이름(실명)</div>
 			<div class="tabletwo">${Member.mem_name }</div>
+		</div>
+		<div class="tablethr">
+			<div class="tableone">생년월일</div>
+			<div class="tabletwo">${Member.mem_birth }</div>
+		</div>
+		<div class="tablethr">
+			<div class="tableone">성별</div>
+			<div class="tabletwo">${Member.mem_gen }</div>
 		</div>
 		<div class="tablethr">
 			<div class="tableone">아이디</div>
