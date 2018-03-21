@@ -173,6 +173,37 @@
 	      	INSERT INTO VISITOR VALUES(1,SYSDATE)
 	    ]]>
    	</insert>
+   	
+   	<resultMap type="Member" id="studentNameList">
+		<result property="mem_id" column="mem_id" />
+		<result property="mem_name" column="mem_name" />
+		<result property="mem_phone" column="mem_phone" />
+		<result property="mem_age" column="mem_age" />
+		<result property="mem_gen" column="mem_gen" />
+		<result property="mem_inter" column="mem_inter" />
+	</resultMap>
+	
+	
+	<select id="selectStudentList" parameterType="java.util.HashMap" resultMap="studentNameList" resultType="list">
+		<![CDATA[
+			select *
+			from (select rownum rnum, mem_id, mem_name, mem_age, mem_gen, mem_phone, mem_inter
+			      from (select mem_id, mem_name, mem_age, mem_gen, mem_phone, mem_inter
+			            from member
+			            join apply a on (app_student_no = mem_no)
+			            where app_tutor_no= #{tutor_no} and app_y = 'Y'))
+			where rnum >= #{startRow} and rnum <= #{endRow} order by rnum desc
+		]]>
+	</select>
+	
+	<select id="countStudentList" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			select count(*)
+			from member
+			join apply on (app_student_no = mem_no)
+			where app_tutor_no = #{tutor_no}
+		]]>
+	</select>
 	
 	
 </mapper>

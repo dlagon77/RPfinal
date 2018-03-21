@@ -1,6 +1,7 @@
 package com.rp.finalp.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.rp.finalp.lecture.model.vo.Lecture;
@@ -32,4 +33,7 @@ public interface MemberService {
 	int updateCount(Member today);
 	void insertCount(); 
 	
+	//강의실관리에서 내 수강생 조회용
+	List<Member> selectStudentList(HashMap<String, Object> map);
+	int countStudentList(int tutor_no);
 }

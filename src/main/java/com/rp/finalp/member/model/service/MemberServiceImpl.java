@@ -1,12 +1,12 @@
 package com.rp.finalp.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.dao.MemberDao;
 import com.rp.finalp.member.model.vo.Member;
@@ -117,5 +117,15 @@ public class MemberServiceImpl implements MemberService {
 		@Override
 		public void insertCount() {
 			memberDao.insertCount();
+		}
+		
+		@Override
+		public List<Member> selectStudentList(HashMap<String, Object> map) {
+			return memberDao.selectStudentList(map);
+		}
+
+		@Override
+		public int countStudentList(int tutor_no) {
+			return memberDao.countStudentList(tutor_no);
 		}
 	}

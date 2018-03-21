@@ -1,5 +1,6 @@
 package com.rp.finalp.member.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -83,6 +84,14 @@ public class MemberDao {
 
 	public void insertCount() {
 		mybatis.insert("memberMapper.insertCount");
+	}
+	
+	public List<Member> selectStudentList(HashMap<String, Object> map) {
+		return mybatis.selectList("memberMapper.selectStudentList", map);
+	}
+
+	public int countStudentList(int tutor_no) {
+		return mybatis.selectOne("memberMapper.countStudentList", tutor_no);
 	}
 }
 
