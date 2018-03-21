@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,6 +156,54 @@
 		.compileButton:hover{
 			background-color:#285e8e;
 		}
+			.deleteButton{
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	}
+	.deleteButton:hover {
+		color:#f44336;
+	}
+	.deleteButton2 {
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	    color: #2196f3;
+	}
+	
+	.deleteTaskButton {
+		border: none;
+	    outline: none;
+	    color: #f44336;
+	    background: none;
+	    font-size: 15px;
+	    margin-right: 20px;
+		
+	}
+	
+	.deleteTaskButton:hover{
+		font-weight:bold;
+		
+	}
+	
+	.deleteTaskButton2 {
+		border: none;
+	    outline: none;
+	    color: #2196f3;
+	    background: none;
+	    font-size: 14px;
+	    margin-right: 20px;
+		
+	}
+	.deleteTaskButton2:hover{
+		font-weight:bold;
+		
+	}
+
 </style>
 </head>
 <body>
@@ -168,7 +217,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -177,13 +226,11 @@
 					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 
-				<c:if test="${loginUser.mem_no eq tutor_no }">
 				<div style="margin-top: 25px;margin-left:10px">
-					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
-						<img height="40" width="50" src="/finalp/resources/img/setting1.png">
+					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
+						<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 					</button>
 				</div>
-				</c:if>
 
 			</div>
 			<div class="col-lg-3">
@@ -192,8 +239,9 @@
 						<c:url var="apply" value="apply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>
 							<c:param name="tutor_no" value="${tutor_no }" />
-							<c:param name="pageName" value="tutorHome.do" />
+							<c:param name="pageName" value="taskList.do" />
 						</c:url>
+						
 						<c:if test="${loginUser.mem_no != tutor_no }">
 							<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
 						</c:if>
@@ -203,12 +251,11 @@
 						<button id="applyready" class="applyButton" disabled><i class="xi-spinner-1 xi-spin xi-x"></i>&nbsp;&nbsp;수강대기</i></button>
 					</c:if>
 					
-					
 					<c:if test="${checkApply gt 0 }">
 						<c:url var="deapply" value="deapply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>
 							<c:param name="tutor_no" value="${tutor_no }" />
-							<c:param name="pageName" value="tutorHome.do" />
+							<c:param name="pageName" value="taskList.do" />
 						</c:url>
 						<button id="deapply" class="applyButton" data-toggle="modal" data-target="#exampleModal">
 							<img src="/finalp/resources/img/check.png">&nbsp;수강중 ${Lecture.apply_count }명
@@ -246,10 +293,10 @@
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
 			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span></a>
-			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span><div class="selected"></div></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
 			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
@@ -274,8 +321,8 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li class="active"><a href="/problem/1000">${test_sub_no }번</a></li>
-				<li><a href="/problem/status/1000">제출 답안</a></li>
+				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&tutor_no=${tutor_no}">${ass_sub_no }번</a></li>
+				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
 
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
 
@@ -300,61 +347,41 @@
 
 			</ul>
 
-					
 
-
-			<div class="page-header">
-				<h1 style="font-weight:600">
-					<span id="problem_title" class="">${test.test_title }</span>
-					<span class="label label-light-green">풀이</span>
-				</h1>
-			</div>
+			<c:forEach items="${submitList }" var="row">
+				<section id="description" style="padding-top:30px">
+					<div class="headline">
+						<h2 style="width: 4%;font-weight:500">문제</h2>
+					</div>
+					<div style="font-size:medium; line-height:30px;" id="problem_description">
+						<p>${row.ass_orfile }</p>
+					</div>
+				</section>
+			</c:forEach>
 			
-
-			<div class="table-responsive">
-				<table class="table" id="problem-info">
-				<thead>
-				<tr>
-					<th style="width:25%;">제한시간</th>
-					<th style="width:25%;">카테고리</th>
-					<th style="width:25%;">맞은 사람</th>
-					<th style="width:25%;">정답 비율</th>
-				</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>-</td>
-						<td>${test.test_cate }</td>
-						<td>${test.test_cor_cnt }</td>
-						<td>${test.test_cor_cnt/Lecture.apply_count*100 }%</td>
-					</tr>
-				</tbody>
-				</table>
-			</div>
-
 
 			<section id="description" style="padding-top:30px">
 				<div class="headline">
-					<h2 style="width: 4%;font-weight:600">문제</h2>
+					<h2 style="width: 4%;font-weight:500">Hint</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p>${test.test_pro }</p>
+					<p>${assignment.ass_hint }</p>
 				</div>
 			</section>
 
 
 			<section id="description" style="padding-top:30px">
 				<div class="headline">
-					<h2 style="width: 9%;font-weight:600">예제 정답</h2>
+					<h2 style="width: 9%;font-weight:500">예제 정답</h2>
 				</div>
 				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<pre class="sampledata" id="sample-input-1">${test.test_answer }</pre>
+					<pre class="sampledata" id="an">${assignment.ass_answer }</pre>
 				</div>
 			</section>
 
 			<section id="sampleinput" style="padding-top:30px">
 				<div class="headline">
-					<h2 style="width:6%;font-weight:600">풀기</h2>
+					<h2 style="width:6%;font-weight:500">풀기</h2>
 				</div>
 			</section>
 			<div class="row">
@@ -369,7 +396,7 @@
 					<button class="compileButton" onclick="compile()">Compile</button>
 					<button class="compileButton" onclick="run()">Run</button>
 					<button class="compileButton" onclick="empty()">Clear</button>
-					<button class="compileButton" onclick="subass()">제출</button>
+					<button class="compileButton" id="subutton" onclick="subass()">제출</button>
 				</div>
 				<textarea class="form-control" aria-label="With textarea" rows="30" id="maincode" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
 				
@@ -384,23 +411,7 @@
 			</div>
 				
 			</div>
-			
-
-			<section id="description" style="padding-top:30px">
-				<div class="headline">
-					<h2 style="width: 19%;font-weight:600">관련 강의 및 카테고리</h2>
-				</div>
-				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<ul>
-							<li><a href="/problem/1001">1001번. A-B</a></li>
-							<li><a href="/problem/1008">1008번. A/B</a></li>
-					</ul>
-				</div>
-			</section>
-			
-
-
-
+			<hr>
 
 		</div>
 
@@ -421,9 +432,8 @@
 
 
 
-
+<input type="hidden" id="abc" value=${assignment.ass_cate } >
 	</section>
-	
 	
 
 	
@@ -455,9 +465,37 @@
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
+	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
 
-	
+<script type="text/javascript">
+
+$(function(){
+ 	$("#subutton").on("click",function(){
+
+  $.ajax({
+			url:"test1.do",
+
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
+
+	          type : "post",
+	          success : function(result){
+	              if(result == "ok"){
+	                  alert("Success");
+	               }else{
+	                  alert("Fail");
+	               }	         
+	          },
+	          error : function(request,status, errorData){
+	             alert("error code : " + request.status + "\n"
+	                   + "message : " + request.responseText + "\n"
+	                   + "error : " + errorData);
+	          }
+		}); 
+	});  
+
+});
+</script>	
 
 
 
@@ -501,6 +539,9 @@ function myFunction() {
 </div>
 
 </body>
+<script>
+window.onload=startass; 
+</script>
 </html>
 
 

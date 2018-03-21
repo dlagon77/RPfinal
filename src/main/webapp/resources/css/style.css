@@ -346,7 +346,7 @@ a:hover,a:focus {
 
 /* Modal Box */
 
-.modal-dialog {
+/* .modal-dialog {
     margin: 0px auto;
     position: fixed;
     top: 0;
@@ -364,7 +364,7 @@ a:hover,a:focus {
     border-radius: 0px;
     box-shadow: none;
 }
-
+ */
 /* Carousel Control*/
 
 .close {

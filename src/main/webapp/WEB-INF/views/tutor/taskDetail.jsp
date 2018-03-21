@@ -247,7 +247,7 @@
 			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
 			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
-			  <a href="#" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
 			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
@@ -273,14 +273,7 @@
 			
 			<ul class="nav nav-pills no-print">
 				<li class="active"><a href="/problem/1000">${ass_sub_no }</a></li>
-				<li><a href="/problem/status/1000">맞은 사람</a></li>
-
-				<li><a href="/short/status/1000">숏코딩</a></li>
-				<li><a href="/problem/solutions/1000">풀이</a></li>
-				<li><a href="/problem/solution/write/1000">풀이 작성</a></li>
-				<li><a href="#" class="solution-request">풀이 요청</a></li>
-				<li><a href="/problem/history/1000">재채점/수정</a></li>
-
+				<li><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${ass_no}&ass_sub_no=${ass_sub_no}&ass_cate=${assignment.ass_cate}">제출 답안</a></li>
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
 
 				<li class="dropdown">
@@ -311,32 +304,8 @@
 				<h1 style="font-weight:600">
 					<span id="problem_title" class="">${assignment.ass_title }</span>
 				</h1>
-								 <button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" style="margin-left: 70%;">과제 삭제하기</button>
 			</div>
 			
-			<!-- 과제 삭제 모달 시작 -->
-			<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content" style="border-radius: 3px;">
-					      <div class="modal-header" style="border-bottom:0">
-					        <h4 class="modal-title" id="exampleModalLabel" style="font-weight:400">정말로 이 과제를 삭제하시겠습니까?</h4>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					      	<span style="font-size:13px">과제를 삭제하시게 되면 연관된 자료 또한 모두 삭제됩니다.</span>
-					      </div>
-					      <div class="modal-footer"  style="border-top:0;padding-top:0">
-					      	<button type="button" class="deleteTaskButton" >과제 삭제</button>
-					        <button type="button" class="deleteTaskButton2" data-dismiss="modal">취소</button>
-					        
-					      </div>
-					    </div>
-					  </div>
-					</div>
-			<!-- 과제 삭제 모달 끝 -->
-
 			<div class="table-responsive">
 				<table class="table" id="problem-info">
 				<thead>
@@ -352,7 +321,7 @@
 						<td>-</td>
 						<td>${assignment.ass_cate }</td>
 						<td>${assignment.ass_cor_cnt }</td>
-						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
+						<td>${assignment.ass_cor_cnt/Lecture.apply_count*100 }%</td>
 					</tr>
 				</tbody>
 				</table>

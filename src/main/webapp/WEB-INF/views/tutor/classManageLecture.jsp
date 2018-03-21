@@ -239,7 +239,7 @@
 						<hr/>
 						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
 						<hr/>
-						<li><a href="#"><i class="xi-documents-o xi-2x"></i><p>&nbsp;&nbsp;시험</p></a></li>
+						<li><a href="classManageTest.do?tutor_no=${tutor_no }"><i class="xi-documents-o xi-2x"></i><p>&nbsp;&nbsp;시험</p></a></li>
 						<hr/>
 						<li><a href="#"><i class="xi-man xi-2x"></i><p>&nbsp;&nbsp;수강생</p></a></li>
 					</ul>

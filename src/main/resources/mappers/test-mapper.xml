@@ -45,7 +45,7 @@
 			TEST_ANSWER,TEST_RES_COD,TEST_RES_ANS,
 			TEST_WRITER,TEST_MAKER,TEST_LEC_ID,
 			TEST_TCATE_ID  FROM TEST)) 
-		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}  ORDER BY RNUM DESC
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow} AND TEST_WRITER IS NULL AND TEST_MAKER = #{tutor_no} ORDER BY RNUM DESC
 
 		]]>
 	</select>
@@ -55,7 +55,7 @@
 			SELECT COUNT(*) FROM TEST
 		]]>		
 	</select>
-	<select id="selectTest" resultType="Test" parameterType="Test">
+	<select id="selectTest" resultType="Test" parameterType="integer">
 	<![CDATA[
 		SELECT * FROM TEST WHERE TEST_NO=#{test_no}
 	]]>
@@ -72,6 +72,7 @@
 		SELECT * FROM TEST
 		]]>
 	</select>
+	
 
 
 </mapper>

@@ -236,6 +236,8 @@ public class MemberController {
 			job2.put("mem_refile", m.getMem_refile());
 			job2.put("rev_con", m.getRev_con());
 			job2.put("rev_star", m.getRev_star());
+			job2.put("mem_name", m.getMem_name());
+			job2.put("rev_date", m.getRev_date().toString());
 			jarr.add(job2);
 		}
 		job.put("reviewList", jarr);

@@ -102,5 +102,14 @@
 	<insert id="makeAss" parameterType="Assignment"><![CDATA[
 		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,#{ass_comment},default,null,null,'123abc.java',#{ass_cate},#{ass_title},0,#{ass_pro},#{ass_answer},#{ass_hint},'public static void main','3,6,9',null,#{ass_maker},null,5)
 	]]></insert>
+	
+	
+	<select id="selectSubmitAss" resultMap="assResultMap" resultType="list">
+		<![CDATA[
+			select * from assignment where ass_cate = #{ass_cate} and ass_maker is null
+		]]>
+	</select>
+
+
 
 </mapper>

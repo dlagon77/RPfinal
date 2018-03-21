@@ -9,7 +9,7 @@ import com.rp.finalp.test.model.vo.Test;
 public interface TestService {
 	List<Test> selectTestList(HashMap<String, Object> map);
 	int listCount();
-	Test selectTest(Test test);
+	Test selectTest(int test_no);
 	List<Test> selectTestAll();
-	int testDeleteone(Test test); 
+	int testDeleteone(Test test);
 }

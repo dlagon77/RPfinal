@@ -26,8 +26,8 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public Test selectTest(Test test) {
-		return testDao.selectTest(test);
+	public Test selectTest(int test_no) {
+		return testDao.selectTest(test_no);
 	}
 
 	@Override

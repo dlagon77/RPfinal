@@ -23,8 +23,8 @@ public class TestDao {
 		return a;
 	}
 	
-	public Test selectTest(Test test) {
-		return mybatis.selectOne("testMapper.selectTest",test);
+	public Test selectTest(int test_no) {
+		return mybatis.selectOne("testMapper.selectTest",test_no);
 	}
 	
 	public int testDeleteone(Test test) {
@@ -34,4 +34,5 @@ public class TestDao {
 	public List<Test> selectTestAll() {
 		return mybatis.selectList("testMapper.selectAllTest");
 	}
+
 }

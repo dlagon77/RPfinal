@@ -1,5 +1,6 @@
 package com.rp.finalp.lecture.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rp.finalp.assign.model.service.AssignService;
+import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.member.model.vo.Member;
+import com.rp.finalp.test.model.service.TestService;
+import com.rp.finalp.test.model.vo.Test;
 
 @Controller
 public class LectureController {
@@ -28,6 +32,9 @@ public class LectureController {
 	@Autowired
 	private AssignService assignService;
 	
+	@Autowired
+	private TestService testService;
+	
 	@RequestMapping(value = "taskList.do", method = RequestMethod.GET)
 	public String taskListViewMethod(@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
@@ -35,6 +42,8 @@ public class LectureController {
 		model.addAttribute("assignList",assignService.selectTutorAssList(tutor_no));
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		return "tutor/taskList";
 	}
 	
@@ -47,7 +56,53 @@ public class LectureController {
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		return "tutor/taskDetail";
+	}
+	
+	@RequestMapping(value="submitTaskList.do", method=RequestMethod.GET)
+	public String submitTaskList(HttpServletRequest request,Model model,Lecture lecture) {
+
+		int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
+		int ass_no = Integer.parseInt(request.getParameter("ass_no"));
+		int ass_sub_no = Integer.parseInt(request.getParameter("ass_sub_no"));
+		String ass_cate = request.getParameter("ass_cate");
+
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = testService.listCount();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ass_cate", ass_cate);
+		
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("ass_no",ass_no);
+		model.addAttribute("ass_sub_no",ass_sub_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		model.addAttribute("submitList",assignService.selectSubmitAss(map));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		return "tutor/submitTaskList";
 	}
 	
 	@RequestMapping("testDetailView.do")
@@ -120,5 +175,43 @@ public class LectureController {
 		model.addAttribute("tutor_no", tutor_no);
 		
 		return "redirect:classManage.do";
+	}
+	
+	@RequestMapping("classManageTest.do")
+	public String classManageTestMethod(@RequestParam(value="tutor_no") int tutor_no,Model model,HttpServletRequest request,Lecture lecture) {
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = testService.listCount();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		map.put("tutor_no", tutor_no);
+		
+		List<Test> list = testService.selectTestList(map);
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("testList",list);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		
+		return "tutor/classManageTest";
 	}
 }
