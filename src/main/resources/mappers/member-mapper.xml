@@ -89,7 +89,7 @@
    <select id="selectTutorList" resultType="Member">
       <![CDATA[
          select *
-         from tutorList
+         from tutorList where lecture_count > 0 
       ]]>
    </select>
 

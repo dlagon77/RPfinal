@@ -16,4 +16,5 @@ public interface AssignService {
 	Assignment assDetail(int ass_no);
 	int insertAss(Assignment ass);
 	int makeAss(Assignment ass);
+	List<Assignment> selectSubmitAss(HashMap<String, Object> map);
 }

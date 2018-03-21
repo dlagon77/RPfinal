@@ -187,8 +187,7 @@
 			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
 			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span><div class="selected"></div></a>
 			  <a href="taskList.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
-			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
-			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a"></span></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
 			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>

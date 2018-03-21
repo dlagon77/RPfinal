@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.rp.finalp.assign.model.vo.Assignment;
+import com.rp.finalp.lecture.model.service.LectureService;
+import com.rp.finalp.lecture.model.vo.Lecture;
+import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.test.model.service.TestService;
 import com.rp.finalp.test.model.vo.Test;
 
@@ -37,6 +40,12 @@ import com.rp.finalp.test.model.vo.Test;
 public class TestController {
 	@Autowired
 	private TestService testService;
+	
+	@Autowired
+	private LectureService lectureService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value = "testInsertForm.do", method = RequestMethod.GET)
 	public String testInsertFormMethod() {
@@ -128,7 +137,16 @@ public class TestController {
 	}
 	
 	@RequestMapping("testList.do")
-	public String testListMethod(Model model, HttpServletRequest request) {
+	public String testListMethod(Model model, HttpServletRequest request,@RequestParam(value="tutor_no") int tutor_no,Lecture lecture) {
+		
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		//model.addAttribute("testList",testService.testList(tutor_no));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -145,6 +163,7 @@ public class TestController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow",endRow);
+		map.put("tutor_no", tutor_no);
 		
 		List<Test> list = testService.selectTestList(map);
 		
@@ -158,14 +177,21 @@ public class TestController {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		
-		return "test/testListView";
+		return "tutor/testListView";
 	}
 	
-	@RequestMapping("testDetailForm.do")
-	public String testSelectOneMethod(Test test,Model model) {
-		Test test1=testService.selectTest(test);
+	@RequestMapping("testDetail.do")
+	public String testSelectOneMethod(Test test,Model model,@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="test_no") int test_no,@RequestParam(value="test_sub_no") int test_sub_no,Lecture lecture) {
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady=memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
+		model.addAttribute("test_sub_no", test_sub_no);
+		Test test1=testService.selectTest(test_no);
 		model.addAttribute("test",test1);
-		return "test/testDetail";
+		return "tutor/testDetailView";
 	}
 	
 	@RequestMapping(value = "submitTest.do", method = RequestMethod.POST)
@@ -241,9 +267,10 @@ public class TestController {
 	}
 	
 	@RequestMapping("/testdelete.do")
-	public String assdeleteMethod(Test test) {
+	public String assdeleteMethod(Test test,@RequestParam(value="tutor_no") int tutor_no,Model model) {
+		model.addAttribute("tutor_no",tutor_no);
 		testService.testDeleteone(test);
-		return "redirect:assList.do";
+		return "redirect:classManageTest.do";
 	}
 	
 	@RequestMapping(value="teststart.do",method=RequestMethod.POST)
@@ -289,4 +316,5 @@ public class TestController {
 		out.close();
 				
 	}
+	
 }

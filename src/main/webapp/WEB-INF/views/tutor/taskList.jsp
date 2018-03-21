@@ -112,6 +112,22 @@
 			background-color: hsl(0, 0%, 93.3%);
 			color: hsla(0, 0%, 6.7%, .6);
 		}
+			#applyready{
+			background-color: burlywood;
+			border-radius: 2px;
+			color: white;
+			padding: 13px 20px;
+			white-space: nowrap;
+			font-size: 1.4rem;
+			font-weight: 500;
+			letter-spacing: .007px;
+			display: flex;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			outline:none;
+			border:none;
+		}
 </style>
 </head>
 <body>
@@ -145,15 +161,22 @@
 			</div>
 			<div class="col-lg-3">
 				<div style="margin-left: 75%;margin-top: 25px;">
-					<c:if test="${checkApply eq 0 }">
+					<c:if test="${checkReady eq 0 && checkApply eq 0}">
 						<c:url var="apply" value="apply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>
 							<c:param name="tutor_no" value="${tutor_no }" />
 							<c:param name="pageName" value="taskList.do" />
 						</c:url>
 						
-						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+						<c:if test="${loginUser.mem_no != tutor_no }">
+							<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+						</c:if>
 					</c:if>
+					
+					<c:if test="${checkReady gt 0}">
+						<button id="applyready" class="applyButton" disabled><i class="xi-spinner-1 xi-spin xi-x"></i>&nbsp;&nbsp;수강대기</i></button>
+					</c:if>
+					
 					<c:if test="${checkApply gt 0 }">
 						<c:url var="deapply" value="deapply.do">
 							<c:param name="mem_no" value="${loginUser.mem_no }"/>
@@ -201,12 +224,15 @@
 			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
 			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
-			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
-			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
-				  <input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
-				</form>
+			  <div>
+			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  </div>
+			  <div>	
+			  	<input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  </div>
 
 			</nav>
 		</div>

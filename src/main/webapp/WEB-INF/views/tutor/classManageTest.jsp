@@ -238,7 +238,7 @@
 	    color: #2196f3;
 	}
 	
-	.deleteTaskButton {
+	.deleteTestButton {
 		border: none;
 	    outline: none;
 	    color: #f44336;
@@ -248,12 +248,12 @@
 		
 	}
 	
-	.deleteTaskButton:hover{
+	.deleteTestButton:hover{
 		font-weight:bold;
 		
 	}
 	
-	.deleteTaskButton2 {
+	.deleteTestButton2 {
 		border: none;
 	    outline: none;
 	    color: #2196f3;
@@ -262,7 +262,7 @@
 	    margin-right: 20px;
 		
 	}
-	.deleteTaskButton2:hover{
+	.deleteTestButton2:hover{
 		font-weight:bold;
 		
 	}
@@ -371,15 +371,15 @@
 				<div class="tabs tabs-style-bar">
 					<nav>
 						<ul>
-							<li><a href="#" name="item" onclick="showDiv4();" ><span>OVERVIEW</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv1();"><span>과제 출제</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv3();"><span>제출 답안</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv4();" ><span>시험 관리</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>시험 출제</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>답안 관리</span></a></li>
 						</ul>
 					</nav>
 				</div>
 				
 				<div id="section4" style="display:block;">
-					<h2>Assignment List</h2>
+					<h2>Test List</h2>
 					<div class="grid">
 
 						<table class="table table-striped table-bordered sortable-table clickable-table" id="problemset" style="font-size:13px">
@@ -396,23 +396,23 @@
 				</thead>
 
 				<tbody>
-					<c:set value="0" var="assign_no"/>
-					<c:forEach items="${assignList }" var="row">
-					<c:set value="${assign_no+1 }" var="assign_no"/>
+					<c:set value="0" var="test_sub_no"/>
+					<c:forEach items="${testList }" var="row">
+					<c:set value="${test_sub_no+1 }" var="test_sub_no"/>
 					<tr>
 					
-						<td class="list_problem_id">${assign_no }</td>
-						<td>${row.ass_reg_date }</td>
-						<td class="click-this"><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}">${row.ass_title }</a></td>
+						<td class="list_problem_id">${test_sub_no }</td>
+						<td>${row.test_reg_date }</td>
+						<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no}">${row.test_title }</a></td>
 						<td>
-							<span class="badge badge-info">${row.ass_cate }</span>
+							<span class="badge badge-info">${row.test_cate }</span>
 						</td>
-						<td><a href="#">${row.ass_cor_cnt }</a></td>
-						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
-						<td><button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" name="ass_no" value="${row.ass_no }">삭제</button></td>
+						<td><a href="#">${row.test_cor_cnt }</a></td>
+						<td>${row.test_cor_cnt/Lecture.apply_count*100 }%</td>
+						<td><button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTestModal" name="test_no" value="${row.test_no }">삭제</button></td>
 					</tr>
-					<c:url var="assdelete" value="assdelete.do">
-						<c:param name="ass_no" value="${row.ass_no }"/>
+					<c:url var="testdelete" value="testdelete.do">
+						<c:param name="test_no" value="${row.test_no }"/>
 						<c:param name="tutor_no" value="${tutor_no }"/>
 					</c:url>
 					</c:forEach>
@@ -424,31 +424,27 @@
 				</div>
 				
 				
-				
-				<!-- 과제 삭제 모달 시작 -->
-				<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<!-- test 삭제 모달 시작 -->
+				<div class="modal fade" id="deleteTestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content" style="border-radius: 3px;">
 						      <div class="modal-header" style="border-bottom:0">
-						        <h4 class="modal-title" id="exampleModalLabel" style="font-weight:400">정말로 이 과제를 삭제하시겠습니까?</h4>
+						        <h4 class="modal-title" id="exampleModalLabel" style="font-weight:400">정말로 이 시험을 삭제하시겠습니까?</h4>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
 						      <div class="modal-body">
-						      	<span style="font-size:13px">과제를 삭제하시게 되면 연관된 자료 또한 모두 삭제됩니다.</span>
+						      	<span style="font-size:13px">시험을 삭제하시게 되면 연관된 자료 또한 모두 삭제됩니다.</span>
 						      </div>
 						      <div class="modal-footer"  style="border-top:0;padding-top:0">
-						      	<button type="button" class="deleteTaskButton" onclick="location.href='${assdelete}'">과제 삭제</button>
-						        <button type="button" class="deleteTaskButton2" data-dismiss="modal">취소</button>
+						      	<button type="button" class="deleteTestButton" onclick="location.href='${testdelete}'">시험 삭제</button>
+						        <button type="button" class="deleteTestButton2" data-dismiss="modal">취소</button>
 						      </div>
 						    </div>
 						  </div>
 						</div>
-				<!-- 과제 삭제 모달 끝 -->
-				
-				
-				
+				<!-- test 삭제 모달 끝 -->
 				
 				<div id="section1" style="display:none;">
 					
@@ -462,47 +458,48 @@
 					    <div class="text-field-horizontal" style="display: table;width: 100%;table-layout: fixed;">
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label">과제 제목</div>
+					        <div class="control-label">시험 제목</div>
 					        <div class="control-input">
-					          <input class="input-block" type="text" maxlength="50" name="ass_title" placeholder="과제의 제목을 입력해주세요.">
+					          <input class="input-block" type="text" maxlength="50" name="test_title" placeholder="시험의 제목을 입력해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label">과제 카테고리</div>
+					        <div class="control-label">시험 카테고리</div>
 					        <div class="control-input">
-					          <input class="input-block" type="text" maxlength="50" name="ass_cate" placeholder="과제 카테고리를 입력해주세요.">
+					          <input class="input-block" type="text" maxlength="50" name="test_cate" placeholder="시험 카테고리를 입력해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
 					        <div class="control-label">추가 Comment</div>
 					        <div class="control-input">
-					          <input class="input-block" type="text" maxlength="50" name="ass_comment" placeholder="과제에 덧붙일 말을 추가해주세요.">
+					          <input class="input-block" type="text" maxlength="50" name="test_comment" placeholder="시험에 덧붙일 말을 추가해주세요.">
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label">과제 내용</div>
+					        <div class="control-label">시험 문제 내용</div>
 					        <div class="control-input">
-					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ass_pro" form="makeAssForm"></textarea>
+					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_pro" form="makeAssForm"></textarea>
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label">과제 정답</div>
+					        <div class="control-label">시험 정답</div>
 					        <div class="control-input">
-					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ass_answer" form="makeAssForm"></textarea></pre>
+					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_answer" form="makeAssForm"></textarea></pre>
 					        </div>
 					      </div>
 					    
+					      
 					      <div class="control" style="display: table-row;">
-					        <div class="control-label">Hint</div>
+					        <div class="control-label">제한 시간</div>
 					        <div class="control-input">
-					          <input class="input-block" type="text" maxlength="50"  name="ass_hint" placeholder="과제에 덧붙일 힌트를 추가해주세요.">
+					          <input class="input-block" type="number" maxlength="10" name="test_time" placeholder="단위(초)" style="width:15%">
 					        </div>
 					      </div>
-					      
+					     
 					      
 					      
 					    </div>
@@ -531,16 +528,11 @@
 				</div>
 				
 				<div id="section3" style="display:none;">
-					<ul>
-						<li>문제를 번역한 사람: 
-							<a href="/user/baekjoon">baekjoon</a>
-						</li>
-						<li>데이터를 추가한 사람: 
-							<a href="/user/doju">doju</a>
-						</li>
-					</ul>
+				
 				</div>
-
+				
+					
+				
 			
 			<!-- 하단 주요내용 끝 -->
 			</div>
@@ -551,29 +543,6 @@
 	
 	
 	<script src="resources/js/jquery.dotdotdot.js"></script>
-	<script>
-	$(function() {
-		function( e )
-		{
-			e.preventDefault();
-
-			//	When truncated, restore
-			if ( $xmpl.hasClass( 'ddd-truncated' ) )
-			{
-				api.restore();
-				$xmpl.addClass( 'full-story' );
-			}
-
-			//	Not truncated, truncate
-			else
-			{
-				$xmpl.removeClass( 'full-story' );
-				api.truncate();
-				api.watch();
-			}
-	};
-
 	
-	</script>
 </body>
 </html>

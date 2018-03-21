@@ -84,6 +84,7 @@
 	<!-- icon관련 링크 -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	
+
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -123,10 +124,10 @@
 							<c:param name="tutor_no" value="${tutor_no }" />
 							<c:param name="pageName" value="tutorHome.do" />
 						</c:url>
-						
-						<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+						<c:if test="${loginUser.mem_no != tutor_no }">
+							<button id="apply" class="applyButton" onclick="location.href='${apply }'">수강신청</button>
+						</c:if>
 					</c:if>
-					
 					
 					<c:if test="${checkReady gt 0}">
 						<button id="applyready" class="applyButton" disabled><i class="xi-spinner-1 xi-spin xi-x"></i>&nbsp;&nbsp;수강대기</i></button>
@@ -182,11 +183,16 @@
 			  <a href="tutorHome.do?tutor_no=${tutor_no }" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span><div class="selected"></div></a>
 			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
-			  <a href="#" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
 			  <form style="margin-top:7px;display:flex">
-			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
-				  <input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  <div>
+			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  </div>
+			  <div>	
+			  	<input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  </div>
+				  
 				</form>
 
 			</nav>
@@ -229,7 +235,7 @@
 
 	<!--<div class="container">-->
 	<div style="display:flex">
-	<h4>평가 ${reviewCount }개</h4>
+	<h4><div id="reviewCount">평가 ${reviewCount }개</div></h4>
 	</div>
 	<section class="about" id="about" style="width:1284px;padding-top:0">
 		<div class="row">
@@ -270,13 +276,16 @@
 				<c:forEach items="${review }" var="row">
 				<!-- 댓글 리스트 폼 -->
 				
-					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">
+					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">
 						<button style="background: none;border: none;outline: none;display: flex;">
 						<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
 							<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 						</div>
 					   </button>
-					   <p>${row.rev_con }</p>
+					   <div>
+						<span style="font-size:16px!important;font-weight:600;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
+					   	<p>${row.rev_con }</p>
+					   </div>
 					   <div style="margin-top:1%;position: absolute;left: 87%;">
 						   <select id="p${row.rev_no }">
 							  <option value="1">1</option>
@@ -415,7 +424,7 @@
 			        	url: "selectReview.do",
 			        	data: {"tutor_no" : ${tutor_no}},
 			        	type: "post",
-			        	dataType: "json",
+			        	dataType: "JSON",
 			        	success: function(result){
 			        		$('#review').html("");
 			        		var jsonStr = JSON.stringify(result);
@@ -424,13 +433,16 @@
 			        		for(var i = 0; i<json.reviewList.length;i++){
 			        			
 			        			tag = 
-			        			'<div class="message" style="display:flex;width:750px;padding-bottom: 50px;">'
+			        			'<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">'
 								+'<button style="background: none;border: none;outline: none;display: flex;">'
 								+'<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">'
 									+'<img height="45" width="45" src="/finalp/resources/img/'+json.reviewList[i].mem_refile+'" style="display: block;margin-left: auto;margin-right: auto;">'
 								+'</div>'
 							   +'</button>'
+							   +'<div>'
+							   +'<span style="font-size: 16px!important;font-weight: 600;">'+json.reviewList[i].mem_name+'&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">'+json.reviewList[i].rev_date+'</span></span>'
 							   +'<p>'+json.reviewList[i].rev_con+'</p>'
+							   +'</div>'
 							   +'<div style="margin-top:1%;position: absolute;left: 87%;">'
 								   +'<select id="p'+json.reviewList[i].rev_no+'">'
 									  +'<option value="1">1</option>'
@@ -451,7 +463,7 @@
 			        		alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
 			        	}
 			         });
-	    	  }
+	    	  };
 		         
        		function starScript(no,star){
 			  $('#p'+no).barrating({
