@@ -108,16 +108,19 @@ public class AdminDao {
 	public List<Board> kBoardList() {
 		
 		List<Keyword> keylist= mybatis.selectList("adminMapper.selectKeyAll");
+		System.out.println(keylist.toString());
 		List<Board> blist = new ArrayList<Board>();
-		
+		List<Board> list = new ArrayList<Board>();
 		for(Keyword k : keylist) {
 			blist = mybatis.selectList("adminMapper.kBoardAll",k);
 			for(Board b : blist) {
 			b.setKeyword(k.getKey_word());
+			list.add(b);
 			}
+			
 		}
 		
-		return blist;
+		return list;
 	}
 
 	public List<Member> modalClass(Member member) {
