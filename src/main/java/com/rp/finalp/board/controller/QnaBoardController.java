@@ -40,7 +40,7 @@ public class QnaBoardController {
 		model.addAttribute("qblist", qbService.selectQnaList(map));
 		return "board/QnaBoardList";
 	}*/
-	//게시글 상세보기
+	//게시글 상세보기 
 	@RequestMapping("/qbDetail.do")	
 	public String qbdetailMethod(Model model, int q_no){
 		model.addAttribute("qbDetail", qbService.selectqBoardOne(q_no));
@@ -93,6 +93,7 @@ public class QnaBoardController {
 			endPage = maxPage;
 		
 		model.addAttribute("qblist",list);
+		model.addAttribute("listCount", (int)listCount);
 		model.addAttribute("limit",limit);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("maxPage",maxPage);
@@ -121,62 +122,72 @@ public class QnaBoardController {
     //검색 기능
 	@RequestMapping(value="qbsearch.do", method=RequestMethod.POST)
 	public String qbSearchMethod(Model model, @RequestParam("qboption") int qboption, 
-									@RequestParam("qbsearch") String qbsearch) {		
+									@RequestParam("qbsearch") String qbsearch, HttpServletRequest request) {		
+		
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = qbService.listCount();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		
+		List<QnaBoard> list = qbService.selectQnaList(map);
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
 		model.addAttribute("qblist", qbService.qbsearch(qboption, qbsearch));
+		model.addAttribute("listCount", (int)listCount);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		
+		
 		return "board/QnaBoardList";
 	}
 	
 	//댓글 삭제
 	@RequestMapping(value="qbrDelete.do")
-	public String qbrdelete(int q_re_no) {
+	public String qbrdelete(@RequestParam("q_no") int qno, int q_re_no) {
 		qbService.deleteQboardReply(q_re_no);
-		return "redirect:qbDetail.do";
+		return "redirect:qbDetail.do?q_no="+qno;
 	}
 	
 	//댓글 입력
 	@RequestMapping(value="qbReply.do", method=RequestMethod.POST)
 	public void qbreply(Q_Reply qreply, HttpServletResponse response,@RequestParam("q_no") int qno) throws IOException {
-		
-			System.out.println(qreply.toString());
 			int check = qbService.insertQboardReply(qreply, qno);
-			System.out.println(check);
 			if(check > 0 ) {
 				
 				List<Q_Reply> list = qbService.QboardRlist(qno);
 				System.out.println(list.toString());
 				JSONObject json = new JSONObject();
 				JSONArray jarr = new JSONArray();
-			/*	
-				
-				try {
-					
-					String sdate = qreply.getQ_re_sdate();
-					SimpleDateFormat ori = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					SimpleDateFormat rer = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-					
-					Date oridate = (Date)ori.parse(sdate);
-					String qbsdate = rer.format(oridate);
-					
-					qreply.setQ_re_sdate(qbsdate);
-					
-					String newdate=rer.format(qreply.getQ_re_sdate());
-					qreply.setQ_re_sdate(newdate);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				*/
+			
 				for(Q_Reply r : list) {
 					JSONObject j = new JSONObject();			
 		
 					j.put("q_re_con", r.getQ_re_con());
-					j.put("q_re_sdate", r.getQ_re_sdate());
+					j.put("q_re_date", r.getQ_re_date().toString());
 					j.put("q_re_writer", r.getQ_re_writer());
+					j.put("q_no", r.getQ_no());
+					j.put("q_re_no", r.getQ_re_no());
 					jarr.add(j);
 				}
 				
 				json.put("rlist",jarr);
-				System.out.println("AA"+jarr.toJSONString());
 				response.setContentType("application/json; charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println(json.toJSONString());

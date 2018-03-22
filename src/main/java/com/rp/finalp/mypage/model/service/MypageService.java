@@ -5,6 +5,7 @@ import java.util.List;
 import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.board.model.vo.QnaBoard;
 import com.rp.finalp.mypage.model.vo.InqBoard;
+import com.rp.finalp.mypage.model.vo.Message;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 import com.rp.finalp.member.model.vo.Member;
@@ -53,5 +54,9 @@ public interface MypageService {
 
 
 	List<Assignment> serviceMyAssign(int startRow, int endRow, String keyword, int mem_no);
+
+	List<Message> selectMessageList(int size);
+
+	int listCount();
 
 }

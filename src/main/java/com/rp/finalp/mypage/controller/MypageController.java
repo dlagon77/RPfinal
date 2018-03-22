@@ -1,14 +1,17 @@
 package com.rp.finalp.mypage.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import com.rp.finalp.common.util.FileUtils;
 import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.member.model.vo.Member;
 import com.rp.finalp.mypage.model.service.MypageService;
+import com.rp.finalp.mypage.model.vo.Message;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 
 @Controller
@@ -468,6 +472,37 @@ public class MypageController {
 			public String moveToStumypagemodify() {
 				return "mypage/membermodify";
 			}*/
-
+		/* 수강생 마이페이지 - 쪽지함 모달로 이동 */
+		
+		@RequestMapping(value="/msgList.do",method=RequestMethod.POST)
+		public void MessageListMethod(Model model, @RequestParam("mem_no") int size, HttpServletResponse response) throws IOException {
+			
+				JSONObject json = new JSONObject();
+				JSONArray jarr = new JSONArray();		
+				
+				List<Message> list = mypService.selectMessageList(size);
+				for(Message m : list) {
+					SimpleDateFormat mesdate = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+					
+					String mdate = mesdate.format(m.getMes_date());
+					
+					JSONObject j = new JSONObject();
+					j.put("mes_no", m.getMes_no());
+					j.put("mes_title", m.getMes_title());
+					j.put("mes_writer", m.getMes_writer());
+					j.put("mes_date", mdate);
+					j.put("mes_receiver", m.getMes_receiver());
+					
+					jarr.add(j);
+				}
+				
+				json.put("msglist", jarr);
+				
+				response.setContentType("application/json; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+				out.flush();
+				out.close();
+		}
 }
 

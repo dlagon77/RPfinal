@@ -56,10 +56,9 @@
 						 			</strong>
 						 	    &nbsp;<img src="/finalp/resources/img/Calendar-256.png" height="20" width="22">&nbsp;	 
 						 			<strong>
-						 				<span>${rlist.q_re_sdate }</span>
+						 				<span>${rlist.q_re_date }</span>
 						 				<c:if test="${sessionScope.loginUser.mem_name eq qbDetail.q_writer}">
-						            		<a href='qbrUpdate.do?q_re_no=${ rlist.q_re_no}' class="btn btn-success">수정</a>
-					            			<a href='qbrDelete.do?q_re_no=${ rlist.q_re_no}' class="btn btn-success">삭제</a>
+					            			<a href='qbrDelete.do?q_no=${ rlist.q_no }&q_re_no=${ rlist.q_re_no}' class="btn btn-success">삭제</a>
 					            		</c:if>
 						 			</strong>
 					 				<br>
@@ -76,9 +75,9 @@
    	      		<c:if test="${!empty sessionScope.loginUser }"> 
                 	<p><img src="/finalp/resources/img/comment.png" height="20" width="22">&nbsp;Comment</p>
 	         			<div class="form-group">
-	            	 		<textarea rows="5" class="form-control" id="send"  placeholder="댓글을 작성하세요." required></textarea>
+	            	 		<textarea rows="5" cols="127" class="form-control" id="send"  placeholder="댓글을 작성하세요."></textarea>	            	 		
 	          			</div>
-				<button type="submit" onclick="replyPlus('${loginUser.mem_no}','${qbDetail.q_no}')"  class="btn btn-success" style="float:right;" disabled>댓글쓰기</button>
+				<button type="submit" onclick="replyPlus('${loginUser.mem_no}','${qbDetail.q_no}')"  class="btn btn-success" style="float:right;">댓글쓰기</button>
            			
            		</c:if>	
    	  		 </div>
@@ -88,12 +87,17 @@
 
 	function replyPlus(mem_no,q_no){
 		var send = $("#send").val();
+		if(send == ""){
+			console.log("댓글을 입력해주세요.");
+		}else{
+		
 		  $.ajax({
 			url:"qbReply.do",
 			dataType:"json",
 			type:"post",
 			data:{"q_re_writer":mem_no,"q_re_con":send,"q_no":q_no},
 			success:function(result){	
+		;
 				var jsonstr = JSON.stringify(result);
 				var json = JSON.parse(jsonstr);
 				var tag = "";
@@ -106,10 +110,13 @@
 			 				 +"</span></strong>" 
 			 				 +"<img src='/finalp/resources/img/Calendar-256.png' height='20' width='22'>&nbsp;"
 			 				 +"<strong><span>"
-			 				 +decodeURIComponent(json.rlist[i].q_re_sdate)
+			 				 +decodeURIComponent(json.rlist[i].q_re_date)
 			 				 +"</span>"
-			 				 +"&nbsp;&nbsp;<a href='qbrUpdate.do?q_re_no=${ json.rlist[i].q_re_no}' class='btn btn-success'>수정</a>"
-		            		 +"&nbsp;&nbsp;<a href='qbrDelete.do?q_re_no=${ json.rlist[i].q_re_no}' class='btn btn-success'>삭제</a>"
+		            		 +"&nbsp;&nbsp;<a href='qbrDelete.do?q_no="
+		            		 +json.rlist[i].q_no
+		            		 +"&q_re_no="
+		            		 +json.rlist[i].q_re_no
+		            		 +"' class='btn btn-success'>삭제</a>"
 		            		 +"</strong>"
 			 				 +"<br>"
 			 				 +"<small><span>"
@@ -119,6 +126,7 @@
 			      			+"</tr>";
 				}
 				$("#reply").html(tag);
+				$("#send").val("");
 			},error: function(request, status, errorData){
 				alert("error code : " + request.status + "\n" 
 						+ "message : " + request.responsText 
@@ -126,7 +134,7 @@
 			}
 		});  
 		}
-
+	}
 </script>
 </body>
 </html>

@@ -32,7 +32,5 @@ public interface QnaBoardService {
 	List<Q_Reply> QboardRlist(int q_no);
 
 	int deleteQboardReply(int q_re_no);
-    
-
-	
+   
 }

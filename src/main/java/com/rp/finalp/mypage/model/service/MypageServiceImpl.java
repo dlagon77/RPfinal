@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
+import com.rp.finalp.mypage.model.vo.Message;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 import com.rp.finalp.assign.model.vo.Assignment;
@@ -101,7 +102,16 @@ public class MypageServiceImpl implements MypageService {
 		return mypDao.serviceMyAssign(currentPage,limit,keyword,mem_no);
 	}
 
+	@Override
+	public List<Message> selectMessageList(int size){
+		return mypDao.selectMesList(size);
+	}
 
+	@Override
+	public int listCount() {
+		return mypDao.listCount();
+	}
+	
 	
 
 	

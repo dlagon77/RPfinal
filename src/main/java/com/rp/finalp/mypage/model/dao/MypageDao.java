@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
+import com.rp.finalp.mypage.model.vo.Message;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 import com.rp.finalp.assign.model.vo.Assignment;
@@ -149,4 +150,12 @@ public class MypageDao {
 				}
 				return mybatis.selectList("mypageMapper.serviceMyAssign", map);
 			}
+		
+		public List<Message> selectMesList(int size){
+			return mybatis.selectList("MesboardMapper.selectAll", size);
+		}
+		
+		public int listCount() {
+			return mybatis.selectOne("MesboardMapper.listCount");
+		}
 }

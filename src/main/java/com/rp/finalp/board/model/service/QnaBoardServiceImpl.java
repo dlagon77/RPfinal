@@ -57,7 +57,7 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	public List<QnaBoard> qbsearch(int qboption, String qbsearch) {
 		return qbDao.qbsearch(qboption, qbsearch);
 	}
-	//게시글 답글
+	//게시글 답글 입력
 	@Override
 	public int insertQboardReply(Q_Reply qreply, int qno) {
 		return qbDao.insertQboardReply(qreply, qno);
@@ -69,10 +69,7 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		return qbDao.deleteQbReply(q_re_no);
 	}
 	
-	//게시글 답글수정
-	public int updateQboardReply(Q_Reply qreply) {
-		return qbDao.updateQboardReply(qreply);
-		}
+	//게시글 답글리스트
 	@Override
 	public List<Q_Reply> QboardRlist(int q_no) {
 		

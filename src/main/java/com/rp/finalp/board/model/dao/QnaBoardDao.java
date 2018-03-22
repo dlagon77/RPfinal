@@ -56,7 +56,7 @@ public class QnaBoardDao {
 	}
 	
 	public int deleteQbReply(int q_re_no) {
-		return mybatis.delete("boardMapper.rdelete", q_re_no);
+		return mybatis.delete("boardMapper.qbrdelete", q_re_no);
 	}
 
 	public int updateQboardReply(Q_Reply qreply) {

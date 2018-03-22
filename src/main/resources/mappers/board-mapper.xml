@@ -135,7 +135,7 @@
   		<result property="q_re_no" column="q_re_no"/>
   		<result property="q_no" column="q_no"/>
   		<result property="q_re_con" column="q_re_con"/>
-  		<result property="q_re_sdate" column="q_re_sdate"/>
+  		<result property="q_re_date" column="q_re_date"/>
   		<result property="q_re_writer" column="q_re_writer"/>
   		<result property="mem_no" column="mem_no"/>
 	</resultMap>
@@ -146,7 +146,7 @@
     
  
     <select id="qbrlist" resultMap="QReplyResultMap" resultType="Q_Reply">
-        SELECT q_re_no, q_no, q_re_con, q_re_date as q_re_sdate, mem_name as q_re_writer, mem_no
+        SELECT q_re_no, q_no, q_re_con, q_re_date, mem_name as q_re_writer, mem_no
         FROM Q_Reply
         JOIN MEMBER ON (mem_no=q_re_writer)
         WHERE Q_NO = #{q_no} ORDER BY Q_RE_DATE DESC
@@ -154,7 +154,8 @@
 
 	<delete id="qbrdelete">
     	<![CDATA[
-    		DELETE FROM Q_REPLY WHERE Q_RE_NO = #{q_re_no}
+    		DELETE FROM Q_REPLY 
+    		WHERE Q_RE_NO = #{q_re_no}
     	]]>
     </delete>
 

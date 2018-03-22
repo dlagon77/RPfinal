@@ -20,11 +20,11 @@
         <form method="post" action="qbUpdate.do?q_no=${qboard.q_no }">
           <div class="form-group">
             <label>제목</label>
-            <input type="text" name="q_title" class="form-control" placeholder="${qbDetail.q_title }" required>
+            <input type="text" name="q_title" class="form-control" required>
           </div>
           <div class="form-group">
             <label>내용</label>
-            <textarea name="q_content" class="form-control" rows="5" placeholder="수정할 제목" required></textarea>
+            <textarea name="q_content" class="form-control" rows="5" required></textarea>
           </div>
           <a onclick="history.back()" class="btn btn-default">취소</a> 
           <button type="submit" class="btn btn-default">수정</button>

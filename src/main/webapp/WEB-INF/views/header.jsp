@@ -7,11 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Real Programmer</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <!-- 지혜 -->
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
 
    <!-- Css -->
     <link href="/finalp/resources/css/bootstrap.css" rel="stylesheet">
@@ -32,7 +33,9 @@
    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
    
    <style>
-
+	
+	  .city {display:none}
+	  	
       body{
          /*background-color:hsla(0, 0%, 93.3%, .4);*/
       }
@@ -219,7 +222,7 @@
                                  <li><a href="tumypage.do">마이페이지</a></li>
                                   <li><a href="tutorHome.do?tutor_no=${loginUser.mem_no }">내 강의실</a></li>
                               </c:if>
-                               <li><a href="#">쪽지함(준비중)</a></li>
+                               <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
                                <li class="divider"></li>
                                <li><a href="logout.do">로그아웃</a></li>
                               </ul>
@@ -285,8 +288,134 @@
 				</div>
 			</div>
 		</div>
-		<!--===============================================================================================-->    
+		<!--===============================================================================================-->
+							
 <!-- LOGIN MODAL TEST END-->
+		    </
+		 <!-- 쪽지함 모달 시작 -->
+			   <div id="id01" class="w3-modal">
+			 		<div class="w3-modal-content w3-card-4 w3-animate-zoom">
+			 			 <header class="w3-container w3-blue"> 
+			  				 <span onclick="document.getElementById('id01').style.display='none'" 
+			  					class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+			   						<h2 style="margin:13px">쪽지함</h2>
+			 			 </header>
+			
+			   <div class="w3-bar w3-border-bottom">
+				   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Send');smsglist();">보낸쪽지함</button>
+				   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Receiver');msglist();">받은쪽지함</button>
+			   </div>
+			
+				  <div id="Send" class="w3-container city">
+				  	 <div class="w3-container">
+				  		<h4 style="margin:13px">쪽지함(발신)</h4>
+			
+		 	    	<table class="w3-table-all w3-hoverable">
+					    <thead>
+					      <tr class="w3-light-grey">				
+					        <th>제목</th>
+					        <th>작성자</th>
+					        <th>받는사람</th>
+					        <th>보낸날짜</th>
+					      </tr>
+					    </thead>
+					    <tbody id="smsg">
+					    
+					    </tbody>
+			  		</table>
+					</div>
+				 </div>
+
+				  <div id="Receiver" class="w3-container city">
+				     <div class="w3-container">
+				  		<h4 style="margin:13px">쪽지함(수신)</h4>
+
+ 					<table class="w3-table-all w3-hoverable">
+    					<thead>      
+					      <tr class="w3-light-grey">
+					        <th>제목</th>
+					        <th>보낸사람</th>   
+					        <th>보낸날짜</th>  
+					      </tr>
+					    </thead>
+					    <tbody id="msg">
+    					
+				    	</tbody>
+				  	</table>
+				 <!--  쪽지함 모달 END -->
+					   
+					   	<!-- 페이징 처리 START -->
+					   <%-- <div class="col-md-12">
+					        <div class="text-center">
+					         	<ul class="pagination">
+			            			<li>              
+				            			<c:url var="first" value="msgList.do">
+											<c:param name="currentPage" value="1" />
+										</c:url>
+										<c:if test="${currentPage != 1}">
+											<a href="${first }">FIRST</a>
+										</c:if>
+			            			</li>
+			            			
+			            			<li>
+							            <c:url var="prev" value="msgList.do">
+											<c:param name="currentPage" value="${currentPage - 1 }" />
+										</c:url>
+									    <c:if test="${currentPage != 1}">
+											<a href="${prev }">PREV</a>
+									    </c:if>
+			            			</li>
+			            			
+			            			<li>
+			            				<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+											<c:url var="page" value="msgList.do">
+												<c:param name="currentPage" value="${p }" />
+											</c:url>
+						  					<c:if test="${p ne currentPage }">
+								 				<a href="${page }">${p }</a> 
+						   					</c:if>
+									</li>
+									
+									<li>
+											<c:if test="${p eq currentPage }">	
+											 	<a href="${page }"><b>${p }</b></a>
+										    </c:if>
+										</c:forEach>
+									</li>
+			            
+			            			<li>
+			            					<c:if test="${currentPage != maxPage }">
+								              	<c:url var="next" value="msgList.do">
+													<c:param name="currentPage" value="${currentPage + 1 }" />
+												</c:url>
+												<a href="${next }">NEXT</a>
+			            			</li>
+			            			
+			            			<li>
+							               	<c:url var="last" value="msgList.do">
+													<c:param name="currentPage" value="${maxPage }" />
+										   	</c:url>
+											<a href="${last }">END</a>
+						   					</c:if>
+			           				</li>
+			         		</ul>
+			         	 </div>
+			    	 </div> --%>
+				   </div>
+				   		<!-- 페이징 처리 END -->
+				</div>
+						<br><br>
+					 	<!-- 쪽지함 CLOSE 버튼 -->	
+					  <div class="w3-container w3-light-grey w3-padding">
+					   		<button class="w3-button w3-right w3-white w3-border" 
+					   			onclick="document.getElementById('id01').style.display='none'">Close</button>
+					  </div>
+					  	<!-- 쪽지함 CLOSE 끝 -->
+					 </div>
+					</div>
+				</div>
+					
+					  <!-- 쪽지하 ㅁ모달 끝 -->
 
 	   <script>
 	      // For Demo purposes only (show hover effect on mobile devices)
@@ -397,5 +526,119 @@
 		}
 		</script>
 		<!-- ================== LOGIN COOKIE ======================= -->
+<script> <!--쪽지함 스크립트 -->
+document.getElementsByClassName("tablink")[0].click();
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.remove("w3-light-grey");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.classList.add("w3-light-grey");
+}
+	
+/*  $(document).ready(function(){ */
+	function smsglist(){
+		$.ajax({
+			 url:"msgList.do",
+	         dataType:"json",
+	         type:"post",
+	         data:{"mem_no":${sessionScope.loginUser.mem_no}},
+	         success:function(result){
+	        	 var jsonStr = JSON.stringify(result);
+	        	 var json = JSON.parse(jsonStr);
+	        	 var smsg = "";
+	        	 var loginUser = "${sessionScope.loginUser.mem_name}";
+	        	 if( json.msglist.length > 0){
+		        	 for(var i = 0; i < json.msglist.length; i++){
+		        		 if(json.msglist[i].mes_writer == loginUser){
+		        			 smsg +=
+		        			 		"<tr>"
+			       					 +"<td>"
+			       					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+									 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
+									 +"</c:url>"
+									 +"<a href='${myMsg }'>"
+									 +decodeURIComponent(json.msglist[i].mes_title)	
+			       					 +"</a>"
+			       					 +"</td>"		       					 
+			       					 +"<td>"
+			       					 +decodeURIComponent(json.msglist[i].mes_writer)
+			       					 +"</td>"
+			       					 +"<td>"
+			       					 +decodeURIComponent(json.msglist[i].mes_receiver)
+			       					 +"</td>"
+			       					 +"<td>"
+			       					 +json.msglist[i].mes_date
+			       					 +"</td>"
+						       		 +"</tr>";
+						       	}
+		        			 }	
+					       }else{
+					    	   smsg +=
+		        		  			+"<tr>"
+		        		  			+"<td colspan='4'>조회된 결과가없습니다.</td>"
+		        		  			+"</tr>";
+					        	}
+					        	 
+					        	 $("#smsg").html(smsg);
+					         }
+		         
+					});
+				};
+	
+ 	function msglist(){
+			 $.ajax({
+				 url:"msgList.do",
+		         dataType:"json",
+		         type:"post",
+		         data:{"mem_no":${sessionScope.loginUser.mem_no}},
+		         success:function(result){
+		        	 var jsonStr = JSON.stringify(result);
+		        	 var json = JSON.parse(jsonStr);
+		        	 var msg = "";
+		        	 if( json.msglist.length > 0){
+			        	 for(var i = 0; i < json.msglist.length; i++){
+			        		 if(json.msglist[i].mes_receiver == "${sessionScope.loginUser.mem_name}"){
+			        				 msg += 
+			        					 "<tr>"
+			        					 +"<td>"
+			        					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+										 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
+										 +"</c:url>"
+										 +"<a href='${myMsg }'>"
+										 +decodeURIComponent(json.msglist[i].mes_title)	
+			        					 +"</a>"
+			        					 +"</td>"
+			        					 +"<td>"
+			        					 +decodeURIComponent(json.msglist[i].mes_writer)
+			        					 +"</td>"	
+			        					 +"<td>"
+				       					 +json.msglist[i].mes_date
+				       					 +"</td>"
+			        					 +"</tr>";
+			        					 
+			        		 	}
+			        		 }
+		        	 }else{
+		 		  		msg +=
+				  			+"<tr>"
+				  			+"<td colspan='3'>조회된 결과가없습니다.</td>"
+				  			+"</tr>";
+					 }
+        	 			$("#msg").html(msg);
+			         },error: function(request, status, errorData){
+			             alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData); 	 
+			         }
+        	 	});
+			};
+
+</script>
 </body>
 </html>

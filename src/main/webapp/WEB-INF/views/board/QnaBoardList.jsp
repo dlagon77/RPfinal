@@ -21,6 +21,7 @@
 	        <img src="/finalp/resources/img/QnaImg.jpg" height="100" width="450" style="display: block;margin-left: auto;margin-right: auto;">
 	           <h2 align="center">게시판</h2><br><br>
 	   	<div>
+	   	
         <form action="qbsearch.do" method="post">
             <select name="qboption">
                 <option value="0">제목</option>
@@ -28,12 +29,13 @@
                 <option value="2">제목+내용</option>
                 <option value="3">작성자</option>
             </select>
-            <input type="text" size="20" name="qbsearch"/>&nbsp;
+            <input type="text" size="20" name="qbsearch" required/>&nbsp;
             <input type="submit" value="검색"/>
             
         </form><br><br>
     </div>
-           
+		
+			<h4>총 ${listCount}개의 게시물이 있습니다.</h4> 
             <thead>
                 <tr>
                     <th>번호</th>
