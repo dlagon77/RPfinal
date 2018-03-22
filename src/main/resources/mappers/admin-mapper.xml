@@ -224,7 +224,7 @@
 		<!-- 1대1 문의 답변 -->
 			<update id="sendContact" parameterType="Contact">
 				<![CDATA[
-					UPDATE INQBOARD SET INQ_RECEIVER = #{inq_reply},
+					UPDATE INQBOARD SET INQ_REPLY = #{inq_reply},
 										INQ_YN = 'Y'
 					WHERE INQ_NO = #{inq_no}
 				]]>

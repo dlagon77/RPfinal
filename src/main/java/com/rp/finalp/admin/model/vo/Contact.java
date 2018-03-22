@@ -11,12 +11,12 @@ public class Contact implements java.io.Serializable{
 	private String inq_content;
 	private Date inq_date;
 	private String inq_writer;
-	private int inq_reply;
+	private String inq_reply;
 	private int inq_tcate_id;
 	
 	public Contact() {}
 
-	public Contact(int inq_no, String inq_title, String inq_content, Date inq_date, String inq_writer, int inq_reply,
+	public Contact(int inq_no, String inq_title, String inq_content, Date inq_date, String inq_writer, String inq_reply,
 			int inq_tcate_id) {
 		super();
 		this.inq_no = inq_no;
@@ -68,11 +68,11 @@ public class Contact implements java.io.Serializable{
 		this.inq_writer = inq_writer;
 	}
 
-	public int getInq_reply() {
+	public String getInq_reply() {
 		return inq_reply;
 	}
 
-	public void setInq_reply(int inq_reply) {
+	public void setInq_reply(String inq_reply) {
 		this.inq_reply = inq_reply;
 	}
 

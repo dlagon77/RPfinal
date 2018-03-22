@@ -130,15 +130,13 @@ public class AdminController {
 	@RequestMapping(value="/sendContact.do", method=RequestMethod.POST)
 	public void sendContactMethod(Contact contact,HttpServletResponse response) throws IOException{
 		System.out.println(contact.toString());
-		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(aService.sendContact(contact) > 0) {
 			out.append("ok");
-			out.flush();
 		}else {
-			out.append("fail");
-			out.flush();
+			out.append("fail");	
 		}
+		out.flush();
 		out.close();
 	}
 	

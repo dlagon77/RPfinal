@@ -201,7 +201,6 @@
 	<script>
 		function send(num,name){
 			var send = $("#send"+num).val();
-			alert(name);
 			$.ajax({
 				url:"sendContact.do",
 				data:{inq_reply:send,inq_no:num},
