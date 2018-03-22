@@ -97,7 +97,7 @@
 	</select>
 	
 	<insert id="insertAss" parameterType="Assignment"><![CDATA[
-		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,null,null,sysdate,#{ass_orfile},'123abc.java',#{ass_cate},null,0,null,null,null,null,null,#{ass_writer},#{ass_maker},null,5)
+		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,null,null,sysdate,#{ass_orfile},'123abc.java',#{ass_cate},#{ass_title},0,null,null,null,null,null,#{ass_writer},#{ass_maker},null,5)
 	]]></insert>
 	
 	<insert id="makeAss" parameterType="Assignment"><![CDATA[

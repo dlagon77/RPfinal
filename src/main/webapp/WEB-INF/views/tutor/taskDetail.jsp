@@ -480,7 +480,7 @@
 	</div><!--row-->
 
 
-
+<input type="text" id="atitle" value=${assignment.ass_title } >
 <input type="hidden" id="abc" value=${assignment.ass_cate } >
 <input type="hidden" id="tno" value=${tutor_no }>
 	
@@ -760,7 +760,8 @@ $(function(){
   $.ajax({
 			url:"test1.do",
 
-			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val(), ass_maker : $("#tutorno").val()},
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_title : $("#atitle").val(),
+				ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val(), ass_maker : $("#tutorno").val()},
 
 	          type : "post",
 	          success : function(result){
