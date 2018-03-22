@@ -150,11 +150,39 @@ public class LectureController {
 	}
 
 	@RequestMapping("classManage.do")
-	public String classManageMethod(@RequestParam(value="tutor_no") int tutor_no,Model model) {
-		model.addAttribute("tutor_no",tutor_no);
+	public String classManageMethod(@RequestParam(value="tutor_no") int tutor_no,Model model, HttpServletRequest request) {
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = memberService.countApplyList(tutor_no);
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		map.put("tutor_no", tutor_no);
+		
+		List<Member> list = memberService.applyClassList(map);
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("list",list);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		model.addAttribute("tutor_no", tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
-		List<Member> list = lectureService.applyClassList(tutor_no);
-		model.addAttribute("list", list);
+		model.addAttribute("lectureCount", lectureService.countLectureList(tutor_no));
+		
 		return "tutor/classManage";
 	}
 	
@@ -232,5 +260,50 @@ public class LectureController {
 		model.addAttribute("endPage",endPage);
 		
 		return "tutor/classManageTest";
+	}
+	
+	@RequestMapping("classManageStudent.do")
+	public String classManageStudentMethod(@RequestParam(value="tutor_no") int tutor_no, Model model, HttpServletRequest request) {
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = memberService.countStudentList(tutor_no);
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		map.put("tutor_no", tutor_no);
+		
+		List<Member> list = memberService.selectStudentList(map);
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("list",list);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		model.addAttribute("tutor_no", tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		/*List<Member> list = memberService.selectStudentList(tutor_no);*/
+		
+		return "tutor/classManageStudent";
+	}
+	
+	@RequestMapping(value="deleteClassStudent.do")
+	public String deleteClassStudentMethod( Lecture lecture, @RequestParam(value="tutor_no") int tutor_no, Model model) {
+		lectureService.deleteClassStudent(lecture);
+		model.addAttribute("tutor_no", tutor_no);
+		System.out.println(lecture);
+		return "redirect:classManageStudent.do";
 	}
 }

@@ -36,4 +36,8 @@ public interface MemberService {
 	//강의실관리에서 내 수강생 조회용
 	List<Member> selectStudentList(HashMap<String, Object> map);
 	int countStudentList(int tutor_no);
+	//강의실관리에서 수강신청학생 조회용
+	List<Member> applyClassList(HashMap<String, Object> map);
+	int countApplyList(int tutor_no);
 }
+

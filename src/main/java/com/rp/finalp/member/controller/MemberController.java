@@ -78,7 +78,6 @@ public class MemberController {
 	/* 로그인 페이지로 이동 */
 	@RequestMapping(value="/loginpage.do")
 	public String moveToLoginpage() {
-		System.out.println("로긴페이지");
 		return "member/login";
 	}
 	
@@ -125,7 +124,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/proinsertpage.do")
 	public String moveToInsertpage() {
-		System.out.println("회원가입페이지");
 		return "member/proinsertForm";     //jsp파일 이름
 	}
 	

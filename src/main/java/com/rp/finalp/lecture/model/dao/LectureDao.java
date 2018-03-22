@@ -1,6 +1,7 @@
 package com.rp.finalp.lecture.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,11 +41,6 @@ public class LectureDao {
 		return mybatis.insert("lectureMapper.insertLectre", lecture);
 	}
 
-
-	public List<Member> applyClassList(int tutor_no) {
-		return mybatis.selectList("lectureMapper.applyClassList", tutor_no);
-	}
-	
 	public List<Lecture> selectLectureList(int tutor_no) {
 		return mybatis.selectList("lectureMapper.selectlectureList",tutor_no);
 	}
@@ -58,5 +54,17 @@ public class LectureDao {
 	public int applyFail(Lecture lecture) {
 		return mybatis.delete("lectureMapper.applyFail", lecture);
 	}
+
+
+	public int deleteClassStudent(Lecture lecture) {
+		return mybatis.delete("lectureMapper.deleteClassStudent", lecture);
+	}
+
+
+	public int countLectureList(int tutor_no) {
+		return mybatis.selectOne("lectureMapper.countLectureList", tutor_no);
+	}
+
+	
 
 }

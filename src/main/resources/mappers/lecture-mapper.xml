@@ -51,20 +51,6 @@
 		]]>
 	</insert>
 	
-	<resultMap type="Member" id="memberNameList">
-		<result property="mem_name" column="mem_name"/>
-	</resultMap>
-	
-	<select id="applyClassList" resultMap="memberNameList" resultType="list" parameterType="Integer"> 
-		<![CDATA[ 
-			select mem_name
-			from member
-			where mem_no in (select app_student_no
-	                		from apply
-	                		where app_tutor_no = #{tutor_no} and app_y is null)
-		]]>
-	</select>
-	
 	<resultMap id="LectureResultMap" type="Lecture">
   		<result property="mem_name" column="mem_name"/>
   		<result property="lec_link" column="lec_link"/>
@@ -84,6 +70,7 @@
 		]]>
 	</select>
 	
+	
 	<update id="applySuccess" parameterType="Lecture">
 		<![CDATA[
 			update apply
@@ -102,4 +89,20 @@
                                             					where mem_name=#{mem_name})
 		]]>
 	</delete>
+	
+	<delete id="deleteClassStudent" parameterType="Lecture">
+		<![CDATA[
+			delete from apply
+			where app_tutor_no = #{tutor_no} and app_student_no = #{mem_no}
+		]]>
+	</delete>
+	
+	<select id="countLectureList" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			select count(*)
+			from lecture
+			where tutor_no = #{tutor_no}
+		]]>
+	</select>
+	
 </mapper>

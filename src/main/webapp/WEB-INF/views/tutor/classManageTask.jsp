@@ -10,6 +10,7 @@
 <style>
 	th{align:center;}
 	ul{list-style: none;}
+	ul li{margin-left: 50px;}
 	ul li a{text-decoration: none;}
 	ul li a p{display: inline; font-size: 16px; font-family: 'Nanum Gothic', sans-serif; color: gray;	}
  	ul li a:hover i, ul li a:hover p{color: black;}
@@ -21,14 +22,14 @@
 	}	
 	.container{
 		width:1000px;
-		height: 950px;
+		height: 889px;
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
 	}
 	.sideMenu{
 		width: 250px;
-		height: 455px;
+		height: 420px;
 		background-color: white;
 		float: left;	
 	}
@@ -336,11 +337,11 @@
 						<hr/>
 						<li><a href="classManageLecture.do?tutor_no=${tutor_no }"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
 						<hr/>
-						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i class="xi-library-books-o xi-2x"></i><p>&nbsp;&nbsp;과제</p></a></li>
+						<li><a href="classManageTask.do?tutor_no=${tutor_no }"><i style="color: black;" class="xi-library-books-o xi-2x"></i><p style="color: black;">&nbsp;&nbsp;과제</p></a></li>
 						<hr/>
 						<li><a href="classManageTest.do?tutor_no=${tutor_no }"><i class="xi-documents-o xi-2x"></i><p>&nbsp;&nbsp;시험</p></a></li>
 						<hr/>
-						<li><a href="#"><i class="xi-man xi-2x"></i><p>&nbsp;&nbsp;수강생</p></a></li>
+						<li><a href="classManageStudent.do?tutor_no=${tutor_no }"><i class="xi-man xi-2x"></i><p>&nbsp;&nbsp;수강생</p></a></li>
 					</ul>
 				</div>
 			</div>

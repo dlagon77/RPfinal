@@ -93,6 +93,14 @@ public class MemberDao {
 	public int countStudentList(int tutor_no) {
 		return mybatis.selectOne("memberMapper.countStudentList", tutor_no);
 	}
+	
+	public List<Member> applyClassList(HashMap<String, Object> map) {
+		return mybatis.selectList("memberMapper.applyClassList", map);
+	}
+	
+	public int countApplyList(int tutor_no) {
+		return mybatis.selectOne("memberMapper.countApplyList", tutor_no);
+	}
 }
 
 

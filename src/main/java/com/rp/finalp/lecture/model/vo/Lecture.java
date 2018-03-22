@@ -186,8 +186,11 @@ public class Lecture implements java.io.Serializable{
 	public String toString() {
 		return "Lecture [tutor_no=" + tutor_no + ", lec_id=" + lec_id + ", lec_cate=" + lec_cate + ", lec_con="
 				+ lec_con + ", lec_link=" + lec_link + ", lec_title=" + lec_title + ", lec_restrict=" + lec_restrict
-				+ ", lec_readcount=" + lec_readcount + "]";
+				+ ", lec_readcount=" + lec_readcount + ", lec_date=" + lec_date + ", mem_name=" + mem_name
+				+ ", apply_count=" + apply_count + ", mem_no=" + mem_no + ", mem_refile=" + mem_refile + "]";
 	}
+
+	
 
 	
 	

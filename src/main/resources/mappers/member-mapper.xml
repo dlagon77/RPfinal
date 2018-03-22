@@ -205,5 +205,30 @@
 		]]>
 	</select>
 	
+	<resultMap type="Member" id="memberNameList">
+		<result property="mem_name" column="mem_name"/>
+	</resultMap>
 	
+	<select id="applyClassList" resultMap="memberNameList" resultType="list" parameterType="java.util.HashMap"> 
+		<![CDATA[ 
+			select *
+			from (select rownum rnum, mem_name
+			      from (select mem_name
+			            from member
+			            where mem_no in (select app_student_no
+				                		from apply
+				                		where app_tutor_no = #{tutor_no} and app_y is null)))
+			where rnum >= #{startRow} and rnum <= #{endRow} order by rnum desc
+		]]>
+	</select>
+	
+	<select id="countApplyList" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			select count(*)
+			from member
+			where mem_no in (select app_student_no
+	                		from apply
+	                		where app_tutor_no = #{tutor_no} and app_y is null)
+		]]>
+	</select>
 </mapper>

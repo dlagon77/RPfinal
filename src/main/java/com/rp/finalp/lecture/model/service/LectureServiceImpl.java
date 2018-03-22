@@ -1,5 +1,6 @@
 package com.rp.finalp.lecture.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,6 @@ public class LectureServiceImpl implements LectureService{
 	public int insertLecture(Lecture lecture) {
 		return lectureDao.insertLecture(lecture);
 	}
-
-	@Override
-	public List<Member> applyClassList(int tutor_no) {
-		return lectureDao.applyClassList(tutor_no);
-	}
 	
 	@Override
 	public List<Lecture> selectLectureList(int tutor_no) {
@@ -59,6 +55,18 @@ public class LectureServiceImpl implements LectureService{
 	public int applyFail(Lecture lecture) {
 		return lectureDao.applyFail(lecture);
 	}
+
+	@Override
+	public int deleteClassStudent(Lecture lecture) {
+		return lectureDao.deleteClassStudent(lecture);
+	}
+
+	@Override
+	public int countLectureList(int tutor_no) {
+		return lectureDao.countLectureList(tutor_no);
+	}
+	
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.rp.finalp.lecture.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.rp.finalp.lecture.model.vo.Lecture;
@@ -17,12 +18,15 @@ public interface LectureService {
 
 	int insertLecture(Lecture lecture);
 
-	List<Member> applyClassList(int tutor_no);
-	
 	List<Lecture> selectLectureList(int tutor_no);
 
 	int applySuccess(Lecture lecture);
 
 	int applyFail(Lecture lecture);
 
+	int deleteClassStudent(Lecture lecture);
+
+	int countLectureList(int tutor_no);
+	
+	
 }

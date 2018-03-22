@@ -128,4 +128,14 @@ public class MemberServiceImpl implements MemberService {
 		public int countStudentList(int tutor_no) {
 			return memberDao.countStudentList(tutor_no);
 		}
+		
+		@Override
+		public List<Member> applyClassList(HashMap<String, Object> map) {
+			return memberDao.applyClassList(map);
+		}
+		
+		@Override
+		public int countApplyList(int tutor_no) {
+			return memberDao.countApplyList(tutor_no);
+		}
 	}
