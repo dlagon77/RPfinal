@@ -154,9 +154,9 @@
              <c:if test="${ sessionScope.loginUser ne null }">			
                <!-- 사용자그림 font awesome 라이브러리 -->
                   <c:if test="${ sessionScope.loginUser.mem_refile eq null }">
-	                <div style="font-size:4rem;color:Tomato;margin-top: 5px;">
-<!-- 	                  	<i class="fas fa-user-circle" style="display: block; margin-left: auto; margin-right: auto;"></i> -->
-						<img src="/finalp/resources/img/profileupload/default-user.png" class="profile-img" />
+	                <div style="font-size:4rem;color:gray;margin-top: 5px;">
+	                  	<i class="fas fa-user-circle" style="display: block; margin-left: auto; margin-right: auto;"></i>
+<!-- 						<img src="/finalp/resources/img/profileupload/default-user.png" class="profile-img" /> -->
 	                </div> 
                   </c:if>
 			</c:if>                  
@@ -199,6 +199,7 @@
     });
     
 </script>
+	
             <!-- ===회원 로그인 시 18.03.11 JOONWOO ===  -->   
             <c:if test="${ sessionScope.loginUser ne null }">
                  <li class="dropdown">
@@ -235,6 +236,7 @@
 
 <!-- LOGIN MODAL TEST -->
 <!--===============================================================================================-->
+
   <!-- Modal -->
 		<div class="modal fade" id="loginModal1q">
 			<div class="modal-dialog">
@@ -242,23 +244,25 @@
 				<!-- Modal content-->
 				<div class="container-login100">
 					<div class="wrap-login1000">
-						<form action="login.do" method="post" class="login100-form validate-form">
+						<form name="loginform" action="login.do" method="post" class="login100-form validate-form" onsubmit="checking()">
 							<span class="login100-form-title p-b-26"> Login </span>
 							<span class="login100-form-title p-b-48"> 
 								<img src="http://cfile24.uf.tistory.com/image/99669F3A5AADD1BE038E83" style="margin-top: 10px;">
 							</span>
 
 							<div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-								<input class="input100" type="email" name="mem_id" style="outline: none;border: none;">
+								<input class="input100" type="email" id="mem_id" name="mem_id" style="outline: none;border: none;" >
 								<span class="focus-input100" data-placeholder="Email"></span>
 							</div>
 
 							<div class="wrap-input100 validate-input" data-validate="Enter password">
 								<span class="btn-show-pass"> <i class="zmdi zmdi-eye"></i></span> 
-								<input class="input100" type="password" name="mem_pwd" style="outline: none;border: none;"> 
+								<input class="input100" type="password" id="mem_pwd" name="mem_pwd" style="outline: none;border: none;" onclick="checkcheck()"> 
 								<span class="focus-input100" data-placeholder="Password"></span>
 							</div>
-							
+							<div style="margin-top: -20px;margin-bottom: 15px;">
+								<label for="checker"><input type="checkbox" id="checker" name="checker"><span class="txt1"> E-mail 저장</span></label>
+							</div>
 							<div class="wrap-login100-form-btn">
 								<div class="login100-form-bgbtn"></div>
 								<button class="login100-form-btn">Login</button>
@@ -314,5 +318,84 @@
 		    }
 		}
 		</script>
+	<!-- ================== LOGIN COOKIE ======================= -->
+		<script>
+		function newCookie(name,value,days) {
+		 var days = 10;   // 쿠키저장 일수
+		                 
+			 if (days) {
+			   var date = new Date();
+			   date.setTime(date.getTime()+(days*24*60*60*1000));
+			   var expires = "; expires="+date.toGMTString(); 
+			 }else var expires = "";
+			   document.cookie = name+"="+value+expires+"; path=/"; 
+		 }
+		
+		function readCookie(name) {
+		   var nameSG = name + "=";
+		   var nuller = '';
+		  if (document.cookie.indexOf(nameSG) == -1)
+		    return nuller;
+		
+		   var ca = document.cookie.split(';');
+		  for(var i=0; i<ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		  if (c.indexOf(nameSG) == 0) return c.substring(nameSG.length,c.length); }
+		    return null; 
+		}
+		
+		function delMem(a) {
+			  eraseCookie('theName');   // make sure to add the eraseCookie function for every field
+			  eraseCookie('theEmail');
+
+			//   document.loginform.mem_id.value = '';   // add a line for every field
+			   document.loginform.mem_pwd.value = ''; }
+		
+		function eraseCookie(name) {
+		  newCookie(name,"",-1); 
+		}
+		
+		function toMem(a) {
+		    newCookie('theName', document.loginform.mem_id.value);     // add a new cookie as shown at left for every
+		    newCookie('theEmail', document.loginform.mem_pwd.value);   // field you wish to have the script remember
+		}
+		function remCookie() {
+			document.loginform.mem_id.value = readCookie("theName");
+// 			document.loginform.mem_pwd.value = readCookie("theEmail");
+		}
+		
+		function addLoadEvent(func) {
+		  var oldonload = window.onload;
+		  if (typeof window.onload != 'function') {
+		    window.onload = func;
+		  } else {
+		    window.onload = function() {
+		      if (oldonload) {
+		        oldonload();
+		      }
+		      func();
+		    }
+		  }
+		}
+		
+		addLoadEvent(function() {
+		  remCookie();
+		});
+		</script>
+		<script>
+		function checking(){
+			if(this.checker.checked){
+				toMem(this)
+			}
+		}
+		function checkcheck(){
+			if(this.checker.checked == false){
+		// 		delMem(this)
+				 eraseCookie('theName');
+			}
+		}
+		</script>
+		<!-- ================== LOGIN COOKIE ======================= -->
 </body>
 </html>
