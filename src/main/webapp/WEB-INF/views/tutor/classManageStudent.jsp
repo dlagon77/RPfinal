@@ -413,7 +413,7 @@
 							<c:param name="tutor_no" value="${tutor_no }"/>
 						</c:url>
 						<a href="${next }">	[next]</a>
-						<c:url var="last" value="classManageStudentist.do">
+						<c:url var="last" value="classManageStudent.do">
 							<c:param name="currentPage" value="${maxPage }" />
 							<c:param name="tutor_no" value="${tutor_no }"/>
 						</c:url>

@@ -201,7 +201,7 @@
 			select count(*)
 			from member
 			join apply on (app_student_no = mem_no)
-			where app_tutor_no = #{tutor_no}
+			where app_tutor_no = #{tutor_no} and app_y = 'Y'
 		]]>
 	</select>
 	
