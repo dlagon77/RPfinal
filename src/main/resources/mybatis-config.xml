@@ -20,6 +20,7 @@
 		<typeAlias type="com.rp.finalp.admin.model.vo.Keyword" alias="Keyword" />
 		<typeAlias alias="Chart" type="com.rp.finalp.admin.model.vo.Chart"/>
 		<typeAlias type="com.rp.finalp.mypage.model.vo.InqBoard" alias="InqBoard" />
+		<typeAlias type="com.rp.finalp.mypage.model.vo.Message" alias="Message"/>
 		
 	</typeAliases>
 
@@ -31,5 +32,7 @@
 		<mapper resource="mappers/lecture-mapper.xml" />  
 		<mapper resource="mappers/admin-mapper.xml" /> 
 		<mapper resource="mappers/mypage-mapper.xml" /> 
+		<mapper resource="mappers/Mesboard-mapper.xml" /> 
+		 
 	</mappers>
 </configuration>
