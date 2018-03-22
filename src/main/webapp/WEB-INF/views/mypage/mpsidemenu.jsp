@@ -207,7 +207,7 @@ a:focus, a:hover, a:active {
 			<div class="top-news ">
 				<a href="${myqna }" class="btn blue-madison" style="  display:  inline-flex;">
 				<div style="width:150px;">
-                      <span>3 - 내 작성 글</span>
+                      <span>3 - Q&A 내가 쓴 글</span>
                       <em>Task submission history</em>
                  </div>
 					 <!-- <i class="fa fa-cogs top-news-icon"></i>  -->
@@ -233,7 +233,7 @@ a:focus, a:hover, a:active {
                     </div>
              </div>
             <!-- ============ -->
-            		<c:url var="myqna" value="selectQnaBoardList.do">
+<%--             		<c:url var="myqna" value="selectQnaBoardList.do">
 						<c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
 					</c:url>
                 <div style="width:250px;">
@@ -246,18 +246,22 @@ a:focus, a:hover, a:active {
 				<i class="fa fa-flask top-news-icon "></i>
 				</a>
 			</div>
-		</div>
+		</div> --%>
 		<!-- ============ -->
+		<c:url var="myadminque" value="adminquestion.do">
+			<c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
+			<c:param name="mpside" value="0" />
+		</c:url>
 		<div style="width:250px;">
 			<div class="top-news ">
-				<a href="testtest.do" class="btn grey " target="_blank ">
-				<span>Documentation</span>
-				
+				<a href="${myadminque }" class="btn grey">
+<!-- 				<a href="mypagequestionPage.do" class="btn grey"> -->
+				<span>일대일 문의</span>
 				Get Coding!	 
 				<i class="fa fa-columns top-news-icon "></i>
 				</a>
 			</div>
-		</div>
+		</div> 
 	</div>	
 
 </body>
