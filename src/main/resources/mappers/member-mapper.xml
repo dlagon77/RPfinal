@@ -206,14 +206,19 @@
 	</select>
 	
 	<resultMap type="Member" id="memberNameList">
+		<result property="mem_id" column="mem_id"/>
 		<result property="mem_name" column="mem_name"/>
+		<result property="mem_age" column="mem_age"/>
+		<result property="mem_gen" column="mem_gen"/>
+		<result property="mem_inter" column="mem_inter"/>
+		<result property="mem_refile" column="mem_refile"/>
 	</resultMap>
 	
 	<select id="applyClassList" resultMap="memberNameList" resultType="list" parameterType="java.util.HashMap"> 
 		<![CDATA[ 
 			select *
-			from (select rownum rnum, mem_name
-			      from (select mem_name
+			from (select rownum rnum, mem_id, mem_name, mem_age, mem_gen, mem_inter, mem_refile
+			      from (select mem_id, mem_name, mem_age, mem_gen, mem_inter, mem_refile
 			            from member
 			            where mem_no in (select app_student_no
 				                		from apply

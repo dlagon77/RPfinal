@@ -98,6 +98,10 @@
 	.tabletwo{
 		display: inline-block;
 	}
+	
+	.header-title{
+		text-align: center;
+	}
 </style>
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -169,11 +173,12 @@
 						<%
 							int selectNum = 1;
 							int acceptNum = 1;
+							int modalNum = 1;
 						%>
 						<c:forEach var="member" items="${list }">
 								<tr align="center">
 									<td align="center"><%= acceptNum++ %></td>
-									<td align="center"><a href="#" data-toggle="modal" data-target="#memprofile">${member.mem_name}</a></td>
+									<td align="center"><a href="#" data-toggle="modal" data-target="#memprofile<%= modalNum %>" data-toggle="tooltip" data-placement="top" title="회원정보 상세보기"">${member.mem_name}</a></td>
 									
 									<td>
 										<form action="applyClass.do" method="post">									
@@ -197,6 +202,73 @@
 									</td>
 									
 								</tr>
+								<!-- 회원 상세정보 모달  -->
+								<div class="modal fade" id="memprofile<%= modalNum++ %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content" style="border-radius: 3px;">
+											<div class="modal-header" style="border-bottom:0">
+												<div class="header-title">
+													<h2 class="detail-title"><i class="xi-profile xi-x"></i>&nbsp;회원 상세보기</h2>
+													<button type="button" class="close" aria-label="Close" data-dismiss="modal">
+														<span aria-hidden="true" style="color:gray;">&times;</span>
+													</button>
+												</div>
+											</div>
+											<div class="modal-body">
+												<div class="profile-id">
+													<div class="form-group"> 
+														<label class="col-sm-2 control-label">ID</label> 
+														<div class="col-sm-10"> 
+															<p class="form-control-static">${ member.mem_id }</p> 
+														</div> 
+													</div>
+												</div>
+												<div class="profile-name">
+													<div class="form-group"> 
+														<label class="col-sm-2 control-label">이름</label> 
+														<div class="col-sm-10"> 
+															<p class="form-control-static">${ member.mem_name }</p> 
+														</div> 
+													</div>
+												</div>
+												<div class="profile-age">
+													<div class="form-group"> 
+														<label class="col-sm-2 control-label">나이</label> 
+														<div class="col-sm-10"> 
+															<p class="form-control-static">${ member.mem_age }</p> 
+														</div> 
+													</div>
+												</div>
+												<div class="profile-gender">
+													<div class="form-group"> 
+														<label class="col-sm-2 control-label">성별</label> 
+														<div class="col-sm-10"> 
+															<c:if test="${ member.mem_gen eq 'F' }">
+																<p class="form-control-static">여자</p> 															
+															</c:if>
+															<c:if test="${ member.mem_gen eq 'M' }">
+																<p class="form-control-static">남자</p> 															
+															</c:if>
+														</div> 
+													</div>
+												</div>
+												<div class="profile-gender">
+													<div class="form-group"> 
+														<label class="col-sm-2 control-label">관심</label> 
+														<div class="col-sm-10"> 
+															<p class="form-control-static">${ member.mem_inter }</p> 
+														</div> 
+													</div>
+												</div>
+											</div>
+												
+											<div class="modal-footer"  style="border-top:0;padding-top:0">
+												<button type="button" class="closeButton" data-dismiss="modal">닫기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 회원 상세정보 모달  끝-->
 						</c:forEach>
 					
 					</table>
@@ -237,145 +309,7 @@
 						<a href="${last }">[맨끝]</a>
 					</div>
 					
-					<!-- test 삭제 모달 시작 -->
-					<div class="modal fade" width="600px" height="800px" id="memprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content" style="border-radius: 3px;">
-								<div class="modal-header" style="border-bottom:0">
-									<div style="text-align:center; font-size: 20px;font-weight: 400;margin-bottom: 20px;">기본 정보</div>  
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<div class="tablethr">
-										<div class="tableone">이름(실명)</div>
-										<div class="tabletwo">${Member.mem_name }</div>
-									</div>
-									<div class="tablethr">
-										<div class="tableone">아이디</div>
-										<div class="tabletwo">${Member.mem_id }</div>
-									</div>
-									<div class="tablethr" style="height:200px;">
-										<div class="tableone"style="padding-top: 80px;">사진</div>
-										<div class="tableimg">
-											<div>
-												<c:if test="${Member.mem_refile eq null || Member.mem_refile eq ''}">
-													<img src="/finalp/resources/img/profileupload/default-user.png"/>
-												</c:if>
-												<c:if test="${Member.mem_refile ne null && Member.mem_refile ne ''}">
-													<img src="/finalp/resources/img/profileupload/${Member.mem_refile }" id="userimg" >
-										            <img src="/finalp/target/m2e-wtp/web-resources/uploadFiles/${Member.mem_refile }" id="userimg" >
-												</c:if>
-											</div>
-											<div style="margin-left:10px;margin-top:10px;">
-												<form id="file-form" method="post" enctype="multipart/form-data" action="">
-													<div class="filebox bs3-primary preview-image">
-														<input type="file" id="input_file" name="userimgfile" style="display:none;" class="upload-hidden">
-														<br><br>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="tablethr">
-										<div class="tableone">전공분야</div>
-										<div class="tabletwo" style="display:  inline-flex;">
-											<div class="tablefive">
-												Spring
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer"  style="border-top:0;padding-top:0">
-									<button type="button" class="closeButton" data-dismiss="modal">닫기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-		            <!-- test 삭제 모달 끝 -->
 					
-					<!-- Large modal -->
-					<%-- <div id="memprofile222222"class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				  		<div class="modal-dialog modal-lg">
-						    <div class="modal-content">
-						     <!-- === BEGIN STU_PROFILE ===  -->
-
-								<section style="padding-top: 20px;">
-									<div class="largeboxone" style="margin-top: 40px;">
-										<div style="margin: 20px;">
-											<div style="font-size: 20px;font-weight: 400;margin-bottom: 20px;">기본 정보
-												<c:if test="${Member.mem_cate eq 'S'}">
-												(학생회원)
-												</c:if>
-												<c:if test="${Member.mem_cate eq 'T'}">
-												(강사회원)
-												</c:if>
-											</div>   
-											<div class="tablethr">
-												<div class="tableone">이름(실명)</div>
-												<div class="tabletwo">${Member.mem_name }</div>
-											</div>
-											<div class="tablethr">
-												<div class="tableone">아이디</div>
-												<div class="tabletwo">${Member.mem_id }</div>
-											</div>
-											<div class="tablethr" style="height:200px;">
-												<div class="tableone"style="padding-top: 80px;">사진</div>
-												<div class="tableimg">
-													<div>
-														<c:if test="${Member.mem_refile eq null || Member.mem_refile eq ''}">
-															<img src="/finalp/resources/img/profileupload/default-user.png"/>
-														</c:if>
-														<c:if test="${Member.mem_refile ne null && Member.mem_refile ne ''}">
-															<img src="/finalp/resources/img/profileupload/${Member.mem_refile }" id="userimg" >
-															             <img src="/finalp/target/m2e-wtp/web-resources/uploadFiles/${Member.mem_refile }" id="userimg" >
-														</c:if>
-													</div>
-													<div style="margin-left:10px;margin-top:10px;">
-														<form id="file-form" method="post" enctype="multipart/form-data" action="">
-															<div class="filebox bs3-primary preview-image">
-																<label for="input_file" class="btn btn-green">업로드</label>
-																<input class="btn btn-green" type="button" id="userimginit" onclick ="initImg();" value = "기본이미지">
-																<input type="file" id="input_file" name="userimgfile" style="display:none;" class="upload-hidden">
-																<br><br>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-											
-											<div class="tablethr">
-												<div class="tableone">전공분야</div>
-												<div class="tabletwo" style="display:  inline-flex;">
-													<div class="tablefive">
-														<input type="text" name="mem_inter" id="mem_inter" list="interestValues" placeholder="전공 선택해주세요" value="${Member.mem_inter }">
-														<div class="input-group">
-															<datalist id="interestValues">
-																<option value="CSS"/>
-																<option value="HTML"/>
-																<option value="JSP" />
-																<option value="ORACLE" />
-																<option value="JAVA" />
-																<option value="C++" />
-																<option value="SPRING" />
-															</datalist>   
-														</div>
-													</div>
-													<div class="tablefive">
-														<input type="button" onclick="checkinter();" value = "전공변경" style="margin-left: 10px;">
-													</div> 
-												</div>
-											</div>
-										</div>
-									</div>
-								</section>
-						   
-						   
-						    </div>
-				  		</div>
-					</div>
-					 --%>
 				</div>
 			</div>
 					
@@ -392,6 +326,11 @@
 	        }
 	    });
 	});
+	
+	//툴팁처리
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+	})
 </script>
 </body>
 </html>
