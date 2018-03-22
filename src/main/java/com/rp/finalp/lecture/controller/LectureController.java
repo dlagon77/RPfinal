@@ -41,8 +41,9 @@ public class LectureController {
 	private TestService testService;
 	
 	@RequestMapping(value = "taskList.do", method = RequestMethod.GET)
-	public String taskListViewMethod(@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
+	public String taskListViewMethod(@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="mem_no") int mem_no,Model model,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("mem_no",mem_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("assignList",assignService.selectTutorAssList(tutor_no));
 		int checkApply=memberService.checkApply(lecture);

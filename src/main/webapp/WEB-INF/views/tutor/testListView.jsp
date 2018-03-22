@@ -131,6 +131,7 @@
 </style>
 </head>
 <body>
+<c:if test="${checkApply eq 1 or tutor_no == mem_no }">
 <c:import url="../header.jsp" />
 <div id="banner" style="height:305px;background-image: url('/finalp/resources/img/avatar.jpg');background-size:cover;background-position-y: -200px;"></div>
 
@@ -408,7 +409,13 @@ function myFunction() {
 		</script>
 		
 </div>
-
+</c:if>
+<c:if test="${checkApply eq 0 and tutor_no != mem_no}">
+	<script>
+		alert("수강신청을 해야합니다!!");
+		 history.go(-1);
+	</script>
+</c:if>
 </body>
 </html>
 

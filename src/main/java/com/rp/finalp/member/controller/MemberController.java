@@ -244,4 +244,9 @@ public class MemberController {
 		out.flush();
 		out.close();
 	}
+	
+	@RequestMapping("/search.do")
+	public String searchViewmMethod() {
+		return "tutor/search";
+	}
 }

@@ -84,7 +84,7 @@
 	<select id="selectTutorAssList" resultMap="tutorAssList" resultType="list" 
 		parameterType="java.util.HashMap"> 					
 		<![CDATA[ 
-		select ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt
+		select ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt,ass_maker
 		from assignment
 		where ass_maker = #{tutor_no} and ass_writer is null
 		]]>
@@ -106,7 +106,7 @@
 
 	<select id="selectSubmitAss" resultMap="assResultMap" resultType="list">
 		<![CDATA[
-			select ass_no, ass_date, ass_orfile, ass_refile, ass_cate, ass_cor_cnt, ass_writer, ass_tcate_id, mem_name
+			select ass_no, ass_date, ass_orfile, ass_refile, ass_cate, ass_cor_cnt, ass_writer, ass_tcate_id, mem_name,ass_maker
 			from assignment 
 			join member on (ass_writer = mem_no)
 			where ass_cate = #{ass_cate} and ass_maker = #{ass_maker}

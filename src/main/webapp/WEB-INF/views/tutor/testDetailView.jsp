@@ -164,7 +164,7 @@
 	<div style="background-color:hsla(0, 0%, 93.3%, .4);">
 	
 		
-		<div class="container about" style="display:flex;width:1284px"">
+		<div class="container about" style="display:flex;width:1284px">
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">

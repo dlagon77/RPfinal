@@ -460,6 +460,16 @@
 			</div>
 				
 			</div>
+			
+			<section id="memo" style="padding-top:30px">
+				<div class="headline">
+					<h2 style="width: 4%;font-weight:600">메모</h2>
+				</div>
+				<div style="font-size:medium; line-height:30px;" id="problem_description">
+					<p class="lead text-center" id="problem-memo-button"><a href="#" class="problem-memo-write">메모 작성하기</a></p>
+				</div>
+			</section>
+			
 			<hr>
 
 		</div>
@@ -480,7 +490,7 @@
 	</div><!--row-->
 
 
-<input type="text" id="atitle" value=${assignment.ass_title } >
+<input type="hidden" id="atitle" value=${assignment.ass_title } >
 <input type="hidden" id="abc" value=${assignment.ass_cate } >
 <input type="hidden" id="tno" value=${tutor_no }>
 	

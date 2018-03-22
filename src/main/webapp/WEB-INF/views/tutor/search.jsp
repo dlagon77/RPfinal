@@ -73,6 +73,14 @@
 			outline:none;
 			border:none;
 		}
+		
+		.results-number{
+			color: #999;
+		    display: block;
+		    margin-bottom: 10px;
+		    text-transform: uppercase;
+		    font-size:13px;
+		}
 </style>
 
 	<!-- 별점플러그인 관련 링크 -->
@@ -185,12 +193,12 @@
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
 
-			  <form style="margin-top:7px;display:flex" action="search.do">
+			  <form style="margin-top:7px;display:flex">
 			  <div>
 			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
 			  </div>
 			  <div>	
-			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
 			  </div>
 				  
 				</form>
@@ -206,128 +214,124 @@
 <div class="container about" style="width:1284px">
 
 	<section class="about" id="about" style="width:1284px">
-		<!--<div class="container about" style="width:1284px">-->
+		
 			<div class="row">
+    <div class="col-md-2 related-search">
+      <div class="row">
+        <div class="col-md-12 col-sm-4">
+          <h5 style="color:gray;margin:0 0 10px">검색 결과</h5>
+            <ul class="list-unstyled">
+                <li><a href="#" class="category-link active" data-category="Problems" style="font-size:15px">문제</a></li>
+                <li><a href="#" class="category-link" data-category="Lecture" style="font-size:15px">강의</a></li>
+                <li><a href="#" class="category-link" data-category="Workbooks" style="font-size:15px">test</a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="margin-bottom-20"></div>
+      <div style="width: 100%;">
+    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><iframe width="164" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:164px;height:600px;"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<div class="margin-bottom-20"></div>
 
-				<div class="col-md-7 big-letter">
-				<iframe width="734" height="400" src="https://www.youtube.com/embed/${Lecture.lec_link }" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-				
-					<p style="font-size:14px;color:gray;float:right">
-						조회수 ${Lecture.lec_readcount }회
-					</p>
-					<br>
-				</div>
-				<div class="col-md-5">
-					<h4>${Lecture.lec_title }</h4>
-					<br>
-					<p>
-						${Lecture.lec_con }
-					</p>
-					<br>
-					<img class="pull-right" src="/finalp/resources/img/logo2.PNG" alt="signature">
-					<p style="font-size:14px">자세히 보기</p>
-				</div>
-			</div>
-		<!--</div>-->
+    </div>
+    <div class="col-md-10" id="result">
+      
+
+
+      <span class="results-number">검색 결과 4개</span>
+      <div class="results">
+ 
+
+  <div class="inner-results">
+    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
+    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+      <li>시간 제한: 2초</li>
+      <li>맞은 사람: 47929</li>
+      <li>정답률: 36.04%</li>
+    </ul>
+    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+    <!-- <ul class="list-inline down-ul">
+      <li><a href="/submit/1000">제출</a></li>
+    </ul> -->
+  </div>
+<hr>
+
+<div class="inner-results">
+    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
+    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+      <li>시간 제한: 2초</li>
+      <li>정답: 47929</li>
+      <li>맞은 사람: 36408</li>
+    </ul>
+    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+    <!-- <ul class="list-inline down-ul">
+      <li><a href="/submit/1000">제출</a></li>
+    </ul> -->
+  </div>
+<hr>
+
+<div class="inner-results">
+    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
+    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+      <li>시간 제한: 2초</li>
+      <li>정답: 47929</li>
+      <li>맞은 사람: 36408</li>
+    </ul>
+    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+    <!-- <ul class="list-inline down-ul">
+      <li><a href="/submit/1000">제출</a></li>
+    </ul> -->
+  </div>
+<hr>
+
+<div class="inner-results">
+    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
+    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+      <li>시간 제한: 2초</li>
+      <li>정답: 47929</li>
+      <li>맞은 사람: 36408</li>
+    </ul>
+    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
+    <!-- <ul class="list-inline down-ul">
+      <li><a href="/submit/1000">제출</a></li>
+    </ul> -->
+  </div>
+<hr>
+
+
+  
+
+</div>
+      <div class="margin-bottom-30"></div>
+      <div class="text-center">
+        <ul class="pagination" id="result-pagination">
+          
+        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
+      </div>
+      
+      <div style="width: 100%;">
+    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><iframe width="945" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:945px;height:90px;"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<div class="margin-bottom-20"></div>
+
+    </div>
+  </div>
 	</section>
 	
 	<hr>
 
-	<!--<div class="container">-->
-	<div style="display:flex">
-	<h4><div id="reviewCount">평가 ${reviewCount }개</div></h4>
-	</div>
 	<section class="about" id="about" style="width:1284px;padding-top:0">
 		<div class="row">
 
-			<div class="col-md-7 big-letter">
-				
-				<!--리뷰 등록 템플릿 -->
-				<div class="message" style="display:flex;width:750px;margin-bottom: 50px;">
-					<button style="background: none;border: none;outline: none;display: flex;">
-					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<c:if test="${loginUser.mem_refile == null }">
-							<img height="45" width="45" src="/finalp/resources/img/logo2.PNG" style="display: block;margin-left: auto;margin-right: auto;">
-						</c:if>
-						<c:if test="${loginUser.mem_refile != null }">
-							<img height="45" width="45" src="/finalp/resources/img/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
-						</c:if>
-					</div>
-				   </button>
-		
-					<form style="width:100%">
-					  <div class="form-group" style="font-size:15px;padding-top: 50px;">
-						<input type="text" class="messageInput" id="inputReviewContent" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
-						<select id="star">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						</select>
-					  </div>
-					
-					  <button type="button" id="inputReviewButton" class="btn btn-primary" style="float:right" onclick="insertReview();">리뷰등록</button>
-					</form>
-				</div>
-				<!-- 리뷰 등록 템플릿 끝 -->
-				
-				<div id="review">
-				<c:forEach items="${review }" var="row">
-				<!-- 댓글 리스트 폼 -->
-				
-					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">
-						<button style="background: none;border: none;outline: none;display: flex;">
-						<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-							<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
-						</div>
-					   </button>
-					   <div>
-						<span style="font-size:16px!important;font-weight:500;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
-					   	<p>${row.rev_con }</p>
-					   </div>
-					   <div style="margin-top:1%;position: absolute;left: 87%;">
-						   <select id="p${row.rev_no }">
-							  <option value="1">1</option>
-							  <option value="2">2</option>
-							  <option value="3">3</option>
-							  <option value="4">4</option>
-							  <option value="5">5</option>
-							</select>
-						</div>
-					</div>
-				
-				<!-- 댓글 리스트 폼 끝--> 
-				
-				</c:forEach>
-				</div>
-				
-
-
-			</div><!--col-md-7-->
-
-
-			<div class="col-md-5" style="width: 35%;float: right;">
-			<br>
-			<form action="#">
-				<div class="input-group mb-3">
-				  <div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">@제목</span>
-				  </div>
-				  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-				</div>
-				<br>
-				<div class="input-group mb-3">
-				  <div class="input-group-append">
-					<span class="input-group-text" id="basic-addon2">@강사님께 쪽지보내기</span>
-				  </div>
-				</div>
-				<textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
-				<br>
-				<button type="submit" class="btn btn-primary" style="float:right">쪽지보내기</button>
-				</div>
-				
-			</form>
+			
 
 			</div>
 	</section>
