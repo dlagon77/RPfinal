@@ -12,6 +12,14 @@
 .btn{
 cursor:pointer;
 }
+.cuadro_intro_hover .caption-textt {
+    z-index: 10;
+    color: #fff;
+    position: absolute;
+    height: 300px;
+    text-align: center;
+    width: 100%;
+}
 </style>
 </head>
 <!-- === BEGIN BODY ===  -->
@@ -55,12 +63,19 @@ cursor:pointer;
 												</p>
 											<div class="caption">
 												<div class="blur"></div>
-												<div class="caption-text">
+												<div class="caption-textt">
 													<h3	class="img-h3" style="border-top: 2px solid white; border-bottom: 2px solid white; padding: 10px;">${row.mem_name }</h3>
 													<p> 
 													- ${row.mem_name } 강사님 -
 														</p>
-													<a class=" btn btn-default" href="tutorHome.do" ><span class="glyphicon glyphicon-plus" style="color:black;">
+															<c:if test="${loginUser.mem_no ne null }">
+																<c:url var="tdetail" value="tutorHome.do">
+																	<c:param name="tutor_no" value="${row.mem_no }" />
+																	<c:param name="mem_no" value="${loginUser.mem_no }" />
+																</c:url>
+															</c:if>
+													<a class=" btn btn-default" href="${tdetail }" >
+													<span class="glyphicon glyphicon-plus" style="color:black;">
 															방송국가기</span></a>
 												</div>
 											</div>
