@@ -19,6 +19,7 @@
 		<typeAlias type="com.rp.finalp.admin.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.rp.finalp.admin.model.vo.Keyword" alias="Keyword" />
 		<typeAlias alias="Chart" type="com.rp.finalp.admin.model.vo.Chart"/>
+		<typeAlias type="com.rp.finalp.mypage.model.vo.InqBoard" alias="InqBoard" />
 		
 	</typeAliases>
 
