@@ -49,7 +49,6 @@ public class LectureController {
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
-		System.out.println(checkApply);
 		return "tutor/taskList";
 	}
 	
@@ -66,7 +65,6 @@ public class LectureController {
 		int checkReady = memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
 		
-		System.out.println(checkApply);
 		
 		return "tutor/taskDetail";
 	}
@@ -195,7 +193,6 @@ public class LectureController {
 	
 	@RequestMapping("insertLecture.do")
 	public void insertLectureMethod(Lecture lecture, Model model) {
-		System.out.println(lecture);
 		lectureService.insertLecture(lecture);
 	}
 	
@@ -303,7 +300,6 @@ public class LectureController {
 	public String deleteClassStudentMethod( Lecture lecture, @RequestParam(value="tutor_no") int tutor_no, Model model) {
 		lectureService.deleteClassStudent(lecture);
 		model.addAttribute("tutor_no", tutor_no);
-		System.out.println(lecture);
 		return "redirect:classManageStudent.do";
 	}
 }
