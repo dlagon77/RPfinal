@@ -310,7 +310,7 @@
 						
 							<c:forEach var="member" items="${ list }">							
 								<c:if test="${ member.mem_gen eq 'M' }">
-									<tr align="center" style="background-color: #CECEF6">
+									<tr align="center" style="background-color: #EFEFFB">
 										<td align="center"><%= num++ %></td>
 										<td align="center">
 											<c:url var="studentDetail" value="#">
@@ -334,7 +334,7 @@
 									</tr>
 								</c:if>
 								<c:if test="${ member.mem_gen eq 'F' }">
-									<tr align="center" style="background-color: #F6CECE">
+									<tr align="center" style="background-color: #FBEFEF">
 										<td align="center"><%= num++ %></td>
 										<td align="center">
 											<c:url var="studentDetail" value="#">

@@ -111,7 +111,7 @@
 			
 			<div class="sideMenu">
 			
-				<h1 class="title" >[강의실 관리]</h1>
+				<h1 class="title" ><i class="xi-label"></i>&nbsp;강의실 관리</h1>
 				<hr>
 				<div class="menu">
 					<ul>
