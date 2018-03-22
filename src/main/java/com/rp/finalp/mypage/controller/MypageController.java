@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.board.model.service.QnaBoardService;
 import com.rp.finalp.board.model.vo.QnaBoard;
 import com.rp.finalp.common.util.FileUtils;
@@ -37,10 +39,81 @@ public class MypageController {
 	private QnaBoardService qbService;
 	
 	
-	/* 테스트 이동 */
-	@RequestMapping("/testtest.do")
-	public String amoveToStumypagemyboard() {
-		return "mypage/mplist";
+	/* 과제 제출 내역 */
+/*	@RequestMapping("/stusubmit.do")
+	public String moveToStumypageAssignmentSubmit() {
+		return "mypage/stusubmitlist";
+	}*/
+	
+	// 마이페이지 : 과제 제출 내역 내가 쓴글 리스트 조회 + 검색
+	@RequestMapping(value = "/MyAssignBoardList.do")
+	public String mypageAssignmentSubmitlist(Model model, @RequestParam(value="page",required=true,defaultValue="1")int page,
+			@RequestParam(value="keyword",required=false,defaultValue="") String keyword,
+			@RequestParam(value="mem_no",required=false,defaultValue="1") int mem_no,
+			HttpSession session
+			) {
+		if(session !=null) {	
+			Member member = (Member)session.getAttribute("loginUser");
+			mem_no = member.getMem_no();
+		}
+		
+		int currentPage = page;
+		System.out.println("currentPage : "+currentPage);
+		int limit = 10;
+		int listCount = mypService.getListCountSubAssign(keyword,mem_no);
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		int startPage = ((int) ((double) currentPage / limit + 0.9) -1) * limit + 1;
+		int endPage = startPage + limit - 1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		List<Assignment> list = mypService.serviceMyAssign(startRow,endRow,keyword,mem_no);
+		
+		if (maxPage < endPage)
+			endPage = maxPage;
+		
+		if(list.size()>0){
+			model.addAttribute("list", list);
+		}else{
+			model.addAttribute("result", 0);
+		}
+		                  
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("limit", limit);
+		model.addAttribute("keyword", keyword);
+		
+		return "mypage/mySubmitAssignBoard";
+	}
+	
+	
+	
+	/* 마이페이지 - 일대일문의페이지 */
+/*	@RequestMapping("/mypagequestionPage.do")
+	public String moveTomypagequestion() {
+		return "mypage/customerboardlist";
+	}*/
+	
+	/* 마이페이지 일대일문의ㅋ	 ->   */
+	@RequestMapping("/adminquestion.do")
+	public String file(Model model, HttpSession session,
+			@RequestParam(value="mem_no",required=false)int mem_no,
+			@RequestParam(value="inqbtitle",required=false)String inqbtitle,
+			@RequestParam(value="content",required=false)String content,
+			@RequestParam(value="mpside",required=false)int mpside
+			) {
+		if(mpside == 2) {
+			int checknum = mypService.adminquestion(mem_no, inqbtitle, content);
+			if(checknum > 0) {
+				System.out.println("마이페이지 - 일대일문의하기 성공!");
+			}else {
+				System.out.println("마이페이지 - 일대일문의하기 실패!");
+			}
+		}
+		model.addAttribute("myadminquestion", mypService.myadminquestlist(mem_no));
+		return "mypage/customerboardlist";
 	}
 	
 	
@@ -71,7 +144,6 @@ public class MypageController {
 			return "home";
 		}
 	}
-
 
 	
 	/* 현재비번확인 */
@@ -175,6 +247,13 @@ public class MypageController {
 		out.close();
 	}
 	
+	/* 수강생 마이페이지 - 구독중인 강사 페이지로 이동 */
+	/*@RequestMapping("/stusubsc.do")*/
+	@RequestMapping("/stumypage.do")
+	public String moveToStumypagesubscribe(Model model, int mem_no) {
+		model.addAttribute("mysubsc", mypService.mysubsclist(mem_no));
+		return "mypage/stusubscribe";
+	}
 	
 	// 마이페이지 : QNA내가 쓴글 리스트 조회 + 검색
 	@RequestMapping(value = "/selectQnaBoardList.do")
@@ -258,20 +337,14 @@ public class MypageController {
 		
 	}
 	
-	/* 수강생 마이페이지 - 구독중인 강사 페이지로 이동 */
-	/*@RequestMapping("/stusubsc.do")*/
-	@RequestMapping("/stumypage.do")
-	public String moveToStumypagesubscribe(Model model, int mem_no) {
-		model.addAttribute("mysubsc", mypService.mysubsclist(mem_no));
-		return "mypage/stusubscribe";
-	}
+
 	
 	/* 수강생 마이페이지 - 질문내역 페이지로 이동 */
-	@RequestMapping("/stuquestion.do")
+/*	@RequestMapping("/stuquestion.do")
 	public String moveToStumypageQna() {
 		return "mypage/stuqnalist";
 	}
-	
+	*/
 	/* 수강생 마이페이지 - 과제제출내역 페이지로 이동 */
 	@RequestMapping("/stusubmit.do")
 	public String moveToStumypageAssignmentSubmit() {
@@ -279,27 +352,6 @@ public class MypageController {
 	}
 	
 
-
-	/* 수강생 마이페이지 - 선생님 회원 신청 페이지로 이동 */
-	@RequestMapping("/stuchangeTu.do")
-	public String moveToStumypagechange() {
-		return "mypage/stuapplytoTu";
-	}
-	
-	/* 수강생 마이페이지 - 회원정보수정 페이지로 이동 */
-	@RequestMapping("/stuupdate.do")
-	public String moveToStumypagemodify() {
-		return "mypage/membermodify";
-	}
-
-	
-
-	
-
-
-	
-
-	
 	/* 마이페이지 ajax 프로필 이미지 업로드 */
 	@RequestMapping("/ajax/userimgupload.do")
 	@ResponseBody
@@ -405,6 +457,17 @@ public class MypageController {
 			model.addAttribute("myqblist", myqbService.selectQnaList());
 			return "board/QnaBoardList";
 		}*/
+		/* 수강생 마이페이지 - 선생님 회원 신청 페이지로 이동 */
+		/*	@RequestMapping("/stuchangeTu.do")
+			public String moveToStumypagechange() {
+				return "mypage/stuapplytoTu";
+			}*/
+			
+			/* 수강생 마이페이지 - 회원정보수정 페이지로 이동 */
+		/*	@RequestMapping("/stuupdate.do")
+			public String moveToStumypagemodify() {
+				return "mypage/membermodify";
+			}*/
 
 }
 
