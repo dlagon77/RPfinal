@@ -10,7 +10,7 @@
 <style>
 	th{align:center;}
 	ul{list-style: none;}
-	ul li{margin-left: 50px;}
+	.menu ul li{margin-left: 50px;}
 	ul li a{text-decoration: none;}
 	ul li a p{display: inline; font-size: 16px; font-family: 'Nanum Gothic', sans-serif; color: gray;	}
  	ul li a:hover i, ul li a:hover p{color: black;}
