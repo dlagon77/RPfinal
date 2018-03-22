@@ -318,7 +318,7 @@
 												<c:param name="ass_no" value="${row.ass_no }" />
 												<c:param name="tutor_no" value="${tutor_no }"/>
 											</c:url>			
-											<a href="${studentDetail}" name="title">${ member.mem_name }${member.mem_no }</a>
+											<a href="${studentDetail}" name="title">${ member.mem_name }</a>
 										</td>
 										<td align="center">${ member.mem_id }</td>
 										<td align="center">${ member.mem_age }</td>
@@ -341,7 +341,7 @@
 												<c:param name="currentPage" value="${currentPage }" />
 												<c:param name="tutor_no" value="${tutor_no }"/>
 											</c:url>			
-											<a href="${studentDetail}" name="title">${ member.mem_name }${member.mem_no }</a>
+											<a href="${studentDetail}" name="title">${ member.mem_name }</a>
 										</td>
 										<td align="center">${ member.mem_id }</td>
 										<td align="center">${ member.mem_age }</td>
