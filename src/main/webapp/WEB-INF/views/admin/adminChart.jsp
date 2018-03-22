@@ -145,7 +145,7 @@
           var data = google.visualization.arrayToDataTable([
             ['string', '방문자수'],
             ['${datelist[0].v_date}',  ${datelist[0].v_count}],
-            ['${datelist[1].v_date}',  ${datelist[2].v_count}],
+            ['${datelist[1].v_date}',  ${datelist[1].v_count}],
             ['${datelist[2].v_date}',  ${datelist[2].v_count}],
             ['${datelist[3].v_date}',  ${datelist[3].v_count}],
             ['${datelist[4].v_date}',  ${datelist[4].v_count}],

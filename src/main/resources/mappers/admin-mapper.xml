@@ -346,7 +346,7 @@
 			<select id="dalist" resultMap="ChartResultMap">
 				<![CDATA[
 					SELECT * FROM VISITOR
-					WHERE V_DATE BETWEEN SYSDATE-7 AND SYSDATE
+					WHERE V_DATE BETWEEN SYSDATE-8 AND SYSDATE
 					ORDER BY 2	
 				]]>
 			</select>
