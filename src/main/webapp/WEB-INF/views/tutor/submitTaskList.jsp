@@ -203,7 +203,27 @@
 		font-weight:bold;
 		
 	}
-
+	#deapply{
+			background-color: hsl(0, 0%, 93.3%);
+			color: hsla(0, 0%, 6.7%, .6);
+		}
+			#applyready{
+			background-color: burlywood;
+			border-radius: 2px;
+			color: white;
+			padding: 13px 20px;
+			white-space: nowrap;
+			font-size: 1.4rem;
+			font-weight: 500;
+			letter-spacing: .007px;
+			display: flex;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			outline:none;
+			border:none;
+		}
+	
 </style>
 </head>
 <body>
@@ -226,11 +246,13 @@
 					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
 
-				<div style="margin-top: 25px;margin-left:10px">
-					<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
-						<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
-					</button>
-				</div>
+				<c:if test="${loginUser.mem_no eq tutor_no }">
+					<div style="margin-top: 25px;margin-left:10px">
+						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
+							<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+						</button>
+					</div>
+				</c:if>
 
 			</div>
 			<div class="col-lg-3">
@@ -321,7 +343,7 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&tutor_no=${tutor_no}">${ass_sub_no }번</a></li>
+				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${ass_sub_no }번</a></li>
 				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
 
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
@@ -347,71 +369,28 @@
 
 			</ul>
 
-
-			<c:forEach items="${submitList }" var="row">
-				<section id="description" style="padding-top:30px">
-					<div class="headline">
-						<h2 style="width: 4%;font-weight:500">문제</h2>
-					</div>
-					<div style="font-size:medium; line-height:30px;" id="problem_description">
-						<p>${row.ass_orfile }</p>
-					</div>
-				</section>
-			</c:forEach>
+			<c:if test="${checkSubmit gt 0 or tutor_no eq loginUser.mem_no}">
 			
-
-			<section id="description" style="padding-top:30px">
-				<div class="headline">
-					<h2 style="width: 4%;font-weight:500">Hint</h2>
-				</div>
-				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p>${assignment.ass_hint }</p>
-				</div>
-			</section>
-
-
-			<section id="description" style="padding-top:30px">
-				<div class="headline">
-					<h2 style="width: 9%;font-weight:500">예제 정답</h2>
-				</div>
-				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<pre class="sampledata" id="an">${assignment.ass_answer }</pre>
-				</div>
-			</section>
-
-			<section id="sampleinput" style="padding-top:30px">
-				<div class="headline">
-					<h2 style="width:6%;font-weight:500">풀기</h2>
-				</div>
-			</section>
-			<div class="row">
-			<div class="col-md-8">
-				<section id="sampleinput" style="padding-top:0">
-				
-				<div style="display:flex;margin-bottom: 20px;">
-					<p>Enter Your Tutor_NO : <p><input type="text" id="tutorno" onblur="check()">
-					<p>Enter Class Name : <p><input type="text" id="class" onblur="check()">
-				</div>
-				<div style="display:flex;width: fit-content;">
-					<button class="compileButton" onclick="compile()">Compile</button>
-					<button class="compileButton" onclick="run()">Run</button>
-					<button class="compileButton" onclick="empty()">Clear</button>
-					<button class="compileButton" id="subutton" onclick="subass()">제출</button>
-				</div>
-				<textarea class="form-control" aria-label="With textarea" rows="30" id="maincode" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
-				
+				<c:forEach items="${submitList }" var="row">
+					<section id="description" style="padding-top:30px">
+						<div class="headline">
+							<h2 style="width: 6%;font-weight:500">${row.mem_name }</h2>
+						</div>
+						<div style="font-size:medium; line-height:30px;" id="problem_description">
+							<p>${row.ass_orfile }</p>
+						</div>
+					</section>
+				</c:forEach>
+			
+			</c:if>
+			
+			<c:if test="${checkSubmit eq 0 and tutor_no != loginUser.mem_no}">
+				<section id="description" style="padding-top:30px">
+					문제를 풀어야만 결과를 볼 수 있습니다.
 				</section>
-			</div>
-			<div class="col-md-4">
-				<section id="sampleoutput" style="padding-top:30px">
-				<div style="padding-top:84px"></div>
-				
-				<textarea class="form-control" aria-label="With textarea" rows="30" id="output" name="output" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
-				</section>
-			</div>
-				
-			</div>
-			<hr>
+			</c:if>
+			
+			
 
 		</div>
 

@@ -62,4 +62,9 @@ public class AssignServiceImpl implements AssignService{
 	public List<Assignment> selectSubmitAss(HashMap<String, Object> map) {
 		return assignDao.selectSubmitAss(map);
 	}
+
+	@Override
+	public int checkSubmit(Assignment ass) {
+		return assignDao.checkSubmit(ass);
+	}
 }

@@ -49,5 +49,9 @@ public class AssignDao {
 	public List<Assignment> selectSubmitAss(HashMap<String, Object> map) {
 		return mybatis.selectList("assignMapper.selectSubmitAss",map);
 	}
+	
+	public int checkSubmit(Assignment ass) {
+		return mybatis.selectOne("assignMapper.checkSubmit",ass);
+	}
 
 }

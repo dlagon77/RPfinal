@@ -281,7 +281,7 @@
 					
 						<td class="list_problem_id">${assign_no }</td>
 						<td>${row.ass_reg_date }</td>
-						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}">${row.ass_title }</a></td>
+						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&mem_no=${loginUser.mem_no}">${row.ass_title }</a></td>
 						<td>
 							<span class="badge badge-info">${row.ass_cate }</span>
 						</td>

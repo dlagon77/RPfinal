@@ -23,6 +23,7 @@
   		<result property="ass_maker" column="ass_maker"/>
   		<result property="ass_lec_id" column="ass_lec_id"/>  	
   		<result property="ass_tcate_id" column="ass_tcate_id"/>  	
+  		<result property="mem_name" column="mem_name"/>
   
 	</resultMap>
 	
@@ -106,10 +107,19 @@
 	
 	<select id="selectSubmitAss" resultMap="assResultMap" resultType="list">
 		<![CDATA[
-			select * from assignment where ass_cate = #{ass_cate} and ass_maker is null
+			select ass_no, ass_date, ass_orfile, ass_refile, ass_cate, ass_cor_cnt, ass_writer, ass_tcate_id, mem_name
+			from assignment 
+			join member on (ass_writer = mem_no)
+			where ass_cate = #{ass_cate} and ass_maker = #{ass_maker}
 		]]>
 	</select>
 
+	
+	<select id="checkSubmit" resultType="Integer">
+		<![CDATA[
+			select count(*) from assignment where ass_cate=#{ass_cate} and ass_writer = #{mem_no}
+		]]>
+	</select>
 
 
 </mapper>

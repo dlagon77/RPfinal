@@ -283,7 +283,7 @@
 						</div>
 					   </button>
 					   <div>
-						<span style="font-size:16px!important;font-weight:600;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
+						<span style="font-size:16px!important;font-weight:500;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
 					   	<p>${row.rev_con }</p>
 					   </div>
 					   <div style="margin-top:1%;position: absolute;left: 87%;">

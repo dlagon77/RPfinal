@@ -1,9 +1,14 @@
 package com.rp.finalp.lecture.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,30 +49,36 @@ public class LectureController {
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
+		System.out.println(checkApply);
 		return "tutor/taskList";
 	}
 	
 	@RequestMapping(value = "taskDetail.do", method = RequestMethod.GET)
 	public String taskDetailViewMethod(@RequestParam(value="ass_no") int ass_no,@RequestParam(value="ass_sub_no") int ass_sub_no,@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("ass_no",ass_no);
 		model.addAttribute("ass_sub_no",ass_sub_no);
+		Assignment test = assignService.assDetail(ass_no);
 		model.addAttribute("assignment",assignService.assDetail(ass_no));
-		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
+		
+		System.out.println(checkApply);
+		
 		return "tutor/taskDetail";
 	}
 	
 	@RequestMapping(value="submitTaskList.do", method=RequestMethod.GET)
-	public String submitTaskList(HttpServletRequest request,Model model,Lecture lecture) {
+	public String submitTaskList(HttpServletRequest request,Model model,Lecture lecture,Assignment ass) throws IOException {
 
 		int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
 		int ass_no = Integer.parseInt(request.getParameter("ass_no"));
 		int ass_sub_no = Integer.parseInt(request.getParameter("ass_sub_no"));
 		String ass_cate = request.getParameter("ass_cate");
+		int ass_maker = Integer.parseInt(request.getParameter("ass_maker"));
 
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
@@ -84,10 +95,14 @@ public class LectureController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ass_cate", ass_cate);
+		map.put("ass_maker",ass_maker);
 		
 		
 		if(maxPage < endPage)
 			endPage = maxPage;
+		
+		int checkSubmit = assignService.checkSubmit(ass);
+		model.addAttribute("checkSubmit",checkSubmit);
 		
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("ass_no",ass_no);
@@ -115,6 +130,10 @@ public class LectureController {
 		model.addAttribute("tutor_no", tutor_no);
 		model.addAttribute("Lecture",  lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		return "tutor/lecturePlayList";
 	}
 	

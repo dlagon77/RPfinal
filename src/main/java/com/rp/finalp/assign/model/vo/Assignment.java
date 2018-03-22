@@ -29,13 +29,17 @@ public class Assignment implements java.io.Serializable{
 	private int ass_lec_id;
 	private int ass_tcate_id;
 	
+	//재석 추가
+	private String mem_name;
+	private int mem_no;
+	
 	public Assignment() {}
 
 	
 	public Assignment(int ass_no, String ass_comment, Date ass_reg_date, Date ass_date, String ass_orfile,
 			String ass_refile, String ass_cate, String ass_title, int ass_cor_cnt, String ass_pro, String ass_answer,
 			String ass_hint, String ass_res_cod, String ass_res_ans, int ass_writer, int ass_maker, int ass_lec_id,
-			int ass_tcate_id) {
+			int ass_tcate_id,String mem_name,int mem_no) {
 		super();
 		this.ass_no = ass_no;
 		this.ass_comment = ass_comment;
@@ -55,6 +59,29 @@ public class Assignment implements java.io.Serializable{
 		this.ass_maker = ass_maker;
 		this.ass_lec_id = ass_lec_id;
 		this.ass_tcate_id = ass_tcate_id;
+		this.mem_name = mem_name;
+		this.mem_no = mem_no;
+	}
+
+	
+
+	public int getMem_no() {
+		return mem_no;
+	}
+
+
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
+	}
+
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
 
 
@@ -244,7 +271,7 @@ public class Assignment implements java.io.Serializable{
 				ass_date + ", " + ass_orfile + ", " + ass_refile + ", " + ass_cate + ", " + 
 				ass_title + ", " + ass_cor_cnt + ", " + ass_pro + ", " + ass_answer + ", " + 
 				ass_hint + ", " + ass_res_cod + ", " + ass_res_ans + ", " + ass_writer + ", " + 
-				ass_maker + ", " + ass_lec_id + ", " + ass_tcate_id + "\n";
+				ass_maker + ", " + ass_lec_id + ", " + ass_tcate_id + + mem_no+"\n";
 	}
 	
 }
