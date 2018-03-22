@@ -40,4 +40,14 @@ public class TestServiceImpl implements TestService{
 		return testDao.selectTestAll();
 	}
 
+	@Override
+	public int insertTest(Test test) {
+		return testDao.insertTest(test);
+	}
+
+	@Override
+	public int makeTest(Test test) {
+		return testDao.makeTest(test);
+	}
+
 }

@@ -43,17 +43,17 @@
 	</div>
 	<div class="java" style="flaot:left;display:inline-block;border:1px solid black">
 		<h1> JAVA COMPILER</h1>
-		Enter Your Tutor_NO : <input type="text" id="tutorno" onblur="check()">
-		Enter Class Name : <input type="text" id="class" onblur="check()"> <br><br>
-		<button onclick="compile()">COMPILE</button>
-		<button onclick="run()">RUN</button>
+		Enter Your Tutor_NO : <input type="text" id="tutorno" onblur="checkTest()">
+		Enter Class Name : <input type="text" id="class" onblur="checkTest()"> <br><br>
+		<button onclick="compileTest()">COMPILE</button>
+		<button onclick="runTest()">RUN</button>
 		<button onclick="empty()">CLEAR</button>
 		<br>
 		<br>
 
 		<textarea rows="32" cols="65" id="maincode" name="maincode" style="overflow:auto;"></textarea> <br><br><br>
 		<textarea rows="16" cols="65" id="output" name="output" style="overflow:auto;"></textarea> <br><br><br>
-		<button onclick="subass()">제출하기</button>
+		<button id="subutton" onclick="subass1()">제출하기</button>
 	</div>
 </div>
 <!-- 현재시간 -->
@@ -65,41 +65,34 @@
 <!-- 제한시간 -->
 	제한시간 : <B><span id="timeLeft"></span></B> 초<br>
 <!-- 제한시간 END -->
-<script type="text/javascript">
-$('#test2').on('click', function(){
-	time_reset();
-    	//컨트롤러로부터 리스트를 받아서 출력 처리
-    	$.ajax({
-    		url:"teststart.do",
-    		type:"post",
-    		dataType:"json",
-    		success:function(data){
-    			console.log(data);	//object 라고 출력됨
-    			//리턴된 하나의 객체를 문자열로 변환함
-    			var jsonStr = JSON.stringify(data);
-    			//변환된 문자열을 json 객체로 바꿈
-    			var json = JSON.parse(jsonStr);
+<!-- <script type="text/javascript">
 
-     			var question = "";
-    			var answer = "";
+$(function(){
+ 	$("#subutton").on("click",function(){
 
-    			var qnum=Math.floor(Math.random() * (json.list.length));
-					question = decodeURIComponent(json.list[qnum].question);
-					answer = decodeURIComponent(json.list[qnum].answer);
-	    		$('#d1').html(question);
-    			$('#d2').html(answer); 
+  $.ajax({
+			url:"test2.do",
 
-    		},
-            error : function(request,status, errorData){
-                alert("error code : " + request.status + "\n"
-                      + "message : " + request.responseText + "\n"
-                      + "error : " + errorData);
-             }
-    				
-    	});
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : 3, ass_cate : "배열"},
+
+	          type : "post",
+	          success : function(result){
+	              if(result == "ok"){
+	                  alert("Success");
+	               }else{
+	                  alert("Fail");
+	               }	         
+	          },
+	          error : function(request,status, errorData){
+	             alert("error code : " + request.status + "\n"
+	                   + "message : " + request.responseText + "\n"
+	                   + "error : " + errorData);
+	          }
+		}); 
+	});  
 
 });
-</script>
+</script>	 -->
 
 <!-- 현재시간 -->
 <!-- <script type="text/javascript">
@@ -141,7 +134,7 @@ function leadingZeros(n, digits) {
 <!-- 현재시간END -->
 <!-- 제한시간 -->
 <script>
-var init1 = 60;
+var init1 = 15;
 var init = init1;
 function time_reset(){
 	init=-1;
@@ -165,7 +158,7 @@ function count(){
 		show_clock();
 	} else {
 		document.all.timeLeft.innerHTML=init;
-		timer=setTimeout("subass()",500);
+		timer=setTimeout("subtest()",500);
 	}
 }
  window.onload=show_clock; 

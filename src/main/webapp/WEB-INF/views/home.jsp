@@ -12,11 +12,16 @@
 <a href="assInsertForm.do">for assignment click here</a><br>
 <a href="assList.do">for assignment LIST click here</a><br>
 <a href="testInsertForm.do">for test click here</a><br>
-<a href="testList.do">for test LIST click here</a><br><br>
+<a href="testList.do">for test LIST click here</a><br>
 <a href="testDetailView.do">for testDetailView click here</a><br>
+<a href="testMakeForm.do">for testMake cilck here</a><br><br>
+
+<a href="loginTestForm.do">for loginTestForm cilck here</a><br><br>
 
 <a href="classManage.do">for classManagement cilck here</a><br>
 <a href="blist.do">관리자 페이지</a><br>
+<a href="assMakeForm.do">for assMake cilck here</a>
+
 <!doctype html>
 <html lang="en">
  <head>

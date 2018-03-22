@@ -1,6 +1,7 @@
 package com.rp.finalp.test.controller;
 
 import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.lecture.model.vo.Lecture;
@@ -52,11 +52,16 @@ public class TestController {
 		return "test/test";
 	}
 	
+	@RequestMapping(value = "testMakeForm.do", method = RequestMethod.GET)
+	public String assMakeFormMethod() {
+		return "test/testMakeForm";
+	}
+	
 	@RequestMapping(value = "compileTest.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		String path = request.getSession().getServletContext().getRealPath("/");
 		PrintWriter out = response.getWriter();
-		String filename = request.getParameter("className")+".java";
+		String filename = request.getParameter("className")+"_test.java";
 		File fn = new File(path+"//Files");
 		fn.mkdirs();
 		fn = new File(path+"//Files//"+filename);
@@ -95,7 +100,7 @@ public class TestController {
 	@RequestMapping(value = "runTest.do", method = RequestMethod.POST)
 	public void runTestMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		PrintWriter out = response.getWriter();
-		String filename = request.getParameter("classname").trim();
+		String filename = (request.getParameter("classname")+"_test").trim();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		File fn = new File(path+"//Files//Classes");
 		fn.mkdirs();
@@ -194,41 +199,6 @@ public class TestController {
 		return "tutor/testDetailView";
 	}
 	
-	@RequestMapping(value = "submitTest.do", method = RequestMethod.POST)
-	public void submitTestMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		String path = request.getSession().getServletContext().getRealPath("/");
-		PrintWriter out = response.getWriter();
-		String filename = request.getParameter("className")+".java";
-		String tutorno = request.getParameter("tutorno");
-		File fn = new File(path+"//Files//Classes//"+tutorno);
-		fn.mkdirs();
-		fn = new File(path+"//Files//Classes//"+tutorno+"//"+filename);
-		FileOutputStream fos = new FileOutputStream(fn);
-		System.out.println(request.getParameter("code"));
-		byte[] sourcecode = request.getParameter("code").getBytes();
-		fos.write(sourcecode);
-		String compilecmd ="javac -d " + path + "\\Files\\Classes\\" + tutorno + " \\" + path + "\\Files\\" + filename;
-		Process error = Runtime.getRuntime().exec(compilecmd);
-		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
-		String res="";
-		while(true){
-			String str = br.readLine();
-			if(str!=null){
-				res+=str;
-				res+="\n";
-			}
-			else{
-				break;
-			}
-		}
-		if(res.equals("")){
-			res="Compiled Successfully";
-		}
-		out.println(res);
-		br.close();
-		fos.close();
-	}
-	
 	@RequestMapping("/testdownfile.do")
 	public void fileDownload(
 			@RequestParam(value="rfile") String rfileName, 
@@ -317,4 +287,42 @@ public class TestController {
 				
 	}
 	
+	@RequestMapping(value = "submitTest.do", method = RequestMethod.POST)
+	public void submitTestMethod(Test test, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		String path = request.getSession().getServletContext().getRealPath("/");
+		PrintWriter out = response.getWriter();
+		String filename = request.getParameter("className")+"_test.java";
+		String tutorno = request.getParameter("tutorno");
+		File fn = new File(path+"//Files//Classes//"+tutorno);
+		fn.mkdirs();
+		fn = new File(path+"//Files//Classes//"+tutorno+"//"+filename);
+		FileOutputStream fos = new FileOutputStream(fn);
+		System.out.println(request.getParameter("code"));
+		byte[] sourcecode = request.getParameter("code").getBytes();
+		fos.write(sourcecode);
+		String compilecmd ="javac -d " + path + "\\Files\\Classes\\" + tutorno + " \\" + path + "\\Files\\" + filename;
+		
+		System.out.println(test);
+		testService.insertTest(test);		
+		response.setContentType("text/html; charset=utf-8");
+		
+		if(request.getParameter("submit").equals("sub")) {
+			out.append("ok");
+			out.flush();
+		}else {
+			out.append("fail");
+			out.flush();
+		}
+		out.close();
+		
+		fos.close();
+	}
+	
+	@RequestMapping(value="makeTest.do",method=RequestMethod.POST)
+	public String assMakeMethod(Test test,
+			HttpServletResponse response) throws IOException{
+		testService.makeTest(test);
+		return "home";
+
+	}
 }

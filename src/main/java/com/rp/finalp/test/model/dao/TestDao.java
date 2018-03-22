@@ -35,4 +35,11 @@ public class TestDao {
 		return mybatis.selectList("testMapper.selectAllTest");
 	}
 
+	public int insertTest(Test test) {
+		return mybatis.insert("testMapper.insertTest", test);
+	}
+
+	public int makeTest(Test test) {
+		return mybatis.insert("testMapper.makeTest", test);
+	}
 }

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="/finalp/resources/css/codemirror.css">
+	<link rel="stylesheet" href="/finalp/resources/theme/lesser-dark.css">
 <style>
 	#navbar{
 		 overflow: hidden;
@@ -244,7 +246,7 @@
 					<h3 style="font-size: 2.6rem;font-weight: 400;line-height: 3rem;margin-top: 30px;padding-left: 10px;color:black!important">${Lecture.mem_name }</h3>
 					<h5 style="padding-left:10px;color:gray!important">수강생 ${Lecture.apply_count }명</h5>
 				</div>
-				
+
 				<c:if test="${loginUser.mem_no eq tutor_no }">
 					<div style="margin-top: 25px;margin-left:10px">
 						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
@@ -304,7 +306,6 @@
 						  </div>
 						</div>
 					</c:if>
-					
 				</div>
 			</div>
 		</div>
@@ -454,6 +455,7 @@
 				<div style="padding-top:84px"></div>
 				
 				<textarea class="form-control" aria-label="With textarea" rows="30" id="output" name="output" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
+
 				</section>
 			</div>
 				
@@ -480,10 +482,12 @@
 
 
 <input type="hidden" id="abc" value=${assignment.ass_cate } >
+<input type="hidden" id="tno" value=${tutor_no }>
+	
+
 	</section>
 	
 
-	
 	
 	
 
@@ -511,19 +515,252 @@
     <script src="/finalp/resources/js/bootstrap.min.js"></script>
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
-	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
+<!-- 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script> -->
 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
-	
+	<script type="text/javascript" src="/finalp/resources/js/codemirror.js"></script>
+	<script type="text/javascript" src="/finalp/resources/mode/javascript.js"></script>
 
+<!-- <script>
+  var editor = CodeMirror.fromTextArea(myTextarea, {
+    lineNumbers: true
+  });
+</script>	
+ -->
 <script type="text/javascript">
+<!-- 코드미러 -->
+var textarea=document.getElementById('maincode');
+var editor = CodeMirror.fromTextArea(textarea, {
+    lineNumbers: true,
+    lineWrapping: true,
+     theme: "lesser-dark", 
+    val: textarea.value 
+});
+<!-- 코드미러 -->
 
+<!-- 컴파일러 자바스크립트 -->
+function check() {
+
+	var classname = document.getElementById("class").value;
+	classname.trim();
+	if(classname == ""){
+/*		alert("enter valid class name !!");*/
+		document.getElementById("class").focus();
+	}
+	else{
+		editor.setValue("public class " + classname + "{\n\t public static void main(String[] args){ \n\n\n		} \n}") ;
+	}
+	
+}
+;
+function checkTest() {
+
+	var classname = document.getElementById("class").value;
+	classname.trim();
+	if(classname == ""){
+/*		alert("enter valid class name !!");*/
+		document.getElementById("class").focus();
+	}
+	else{
+		editor.setValue("public class " + classname + "_test" + "{\n\t public static void main(String[] args){ \n\n\n		} \n}") ;
+	}
+	
+}
+
+
+function  compile() {
+	console.log("compiling");
+	if(editor.getValue()==""){
+		alert("Insert some code please !");
+	}
+	else{
+		//code = maincode
+		//classname = class
+		var code=encodeURIComponent(editor.getValue());
+		var url = "compileAssign.do?code=" + code + "&className=" + document.getElementById("class").value;
+		
+		if(window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }  
+
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+            }
+        }
+        xmlhttp.open("POST",url,true);
+        xmlhttp.send();
+	}
+	console.log("compiled !!");
+}
+
+function run() {
+	
+	var url = "runAssign.do?classname=" + document.getElementById("class").value;
+	
+	if(window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+     }
+     else{
+         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+     }  
+	var button_joinus = document.getElementById('subutton');
+	xmlhttp.onreadystatechange=function(){
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+        	document.getElementById("output").innerHTML=xmlhttp.responseText; 
+       	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
+
+      	
+      		button_joinus.disabled = false;
+       	}else{
+       		button_joinus.disabled = true;
+       	}
+        }
+    }
+     xmlhttp.open("POST",url,true);
+     xmlhttp.send();
+}
+
+function  compileTest() {
+	console.log("compiling");
+	if(editor.getValue()==""){
+		alert("Insert some code please !");
+	}
+	else{
+		//code = maincode
+		//classname = class
+		var code=encodeURIComponent(editor.getValue());
+		var url = "compileTest.do?code=" + code + "&className=" + document.getElementById("class").value;
+		
+		if(window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }  
+
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+            }
+        }
+        xmlhttp.open("POST",url,true);
+        xmlhttp.send();
+	}
+	console.log("compiled !!");
+}
+
+function runTest() {
+	
+	var url = "runTest.do?classname=" + document.getElementById("class").value;
+	
+	if(window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+     }
+     else{
+         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+     }  
+	var button_joinus = document.getElementById('subutton');
+	xmlhttp.onreadystatechange=function(){
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+        	document.getElementById("output").innerHTML=xmlhttp.responseText; 
+       	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
+
+      	
+      		button_joinus.disabled = false;
+       	}else{
+       		button_joinus.disabled = true;
+       	}
+        }
+    }
+     xmlhttp.open("POST",url,true);
+     xmlhttp.send();
+}
+
+function startass(){
+	var button_joinus1 = document.getElementById('subutton');
+	button_joinus1.disabled = true;
+}
+
+
+function empty() {
+	
+	document.getElementById("class").value="";
+	editor.setValue("");
+  	document.getElementById("output").value="";
+	
+}
+
+function subass() {
+	console.log("submiting");
+	if(editor.getValue()==""){
+		alert("Insert some code please !");
+	}
+	else{
+		//code = maincode
+		//classname = class
+		var code=encodeURIComponent(editor.getValue());
+		var url = "submitAssign.do?code=" + code + "&className=" + document.getElementById("class").value + "&tutorno=" + document.getElementById("tutorno").value;
+		
+		if(window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }  
+
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST",url,true);
+        xmlhttp.send();
+	}
+	console.log("submited !!");
+}
+
+function subtest() {
+	console.log("submiting");
+	if(editor.getValue()==""){
+		alert("Insert some code please !");
+	}
+	else{
+		//code = maincode
+		//classname = class
+		var code=encodeURIComponent(editor.getValue());
+		var url = "submitTest.do?code=" + code + "&className=" + document.getElementById("class").value + "&tutorno=" + document.getElementById("tutorno").value
+					+"&submit=sub"+"&test_orfile="+document.getElementById("class").value+"_test.java"+"&test_writer="+3+"&test_cate="+"배열";
+		
+		if(window.XMLHttpRequest){
+           xmlhttp=new XMLHttpRequest();
+        }
+        else{
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }  
+
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST",url,true);
+        xmlhttp.send();
+	}
+	console.log("submited !!");
+}
+<!-- /컴파일러 자바스크립트 -->
+
+<!-- 제출시 디비로 값 보내기 -->
 $(function(){
  	$("#subutton").on("click",function(){
 
   $.ajax({
 			url:"test1.do",
 
-			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val(), ass_maker : $("#tutorno").val()},
 
 	          type : "post",
 	          success : function(result){
@@ -542,6 +779,7 @@ $(function(){
 	});  
 
 });
+<!-- /제출시 디비로 값 보내기 -->
 </script>	
 
 

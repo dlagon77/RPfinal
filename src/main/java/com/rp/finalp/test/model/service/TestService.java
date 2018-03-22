@@ -12,4 +12,6 @@ public interface TestService {
 	Test selectTest(int test_no);
 	List<Test> selectTestAll();
 	int testDeleteone(Test test);
+	int insertTest(Test test);
+	int makeTest(Test test); 
 }
