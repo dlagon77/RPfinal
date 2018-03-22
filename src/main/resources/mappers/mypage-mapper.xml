@@ -31,7 +31,26 @@
       <result property="mem_name" column="mem_name" />
 	</resultMap> 
 
-
+	<resultMap id="assResultMap" type="Assignment">
+  		<result property="ass_no" column="ass_no"/>
+  		<result property="ass_comment" column="ass_comment"/>
+  		<result property="ass_reg_date" column="ass_reg_date"/>  
+  		<result property="ass_date" column="ass_date"/>
+  		<result property="ass_orfile" column="ass_orfile"/>  	
+  		<result property="ass_refile" column="ass_refile"/>
+  		<result property="ass_cate" column="ass_cate"/>  
+  		<result property="ass_title" column="ass_title"/>
+  		<result property="ass_cor_cnt" column="ass_cor_cnt"/>  	
+  		<result property="ass_pro" column="ass_pro"/>
+  		<result property="ass_answer" column="ass_answer"/>  
+  		<result property="ass_hint" column="ass_hint"/>
+  		<result property="ass_res_cod" column="ass_res_cod"/>  	
+  		<result property="ass_res_ans" column="ass_res_ans"/>
+  		<result property="ass_writer" column="ass_writer"/>  
+  		<result property="ass_maker" column="ass_maker"/>
+  		<result property="ass_lec_id" column="ass_lec_id"/>  	
+  		<result property="ass_tcate_id" column="ass_tcate_id"/>  	
+	</resultMap>
 
 	<select id="CurrentMemberPwd" resultType="Member" parameterType="Member">
 		<![CDATA[
@@ -127,9 +146,6 @@
 		]]>
 	</select>  -->
 
-	
-	<!-- 준우추가 180313 -->
-
 	<select id="mysubscribe" resultType="Member">
 		<![CDATA[
 			select * from mysubscribe where app_student_no = #{mem_no}
@@ -153,7 +169,55 @@
 		delete from qnaboard where q_no=#{sno}
 		]]>
 	</delete>
-		
 	
+	<insert id="adminquestion" parameterType="InqBoard">
+		<![CDATA[
+			insert into inqboard values(seq_inqno.nextval,#{ inq_title }, #{inq_content} ,sysdate, #{inq_writer},'','','N' )
+		]]>	
+	</insert>
+	
+	<select id="myadminquestlist" resultType="InqBoard" >
+		<![CDATA[
+			select * from inqboard where inq_writer = #{mem_no} 
+		]]>
+	</select>
+	
+	<select id="getListCountSubAssign" parameterType="hashmap" resultType="_int" >
+		<![CDATA[
+		select count(*) from assignment
+		]]>
+		<if test="isKeyword == 1">
+		<![CDATA[
+		where q_title like #{keyword} and mem_no = #{mem_no}
+		]]>
+		</if>
+		<if test="isKeyword == 0">
+		<![CDATA[
+		where mem_no = #{mem_no}
+		]]>
+		</if>
+	</select>
+		
+	<select id="serviceMyAssign" parameterType="hashmap" resultType="list" resultMap="assResultMap">
+	<![CDATA[
+		SELECT * from
+		(SELECT rownum rnum, a.* FROM assignment a 
+		]]>
+		<if test="isKeyword == 1">
+			<![CDATA[
+			where ASS_TITLE like #{keyword} 
+			]]>
+		</if>
+	
+		<![CDATA[
+			order by ASS_NO desc)
+			where rnum>= #{startRow} and rnum<=#{endRow}
+	  	]]>
+		<if test="ismemno == 1">
+			<![CDATA[
+			 	and ASS_WRITER = #{mem_no}
+			]]>
+		</if>
+	</select>
 
 </mapper>
