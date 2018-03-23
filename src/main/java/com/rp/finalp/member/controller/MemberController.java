@@ -81,6 +81,13 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	//회원가입 분류 페이지로 이동
+	@RequestMapping(value="/enrollCategory.do")
+	public String enrollCategoryPage() {
+		System.out.println("회원가입분류페이지");
+		return "member/enrollCategory";     //jsp파일 이름
+	}
+	
 	@RequestMapping(value="/proinsert.do", method=RequestMethod.POST)
 	public String insertProMember(Member member, Model model, HttpServletRequest request) throws IOException{
 		
@@ -123,15 +130,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/proinsertpage.do")
-	public String moveToInsertpage() {
+	public String moveToProInsertpage() {
 		return "member/proinsertForm";     //jsp파일 이름
 	}
 	
-	//아이디 중복
-	@RequestMapping(value = "/checkId.do", method = RequestMethod.POST)
-		public @ResponseBody int idCheck(Member member, Model model) {
-			return memberService.checkId(member);
+	@RequestMapping(value="/stinsertpage.do")
+	public String moveToStInsertpage() {
+		return "member/stinsertForm";     //jsp파일 이름
 	}
+	
+	
 	
 	/*@RequestMapping(value="/proinsert.do", method=RequestMethod.POST)
 	public String insertMember(Member member, Model model) {
@@ -249,4 +257,15 @@ public class MemberController {
 	public String searchViewmMethod() {
 		return "tutor/search";
 	}
+	
+	//아이디 중복 확인
+	
+		@RequestMapping(value = "/checkId.do", method=RequestMethod.POST)
+		 public @ResponseBody String checkId(HttpServletRequest request, Member member, HttpServletResponse response) throws IOException{
+			response.setContentType("application/json; charset=utf-8");
+			System.out.println("컨트롤러:"+member);
+			int result = memberService.checkId(member);
+			System.out.println(result);
+			return String.valueOf(result);
+		}
 }

@@ -20,9 +20,9 @@ public interface MemberService {
 	int selectReviewCount(int tutor_no);
 	List<Member> selectReview(int tutor_no);
 	
+	
 	//아이디중복확인
 	int checkId(Member member); 
-	
 	
 	int insertApply(Lecture lecture);
 	int checkApply(Lecture lecture);

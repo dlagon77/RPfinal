@@ -13,7 +13,7 @@
 <script>
 	
 	//아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위해 변수설정
-	<!-- var idCheck = 0;
+	/* var idCheck = 0;
 	var pwdCheck = 0;
 	function checkId() {
         var inputed = $('.emailId').val();
@@ -44,8 +44,9 @@
                 } 
             }
         });
-    }
-	
+    } */
+    
+    var pwdCheck = 0;
 	//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
     function checkPwd() {
         var inputed = $('.pass').val();
@@ -91,28 +92,6 @@
 </script> -->
 
 
-<!-- 아마 필요없을껑 -->
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		  $('#checkbtn').on('click', function(){
-	            $.ajax({
-	                type: 'POST',
-	                url: '/mate/checkSignup',
-	                data: {
-	                    "id" : $('#id').val()
-	                },
-	                success: function(data){
-	                    if($.trim(data) == 0){
-	                        $('#checkMsg').html('<p style="color:blue">사용가능</p>');
-	                    }
-	                    else{
-	                        $('#checkMsg').html('<p style="color:red">사용불가능</p>');
-	                    }
-	                }
-	            });    //end ajax    
-	        });    //end on 
-	});
-</script> -->
 
 <!-- Bootstrap -->
     <link href="/finalp/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -197,11 +176,44 @@
         <div class="col-md-6 col-md-offset-3">
 		
 		
-
+			<script type="text/javascript">
+			  
+			
+			function checkId(){
+			  		var id = $('#id').val();
+			  			$.ajax({
+			  				type:'POST',
+			  				url:'checkId.do',
+			  				data:{
+			  					mem_id:$('#imadd').val()
+			  				},
+			  				success:function(data){
+			  					if($.trim(data)==0){
+			  						$('#checkMsg').html('<p style="color:blue">사용가능</p>');
+			  					}
+			  					else{
+			  						$('#checkMsg').html('<p style="color:red">사용불가능</p>');
+			  					}
+			  				},
+			  				error:function(){
+			  					alert("에러입니당");
+			  				}
+			  				
+			  			});  //end ajax
+			  		}
+			  	
+			  </script>
+			  
             <div class="form-group">
               <label for="InputEmail">이메일ID</label>
-              <input type="email" required class="emailId" oninput="checkId()" id="checkaa" name="mem_id" placeholder="이메일 주소">
-              <!-- div id="checkMsg"></div-->
+              <input type="email" id="imadd" required class="emailId" maxlength="50" name="mem_id" placeholder="이메일 주소">
+              
+              <div id="checkMsg"></div>
+              
+              <button id="checkbtn" class="btn btn-default" onclick="checkId()">중복확인</button>
+			 	
+			  
+			  	
             </div>
             
 			<!-- div class="form-group">
@@ -210,8 +222,9 @@
 			
             <div class="form-group">
               <label for="InputPassword1">비밀번호</label>
-              <input type="password" required class="pass" id="InputPassword1"  oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호">
+              <input type="password" required class="pass" id="InputPassword1" maxlength="14" oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호">
             </div>
+            
             <div class="form-group">
               <label for="InputPassword2">비밀번호 재확인</label>
               <input type="password" class="form-control" id="InputPassword2"  oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호 재확인">
@@ -223,7 +236,6 @@
 			<input type="text" class="form-control" id="username" name="mem_career" placeholder="1">
 			<input type="text" class="form-control" id="username" name="mem_career" placeholder="2">
 			<input type="text" class="form-control" id="username" name="mem_career" placeholder="3">
-			<input type="text" class="form-control" id="username" name="mem_career" placeholder="4">
 			</div>
 
             <div class="form-group">
@@ -248,95 +260,20 @@
 
             <div class="form-group">
             
-              <!-- <label for="mem_birth">생년월일</label>
-              <input type="text" id="mem_births" name="mem_birth" list="birthday">
-              <div class="input-group">
-              <datalist id="birthday"> -->
-              <input type="hidden" name="mem_birth" value="03/01/2004">
-               <!-- select name="mem_birth">
-       <option value="2013">2013</option>
-       <option value="2012">2012</option>
-       <option value="2011">2011</option>
-       <option value="2010">2010</option>
-       <option value="2009">2009</option>
-       <option value="2008">2008</option>
-       <option value="2007">2007</option>
-       <option value="2006">2006</option>
-       <option value="2005">2005</option>
-       <option value="2004">2004</option>
-       <option value="2003">2003</option>
-       <option value="2002">2002</option>
-       <option value="2001">2001</option>
-       <option value="2000">1999</option>
-	   <option value="2000">1998</option>
-	   <option value="2000">1997</option>
-	   <option value="2000">1996</option>
-	   <option value="2000">1995</option>
-	   <option value="2000">1994</option>
-	   <option value="2000">1993</option>
-	   <option value="2000">1992</option>
-	   <option value="2000">1991</option>
-	   <option value="2000">1990</option>
-	   <option value="2000">1989</option>
-	   <option value="2000">1988</option>
-	   <option value="2000">1987</option>
-     </select>년&nbsp;
-     <select name="birth2">
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
-     </select>
-     <select name="birth3">
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
-       <option value="13">13</option>
-       <option value="14">14</option>
-       <option value="15">15</option>
-       <option value="16">16</option>
-       <option value="17">17</option>
-       <option value="18">18</option>
-       <option value="19">19</option>
-       <option value="20">20</option>
-       <option value="21">21</option>
-       <option value="22">22</option>
-       <option value="23">23</option>
-       <option value="24">24</option>
-       <option value="25">25</option>
-       <option value="26">26</option>
-       <option value="27">27</option>
-       <option value="28">28</option>
-       <option value="29">29</option>
-       <option value="30">30</option>
-       <option value="31">31</option>
-     </select>일<br><br> -->
-	</datalist>
-
-				<!--select name="job" class="form-control" placeholder="생일   년(4자)   월">
-				<input type="tel" class="form-control" id="username" placeholder="- 없이 입력해 주세요">
-                <span class="input-group-btn">
-                  <button class="btn btn-success">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
-                </span-->
+              
+				<div class="form-group">
+					<label for="inputBirth">생일</label>
+					<div class="form-group">
+						<input type="date" class="form-control" id="birth" name="mem_birth"
+							placeholder="생일 입력" required>
+					</div>
+				</div>
+	
+				
               </div>
-            </div>
+            	
+            	<input type="hidden" name="mem_cate" value="T">
+            
             <div class="form-group">
               <label for="username">전공분야</label>
               <input type="text" name="mem_inter" list="interestValues">
@@ -351,23 +288,7 @@
 					<option value="C++" />C++
 					<option value="SPRING" />SPRING
 				</datalist>	
-				<!-- <input type="checkbox" id="checkbox1" name="mem_inter" checked="checked" />
-				<label for="checkbox1">CSS</label>&nbsp;
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">HTML</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">JSP</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter" />
-				<label for="checkbox2">ORACLE</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">Frame Work</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">JAVA</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">C++</label>
-				<input type="checkbox" id="checkbox2" name="mem_inter"/>
-				<label for="checkbox2">Spring</label> -->
-			  <!--  /p-->
+				
 				
 				
               </div>
@@ -394,7 +315,7 @@
 			  <button class="btn btn-danger" type="submit">가입취소<i class="fa fa-times spaceLeft"></i></button>
             </div> -->
     
-        </div>
+      
 	   </form>
 	   <div class="form-group text-center">
               <button type="submit" class="btn btn-info" form="form1">강사회원가입<i class="fa fa-check spaceLeft"></i></button>
@@ -403,9 +324,9 @@
         </div>
       </article>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
     <script src="/finalp/resources/js/jbootstrap.min.js"></script>
     
 </body>

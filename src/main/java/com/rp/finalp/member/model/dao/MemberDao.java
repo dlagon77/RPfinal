@@ -48,10 +48,12 @@ public class MemberDao {
 		return mybatis.selectOne("memberMapper.selectReviewCount",tutor_no);
 	}
 	
+	
+	
 	//id 중복확인
-	public int checkId(Member member) {
-		return mybatis.selectOne("memberMapper.checkId", member);
-	}
+		public int checkId(Member member) {
+			return mybatis.selectOne("memberMapper.checkId", member);
+		}
 	
 	public int insertApply(Lecture lecture) {
 		return mybatis.insert("memberMapper.apply",lecture);

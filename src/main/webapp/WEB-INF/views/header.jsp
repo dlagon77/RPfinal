@@ -11,16 +11,22 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<!-- 지혜 -->
-<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
+
+
+	<!-- 지혜 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- 네이버API -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+
+	<!-- 카카오톡API -->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
    <!-- Css -->
     <link href="/finalp/resources/css/bootstrap.css" rel="stylesheet">
    <link href="/finalp/resources/css/style.css" rel="stylesheet">
    
-  <!-- 지혜 -->
-   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+  
    
    <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" type="text/css" href="/finalp/resources/css/normalize.css" />

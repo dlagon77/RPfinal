@@ -72,12 +72,6 @@ public class MemberServiceImpl implements MemberService {
 			
 			return memberDao.selectReviewCount(tutor_no);
 		}
-		@Override
-		public int checkId(Member member) {
-			
-			return memberDao.checkId(member);
-		}
-		
 		
 		@Override
 		public int insertApply(Lecture lecture) {
@@ -137,5 +131,12 @@ public class MemberServiceImpl implements MemberService {
 		@Override
 		public int countApplyList(int tutor_no) {
 			return memberDao.countApplyList(tutor_no);
+		}
+		
+		//아이디 중복 확인
+		@Override
+		public int checkId(Member member) {
+					
+			return memberDao.checkId(member);
 		}
 	}
