@@ -47,14 +47,14 @@ cursor:pointer;
 					<h3>구독중인 강사님</h3>
 				</div>
 			</div>
-			
 			 <!-- style="display:  inline-flex;" -->
 			<c:set var="i" value="0" /> 
 			<c:set var="j" value="3" />
 				<c:forEach items="${mysubsc }" var="row">
-					<c:if test="${i%j == 0}">
-						<div class="panel-body" style="display:  inline-flex;">
-					</c:if>
+					<c:if test="${row.app_y eq 'Y' }">
+						<c:if test="${i%j == 0}">
+							<div class="panel-body" style="display:  inline-flex;">
+						</c:if>
 					
 											<div class="bluck" style="width: 200px; margin-right: 30px;">
 											<div class="cuadro_intro_hover " style="background-color: #cccccc;">
@@ -87,7 +87,10 @@ cursor:pointer;
 							</div>
 						</c:if>
 					<c:set var="i" value="${i+1 }" />
+				</c:if>
 			</c:forEach>
+			
+			
 			<!-- END DIV Class bluck -->
 		
 			<%-- 	<c:otherwise>
