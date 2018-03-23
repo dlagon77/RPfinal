@@ -767,6 +767,7 @@ function myFunction() {
 	        xmlhttp.send();
 		}
 		console.log("submited !!");
+		alert("시험이 종료되었습니다 !");
 		window.location.replace("tutorListView.do");
 	}
 	<!-- /컴파일러 자바스크립트 -->

@@ -625,6 +625,7 @@ function run() {
       	
       		button_joinus.disabled = false;
        	}else{
+       		alert("정답이 일치하지 않습니다 !");
        		button_joinus.disabled = true;
        	}
         }
@@ -677,7 +678,6 @@ function runTest() {
         if(xmlhttp.readyState==4 && xmlhttp.status==200){
         	document.getElementById("output").innerHTML=xmlhttp.responseText; 
        	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
-
       	
       		button_joinus.disabled = false;
        	}else{
