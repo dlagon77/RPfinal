@@ -2,6 +2,7 @@ package com.rp.finalp.test.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,21 @@ public class TestDao {
 
 	public int makeTest(Test test) {
 		return mybatis.insert("testMapper.makeTest", test);
+	}
+
+	public List<Test> searchTest(Map<String, Object> map) {
+		return mybatis.selectList("testMapper.searchTest",map);
+	}
+
+	public int countTestSearch(Map<String, Object> map) {
+		return mybatis.selectOne("testMapper.countTestSearch",map);
+	}
+
+	public List<Test> selectSubmitTest(HashMap<String, Object> map) {
+		return mybatis.selectList("testMapper.selectSubmitTest",map);
+	}
+
+	public int checkSubmit(Test test) {
+		return mybatis.selectOne("testMapper.checkSubmit",test);
 	}
 }

@@ -119,6 +119,8 @@ public class LectureController {
 		return "tutor/submitTaskList";
 	}
 	
+	
+	
 	@RequestMapping("testDetailView.do")
 	public String testDetailViewMethod() {
 		return "tutor/testDetailView";

@@ -373,8 +373,8 @@
 					<nav>
 						<ul>
 							<li><a href="#" name="item" onclick="showDiv4();" ><span>OVERVIEW</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv1();"><span>과제 출제</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv3();"><span>제출 답안</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>UPLOAD</span></a></li>
+							<!-- <li><a href="#" name="item" onclick="showDiv3();"><span>제출 답안</span></a></li> -->
 						</ul>
 					</nav>
 				</div>
@@ -532,14 +532,7 @@
 				</div>
 				
 				<div id="section3" style="display:none;">
-					<ul>
-						<li>문제를 번역한 사람: 
-							<a href="/user/baekjoon">baekjoon</a>
-						</li>
-						<li>데이터를 추가한 사람: 
-							<a href="/user/doju">doju</a>
-						</li>
-					</ul>
+					
 				</div>
 
 			

@@ -53,5 +53,13 @@ public class AssignDao {
 	public int checkSubmit(Assignment ass) {
 		return mybatis.selectOne("assignMapper.checkSubmit",ass);
 	}
+	
+	public List<Assignment> searchAss(Map<String, Object> map){
+		return mybatis.selectList("assignMapper.searchAss",map);
+	}
+
+	public int countAssSearch(Map<String, Object> map) {
+		return mybatis.selectOne("assignMapper.countAssSearch",map);
+	}
 
 }

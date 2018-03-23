@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,15 @@ public class AssignServiceImpl implements AssignService{
 	@Override
 	public int checkSubmit(Assignment ass) {
 		return assignDao.checkSubmit(ass);
+	}
+
+	@Override
+	public List<Assignment> searchAss(Map<String, Object> map) {
+		return assignDao.searchAss(map);
+	}
+
+	@Override
+	public int countAssSearch(Map<String, Object> map) {
+		return assignDao.countAssSearch(map);
 	}
 }

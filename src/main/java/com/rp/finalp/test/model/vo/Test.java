@@ -30,11 +30,15 @@ public class Test implements java.io.Serializable{
 	private int test_lec_id;
 	private int test_tcate_id;
 	
+	//재석추가
+	private String mem_name;
+	private int mem_no;
+	
 	public Test() {}
 	public Test(int test_no, String test_comment, Date test_reg_date, Date test_date, String test_orfile,
 			String test_refile, String test_cate, String test_title, int test_cor_cnt, String test_pro,
 			String test_answer, String test_res_cod, String test_res_ans, int test_writer, int test_maker,
-			int test_lec_id, int test_tcate_id) {
+			int test_lec_id, int test_tcate_id,String mem_name,int mem_no) {
 		super();
 		this.test_no = test_no;
 		this.test_comment = test_comment;
@@ -53,6 +57,22 @@ public class Test implements java.io.Serializable{
 		this.test_maker = test_maker;
 		this.test_lec_id = test_lec_id;
 		this.test_tcate_id = test_tcate_id;
+		this.mem_name = mem_name;
+		this.mem_no = mem_no;
+	}
+	
+	
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+	public int getMem_no() {
+		return mem_no;
+	}
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
 	}
 	public int getTest_no() {
 		return test_no;

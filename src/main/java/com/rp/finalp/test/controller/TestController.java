@@ -189,6 +189,8 @@ public class TestController {
 	@RequestMapping("testDetail.do")
 	public String testSelectOneMethod(Test test,Model model,@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="test_no") int test_no,@RequestParam(value="test_sub_no") int test_sub_no,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("test_no",test_no);
+		model.addAttribute("test_sub_no",test_sub_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
@@ -326,4 +328,53 @@ public class TestController {
 		return "home";
 
 	}
+	
+	@RequestMapping(value="submitTestList.do", method=RequestMethod.GET)
+	public String submitTestList(HttpServletRequest request,Model model,Lecture lecture,Test test) throws IOException {
+
+		int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
+		int test_no = Integer.parseInt(request.getParameter("test_no"));
+		int test_sub_no = Integer.parseInt(request.getParameter("test_sub_no"));
+		String test_cate = request.getParameter("test_cate");
+		int test_maker = Integer.parseInt(request.getParameter("test_maker"));
+
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = testService.listCount();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("test_cate", test_cate);
+		map.put("test_maker",test_maker);
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		int checkSubmit = testService.checkSubmit(test);
+		model.addAttribute("checkSubmit",checkSubmit);
+		
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("test_no",test_no);
+		model.addAttribute("test_sub_no",test_sub_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		model.addAttribute("submitList",testService.selectSubmitTest(map));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		return "tutor/submitTestList";
+	}
+	
 }

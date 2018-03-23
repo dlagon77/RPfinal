@@ -343,7 +343,7 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li class="active"><a href="/problem/1000">${ass_sub_no }</a></li>
+				<li class="active"><a href="/problem/1000">${ass_sub_no }번</a></li>
 				<li><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${ass_no}&ass_sub_no=${ass_sub_no}&ass_cate=${assignment.ass_cate}&mem_no=${loginUser.mem_no}&ass_maker=${tutor_no}">제출 답안</a></li>
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
 

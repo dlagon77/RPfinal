@@ -2,6 +2,7 @@ package com.rp.finalp.test.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.test.model.vo.Test;
@@ -13,5 +14,9 @@ public interface TestService {
 	List<Test> selectTestAll();
 	int testDeleteone(Test test);
 	int insertTest(Test test);
-	int makeTest(Test test); 
+	int makeTest(Test test);
+	List<Test> searchTest(Map<String, Object> map);
+	int countTestSearch(Map<String, Object> map); 
+	List<Test> selectSubmitTest(HashMap<String, Object> map);
+	int checkSubmit(Test test);
 }

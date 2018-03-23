@@ -119,5 +119,21 @@
 			select count(*) from assignment where ass_cate=#{ass_cate} and ass_writer = #{mem_no}
 		]]>
 	</select>
+	
+	
+	<select id="searchAss" resultMap="assResultMap" resultType="list" parameterType="String">
+		<![CDATA[
+			select * from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker = #{tutor_no}
+		]]>
+	</select>
+	
+	<select id="countAssSearch" resultType="Integer">
+		<![CDATA[
+			select count(*) from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker = #{tutor_no}
+		]]>
+	</select>
+
+
+
 
 </mapper>

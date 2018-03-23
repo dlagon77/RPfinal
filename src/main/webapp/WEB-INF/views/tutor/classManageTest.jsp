@@ -372,9 +372,8 @@
 				<div class="tabs tabs-style-bar">
 					<nav>
 						<ul>
-							<li><a href="#" name="item" onclick="showDiv4();" ><span>시험 관리</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv1();"><span>시험 출제</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv1();"><span>답안 관리</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv4();" ><span>OVERVIEW</span></a></li>
+							<li><a href="#" name="item" onclick="showDiv1();"><span>UPLOAD</span></a></li>
 						</ul>
 					</nav>
 				</div>

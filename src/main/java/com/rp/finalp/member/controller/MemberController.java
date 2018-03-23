@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.rp.finalp.assign.model.service.AssignService;
 import com.rp.finalp.lecture.model.service.LectureService;
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.service.MemberService;
 import com.rp.finalp.member.model.vo.Member;
+import com.rp.finalp.test.model.service.TestService;
 
 @Controller
 public class MemberController {
@@ -40,6 +42,12 @@ public class MemberController {
 	
 	@Autowired
 	private LectureService lectureService;
+	
+	@Autowired
+	private AssignService assignService;
+	
+	@Autowired
+	private TestService testService;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String loginMethod(Member member, HttpSession session) {	
@@ -313,7 +321,26 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/search.do")
-	public String searchViewmMethod() {
+	public String searchViewmMethod(HttpServletRequest request, Model model,Lecture lecture) {
+		int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
+		//String search_content = request.getParameter("search_content");
+		model.addAttribute("tutor_no",tutor_no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search_content", request.getParameter("search_content"));
+		map.put("tutor_no", tutor_no);
+		
+		model.addAttribute("searchAssList",assignService.searchAss(map));
+		model.addAttribute("searchAssCount",assignService.countAssSearch(map));
+		
+		model.addAttribute("searchTestList",testService.searchTest(map));
+		model.addAttribute("searchTestCount",testService.countTestSearch(map));
+		
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+		int checkApply=memberService.checkApply(lecture);
+		model.addAttribute("checkApply",checkApply);
+		int checkReady = memberService.checkReady(lecture);
+		model.addAttribute("checkReady",checkReady);
 		return "tutor/search";
 	}
 	

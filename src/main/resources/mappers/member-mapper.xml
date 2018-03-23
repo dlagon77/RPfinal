@@ -105,7 +105,7 @@
    <select id="selectTutorCount" resultType="Integer">
       <![CDATA[
          select count(*)
-         from tutorList where mem_class is not null
+         from tutorList where mem_class is not null and lecture_count != 0
       ]]>
    </select>
    

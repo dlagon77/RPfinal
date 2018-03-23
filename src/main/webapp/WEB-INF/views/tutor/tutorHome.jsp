@@ -191,6 +191,8 @@
 			  </div>
 			  <div>	
 			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input type="hidden" name="tutor_no" value=${tutor_no } >
+			  	<input type="hidden" name="mem_no" value=${loginUser.mem_no }>
 			  </div>
 				  
 				</form>
@@ -230,6 +232,28 @@
 			</div>
 		<!--</div>-->
 	</section>
+	
+	<hr>
+	  <div id="container" style="text-align: center;">
+	  <h4 style="float:left">HTML/CSS</h4>
+	  <br><br>
+      <div id="box" style="font-size:15px">
+         <textarea class="innerbox html" placeholder="Enter HTML Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-right:20px"></textarea>
+         <textarea class="innerbox css" placeholder="Enter Css Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-bottom:30px"></textarea>
+            <div class="innerbox preview">
+               <iframe id="live_update" style="width: 100%;height: 300px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)">
+                  <!doctype html>
+                  <html lang="en">
+                  <head><meta charset="utf-8">
+                  </head>
+                  <body></body>
+                  </html>
+               </iframe>
+            </div><!-- /iframe holder -->
+      </div><!-- /box -->
+   </div><!-- /container -->
+
+    
 	
 	<hr>
 
@@ -475,6 +499,32 @@
        		}
 
 	</script>
+	
+	<script>
+      $(function(){
+         function fetchHtml(){
+            var html=$(".html").val();
+            return html
+         }
+         function fetchCss(){
+            var css=$(".css").val();
+            return css
+         }
+            $(".innerbox").on("keyup",function(){
+            
+               var target = $("#live_update")[0].contentWindow.document;
+               target.open();
+               target.close();
+
+               var html=fetchHtml();
+               var css=fetchCss();
+
+               $("body",target).append(html); 
+               $("head",target).append("<style>"+css+"</style>");
+
+            });
+      }); 
+    </script>
 
 </div>
 

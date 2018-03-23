@@ -92,6 +92,26 @@
 	<!-- icon관련 링크 -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	
+	<script>
+	function showDiv1(){
+		$("#section1").attr("style", "display:block");
+		$("#section2").attr("style", "display:none");
+		$("#section3").attr("style", "display:none");
+	}
+	
+	function showDiv2(){
+		$("#section1").attr("style", "display:none");
+		$("#section2").attr("style", "display:block");
+		$("#section3").attr("style", "display:none");
+	}
+	
+	function showDiv3(){
+		$("#section1").attr("style", "display:none");
+		$("#section2").attr("style", "display:none");
+		$("#section3").attr("style", "display:block");
+	}
+	
+</script>
 
 </head>
 <body>
@@ -198,7 +218,9 @@
 			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
 			  </div>
 			  <div>	
-			  	<input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input type="hidden" name="tutor_no" value=${tutor_no } >
+			  	<input type="hidden" name="mem_no" value=${loginUser.mem_no }>
 			  </div>
 				  
 				</form>
@@ -216,114 +238,121 @@
 	<section class="about" id="about" style="width:1284px">
 		
 			<div class="row">
-    <div class="col-md-2 related-search">
-      <div class="row">
-        <div class="col-md-12 col-sm-4">
-          <h5 style="color:gray;margin:0 0 10px">검색 결과</h5>
-            <ul class="list-unstyled">
-                <li><a href="#" class="category-link active" data-category="Problems" style="font-size:15px">문제</a></li>
-                <li><a href="#" class="category-link" data-category="Lecture" style="font-size:15px">강의</a></li>
-                <li><a href="#" class="category-link" data-category="Workbooks" style="font-size:15px">test</a></li>
-            </ul>
-        </div>
-      </div>
-      <div class="margin-bottom-20"></div>
-      <div style="width: 100%;">
-    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><iframe width="164" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:164px;height:600px;"></iframe></ins></ins></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-<div class="margin-bottom-20"></div>
+			    
+			    <div class="col-md-2 related-search">
+			      <div class="row">
+			        <div class="col-md-12 col-sm-4">
+			          <h5 style="color:gray;margin:0 0 10px">검색 결과</h5>
+			            <ul class="list-unstyled">
+			                <li><a id="ass" href="#" class="category-link active" onclick="showDiv1();" style="font-size:15px;">문제</a></li>
+			                <li><a id="test" href="#" class="category-link" onclick="showDiv2();" style="font-size:15px">test</a></li>
+			                <li><a href="#" class="category-link"  style="font-size:15px">강의</a></li>
+			            </ul>
+			        </div>
+			      </div>
+			      <div class="margin-bottom-20"></div>
+			      <div style="width: 100%;">
+					    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:164px;background-color:transparent;"><iframe width="164" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:164px;height:600px;"></iframe></ins></ins></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+				<div class="margin-bottom-20"></div>
+			
+			    </div>
+			    
+			    <div id="section1" class="col-md-10"><!-- section1 시작 -->
 
-    </div>
-    <div class="col-md-10" id="result">
-      
+			      <span class="results-number">검색 결과 ${searchAssCount }개</span>
+			      <div class="results">
+			 
+					 <c:forEach items="${searchAssList }" var="row">
+					 	<div class="inner-results">
+						    <h3><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${row.ass_no }&mem_no=${loginUser.mem_no}" style="font-size:20px">${row.ass_no}번 - ${row.ass_title }</a></h3>
+						    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+						      <li>시간 제한: -초</li>
+						      <li>맞은 사람: ${row.ass_cor_cnt}</li>
+						      <li>정답률: ${row.ass_cor_cnt/Lecture.apply_count*100 }%</li>
+						    </ul>
+						    <p>${row.ass_pro}</p>
+						    <!-- <ul class="list-inline down-ul">
+						      <li><a href="/submit/1000">제출</a></li>
+						    </ul> -->
+					  	</div>
+					<hr>
+					 </c:forEach>
+			
+				 </div>
+				 
+			      <div class="margin-bottom-30"></div>
+			      <div class="text-center">
+			        <ul class="pagination" id="result-pagination">
+			          
+			        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
+			      </div>
+			      
+			      <div style="width: 100%;">
+			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><iframe width="945" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:945px;height:90px;"></iframe></ins></ins></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			</div>
+			<div class="margin-bottom-20"></div>
+			
+			    </div><!-- section1 끝 -->
+			    
+			    
+			    <div id="section2" class="col-md-10" style="display:none"><!-- section2 시작 -->
 
-
-      <span class="results-number">검색 결과 4개</span>
-      <div class="results">
- 
-
-  <div class="inner-results">
-    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
-    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
-      <li>시간 제한: 2초</li>
-      <li>맞은 사람: 47929</li>
-      <li>정답률: 36.04%</li>
-    </ul>
-    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
-    <!-- <ul class="list-inline down-ul">
-      <li><a href="/submit/1000">제출</a></li>
-    </ul> -->
-  </div>
-<hr>
-
-<div class="inner-results">
-    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
-    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
-      <li>시간 제한: 2초</li>
-      <li>정답: 47929</li>
-      <li>맞은 사람: 36408</li>
-    </ul>
-    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
-    <!-- <ul class="list-inline down-ul">
-      <li><a href="/submit/1000">제출</a></li>
-    </ul> -->
-  </div>
-<hr>
-
-<div class="inner-results">
-    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
-    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
-      <li>시간 제한: 2초</li>
-      <li>정답: 47929</li>
-      <li>맞은 사람: 36408</li>
-    </ul>
-    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
-    <!-- <ul class="list-inline down-ul">
-      <li><a href="/submit/1000">제출</a></li>
-    </ul> -->
-  </div>
-<hr>
-
-<div class="inner-results">
-    <h3><a href="/problem/1000" style="font-size:20px">1000번 - A+B</a></h3>
-    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
-      <li>시간 제한: 2초</li>
-      <li>정답: 47929</li>
-      <li>맞은 사람: 36408</li>
-    </ul>
-    <p style="color: black;">두 수 A와 B를 입력받은 다음,&nbsp;A+B를 출력하는 프로그램을 작성하시오.</p>
-    <!-- <ul class="list-inline down-ul">
-      <li><a href="/submit/1000">제출</a></li>
-    </ul> -->
-  </div>
-<hr>
-
-
-  
-
-</div>
-      <div class="margin-bottom-30"></div>
-      <div class="text-center">
-        <ul class="pagination" id="result-pagination">
-          
-        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
-      </div>
-      
-      <div style="width: 100%;">
-    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><iframe width="945" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:945px;height:90px;"></iframe></ins></ins></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-<div class="margin-bottom-20"></div>
-
-    </div>
-  </div>
+			      <span class="results-number">검색 결과 ${searchTestCount }개</span>
+			      <div class="results">
+			 
+					 <c:forEach items="${searchTestList }" var="row">
+					 	<div class="inner-results">
+						    <h3><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${row.test_no }&test_no=${loginUser.mem_no}" style="font-size:20px">${row.test_no}번 - ${row.test_title }</a></h3>
+						    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
+						      <li>시간 제한: -초</li>
+						      <li>맞은 사람: ${row.test_cor_cnt}</li>
+						      <li>정답률: ${row.test_cor_cnt/Lecture.apply_count*100 }%</li>
+						    </ul>
+						    <p>${row.test_pro}</p>
+						    <!-- <ul class="list-inline down-ul">
+						      <li><a href="/submit/1000">제출</a></li>
+						    </ul> -->
+					  	</div>
+					<hr>
+					 </c:forEach>
+			
+				 </div>
+				 
+			      <div class="margin-bottom-30"></div>
+			      <div class="text-center">
+			        <ul class="pagination" id="result-pagination">
+			          
+			        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
+			      </div>
+			      
+			      <div style="width: 100%;">
+			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-8806842758252812" data-ad-slot="1129585289" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:945px;background-color:transparent;"><iframe width="945" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:945px;height:90px;"></iframe></ins></ins></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			</div>
+			<div class="margin-bottom-20"></div>
+			
+			    </div><!-- section2 끝 -->
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+  		</div>
+	
 	</section>
 	
 	<hr>

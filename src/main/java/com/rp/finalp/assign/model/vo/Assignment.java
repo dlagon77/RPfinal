@@ -32,6 +32,7 @@ public class Assignment implements java.io.Serializable{
 	//재석 추가
 	private String mem_name;
 	private int mem_no;
+
 	
 	public Assignment() {}
 

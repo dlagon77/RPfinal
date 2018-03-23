@@ -253,9 +253,16 @@
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span></a>
 			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span><div class="selected"></div></a>
 
-			  <form style="margin-top:7px;display:flex">
-			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
-				  <input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  <form style="margin-top:7px;display:flex" action="search.do">
+			  <div>
+			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  </div>
+			  <div>	
+			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input type="hidden" name="tutor_no" value=${tutor_no } >
+			  	<input type="hidden" name="mem_no" value=${loginUser.mem_no }>
+			  </div>
+				  
 				</form>
 
 			</nav>
@@ -277,7 +284,7 @@
 			
 			<ul class="nav nav-pills no-print">
 				<li class="active"><a href="/problem/1000">${test_sub_no }번</a></li>
-				<li><a href="/problem/status/1000">제출 답안</a></li>
+				<li><a href="submitTestList.do?tutor_no=${tutor_no }&test_no=${test_no}&test_sub_no=${test_sub_no}&test_cate=${test.test_cate}&mem_no=${loginUser.mem_no}&test_maker=${tutor_no}">제출 답안</a></li>
 
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
 

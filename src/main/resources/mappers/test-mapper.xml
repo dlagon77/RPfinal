@@ -80,5 +80,35 @@
 	<insert id="makeTest" parameterType="Test"><![CDATA[
 		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,#{test_comment},default,null,null,'123abc.java',#{test_cate},#{test_title},0,#{test_pro},#{test_answer},'public static void main','3,6,9',null,#{test_maker},#{test_lec_id},5)
 	]]></insert>
+	
+	
+	<select id="searchTest" resultMap="testResultMap" resultType="list" parameterType="String">
+		<![CDATA[
+			select * from test where (upper(test_title) like '%'||upper('${search_content}')||'%' or upper(test_cate) like '%'||upper('${search_content}')||'%') and test_writer is null and test_maker = #{tutor_no}
+		]]>
+	</select>
+
+	<select id="countTestSearch" resultType="Integer">
+		<![CDATA[
+			select count(*) from test where (upper(test_title) like '%'||upper('${search_content}')||'%' or upper(test_cate) like '%'||upper('${search_content}')||'%') and test_writer is null and test_maker = #{tutor_no}
+		]]>
+	</select>
+
+
+	<select id="selectSubmitTest" resultMap="testResultMap" resultType="list">
+		<![CDATA[
+			select test_no, test_date, test_orfile, test_refile, test_cate, test_cor_cnt, test_writer, test_tcate_id, mem_name,test_maker
+			from test
+			join member on (test_writer = mem_no)
+			where test_cate = #{test_cate} and test_maker = #{test_maker}
+		]]>
+	</select>
+
+	<select id="checkSubmit" resultType="Integer">
+		<![CDATA[
+			select count(*) from test where test_cate=#{test_cate} and test_writer = #{mem_no}
+		]]>
+	</select>
+
 
 </mapper>

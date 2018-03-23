@@ -2,6 +2,7 @@ package com.rp.finalp.test.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,26 @@ public class TestServiceImpl implements TestService{
 	@Override
 	public int makeTest(Test test) {
 		return testDao.makeTest(test);
+	}
+
+	@Override
+	public List<Test> searchTest(Map<String, Object> map) {
+		return testDao.searchTest(map);
+	}
+
+	@Override
+	public int countTestSearch(Map<String, Object> map) {
+		return testDao.countTestSearch(map);
+	}
+
+	@Override
+	public List<Test> selectSubmitTest(HashMap<String, Object> map) {
+		return testDao.selectSubmitTest(map);
+	}
+
+	@Override
+	public int checkSubmit(Test test) {
+		return testDao.checkSubmit(test);
 	}
 
 }

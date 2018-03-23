@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +109,101 @@
 		.badge-from{
 			background:#428bca!important;
 		}
-		#deapply{
+		
+		.headline {
+			display: block;
+			margin: 10px 0 25px 0;
+			border-bottom: 1px dotted #e4e9f0;
+		}
+
+		.headline h2, .headline h3, .headline h4 {
+			border-bottom: 2px solid #0076C0;
+			margin: 0 0 -2px 0;
+			padding-bottom: 5px;
+		}
+		.headline h2 {
+			font-size: 22px;
+		}
+		p, li, li a {
+			color: #555;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			color: #585f69!important;
+			margin-top: 5px;
+			text-shadow: none!important;
+			font-weight: 600;
+			font-family: 'Open Sans', sans-serif!important;
+		}
+
+		.compileButton{
+			background-color: #337ab7;
+			border-radius: 2px;
+			color: white;
+			padding: 10px 15px;
+			white-space: nowrap;
+			font-size: 1.4rem;
+			font-weight: 500;
+			letter-spacing: .007px;
+			display: flex;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			outline:none;
+			border:none;
+			margin: 10px;
+		}
+
+		.compileButton:hover{
+			background-color:#285e8e;
+		}
+			.deleteButton{
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	}
+	.deleteButton:hover {
+		color:#f44336;
+	}
+	.deleteButton2 {
+		border: none;
+	    outline: none;
+	    background: none;
+	    color: gray;
+	    font-size:15px;
+	    color: #2196f3;
+	}
+	
+	.deleteTaskButton {
+		border: none;
+	    outline: none;
+	    color: #f44336;
+	    background: none;
+	    font-size: 15px;
+	    margin-right: 20px;
+		
+	}
+	
+	.deleteTaskButton:hover{
+		font-weight:bold;
+		
+	}
+	
+	.deleteTaskButton2 {
+		border: none;
+	    outline: none;
+	    color: #2196f3;
+	    background: none;
+	    font-size: 14px;
+	    margin-right: 20px;
+		
+	}
+	.deleteTaskButton2:hover{
+		font-weight:bold;
+		
+	}
+	#deapply{
 			background-color: hsl(0, 0%, 93.3%);
 			color: hsla(0, 0%, 6.7%, .6);
 		}
@@ -128,10 +223,10 @@
 			outline:none;
 			border:none;
 		}
+	
 </style>
 </head>
 <body>
-<c:if test="${checkApply eq 1 or tutor_no == mem_no}">
 <c:import url="../header.jsp" />
 <div id="banner" style="height:305px;background-image: url('/finalp/resources/img/avatar.jpg');background-size:cover;background-position-y: -200px;"></div>
 
@@ -142,7 +237,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -214,18 +309,16 @@
 				</div>
 			</div>
 		</div>
-		
-		
 
 	</div>
 
 	<div id="navbar" style="z-index:99;width:100%;height:48px;background-color: hsla(0, 0%, 97%, 1);text-align:center; font-size:14px">
 		<div class="container about" style="display:flex;">
 			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
-			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Home</span></a>
-			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">강의</span></a>
-			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
-			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" style="width:120px;color:gray"><span class="a">Test</span></a>
+			  <a href="tutorHome.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Home</span></a>
+			  <a href="lecturePlayList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">강의</span></a>
+			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span></a>
+			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span><div class="selected"></div></a>
 
 			  <form style="margin-top:7px;display:flex" action="search.do">
 			  <div>
@@ -238,6 +331,7 @@
 			  </div>
 				  
 				</form>
+
 			</nav>
 		</div>
 		</div>
@@ -245,88 +339,74 @@
 
 <!-- About -->
 
-<div class="container about" style="width:1170px">
+<div class="container about" style="width:1170px;font-size:14px">
 
-	<section class="about" id="about" style="width:1170px">
+	<section class="about" id="about" style="width:1170px;padding-bottom:30px">
 
-		<div class="input-group mb-3" style="width:15%;float: right;margin-bottom:10px">
 		
-		  <select class="custom-select" id="inputGroupSelect02" style="width:100%">
-			<option selected>문제 분류 선택</option>
-			<option value="1">One</option>
-			<option value="2">Two</option>
-			<option value="3">Three</option>
-		  </select>
-		  
-		</div>
-
 		
 		<div class="row">
 		<div class="col-md-12">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered sortable-table clickable-table" id="problemset">
-				<thead>
-				<tr>
-					<th style="width:10%;text-align: center;" data-sort="int">문제 번호</th>
-					<th style="width:10%;text-align: center;" data-sort="int">등록 날짜</th>
-					<th style="width:40%;text-align: center;" data-sort="string">제목</th>
-					<th style="width:20%;text-align: center;" data-sort="string">카테고리</th>
-					<th style="width:10%;text-align: center;" data-sort="int">맞은 사람</th>
-					<th style="width:10%;text-align: center;" data-sort="float">정답 비율</th>
-				</tr>
-				</thead>
 
-				<tbody>
-					<c:set value="0" var="assign_no"/>
-					<c:forEach items="${assignList }" var="row">
-					<c:set value="${assign_no+1 }" var="assign_no"/>
-					<tr>
-					
-					
-						<td class="list_problem_id">${assign_no }</td>
-						<td>${row.ass_reg_date }</td>
-						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&mem_no=${loginUser.mem_no}">${row.ass_title }</a></td>
-						<td>
-							<span class="badge badge-info">${row.ass_cate }</span>
-						</td>
-						<td><a href="#">${row.ass_cor_cnt }</a></td>
-						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
-					
-					</tr>
-					</c:forEach>
-				</tbody>
-				</table>
-			</div>
-			</div>
-		
-		<c:if test="${loginUser.mem_no eq tutor_no }">
-			<div style="display:inline-flex;position: relative;left: 90%;">
-				<button class="taskRegButton">과제등록</button>
-			</div>
-		</c:if>
-		
-		
+			
+			<ul class="nav nav-pills no-print">
+				<li><a href="testDetail.do?ass_test_no=${ass_test_no }&test_no=${test_no}&test_sub_no=${test_sub_no }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${test_sub_no }번</a></li>
+				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
+
+				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
+
+				<li class="dropdown">
+				<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">강의<b class="caret"></b></a>
+				<ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+								<li>
+							<a tabindex="-1" href="https://code.plus/course/3">
+								프로그래밍 대회에서 사용하는 Java
+							</a>
+						</li>
+							<li>
+							<a tabindex="-1" href="https://code.plus/course/4">
+								알고리즘 기초
+							</a>
+						</li>
+						
+					<li class="divider"></li>
+					<li><a tabindex="-1" href="#" class="lecture-request">강의 요청하기</a></li>
+				</ul>
+				</li>
+
+			</ul>
+
+			<c:if test="${checkSubmit gt 0 or tutor_no eq loginUser.mem_no}">
+			
+				<c:forEach items="${submitList }" var="row">
+					<section id="description" style="padding-top:30px">
+						<div class="headline">
+							<h2 style="width: 6%;font-weight:500">${row.mem_name }</h2>
+						</div>
+						<div style="font-size:medium; line-height:30px;" id="problem_description">
+							<p>${row.test_orfile }</p>
+						</div>
+					</section>
+				</c:forEach>
+			
+			</c:if>
+			
+			<c:if test="${checkSubmit eq 0 and tutor_no != loginUser.mem_no}">
+				<section id="description" style="padding-top:30px">
+					문제를 풀어야만 결과를 볼 수 있습니다.
+				</section>
+			</c:if>
+			
+			
+
+		</div>
+
+
+			
 
 		<div class="col-md-12">
-			<div class="text-center">
-			<ul class="pagination">
-				<li class="active">
-					<a href="/problemset/1">1</a>
-				</li>
-				<li>
-					<a href="/problemset/2" id="next_page">2</a>
-				</li>
-				<li>
-					<a href="/problemset/3">3</a>
-				</li>
-				<li>
-					<a href="/problemset/4">4</a>
-				</li>
-				<li>
-					<a href="/problemset/5">5</a>
-				</li>
-			</ul>
-			</div>
+			
+
 		</div>
 		<div class="margin-bottom-20"></div>
 		<div style="width: 100%;">
@@ -334,14 +414,13 @@
 </div>
 <div class="margin-bottom-20"></div>
 
-	</div>
+	</div><!--row-->
 
 
 
-
+<input type="hidden" id="abc" value=${assignment.ass_cate } >
 	</section>
 	
-	<hr>
 
 	
 	
@@ -371,9 +450,38 @@
     <script src="/finalp/resources/js/bootstrap.min.js"></script>
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
+	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
+	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
 
+<script type="text/javascript">
 
+$(function(){
+ 	$("#subutton").on("click",function(){
+
+  $.ajax({
+			url:"test1.do",
+
+			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
+
+	          type : "post",
+	          success : function(result){
+	              if(result == "ok"){
+	                  alert("Success");
+	               }else{
+	                  alert("Fail");
+	               }	         
+	          },
+	          error : function(request,status, errorData){
+	             alert("error code : " + request.status + "\n"
+	                   + "message : " + request.responseText + "\n"
+	                   + "error : " + errorData);
+	          }
+		}); 
+	});  
+
+});
+</script>	
 
 
 
@@ -416,14 +524,10 @@ function myFunction() {
 		
 </div>
 
-</c:if>
-<c:if test="${checkApply eq 0 and tutor_no != mem_no}">
-	<script>
-		alert("수강신청을 해야합니다!!");
-		 history.go(-1);
-	</script>
-</c:if>
 </body>
+<script>
+window.onload=startass; 
+</script>
 </html>
 
 
