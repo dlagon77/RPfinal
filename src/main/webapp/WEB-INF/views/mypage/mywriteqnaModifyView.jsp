@@ -14,7 +14,7 @@
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
 <c:import url="mpsidemenu.jsp" />
-<!-- === BEGIN STU_PROFILE ===  -->
+<!-- === BEGIN mywriteqna_ModifyView ===  -->
 <script type="text/javascript">
 // 	function serviceUpdate() {
 // 		location.href = 'serviceUpdate.do';

@@ -26,7 +26,7 @@
 	$('#stumessage').addClass('list-group-item');
 	$('#stumyboard').addClass('list-group-item');
 	function detail(sno){
-		location.href = 'detailMyQnaService.do?sno='+sno;
+		location.href = 'detailMypAssignService.do?sno='+sno;
 	}
 </script>	
 <!-- === BEGIN CONTENT === -->
@@ -53,21 +53,23 @@
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">
 							<tr>
-<!-- 								<th class="qtable" style="width:100px;">글번호</th> -->
-								<th class="qtable" style="width:700px;">제목</th>
-								<th class="qtable" style="width:100px;">작성자</th>
+								<th class="qtable" style="width:100px;">강사님</th>
+								<th class="qtable" style="width:100px;">카테고리</th>
+								<th class="qtable" style="width:500px;">문제제목</th>
 								<th class="qtable" style="width:200px;">제출일</th>
-								<th class="qtable" style="width:100px;">해당수업</th>
+<!-- 								<th class="qtable" style="width:100px;">작성자</th> -->
+<!-- 								<th class="qtable" style="width:100px;">해당수업</th> -->
 							</tr>
 							<c:if test="${result ne 0 }">
 								<c:forEach var="sc" items="${list }">
 									<tr onclick="detail(${sc.ass_no });"
 										style="cursor: pointer">
 <%-- 										<td style="text-align: center;">${sc.ass_no}</td> --%>
-										<td style="text-align: center;">${sc.ass_title}</td>
-										<td style="text-align: center;">${sessionScope.loginUser.mem_name}</td>
-										<td style="text-align: center;">${sc.ass_date}</td>
+										<td style="text-align: center;">${sc.mem_name}</td>
 										<td style="text-align: center;">${sc.ass_cate}</td>
+										<td style="text-align: center;">${sc.ass_title}</td>
+										<td style="text-align: center;">${sc.ass_date}</td>
+<%-- 										<td style="text-align: center;">${sessionScope.loginUser.mem_name}</td> --%>
 <%-- 										<td style="text-align: center;">${sc.q_read_cnt}</td> --%>
 									</tr>
 								</c:forEach>
@@ -92,7 +94,7 @@
 									<li class='disabled'><a href="#">&laquo;</a></li>
 								</c:if>
 								<c:if test="${currentPage > 1 }">
-									<c:url var="paging1" value="selectQnaBoardList.do">
+									<c:url var="paging1" value="MyAssignBoardList.do">
                           				 <c:param name="page" value="${currentPage-1 }" />
                           				 <c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
                         			</c:url> 
@@ -103,7 +105,7 @@
 										<li class="active"><a href='#'>${status.index}</a></li>
 									</c:if>
 									<c:if test="${status.index ne currentPage }">
-									<c:url var="paging2" value="selectQnaBoardList.do">
+									<c:url var="paging2" value="MyAssignBoardList.do">
                           				 <c:param name="page" value="${status.index}" />
                           				 <c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
                         			</c:url> 
@@ -111,7 +113,7 @@
 									</c:if>
 								</c:forEach>
 								<c:if test="${currentPage < maxPage }">
-									<c:url var="paging3" value="selectQnaBoardList.do">
+									<c:url var="paging3" value="MyAssignBoardList.do">
                           				 <c:param name="page" value="${currentPage+1 }" />
                           				 <c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
                         			</c:url> 
@@ -125,7 +127,7 @@
 						</div>
 						
 							 
- 				<form action="/finalp/selectQnaBoardList.do" method="get" style="display:inline-flex;margin-left: 470px;">
+ 				<form action="/finalp/MyAssignBoardList.do" method="get" style="display:inline-flex;margin-left: 470px;">
 					<div align="right" style="width:200px;">
 						<c:if test="${keyword ne ''}">
 							 <c:url var="keyword1" value="selectQnaBoardList.do">
