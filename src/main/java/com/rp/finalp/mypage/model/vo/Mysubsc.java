@@ -9,15 +9,27 @@ public class Mysubsc implements java.io.Serializable{
 	private int app_student_no;
 	private String mem_name;
 	private String mem_refile;
+	private String app_y;
 	
 	public Mysubsc() {}
 
-	public Mysubsc(int mem_no, int app_student_no, String mem_name, String mem_refile) {
+	public Mysubsc(int mem_no, int app_student_no, String mem_name, String mem_refile, String app_y) {
 		super();
 		this.mem_no = mem_no;
 		this.app_student_no = app_student_no;
 		this.mem_name = mem_name;
 		this.mem_refile = mem_refile;
+		this.app_y = app_y;
+	}
+
+	
+	
+	public String getApp_y() {
+		return app_y;
+	}
+
+	public void setApp_y(String app_y) {
+		this.app_y = app_y;
 	}
 
 	public int getMem_no() {
@@ -59,12 +71,8 @@ public class Mysubsc implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Mysubsc [mem_no=" + mem_no + ", app_student_no=" + app_student_no + ", mem_name=" + mem_name
-				+ ", mem_refile=" + mem_refile + "]";
+				+ ", mem_refile=" + mem_refile + ", app_y=" + app_y + "]";
 	}
-	
-	
-	
-	
-	
+
 	
 }

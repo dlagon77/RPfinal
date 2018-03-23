@@ -49,6 +49,13 @@ public class MypageController {
 		return "mypage/stusubmitlist";
 	}*/
 	
+	// 마이페이지 - 상세보기 : 과제 제출 게시판 글 보기 
+	@RequestMapping(value = "/detailMypAssignService.do", method = RequestMethod.GET)
+	public String mypageAssignDetail(Model model, @RequestParam("sno") int sno) {
+		model.addAttribute("mypassign", mypService.selectmyassigndetail(sno));
+		return "mypage/mySubmitAssignDetailView";
+	}
+	
 	// 마이페이지 : 과제 제출 내역 내가 쓴글 리스트 조회 + 검색
 	@RequestMapping(value = "/MyAssignBoardList.do")
 	public String mypageAssignmentSubmitlist(Model model, @RequestParam(value="page",required=true,defaultValue="1")int page,
@@ -150,7 +157,7 @@ public class MypageController {
 	}
 
 	
-	/* 현재비번확인 */
+	/* 현재비번확인 하고 밑에서 비번 바꿈 */
 	@RequestMapping(value="/changepwd.do")
 	public void changePwd(Model model,@RequestParam(value="oldpass",required=false)String oldpass,
 			@RequestParam(value="newpass1",required=false)String newpass1,
@@ -225,7 +232,7 @@ public class MypageController {
 	}
 	
 	/* 관심분야 변경 */
-	@RequestMapping(value="/changeMemInter.do")
+	@RequestMapping(value="	/changeMemInter.do")
 	public void changeMemInter(Model model,@RequestParam(value="meminter",required=false)String mem_inter,
 			HttpServletResponse response, HttpSession session)throws Exception {
 		

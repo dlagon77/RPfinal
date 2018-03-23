@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
 import com.rp.finalp.mypage.model.vo.Message;
+import com.rp.finalp.mypage.model.vo.MysubAssign;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 import com.rp.finalp.assign.model.vo.Assignment;
@@ -110,6 +111,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int listCount() {
 		return mypDao.listCount();
+	}
+
+	@Override
+	public MysubAssign selectmyassigndetail(int sno) {
+		return mypDao.selectmyassigndetail(sno);
 	}
 	
 	

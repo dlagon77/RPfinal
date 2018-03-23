@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
 import com.rp.finalp.mypage.model.vo.Message;
+import com.rp.finalp.mypage.model.vo.MysubAssign;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
 import com.rp.finalp.assign.model.vo.Assignment;
@@ -157,5 +158,10 @@ public class MypageDao {
 		
 		public int listCount() {
 			return mybatis.selectOne("MesboardMapper.listCount");
+		}
+
+		//내가제출한 과제 상세보기
+		public MysubAssign selectmyassigndetail(int sno) {
+			return mybatis.selectOne("mypageMapper.selectmyassigndetail",sno);
 		}
 }
