@@ -4,133 +4,357 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-   <title>RP's Home~</title> 
+    <title>Real Programmer</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/finalp/resources/css/assets/main.css" />
+	
+	<style type="text/css">
+		#banner h1{
+		    font-size: 4em;
+			margin-bottom: .25em;
+			color: #ffffff;
+			font-weight: 700;
+		    line-height: 1.5;
+		}
+		
+	</style>
 </head>
 <body>
 <c:import url="header.jsp" />
-<h1> 화면 준비중입니다.. </h1>
-<a href="assInsertForm.do">for assignment click here</a><br>
-<a href="assList.do">for assignment LIST click here</a><br>
-<a href="testInsertForm.do">for test click here</a><br>
-<a href="testList.do">for test LIST click here</a><br>
-<a href="testDetailView.do">for testDetailView click here</a><br>
-<a href="testMakeForm.do">for testMake cilck here</a><br><br>
 
-<a href="loginTestForm.do">for loginTestForm cilck here</a><br><br>
+		<!-- Banner -->
+			<section id="banner" data-video="/finalp/resources/img/images/banner">
+				<div class="inner">
+					<header>
+						<h1>Real Programmer</h1>
+						<p>내 손안에 세상을 담고 세상을 만들어가는 코더<br />
+						새로운 시대로의 발걸음 당신부터 시작입니다</p>
+					</header>
+				</div>
+	
+			</section>
 
-<a href="classManage.do">for classManagement cilck here</a><br>
-<a href="blist.do">관리자 페이지</a><br>
-<a href="assMakeForm.do">for assMake cilck here</a>
+		<!-- Main -->
+			<div id="main">
 
-<!doctype html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-   <style type="text/css">
-   .innerbox{float:left;width:48%;border:1px solid #ccc;padding:10px;max-height:250px;}
-   .preview{width:98%;border:1px solid #ccc;min-height:400px;}
-   iframe{width:100%;border:.5px solid red;min-height:400px;}
-   </style>
-  <title>Document</title>
- </head>
- <body>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog" style="top:40px; left:50px;">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        
-      <div class="modal-body">
-          <body class="bg-dark">
-  <div class="container" style="margin-top: 60px;">
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">로그인</div>
-      <div class="card-body">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">아이디입력</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="아이디입력">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">비밀번호입력</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="비밀번호입력">
-          </div>
-          <div class="form-group">
-            <div class="form-check">
-              <!--label class="form-check-label">
-                <input class="form-check-input" type="checkbox">비밀번호 기억하기 </label-->
-            </div>
-          </div>
-          <a class="btn btn-primary btn-block" href="index.jsp">로그인</a>
-        </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="/semi/views/login/enrolll.html">회원가입하기</a>
-          <a class="d-block small" href="/semi/views/login/findpwd.html">ID/PW찾기</a>
-        </div>
-      </div>
-    </div>
-  </div>
-       
-          
-        </div>
-        
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+			<!-- 강의별 인기 랭킹 -->
+				<section class="wrapper style2">
+					<div class="inner">
+						<header>
+							<h2 class="starTutorTitle"><i class="xi-mouse xi-x"></i>&nbsp; [Most Clicked] 가장 인기 있는 강의</h2>
+							<hr>
+							
+						</header>
+						<!-- Tabbed Video Section -->
+							<div class="flex flex-tabs">
+								<ul class="tab-list">
+									<li><a href="#" data-tab="tab-1" class="active">JAVA</a></li>
+									<li><a href="#" data-tab="tab-2">ORACLE</a></li>
+									<li><a href="#" data-tab="tab-3">HTML/CSS</a></li>
+								</ul>
+								<div class="tabs">
 
-   <div id="container">
-      <div id="box">
-         <textarea class="innerbox html" placeholder="Enter HTML Here"></textarea>
-         <textarea class="innerbox css" placeholder="Enter Css Here"></textarea>
-            <div class="innerbox preview">
-               <iframe id="live_update">
-                  <!doctype html>
-                  <html lang="en">
-                  <head><meta charset="utf-8">
-                  </head>
-                  <body></body>
-                  </html>
-               </iframe>
-            </div><!-- /iframe holder -->
-      </div><!-- /box -->
-   </div><!-- /container -->
+									<!-- Tab 1 -->
+										<div class="tab tab-1 flex flex-3 active">
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+										</div>
 
-<!--    <script src="http://code.jQuery.com/jquery-latest.min.js"></script>-->
-<!-- 밑에 jquery는 없는 경로라서 주석 -->
-<!--     <script src="//ajax.googleapis.com/ajx/libs/jquery/1.10.2/jquery.min.js"></script> -->
-    <script>
-      $(function(){
-         function fetchHtml(){
-            var html=$(".html").val();
-            return html
-         }
-         function fetchCss(){
-            var css=$(".css").val();
-            return css
-         }
-            $(".innerbox").on("keyup",function(){
-            
-               var target = $("#live_update")[0].contentWindow.document;
-               target.open();
-               target.close();
+									<!-- Tab 2 -->
+										<div class="tab tab-2 flex flex-3">
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+										</div>
 
-               var html=fetchHtml();
-               var css=fetchCss();
+									<!-- Tab 3 -->
+										<div class="tab tab-3 flex flex-3">
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+											<!-- Video Thumbnail -->
+												<div class="video col">
+													<div class="image fit">
+														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<div class="arrow">
+															<div class="icon fa-play"></div>
+														</div>
+													</div>
+													<a href="#" class="link"><span>Click Me</span></a>
+												</div>
+										</div>
 
-               $("body",target).append(html); 
-               $("head",target).append("<style>"+css+"</style>");
+								</div>
+							</div>
+					</div>
+				</section>
 
-            });
-      }); 
-    </script>
- </body>
+			<!-- 강사랭킹 -->
+				<section class="wrapper ">
+				
+					<div class="inner">
+						<header class="align-center">
+							<h2 style="color: #9ba2a8"><i class="xi-star xi-x"></i>강사 랭킹 탑3</h2>
+							<hr>
+						</header>
+
+						<!-- 3 Column Video Section -->
+							<div class="flex flex-3">
+								<div class="video col">
+									<div class="image fit">
+										<img src="/finalp/resources/img/images/pic09.jpg" alt="" />
+										<div class="arrow">
+											<div class="icon fa-play"></div>
+										</div>
+									</div>
+									<p class="caption">
+										Cras eget lacus sed mauris scelerisque tincidunt
+									</p>
+									<a href="#" class="link"><span>Click Me</span></a>
+								</div>
+								<div class="video col">
+									<div class="image fit">
+										<img src="/finalp/resources/img/images/pic10.jpg" alt="" />
+										<div class="arrow">
+											<div class="icon fa-play"></div>
+										</div>
+									</div>
+									<p class="caption">
+										Vivamus vulputate lacus non massa auctor lobortis
+									</p>
+									<a href="#" class="link"><span>Click Me</span></a>
+								</div>
+								<div class="video col">
+									<div class="image fit">
+										<img src="/finalp/resources/img/images/pic11.jpg" alt="" />
+										<div class="arrow">
+											<div class="icon fa-play"></div>
+										</div>
+									</div>
+									<p class="caption">
+										Nam eu nisi non ante sodales interdum a vitae neque
+									</p>
+									<a href="#" class="link"><span>Click Me</span></a>
+								</div>
+							</div>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex flex-3">
+						<div class="col">
+							<h3>Team</h3>
+							<ul class="alt">
+								<li><a href="#">Kim Yong seung</a></li>
+								<li><a href="#">Lim Ji Hye</a></li>
+								<li><a href="#">Yoon Joon Woo</a></li>
+								<li><a href="#">Shout Out! Leap</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<h3>Final Project</h3>
+							<ul class="alt">
+								<li><a href="#">Leap</a></li>
+								<li><a href="#">RealProgrammer</a></li>
+								<li><a href="#">S-Class</a></li>
+								<li><a href="#">Yoon Cha Ju Tutor</a></li>
+							</ul>
+						</div>
+						<div class="col">
+							<h3>Team</h3>
+							<ul class="alt">
+								<li><a href="#">Lim Seung Woo</a></li>
+								<li><a href="#">Kim Jea Seok</a></li>
+								<li><a href="#">Choi ung Seok</a></li>
+								<li><a href="#">Moon Si Hyeon</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="copyright">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/finalp/resources/js/assets/jquery.min.js"></script>
+			<script src="/finalp/resources/js/assets/jquery.scrolly.min.js"></script>
+			<script src="/finalp/resources/js/assets/skel.min.js"></script>
+			<script src="/finalp/resources/js/assets/util.js"></script>
+			<script src="/finalp/resources/js/assets/main.js"></script>
+
+	</body>
 </html>
 
 </div>
