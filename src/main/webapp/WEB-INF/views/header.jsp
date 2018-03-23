@@ -212,17 +212,24 @@
                               <ul class="dropdown-menu" style="display: none;">
                         <c:url var="stusub" value="stumypage.do">
                            <c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
-                        </c:url> 
+                        </c:url>
+                        <!-- 관리자 로그인시 -->
+                          <c:if test="${ sessionScope.loginUser.mem_cate eq 'M' }">
+                          	<li><a href="mlist.do">마이페이지</a></li>
+                          </c:if>
+                        <!-- 관리자 로그인시 END --> 
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
                                  <li><a href="profpage.do">내 프로필(학생회원)</a></li>
                                  <li><a id="stusubsc" href="${stusub}">내 강좌 홈</a></li>    
+                                 <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
                               </c:if>
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
                                  <li><a href="profpage.do">내 프로필(강사회원)</a></li>
                                  <li><a href="tumypage.do">마이페이지</a></li>
                                   <li><a href="tutorHome.do?tutor_no=${loginUser.mem_no }">내 강의실</a></li>
+                                  <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
                               </c:if>
-                               <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
+                               
                                <li class="divider"></li>
                                <li><a href="logout.do">로그아웃</a></li>
                               </ul>
