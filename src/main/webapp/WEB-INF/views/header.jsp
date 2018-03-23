@@ -220,7 +220,7 @@
                         <!-- 관리자 로그인시 END --> 
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
                                  <li><a href="profpage.do">내 프로필(학생회원)</a></li>
-                                 <li><a id="stusubsc" href="${stusub}">내 강좌 홈</a></li>    
+                                 <li><a href="${stusub}">마이페이지</a></li>    
                                  <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
                               </c:if>
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
