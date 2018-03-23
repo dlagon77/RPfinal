@@ -87,7 +87,7 @@
 			
 							<div class="avatar" style="width:246px">
 								<div class="user_image" style="width: 136px;height: 136px;cursor: pointer;margin: 0 32px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-									<img height="136" width="136" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+									<img height="136" width="136" src="/finalp/resources/img/profileupload/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 								</div>
 							</div>
 							
