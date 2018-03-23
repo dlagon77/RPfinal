@@ -225,6 +225,14 @@
 		}
 	
 </style>
+	<link rel="stylesheet" href="/finalp/resources/css/codemirror.css">
+	<link rel="stylesheet" href="/finalp/resources/theme/lesser-dark.css">
+		<script type="text/javascript" src="/finalp/resources/js/codemirror.js"></script>
+	<script type="text/javascript" src="/finalp/resources/mode/javascript.js"></script>
+	<!-- 	코드미러 readonly -->
+ 	<script src="/finalp/resources/addon/selection/active-line.js"></script>
+    <script src="/finalp/resources/addon/edit/matchbrackets.js"></script> 
+	
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -379,6 +387,8 @@
 						<div style="font-size:medium; line-height:30px;" id="problem_description">
 							<p>${row.ass_orfile }</p>
 						</div>
+
+					<textarea class="form-control" aria-label="With textarea" rows="30" id="ass${row.ass_no }" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)">${row.ass_res_cod }</textarea>
 					</section>
 				</c:forEach>
 			
@@ -446,9 +456,27 @@
 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
+<!-- 
 
+window.myFunction(10, 2);-->
+<c:forEach items="${submitList }" var="row">
+<script>
+
+var editor = CodeMirror.fromTextArea(document.getElementById("ass${row.ass_no }"), {
+    lineNumbers: true,
+    lineWrapping: true,
+     theme: "lesser-dark", 
+/*     val: textarea.value , */
+     readOnly: 'nocursor' 
+}); 
+/* function assFunction() {
+editor.setValue(${row.ass_res_cod }); */
+
+</script>
+</c:forEach>
 <script type="text/javascript">
 
+ 
 $(function(){
  	$("#subutton").on("click",function(){
 
@@ -519,7 +547,7 @@ function myFunction() {
 
 </body>
 <script>
-window.onload=startass; 
+window.onload=assFunction; 
 </script>
 </html>
 

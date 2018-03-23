@@ -97,7 +97,7 @@
 	</select>
 	
 	<insert id="insertAss" parameterType="Assignment"><![CDATA[
-		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,null,null,sysdate,#{ass_orfile},'123abc.java',#{ass_cate},#{ass_title},0,null,null,null,null,null,#{ass_writer},#{ass_maker},null,5)
+		INSERT INTO ASSIGNMENT VALUES(ASS_SEQ.NEXTVAL,null,null,sysdate,#{ass_orfile},'123abc.java',#{ass_cate},#{ass_title},0,null,null,null,#{ass_res_cod},null,#{ass_writer},#{ass_maker},null,5)
 	]]></insert>
 	
 	<insert id="makeAss" parameterType="Assignment"><![CDATA[
@@ -106,7 +106,7 @@
 
 	<select id="selectSubmitAss" resultMap="assResultMap" resultType="list">
 		<![CDATA[
-			select ass_no, ass_date, ass_orfile, ass_refile, ass_cate, ass_cor_cnt, ass_writer, ass_tcate_id, mem_name,ass_maker
+			select ass_no, ass_date, ass_orfile, ass_refile, ass_cate, ass_cor_cnt, ass_writer, ass_tcate_id, mem_name,ass_maker,ass_res_cod
 			from assignment 
 			join member on (ass_writer = mem_no)
 			where ass_cate = #{ass_cate} and ass_maker = #{ass_maker}
@@ -119,8 +119,7 @@
 			select count(*) from assignment where ass_cate=#{ass_cate} and ass_writer = #{mem_no}
 		]]>
 	</select>
-	
-	
+		
 	<select id="searchAss" resultMap="assResultMap" resultType="list" parameterType="String">
 		<![CDATA[
 			select * from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker = #{tutor_no}
@@ -132,8 +131,6 @@
 			select count(*) from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker = #{tutor_no}
 		]]>
 	</select>
-
-
 
 
 </mapper>

@@ -529,6 +529,9 @@
 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/finalp/resources/js/codemirror.js"></script>
 	<script type="text/javascript" src="/finalp/resources/mode/javascript.js"></script>
+<!-- 	코드미러 readonly -->
+<!-- 	<script src="/finalp/resources/addon/selection/active-line.js"></script>
+    <script src="/finalp/resources/addon/edit/matchbrackets.js"></script> -->
 
 <!-- <script>
   var editor = CodeMirror.fromTextArea(myTextarea, {
@@ -543,7 +546,8 @@ var editor = CodeMirror.fromTextArea(textarea, {
     lineNumbers: true,
     lineWrapping: true,
      theme: "lesser-dark", 
-    val: textarea.value 
+    val: textarea.value ,
+/*     readOnly: 'nocursor' */
 });
 <!-- 코드미러 -->
 
@@ -771,7 +775,8 @@ $(function(){
 			url:"test1.do",
 
 			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_title : $("#atitle").val(),
-				ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val(), ass_maker : $("#tutorno").val()},
+				ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val(), ass_maker : $("#tutorno").val(),
+				ass_res_cod : editor.getValue()},
 
 	          type : "post",
 	          success : function(result){
