@@ -7,6 +7,7 @@
    <resultMap id="resultmysubsc" type="Mysubsc">
       <result property="mem_no" column="mem_no" />
       <result property="app_student_no" column="app_student_no"/>
+      <result property="app_y" column="app_y"/>
       <result property="mem_name" column="mem_name" />
       <result property="mem_refile" column="mem_refile" />
      </resultMap>
@@ -50,6 +51,18 @@
   		<result property="ass_maker" column="ass_maker"/>
   		<result property="ass_lec_id" column="ass_lec_id"/>  	
   		<result property="ass_tcate_id" column="ass_tcate_id"/>  	
+	</resultMap>
+	
+	<resultMap id="MysubassResultMap" type="MysubAssign">
+  		<result property="mem_name" column="mem_name"/>
+  		<result property="ass_title" column="ass_title"/>
+  		<result property="ass_cate" column="ass_cate"/>  
+  		<result property="ass_date" column="ass_date"/>
+  		<result property="ass_no" column="ass_no"/>  	
+  		<result property="ass_maker" column="ass_maker"/>  	
+  		<result property="ass_writer" column="ass_writer"/>  	
+  		<result property="ass_orfile" column="ass_orfile"/>  	
+  		<result property="ass_refile" column="ass_refile"/>  	
 	</resultMap>
 
 	<select id="CurrentMemberPwd" resultType="Member" parameterType="Member">
@@ -146,7 +159,7 @@
 		]]>
 	</select>  -->
 
-	<select id="mysubscribe" resultType="Member">
+	<select id="mysubscribe" resultType="Mysubsc">
 		<![CDATA[
 			select * from mysubscribe where app_student_no = #{mem_no}
 		]]>
@@ -198,9 +211,9 @@
 		</if>
 	</select>
 		
-	<select id="serviceMyAssign" parameterType="hashmap" resultType="list" resultMap="assResultMap">
-	<![CDATA[
-		SELECT * from
+	<select id="serviceMyAssign" parameterType="hashmap" resultType="list" resultMap="MysubassResultMap">
+		<![CDATA[
+		SELECT mem_name,ass_title,ass_cate,ASS_DATE,ASS_NO,ass_maker,ass_writer from
 		(SELECT rownum rnum, a.* FROM assignment a 
 		]]>
 		<if test="isKeyword == 1">
@@ -211,13 +224,24 @@
 	
 		<![CDATA[
 			order by ASS_NO desc)
-			where rnum>= #{startRow} and rnum<=#{endRow}
+			inner join member on mem_no = ass_maker
+			where rnum> = #{startRow} and rnum< = #{endRow}
+		    and ass_writer=#{mem_no}
 	  	]]>
+<!-- 			and ass_maker = #{ass_maker} -->
 		<if test="ismemno == 1">
 			<![CDATA[
-			 	and ASS_WRITER = #{mem_no}
+			 	and ass_writer = #{mem_no}
 			]]>
 		</if>
+	</select>
+	
+	<!-- 마이페이지 내가 제출한 과제 상세보기 -->
+	<select id="selectmyassigndetail" parameterType="_int" resultType="MysubAssign"
+		resultMap="MysubassResultMap">
+	<![CDATA[
+		SELECT * FROM assignment where ass_no = #{sno} 
+	]]>
 	</select>
 
 </mapper>

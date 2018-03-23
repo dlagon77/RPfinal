@@ -21,6 +21,7 @@
 		<typeAlias alias="Chart" type="com.rp.finalp.admin.model.vo.Chart"/>
 		<typeAlias type="com.rp.finalp.mypage.model.vo.InqBoard" alias="InqBoard" />
 		<typeAlias type="com.rp.finalp.mypage.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.rp.finalp.mypage.model.vo.MysubAssign" alias="MysubAssign"/>
 		
 	</typeAliases>
 
