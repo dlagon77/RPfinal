@@ -10,7 +10,9 @@ import com.rp.finalp.member.model.vo.Member;
 
 public interface MemberService {
 	Member loginCheck(Member member);
-	int insertMember(Member member);
+	//int insertMember(Member member);
+	int insertProMember(Member member);
+	int insertStMember(Member member);
 	int updateMember(Member member);
 	int deleteMember(String userId);
 	ArrayList<Member> memberAll();

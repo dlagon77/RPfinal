@@ -124,12 +124,59 @@ public class MemberController {
 					member.setMem_refile(rfileName);
 		}	
 				
-		int result = memberService.insertMember(member);
+		int result = memberService.insertProMember(member);
 		String viewName = null;
 		if(result > 0)
 			viewName = "home";
 		else {			
 			model.addAttribute("message", "강사회원가입실패");
+			viewName = "minsertFail";
+		}
+		return viewName;
+	}
+	
+	@RequestMapping(value="/stinsert.do", method=RequestMethod.POST)
+	public String insertStMember(Member member, Model model, HttpServletRequest request) throws IOException{
+		
+		Date sqlDate=member.getMem_birth();
+	      java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+
+	      member.setMem_age((new java.util.Date().getYear())-utilDate.getYear());
+	      
+		
+		System.out.println("insert : " + member);
+		//파일 업로드 처리
+				MultipartHttpServletRequest multipartRequest =
+						(MultipartHttpServletRequest)request;
+				MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+				
+				// 웹서버 컨테이너 경로 추출함 
+/*			    String root = request.getSession().getServletContext().getRealPath("/");*/
+				 String root = "C:/JHfinalProject/finalp/target/m2e-wtp/web-resources/";
+			    // 파일 저장 경로 정함
+			    String savePath = root + "uploadFiles/";
+			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
+			 
+				
+				if(!uploadFile.isEmpty()){
+					String ofileName = uploadFile.getOriginalFilename();
+					
+					long currentTime = System.currentTimeMillis();  
+				    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+					String rfileName = simDf.format(new Date(currentTime)) +"."
+							+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
+					uploadFile.transferTo(new File(savePath + rfileName));
+								
+					member.setMem_orfile(ofileName);
+					member.setMem_refile(rfileName);
+		}	
+				
+		int result = memberService.insertStMember(member);
+		String viewName = null;
+		if(result > 0)
+			viewName = "home";
+		else {			
+			model.addAttribute("message", "회원가입실패");
 			viewName = "minsertFail";
 		}
 		return viewName;

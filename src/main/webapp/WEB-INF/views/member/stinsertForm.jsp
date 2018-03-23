@@ -174,12 +174,41 @@
 		
         <div class="col-md-6 col-md-offset-3">
 		
-		
+		<script type="text/javascript">
+			  
+			
+			function checkId(){
+			  		var id = $('#id').val();
+			  			$.ajax({
+			  				type:'POST',
+			  				url:'checkId.do',
+			  				data:{
+			  					mem_id:$('#imadd').val()
+			  				},
+			  				success:function(data){
+			  					if($.trim(data)==0){
+			  						$('#checkMsg').html('<p style="color:blue">사용가능</p>');
+			  					}
+			  					else{
+			  						$('#checkMsg').html('<p style="color:red">사용불가능</p>');
+			  					}
+			  				},
+			  				error:function(){
+			  					alert("에러입니당");
+			  				}
+			  				
+			  			});  //end ajax
+			  		}
+			  	
+			  </script>
 
             <div class="form-group">
               <label for="InputEmail">이메일ID</label>
-              <input type="email" required class="emailId" maxlength="50" oninput="checkId()" id="checkaa" name="mem_id" placeholder="이메일 주소">
-              <!-- div id="checkMsg"></div-->
+              <input type="email" id="imadd" required class="emailId" maxlength="50" name="mem_id" placeholder="이메일 주소">
+              
+              <div id="checkMsg"></div>
+              
+              <button id="checkbtn" class="btn btn-default" onclick="checkId()">중복확인</button>
             </div>
             
 			<!-- div class="form-group">

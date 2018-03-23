@@ -23,8 +23,16 @@ public class MemberDao {
 		return mybatis.selectOne("memberMapper.loginMember", member);
 	}
 
-	public int insertMember(Member member) {
+	/*public int insertMember(Member member) {
 		return mybatis.insert("memberMapper.insertMember", member);		
+	}*/
+	
+	public int insertProMember(Member member) {
+		return mybatis.insert("memberMapper.insertProMember", member);		
+	}
+	
+	public int insertStMember(Member member) {
+		return mybatis.insert("memberMapper.insertStMember", member);		
 	}
 
 	public int updateMemberImg(Member member) {

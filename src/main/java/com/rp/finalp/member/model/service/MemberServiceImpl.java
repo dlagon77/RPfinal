@@ -23,9 +23,19 @@ public class MemberServiceImpl implements MemberService {
 			return memberDao.loginCheck(member);
 		}
 
-		@Override
+		/*@Override
 		public int insertMember(Member member) {
 			return memberDao.insertMember(member);
+		}*/
+		
+		@Override
+		public int insertProMember(Member member) {
+			return memberDao.insertProMember(member);
+		}
+		
+		@Override
+		public int insertStMember(Member member) {
+			return memberDao.insertStMember(member);
 		}
 
 		@Override

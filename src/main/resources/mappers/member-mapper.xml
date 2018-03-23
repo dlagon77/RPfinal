@@ -45,9 +45,10 @@
       <![CDATA[
       select * from member
       ]]>
+      
    </select> -->
 
-    <insert id="insertMember" parameterType="Member" >
+    <insert id="insertProMember" parameterType="Member" >
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
       #{mem_name}, #{mem_phone},#{mem_age}, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
@@ -58,8 +59,8 @@
    <insert id="insertStMember" parameterType="Member" >
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
-      #{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth}, 'N','T', #{mem_inter}, #{mem_orfile},
-      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content},#{mem_channel_id})
+      #{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth}, 'N','S', #{mem_inter}, #{mem_orfile},
+      #{mem_refile}, null, null, null, null)
       ]]>
    </insert>
    
