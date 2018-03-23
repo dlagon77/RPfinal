@@ -281,10 +281,12 @@
 						</c:url>
 						<a href="${first }">[맨처음]</a>
 						<c:url var="prev" value="classManage.do">
-							<c:param name="currentPage" value="${startPage - limit }" />
+							<c:param name="currentPage" value="1" />
 							<c:param name="tutor_no" value="${tutor_no }"/>
 						</c:url>
-						<a href="${prev }">	[prev]</a>
+						<c:if test="${currentPage != 1 }">
+							<a href="${prev }">	[prev]</a>
+						</c:if>
 						<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
 							<c:url var="page" value="classManage.do">
 								<c:param name="currentPage" value="${p }" />
@@ -298,16 +300,22 @@
 							</c:if>
 						</c:forEach>
 						<c:url var="next" value="classManage.do">
-							<c:param name="currentPage" value="${endPage + limit }" />
+							<c:param name="currentPage" value="${currentPage + 1 }" />
 							<c:param name="tutor_no" value="${tutor_no }"/>
 						</c:url>
-						<a href="${next }">	[next]</a>
+						<c:if test="${currentPage != endPage }">
+							<a href="${next }">	[next]</a>
+						</c:if>
+						
 						<c:url var="last" value="classManage.do">
 							<c:param name="currentPage" value="${maxPage }" />
 							<c:param name="tutor_no" value="${tutor_no }"/>
 						</c:url>
 						<a href="${last }">[맨끝]</a>
 					</div>
+					
+					
+					
 					
 					
 				</div>

@@ -24,8 +24,8 @@ public class AssignServiceImpl implements AssignService{
 	}
 
 	@Override
-	public int listCount() {
-		return assignDao.listCount();
+	public int listCount(int tutor_no) {
+		return assignDao.listCount(tutor_no);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class AssignServiceImpl implements AssignService{
 	}
 
 	@Override
-	public List<Assignment> selectTutorAssList(int tutor_no){
-		return assignDao.selectTutorAssList(tutor_no);
+	public List<Assignment> selectTutorAssList(HashMap<String, Object> map){
+		return assignDao.selectTutorAssList(map);
 	}
 
 	@Override

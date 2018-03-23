@@ -57,7 +57,7 @@
 	
 	<select id="listCount" resultType="integer"> 
 		<![CDATA[
-			SELECT COUNT(*) FROM ASSIGNMENT 
+			select count(*) from assignment where ass_maker=#{tutor_no} and ass_writer is null
 		]]>		
 	</select>
 	<select id="selectAss" resultType="Assignment" parameterType="Assignment">
@@ -84,9 +84,11 @@
 	<select id="selectTutorAssList" resultMap="tutorAssList" resultType="list" 
 		parameterType="java.util.HashMap"> 					
 		<![CDATA[ 
-		select ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt,ass_maker
+		select *
+    	from (select rownum rnum,ass_no,ass_reg_date, ass_title, ass_cate, ass_cor_cnt,ass_maker
 		from assignment
-		where ass_maker = #{tutor_no} and ass_writer is null
+		where ass_maker = #{tutor_no} and ass_writer is null)
+		where rnum >= #{startRow} and rnum <= #{endRow} 
 		]]>
 	</select>
 	

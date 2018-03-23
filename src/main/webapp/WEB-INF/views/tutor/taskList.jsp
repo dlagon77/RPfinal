@@ -301,7 +301,7 @@
 		
 		<c:if test="${loginUser.mem_no eq tutor_no }">
 			<div style="display:inline-flex;position: relative;left: 90%;">
-				<button class="taskRegButton">과제등록</button>
+				<button class="taskRegButton" onclick="location.href='classManageTask.do?tutor_no=${tutor_no }'">과제등록</button>
 			</div>
 		</c:if>
 		

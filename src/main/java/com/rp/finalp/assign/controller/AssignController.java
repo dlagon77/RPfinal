@@ -54,7 +54,6 @@ public class AssignController{
 		return "ass/assMakeForm";
 	}
 	
-	
 	@RequestMapping(value = "compileAssign.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -146,7 +145,7 @@ public class AssignController{
 		}
 	}
 	
-	@RequestMapping("assList.do")
+	/*@RequestMapping("assList.do")
 	public String assListMethod(Model model, HttpServletRequest request) {
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
@@ -178,7 +177,7 @@ public class AssignController{
 		model.addAttribute("endPage",endPage);
 		
 		return "ass/assListView";
-	}
+	}*/
 	
 	@RequestMapping("assDetailForm.do")
 	public String assSelectOneMethod(Assignment ass,Model model) {

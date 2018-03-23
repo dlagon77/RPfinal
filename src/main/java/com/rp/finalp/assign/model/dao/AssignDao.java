@@ -17,8 +17,8 @@ public class AssignDao {
 		return mybatis.selectList("assignMapper.selectAll",map);
 	}
 	
-	public int listCount() {
-		int a= mybatis.selectOne("assignMapper.listCount");
+	public int listCount(int tutor_no) {
+		int a= mybatis.selectOne("assignMapper.listCount",tutor_no);
 		return a;
 	}
 
@@ -30,8 +30,8 @@ public class AssignDao {
 		return mybatis.delete("assignMapper.assDelete",ass);
 	}
 	
-	public List<Assignment> selectTutorAssList(int tutor_no){
-		return mybatis.selectList("assignMapper.selectTutorAssList",tutor_no);
+	public List<Assignment> selectTutorAssList(HashMap<String, Object> map){
+		return mybatis.selectList("assignMapper.selectTutorAssList",map);
 	}
 	
 	public Assignment assDetail(int ass_no) {

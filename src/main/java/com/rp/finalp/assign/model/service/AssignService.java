@@ -8,10 +8,10 @@ import com.rp.finalp.assign.model.vo.Assignment;
 
 public interface AssignService {
 	List<Assignment> selectAssignList(HashMap<String, Object> map);
-	int listCount();
+	int listCount(int tutor_no);
 	Assignment selectAss(Assignment ass);
 	int assDeleteone(Assignment ass);
-	List<Assignment> selectTutorAssList(int tutor_no); 
+	List<Assignment> selectTutorAssList(HashMap<String, Object> map); 
 	
 	Assignment assDetail(int ass_no);
 	int insertAss(Assignment ass);

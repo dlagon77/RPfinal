@@ -397,14 +397,34 @@
 				</thead>
 
 				<tbody>
-					<c:set value="0" var="assign_no"/>
-					<c:forEach items="${assignList }" var="row">
-					<c:set value="${assign_no+1 }" var="assign_no"/>
-					<tr>
+				
+					<c:if test="${currentPage == 1 }">
+						<c:set value="0" var="assign_no"/>
+					</c:if>
+					<c:if test="${currentPage != 1 }">
+						<c:set value="${currentPage*10-9 }" var="assign_no"/>
+					</c:if>
 					
-						<td class="list_problem_id">${assign_no }</td>
+					<c:forEach items="${assignList }" var="row">
+					
+						<c:set value="${assign_no+1 }" var="assign_no"/>
+					
+					<tr>
+						<c:if test="${currentPage == 1 }">
+							<td class="list_problem_id">${assign_no }</td>
+						</c:if>
+						<c:if test="${currentPage !=1  }">
+							<td class="list_problem_id">${assign_no-1 }</td>
+						</c:if>
+						
 						<td>${row.ass_reg_date }</td>
-						<td class="click-this"><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+						<c:if test="${currentPage == 1 }">
+							<td class="click-this"><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+						</c:if>
+						<c:if test="${currentPage != 1 }">
+							<td class="click-this"><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no-1}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+						</c:if>
+						
 						<td>
 							<span class="badge badge-info">${row.ass_cate }</span>
 						</td>
@@ -419,8 +439,54 @@
 					</c:forEach>
 				</tbody>
 				</table>
+					
+					
+					<!-- 페이지 번호 처리 -->
+					<div style="text-align:center;">
+						<c:url var="first" value="classManageTask.do">
+							<c:param name="currentPage" value="1" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<a href="${first }">[맨처음]</a>
+						<c:url var="prev" value="classManageTask.do">
+							<c:param name="currentPage" value="1" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<c:if test="${currentPage != 1 }">
+							<a href="${prev }">	[prev]</a>
+						</c:if>
+						<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+							<c:url var="page" value="classManageTask.do">
+								<c:param name="currentPage" value="${p }" />
+								<c:param name="tutor_no" value="${tutor_no }"/>
+							</c:url>
+							<c:if test="${p ne currentPage }">
+								<a href="${page }">	| ${p } |&nbsp; </a> 
+							</c:if>
+							<c:if test="${p eq currentPage }">	
+								<a href="${page }">	| <b>${p }</b> |&nbsp; </a>
+							</c:if>
+						</c:forEach>
+						<c:url var="next" value="classManageTask.do">
+							<c:param name="currentPage" value="${currentPage + 1 }" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<c:if test="${currentPage != endPage }">
+							<a href="${next }">	[next]</a>
+						</c:if>
+						
+						<c:url var="last" value="classManageTask.do">
+							<c:param name="currentPage" value="${maxPage }" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<a href="${last }">[맨끝]</a>
+					</div>
+					
+
+
 
 					</div>
+					
 					
 				</div>
 				
