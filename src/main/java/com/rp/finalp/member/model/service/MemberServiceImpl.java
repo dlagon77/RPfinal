@@ -149,4 +149,14 @@ public class MemberServiceImpl implements MemberService {
 					
 			return memberDao.checkId(member);
 		}
+		
+		@Override
+		public List<Member> sideListStudent(Member member) {
+			return memberDao.sideListStudent(member);
+		}
+
+		@Override
+		public List<Member> sideListTutor(Member member) {
+			return memberDao.sideListTutor(member);
+		}
 	}

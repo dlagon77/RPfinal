@@ -119,15 +119,22 @@
         <a href="#"><i class="xi-home xi-x"></i>&nbsp;&nbsp;&nbsp; 홈</a>
         <a href="#"><i class="xi-equalizer xi-x"></i>&nbsp;&nbsp;&nbsp; 인기</a>
         <a href="tutorListView.do"><i class="xi-users xi-x"></i>&nbsp;&nbsp;&nbsp; 강사</a>
-        <a href="#"><i class="xi-keyboard xi-x"></i>&nbsp;&nbsp;&nbsp; test</a>
+        <a href="qblist.do"><i class="xi-align-left xi-x"></i>&nbsp;&nbsp;&nbsp; 게시판</a>
      </div>
 
-      <div class="column">
-     <span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">aeoufseu</span>
-       <a href="#"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; About</a>
-       <a href="qblist.do"><i class="xi-align-left xi-x"></i>&nbsp;&nbsp;&nbsp; 게시판</a>
-       <a href="stinsertpage.do"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; Clients</a>
-       <a href="#"><i class="xi-spinner-3 xi-spin xi-x"></i>&nbsp;&nbsp;&nbsp; Contact</a>
+     <div class="column" style="overflow: auto;">
+     	<c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
+	     	<span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">내 수강생</span>
+     		<c:forEach var="list" items="${ sessionScope.sideListTutor }">
+  		     	<a href="#"><i class="xi-school xi-x"></i>&nbsp;${ list.mem_name }</a>	
+     		</c:forEach>
+     	</c:if>
+     	<c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
+	     	<span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">수강중인 강사</span>
+     		<c:forEach var="list" items="${ sessionScope.sideListStudent }">
+  		     	<a href="#"><i class="xi-man xi-x"></i>&nbsp;${ list.mem_name }</a>	
+     		</c:forEach>
+     	</c:if>
      </div>
        
 </div>

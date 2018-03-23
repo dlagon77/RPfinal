@@ -41,5 +41,8 @@ public interface MemberService {
 	//강의실관리에서 수강신청학생 조회용
 	List<Member> applyClassList(HashMap<String, Object> map);
 	int countApplyList(int tutor_no);
+	//승우 헤더 사이드 리스트
+	List<Member> sideListStudent(Member member);
+	List<Member> sideListTutor(Member member);
 }
 

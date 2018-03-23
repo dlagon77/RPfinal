@@ -245,4 +245,30 @@
 	                		where app_tutor_no = #{tutor_no} and app_y is null)
 		]]>
 	</select>
+	
+	<resultMap type="Member" id="sideNameList">
+		<result property="mem_name" column="mem_name"/>
+	</resultMap>
+	
+	<select id="sideListStudent" resultMap="sideNameList" resultType="list" parameterType="Member"> 
+		<![CDATA[ 
+			select mem_name
+			from member
+			join apply on (mem_no = app_tutor_no)
+			where app_y ='Y' and app_student_no in (select mem_no
+			                                        from member
+			                                        where mem_id = #{mem_id})
+		]]>
+	</select>
+	
+	<select id="sideListTutor" resultMap="sideNameList" resultType="list" parameterType="Member"> 
+		<![CDATA[ 
+			select mem_name
+			from member
+			join apply on (mem_no = app_student_no)
+			where app_y ='Y' and app_tutor_no in (select mem_no
+			                                      from member
+			                                      where mem_id = #{mem_id})
+		]]>
+	</select>
 </mapper>

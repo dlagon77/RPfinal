@@ -47,10 +47,16 @@ public class MemberController {
 			// 기존에 loginUser이란 세션 값이 존재한다면
 			session.removeAttribute("loginUser"); // 기존값을 제거해 준다.
 		}
-		Member loginUser = memberService.loginCheck(member);				
+		Member loginUser = memberService.loginCheck(member);
+		//승우 추가
+		List<Member> sideListStudent = memberService.sideListStudent(member);
+		List<Member> sideListTutor = memberService.sideListTutor(member);
+		
 		if(loginUser !=null) {
 			session.setMaxInactiveInterval(10*60);
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("sideListStudent", sideListStudent);
+			session.setAttribute("sideListTutor", sideListTutor);
 			Member today  = memberService.todaycheck();
 			int check = memberService.updateCount(today);
 			if(check == 0) {

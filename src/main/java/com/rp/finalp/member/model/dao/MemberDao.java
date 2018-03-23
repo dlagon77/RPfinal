@@ -111,6 +111,14 @@ public class MemberDao {
 	public int countApplyList(int tutor_no) {
 		return mybatis.selectOne("memberMapper.countApplyList", tutor_no);
 	}
+	
+	public List<Member> sideListStudent(Member member) {
+		return mybatis.selectList("memberMapper.sideListStudent", member);
+	}
+
+	public List<Member> sideListTutor(Member member) {
+		return mybatis.selectList("memberMapper.sideListTutor", member);
+	}
 }
 
 
