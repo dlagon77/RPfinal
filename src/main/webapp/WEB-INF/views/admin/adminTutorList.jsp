@@ -111,7 +111,7 @@
 			 #a:link,#b:link,#c:link { color: black; text-decoration: none;}
 			 #a:visited,#b:visited,#c:visited { color: black; text-decoration: none;}
 			 #a:hover,#b:hover,#c:hover { color: red; text-decoration: none;}
-		
+			
  </style>
  </head>
  <body>
@@ -155,13 +155,13 @@
         <!-- Page Content -->
         <div id="page-content-wrapper" >
 				<div class="container-fluid" >
-				 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">관리자 메뉴</a>
-				   
-				   <h1 style="margin-top:40px; font-family: 'Nanum Pen Script', cursive;"><i class="xi-emoticon-cool-o xi-x"></i>&nbsp;강사 관리</h1>
-				   <div id="div1" style="width:200px;height:90px;padding:10px;border:1px solid #aaaaaa;margin-left:1100px;margin-top:-77px;background-color:red;" ondrop="drop(event)" ondragover="allowDrop(event)">
+				 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" style="float:left;">관리자 메뉴</a>
+				   <div style="clear:both;"></div>
+				   <h1 style="margin-top:40px;float:left; font-family: 'Nanum Pen Script', cursive;"><i class="xi-emoticon-cool-o xi-x"></i>&nbsp;강사 관리</h1>
+				   <div id="div1" style="width:200px;float:right;height:90px;padding:10px;border:1px solid #aaaaaa;margin-left:1100px;margin-top:-77px;background-color:red;" ondrop="drop(event)" ondragover="allowDrop(event)">
 				   <i class="xi-trash-o xi-4x" style="margin-left:58px;"></i>
 				   </div>
-					<hr>
+					<hr style="clear:both;">
 				   <div style="background-color:#efeded; display:flex;">
 						<div style="padding:10px;">
 					 
@@ -491,12 +491,16 @@
     }
         
         function allowDrop(ev) {
-            ev.preventDefault();
+        	
+        	ev.preventDefault();
+            
+            
         }
 
         
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
+            
         }
 
         function drop(ev) {
