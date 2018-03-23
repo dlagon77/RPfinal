@@ -164,11 +164,11 @@
 						  <div class="mcheck" data-mem_no="${list.mem_no }" id="memberprofile" style="background-color:white" >
 							
 							<c:if test="${!empty list.mem_refile }">
-								<img id="profileImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCfuJiJoyelLhmMxfYr5u3FuPK9skk214NZ2d4ynHTOuln5BFEA">
+								<img id="profileImg" src="/finalp/resources/img/${list.mem_refile }">
 							</c:if>
 							
 							<c:if test="${empty list.mem_refile }">
-								<img id="profileImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCfuJiJoyelLhmMxfYr5u3FuPK9skk214NZ2d4ynHTOuln5BFEA">
+								<img id="profileImg" src="https://st2.depositphotos.com/8440746/11596/v/450/depositphotos_115969634-stock-illustration-add-user-icon-man-account.jpg">
 							</c:if>
 							
 							<div style="position:absolute; margin-top:-87px;margin-left: 118px;">
