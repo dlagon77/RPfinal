@@ -15,7 +15,7 @@ public class Member implements java.io.Serializable{
 	private String mem_phone;  //전화번호
 	private int mem_age;       //나이
 	private String mem_gen;    //성별
-	private String mem_birth;  //생년월일
+	private Date mem_birth;  //생년월일
 	private String mem_black;  //블랙리스트
 	private String mem_cate;   //구분
 	private String mem_inter;  //관심
@@ -41,7 +41,7 @@ public class Member implements java.io.Serializable{
 	public Member() {}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
-			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
+			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
 			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id, int apply_count,
 			int lecture_count, int rev_star, String rev_con, Date rev_date,int rev_no,int tutor_id) {
 		super();
@@ -75,7 +75,7 @@ public class Member implements java.io.Serializable{
 
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
-			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
+			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
 			String mem_refile, String mem_career, String mem_class, String mem_content,
 			int apply_count, int lecture_count, int rev_star, String rev_con, Date rev_date, int rev_no) {
 		super();
@@ -104,7 +104,7 @@ public class Member implements java.io.Serializable{
 	}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
-			String mem_gen, String mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
+			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
 			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id) {
 		super();
 		this.mem_no = mem_no;
@@ -191,11 +191,11 @@ public class Member implements java.io.Serializable{
 		this.mem_gen = mem_gen;
 	}
 
-	public String getMem_birth() {
+	public Date getMem_birth() {
 		return mem_birth;
 	}
 
-	public void setMem_birth(String mem_birth) {
+	public void setMem_birth(Date mem_birth) {
 		this.mem_birth = mem_birth;
 	}
 

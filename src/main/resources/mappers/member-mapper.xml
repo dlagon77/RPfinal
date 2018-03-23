@@ -50,7 +50,15 @@
     <insert id="insertMember" parameterType="Member" >
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
-      #{mem_name}, #{mem_phone},25, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
+      #{mem_name}, #{mem_phone},#{mem_age}, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
+      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content}, #{mem_channel_id})
+      ]]>
+   </insert>
+   
+   <insert id="insertStMember" parameterType="Member" >
+      <![CDATA[
+      INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
+      #{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth}, 'N','T', #{mem_inter}, #{mem_orfile},
       #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content},#{mem_channel_id})
       ]]>
    </insert>

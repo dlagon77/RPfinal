@@ -91,6 +91,12 @@ public class MemberController {
 	@RequestMapping(value="/proinsert.do", method=RequestMethod.POST)
 	public String insertProMember(Member member, Model model, HttpServletRequest request) throws IOException{
 		
+		Date sqlDate=member.getMem_birth();
+	      java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+
+	      member.setMem_age((new java.util.Date().getYear())-utilDate.getYear());
+	      
+		
 		System.out.println("insert : " + member);
 		//파일 업로드 처리
 				MultipartHttpServletRequest multipartRequest =
@@ -99,7 +105,7 @@ public class MemberController {
 				
 				// 웹서버 컨테이너 경로 추출함 
 /*			    String root = request.getSession().getServletContext().getRealPath("/");*/
-				 String root = "C:/finalProject/finalp/target/m2e-wtp/web-resources/";
+				 String root = "C:/JHfinalProject/finalp/target/m2e-wtp/web-resources/";
 			    // 파일 저장 경로 정함
 			    String savePath = root + "uploadFiles/";
 			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함

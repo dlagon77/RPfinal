@@ -251,8 +251,7 @@
 			<div class="form-group">
 			<label for="mem_gen">성별</label>
 				<div class="col-sm-12 text-center">
-					<!-- <button class="btn btn-primary" type="submit">남자<i class="fa fa-check spaceLeft"></i></button>
-					<button type="submit" class="btn btn-info">여자<i class="fa fa-check spaceLeft"></i></button> -->
+					
 					<input type="radio" name="mem_gen" value="M"> 남 
       				<input type="radio" name="mem_gen" value="F"> 여
 				</div>
