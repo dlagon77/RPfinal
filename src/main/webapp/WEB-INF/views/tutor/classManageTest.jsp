@@ -452,8 +452,8 @@
 						<div class="content-container" style="display: table-cell;width: 100%;vertical-align: top;">
 					      <section class="section-column section-column-padding" style="padding:30px;font-size:16px">
 					      
-					        <form class="text-fields text-field-horizontal" action="makeAss.do" method="post" style="display: table;width: 100%;table-layout: fixed;" id="makeAssForm">
-					          <input type="hidden" name="ass_maker" value=${tutor_no }>
+					        <form class="text-fields text-field-horizontal" action="makeTest.do" method="post" style="display: table;width: 100%;table-layout: fixed;" id="makeTestForm">
+					          <input type="hidden" name="test_maker" value=${tutor_no }>
 					          
 					  <div class="course-basic-form">
 					    <div class="text-field-horizontal" style="display: table;width: 100%;table-layout: fixed;">
@@ -482,14 +482,14 @@
 					      <div class="control" style="display: table-row;">
 					        <div class="control-label">시험 문제 내용</div>
 					        <div class="control-input">
-					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_pro" form="makeAssForm"></textarea>
+					           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_pro" form="makeTestForm"></textarea>
 					        </div>
 					      </div>
 					      
 					      <div class="control" style="display: table-row;">
 					        <div class="control-label">시험 정답</div>
 					        <div class="control-input">
-					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_answer" form="makeAssForm"></textarea></pre>
+					           <pre><textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test_answer" form="makeTestForm"></textarea></pre>
 					        </div>
 					      </div>
 					    
@@ -497,7 +497,7 @@
 					      <div class="control" style="display: table-row;">
 					        <div class="control-label">제한 시간</div>
 					        <div class="control-input">
-					          <input class="input-block" type="number" maxlength="10" name="test_time" placeholder="단위(초)" style="width:15%">
+					          <input class="input-block" type="number" maxlength="10" name="test_lec_id" placeholder="단위(초)" style="width:15%">
 					        </div>
 					      </div>
 					     

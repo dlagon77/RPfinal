@@ -74,11 +74,11 @@
 	</select>
 	
 		<insert id="insertTest" parameterType="Test"><![CDATA[
-		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,null,null,sysdate,#{test_orfile},'123abc.java',#{test_cate},null,0,null,null,null,null,#{test_writer},null,null,6)
+		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,null,null,sysdate,#{test_orfile},'123abc.java',#{test_cate},#{test_title},0,null,null,null,null,#{test_writer},#{test_maker},null,6)
 	]]></insert>
 
 	<insert id="makeTest" parameterType="Test"><![CDATA[
-		INSERT INTO Test VALUES(TEST_SEQ.NEXTVAL,#{test_comment},default,null,null,'123abc.java',#{test_cate},#{test_title},0,#{test_pro},#{test_answer},'public static void main','3,6,9',null,#{test_maker},#{test_lec_id},5)
+		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,#{test_comment},default,null,null,'123abc.java',#{test_cate},#{test_title},0,#{test_pro},#{test_answer},'public static void main','3,6,9',null,#{test_maker},#{test_lec_id},5)
 	]]></insert>
 
 </mapper>

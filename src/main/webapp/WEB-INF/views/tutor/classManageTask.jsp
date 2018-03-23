@@ -572,7 +572,8 @@
 				api.truncate();
 				api.watch();
 			}
-	};
+	}
+	});
 
 	
 	</script>

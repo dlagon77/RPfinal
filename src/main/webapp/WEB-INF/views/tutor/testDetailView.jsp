@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="/finalp/resources/css/codemirror.css">
+	<link rel="stylesheet" href="/finalp/resources/theme/lesser-dark.css">
 <style>
 	#navbar{
 		 overflow: hidden;
@@ -323,7 +325,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>-</td>
+						<td><b>${test.test_lec_id }초</b></td>
 						<td>${test.test_cate }</td>
 						<td>${test.test_cor_cnt }</td>
 						<td>${test.test_cor_cnt/Lecture.apply_count*100 }%</td>
@@ -357,19 +359,22 @@
 					<h2 style="width:6%;font-weight:600">풀기</h2>
 				</div>
 			</section>
+			<!-- 제한시간 -->
+				제한시간 : <B><span id="timeLeft"></span></B> 초<br>
+			<!-- 제한시간 END -->
 			<div class="row">
 			<div class="col-md-8">
 				<section id="sampleinput" style="padding-top:0">
 				
 				<div style="display:flex;margin-bottom: 20px;">
-					<p>Enter Your Tutor_NO : <p><input type="text" id="tutorno" onblur="check()">
-					<p>Enter Class Name : <p><input type="text" id="class" onblur="check()">
+					<p>Tutor_NO : <p><input type="text" id="tutorno" onblur="check()" value="  ${tutor_no }" style="border: 0px solid;" readonly>
+					<p>Enter Class Name : <p><input type="text" id="class" onblur="checkTest()">
 				</div>
 				<div style="display:flex;width: fit-content;">
-					<button class="compileButton" onclick="compile()">Compile</button>
-					<button class="compileButton" onclick="run()">Run</button>
+					<button class="compileButton" onclick="compileTest()">Compile</button>
+					<button class="compileButton" onclick="runTest()">Run</button>
 					<button class="compileButton" onclick="empty()">Clear</button>
-					<button class="compileButton" onclick="subass()">제출</button>
+					<button class="compileButton" onclick="subtest()">제출</button>
 				</div>
 				<textarea class="form-control" aria-label="With textarea" rows="30" id="maincode" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)"></textarea>
 				
@@ -420,7 +425,10 @@
 	</div><!--row-->
 
 
-
+<input type="hidden" id="teTitle" value=${test.test_title } >
+<input type="hidden" id="teCate" value=${test.test_cate } >
+<input type="hidden" id="teTno" value=${tutor_no }>
+<input type="hidden" id="teMem" value=${loginUser.mem_no }>
 
 	</section>
 	
@@ -454,7 +462,10 @@
     <script src="/finalp/resources/js/bootstrap.min.js"></script>
 	<script src="/finalp/resources/js/modernizr.js"></script>
 	<script src="/finalp/resources/js/script.js"></script>
-	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
+<!-- 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script> -->
+<!-- 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script> -->
+	<script type="text/javascript" src="/finalp/resources/js/codemirror.js"></script>
+	<script type="text/javascript" src="/finalp/resources/mode/javascript.js"></script>
 	
 
 	
@@ -498,6 +509,268 @@ function myFunction() {
 		}
 		</script>
 		
+		
+	<!-- 제한시간 -->
+		<script>
+		var init1 = '${test.test_lec_id}';
+		var init = init1;
+		function time_reset(){
+			init=-1;
+			clearTimeout(timer);
+			timer=setTimeout("count()",500);
+		
+		}
+		function show_clock(){
+			document.all.timeLeft.innerHTML=init;
+			count();
+		}
+		
+		function count(){
+			if(init>0){
+				document.all.timeLeft.innerHTML=init;
+				init--;
+				timer=setTimeout("count()",1000);
+			} else if(init<0) {
+				clearTimeout(timer);
+				init=init1;
+				show_clock();
+			} else {
+				document.all.timeLeft.innerHTML=init;
+				timer=setTimeout("subtest()",500);
+			}
+		}
+		 window.onload=show_clock; 
+		</script>
+	<!-- 제한시간END -->
+	<script type="text/javascript">
+	<!-- 코드미러 -->
+	var textarea=document.getElementById('maincode');
+	var editor = CodeMirror.fromTextArea(textarea, {
+	    lineNumbers: true,
+	    lineWrapping: true,
+	     theme: "lesser-dark", 
+	    val: textarea.value 
+	});
+	<!-- 코드미러 -->
+	
+	<!-- 컴파일러 자바스크립트 -->
+	function check() {
+	
+		var classname = document.getElementById("class").value;
+		classname.trim();
+		if(classname == ""){
+	/*		alert("enter valid class name !!");*/
+			document.getElementById("class").focus();
+		}
+		else{
+			editor.setValue("public class " + classname + "{\n\t public static void main(String[] args){ \n\n\n		} \n}") ;
+		}
+		
+	}
+	;
+	function checkTest() {
+	
+		var classname = document.getElementById("class").value;
+		classname.trim();
+		if(classname == ""){
+	/*		alert("enter valid class name !!");*/
+			document.getElementById("class").focus();
+		}
+		else{
+			editor.setValue("public class " + classname + "_test" + "{\n\t public static void main(String[] args){ \n\n\n		} \n}") ;
+		}
+		
+	}
+	
+	
+	function  compile() {
+		console.log("compiling");
+		if(editor.getValue()==""){
+			alert("Insert some code please !");
+		}
+		else{
+			//code = maincode
+			//classname = class
+			var code=encodeURIComponent(editor.getValue());
+			var url = "compileAssign.do?code=" + code + "&className=" + document.getElementById("class").value;
+			
+			if(window.XMLHttpRequest){
+	           xmlhttp=new XMLHttpRequest();
+	        }
+	        else{
+	            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	        }  
+	
+	        xmlhttp.onreadystatechange=function(){
+	            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+	            }
+	        }
+	        xmlhttp.open("POST",url,true);
+	        xmlhttp.send();
+		}
+		console.log("compiled !!");
+	}
+	
+	function run() {
+		
+		var url = "runAssign.do?classname=" + document.getElementById("class").value;
+		
+		if(window.XMLHttpRequest){
+	        xmlhttp=new XMLHttpRequest();
+	     }
+	     else{
+	         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	     }  
+		var button_joinus = document.getElementById('subutton');
+		xmlhttp.onreadystatechange=function(){
+	        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	        	document.getElementById("output").innerHTML=xmlhttp.responseText; 
+	       	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
+	
+	      	
+	      		button_joinus.disabled = false;
+	       	}else{
+	       		button_joinus.disabled = true;
+	       	}
+	        }
+	    }
+	     xmlhttp.open("POST",url,true);
+	     xmlhttp.send();
+	}
+	
+	function  compileTest() {
+		console.log("compiling");
+		if(editor.getValue()==""){
+			alert("Insert some code please !");
+		}
+		else{
+			//code = maincode
+			//classname = class
+			var code=encodeURIComponent(editor.getValue());
+			var url = "compileTest.do?code=" + code + "&className=" + document.getElementById("class").value;
+			
+			if(window.XMLHttpRequest){
+	           xmlhttp=new XMLHttpRequest();
+	        }
+	        else{
+	            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	        }  
+	
+	        xmlhttp.onreadystatechange=function(){
+	            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+	            }
+	        }
+	        xmlhttp.open("POST",url,true);
+	        xmlhttp.send();
+		}
+		console.log("compiled !!");
+	}
+	
+	function runTest() {
+		
+		var url = "runTest.do?classname=" + document.getElementById("class").value;
+		
+		if(window.XMLHttpRequest){
+	        xmlhttp=new XMLHttpRequest();
+	     }
+	     else{
+	         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	     }  
+		var button_joinus = document.getElementById('subutton');
+		xmlhttp.onreadystatechange=function(){
+	        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	        	document.getElementById("output").innerHTML=xmlhttp.responseText; 
+	       	if(document.getElementById("an").innerHTML==document.getElementById("output").innerHTML){
+	
+	      	
+	      		button_joinus.disabled = false;
+	       	}else{
+	       		button_joinus.disabled = true;
+	       	}
+	        }
+	    }
+	     xmlhttp.open("POST",url,true);
+	     xmlhttp.send();
+	}
+	
+/* 	function startass(){
+		var button_joinus1 = document.getElementById('subutton');
+		button_joinus1.disabled = true;
+	}
+	 */
+	
+	function empty() {
+		
+		document.getElementById("class").value="";
+		editor.setValue("");
+	  	document.getElementById("output").value="";
+		
+	}
+	
+	function subass() {
+		console.log("submiting");
+		if(editor.getValue()==""){
+			alert("Insert some code please !");
+		}
+		else{
+			//code = maincode
+			//classname = class
+			var code=encodeURIComponent(editor.getValue());
+			var url = "submitAssign.do?code=" + code + "&className=" + document.getElementById("class").value + "&tutorno=" + document.getElementById("tutorno").value;
+			
+			if(window.XMLHttpRequest){
+	           xmlhttp=new XMLHttpRequest();
+	        }
+	        else{
+	            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	        }  
+	
+	        xmlhttp.onreadystatechange=function(){
+	            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	            	document.getElementById("output").innerHTML=xmlhttp.responseText;
+	            }
+	        }
+	        xmlhttp.open("POST",url,true);
+	        xmlhttp.send();
+		}
+		console.log("submited !!");
+	}
+	
+	function subtest() {
+		console.log("submiting");
+		if(editor.getValue()==""){
+			alert("Insert some code please !");
+		}
+		else{
+			//code = maincode
+			//classname = class
+			var code=encodeURIComponent(editor.getValue());
+			var url = "submitTest.do?code=" + code + "&className=" + document.getElementById("class").value+"_test.java" + "&tutorno=" + document.getElementById("tutorno").value
+						+"&submit=sub"+"&test_orfile="+document.getElementById("class").value+"_test.java"+"&test_writer="+document.getElementById("teMem").value+"&test_cate="+document.getElementById("teCate").value
+						+"&test_maker="+document.getElementById("teTno").value+"&test_title="+document.getElementById("teTitle").value;
+			
+			if(window.XMLHttpRequest){
+	           xmlhttp=new XMLHttpRequest();
+	        }
+	        else{
+	            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	        }  
+	
+	        xmlhttp.onreadystatechange=function(){
+	            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	            	document.getElementById("output").innerHTML=xmlhttp.responseText;
+	            }
+	        }
+	        xmlhttp.open("POST",url,true);
+	        xmlhttp.send();
+		}
+		console.log("submited !!");
+		window.location.replace("tutorListView.do");
+	}
+	<!-- /컴파일러 자바스크립트 -->
+	</script>	
 </div>
 
 </body>
