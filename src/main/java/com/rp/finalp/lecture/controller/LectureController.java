@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -168,7 +170,47 @@ public class LectureController {
 		model.addAttribute("videoTime", videoTime);
 		lectureService.addReadCount(videoId);
 		model.addAttribute("Lecture", lectureService.selectReadCount(videoId));
+		model.addAttribute("review", lectureService.selectReviewList(videoId));
 		return "tutor/lectureDetail";
+	}
+	
+	@RequestMapping(value="/selectLectureReview.do",method=RequestMethod.POST)
+	public void selectLectureReviewMethod(@RequestParam(value="videoId") String videoId, Member member,Model model,HttpServletResponse response) throws IOException {
+		
+		response.setContentType("application/json; charset=utf-8");
+		List<Member> list = lectureService.selectReviewList(videoId);
+		JSONObject job = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		for(Member m : list) {
+			JSONObject job2 = new JSONObject();
+			job2.put("rev_no", m.getRev_no());
+			job2.put("mem_refile", m.getMem_refile());
+			job2.put("rev_con", m.getRev_con());
+			job2.put("mem_name", m.getMem_name());
+			job2.put("rev_date", m.getRev_date().toString());
+			jarr.add(job2);
+		}
+		job.put("reviewList", jarr);
+		PrintWriter out = response.getWriter();
+		out.println(job.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("insertLectureReview.do")
+	public void insertLectureReviewMethod(Model model,Member member,HttpServletResponse response) throws IOException  {
+		PrintWriter out = response.getWriter();
+		System.out.println(member.toString());
+		int result = lectureService.insertLectureReview(member);
+		if(result>0) {
+			out.append("ok");
+			out.flush();
+		}
+		else {
+			out.append("fail");
+			out.flush();
+		}
+		out.close();
 	}
 
 	@RequestMapping("classManage.do")

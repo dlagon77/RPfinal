@@ -35,6 +35,7 @@ public class Member implements java.io.Serializable{
 	private String rev_con; //리뷰 내용
 	private Date rev_date; //리뷰등록날짜
 	private int rev_no; //리뷰 번호
+	private String videoId;
 
 
 	private Date v_date;
@@ -42,8 +43,9 @@ public class Member implements java.io.Serializable{
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
 			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
-			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id, int apply_count,
-			int lecture_count, int rev_star, String rev_con, Date rev_date,int rev_no,int tutor_id) {
+			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id,
+			int apply_count, int lecture_count, int tutor_id, int rev_star, String rev_con, Date rev_date, int rev_no,
+			String videoId, Date v_date) {
 		super();
 		this.mem_no = mem_no;
 		this.mem_id = mem_id;
@@ -64,15 +66,14 @@ public class Member implements java.io.Serializable{
 		this.mem_channel_id = mem_channel_id;
 		this.apply_count = apply_count;
 		this.lecture_count = lecture_count;
+		this.tutor_id = tutor_id;
 		this.rev_star = rev_star;
 		this.rev_con = rev_con;
 		this.rev_date = rev_date;
 		this.rev_no = rev_no;
-		this.tutor_id = tutor_id;
+		this.videoId = videoId;
+		this.v_date = v_date;
 	}
-
-	
-
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
 			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
@@ -320,6 +321,15 @@ public class Member implements java.io.Serializable{
 	}
 	
 	
+	
+
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
 
 	public int getTutor_id() {
 		return tutor_id;
@@ -338,8 +348,10 @@ public class Member implements java.io.Serializable{
 				+ ", mem_class=" + mem_class + ", mem_content=" + mem_content + ", mem_channel_id=" + mem_channel_id
 				+ ", apply_count=" + apply_count + ", lecture_count=" + lecture_count + ", tutor_id=" + tutor_id
 				+ ", rev_star=" + rev_star + ", rev_con=" + rev_con + ", rev_date=" + rev_date + ", rev_no=" + rev_no
-				+ "]";
+				+ ", videoId=" + videoId + ", v_date=" + v_date + "]";
 	}
+
+	
 
 	
 	

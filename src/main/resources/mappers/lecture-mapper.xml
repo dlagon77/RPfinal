@@ -105,4 +105,26 @@
 		]]>
 	</select>
 	
+   <select id="selectReviewList" resultType="Member" parameterType="String">
+      <![CDATA[
+	        select mem_refile, rev_con, rev_date, rev_no, mem_name
+	        from review 
+	        join member on (mem_no = rev_mem_no)
+	        where REV_LEC_LINK = #{videoId}
+      ]]>
+   </select>
+   <insert id="insertLectureReview" parameterType="Member">
+	   <![CDATA[
+	   		insert into review values (null,review_sequence.NEXTVAL,#{rev_con},sysdate,#{mem_no},1,null,#{videoId})
+	   ]]>
+   </insert>
+   <select id="selectIntroduce" resultType="Lecture" parameterType="Integer">
+	   <![CDATA[
+	   		select lec_link
+	   		from lecture
+	   		where tutor_no = #{tutor_no} and lec_cate = '소개'
+	   ]]>
+   </select>
+
+
 </mapper>

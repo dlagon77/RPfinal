@@ -65,6 +65,21 @@ public class LectureDao {
 		return mybatis.selectOne("lectureMapper.countLectureList", tutor_no);
 	}
 
+
+	public List<Member> selectReviewList(String videoId) {
+		return mybatis.selectList("lectureMapper.selectReviewList", videoId);
+	}
+
+
+	public int insertLectureReview(Member member) {
+		return mybatis.insert("lectureMapper.insertLectureReview", member);
+	}
+
+
+	public Lecture selectIntroduce(int tutor_no) {
+		return mybatis.selectOne("lectureMapper.selectIntroduce", tutor_no);
+	}
+
 	
 
 }

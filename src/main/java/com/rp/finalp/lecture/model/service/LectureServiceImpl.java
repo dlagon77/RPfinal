@@ -65,6 +65,21 @@ public class LectureServiceImpl implements LectureService{
 	public int countLectureList(int tutor_no) {
 		return lectureDao.countLectureList(tutor_no);
 	}
+
+	@Override
+	public List<Member> selectReviewList(String videoId) {
+		return lectureDao.selectReviewList(videoId);
+	}
+
+	@Override
+	public int insertLectureReview(Member member) {
+		return lectureDao.insertLectureReview(member);
+	}
+
+	@Override
+	public Lecture selectIntroduce(int tutor_no) {
+		return lectureDao.selectIntroduce(tutor_no);
+	}
 	
 	
 	

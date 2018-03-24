@@ -61,7 +61,6 @@ public class MemberController {
 		List<Member> sideListTutor = memberService.sideListTutor(member);
 		
 		if(loginUser !=null) {
-			session.setMaxInactiveInterval(10*60);
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("sideListStudent", sideListStudent);
 			session.setAttribute("sideListTutor", sideListTutor);
@@ -247,6 +246,7 @@ public class MemberController {
 		model.addAttribute("checkApply",checkApply);
 		int checkReady=memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
+		model.addAttribute("introduce", lectureService.selectIntroduce(tutor_no));
 		
 		return "tutor/tutorHome";
 	}

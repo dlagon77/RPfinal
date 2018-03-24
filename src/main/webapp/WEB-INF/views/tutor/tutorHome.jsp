@@ -212,7 +212,7 @@
 			<div class="row">
 
 				<div class="col-md-7 big-letter">
-				<iframe width="734" height="400" src="https://www.youtube.com/embed/${Lecture.lec_link }" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe width="734" height="400" src="https://www.youtube.com/embed/${introduce.lec_link }" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				
 					<p style="font-size:14px;color:gray;float:right">
 						조회수 ${Lecture.lec_readcount }회

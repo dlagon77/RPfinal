@@ -159,4 +159,6 @@ public class MemberServiceImpl implements MemberService {
 		public List<Member> sideListTutor(Member member) {
 			return memberDao.sideListTutor(member);
 		}
+		
+		
 	}

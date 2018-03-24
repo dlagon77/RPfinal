@@ -27,6 +27,14 @@ public interface LectureService {
 	int deleteClassStudent(Lecture lecture);
 
 	int countLectureList(int tutor_no);
+
+	List<Member> selectReviewList(String videoId);
+
+	int insertLectureReview(Member member);
+
+	Lecture selectIntroduce(int tutor_no);
+
+	
 	
 	
 }
