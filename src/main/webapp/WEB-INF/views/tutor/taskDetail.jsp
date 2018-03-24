@@ -565,7 +565,6 @@ function check() {
 	}
 	
 }
-;
 function checkTest() {
 
 	var classname = document.getElementById("class").value;

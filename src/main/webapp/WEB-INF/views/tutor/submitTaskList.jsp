@@ -421,7 +421,7 @@
 
 
 
-<input type="hidden" id="abc" value=${assignment.ass_cate } >
+
 	</section>
 	
 
@@ -456,9 +456,7 @@
 	<script type="text/javascript" src="/finalp/resources/js/j_main__script.js"></script>
 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
-<!-- 
 
-window.myFunction(10, 2);-->
 <c:forEach items="${submitList }" var="row">
 <script>
 
@@ -469,40 +467,10 @@ var editor = CodeMirror.fromTextArea(document.getElementById("ass${row.ass_no }"
 /*     val: textarea.value , */
      readOnly: 'nocursor' 
 }); 
-/* function assFunction() {
-editor.setValue(${row.ass_res_cod }); */
+
 
 </script>
 </c:forEach>
-<script type="text/javascript">
-
- 
-$(function(){
- 	$("#subutton").on("click",function(){
-
-  $.ajax({
-			url:"test1.do",
-
-			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
-
-	          type : "post",
-	          success : function(result){
-	              if(result == "ok"){
-	                  alert("Success");
-	               }else{
-	                  alert("Fail");
-	               }	         
-	          },
-	          error : function(request,status, errorData){
-	             alert("error code : " + request.status + "\n"
-	                   + "message : " + request.responseText + "\n"
-	                   + "error : " + errorData);
-	          }
-		}); 
-	});  
-
-});
-</script>	
 
 
 

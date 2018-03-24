@@ -225,6 +225,13 @@
 		}
 	
 </style>
+	<link rel="stylesheet" href="/finalp/resources/css/codemirror.css">
+	<link rel="stylesheet" href="/finalp/resources/theme/lesser-dark.css">
+		<script type="text/javascript" src="/finalp/resources/js/codemirror.js"></script>
+	<script type="text/javascript" src="/finalp/resources/mode/javascript.js"></script>
+	<!-- 	코드미러 readonly -->
+ 	<script src="/finalp/resources/addon/selection/active-line.js"></script>
+    <script src="/finalp/resources/addon/edit/matchbrackets.js"></script> 
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -350,7 +357,7 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li><a href="testDetail.do?ass_test_no=${ass_test_no }&test_no=${test_no}&test_sub_no=${test_sub_no }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${test_sub_no }번</a></li>
+				<li><a href="testDetail.do?ass_test_no=${test_test_no }&test_no=${test_no}&test_sub_no=${test_sub_no }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${test_sub_no }번</a></li>
 				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
 
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
@@ -386,6 +393,8 @@
 						<div style="font-size:medium; line-height:30px;" id="problem_description">
 							<p>${row.test_orfile }</p>
 						</div>
+						
+						<textarea class="form-control" aria-label="With textarea" rows="30" id="test${row.test_no }" name="maincode" style="overflow:auto;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)">${row.test_res_cod }</textarea>
 					</section>
 				</c:forEach>
 			
@@ -418,7 +427,6 @@
 
 
 
-<input type="hidden" id="abc" value=${assignment.ass_cate } >
 	</section>
 	
 
@@ -454,35 +462,21 @@
 	<script type="text/javascript" src="/finalp/resources/js/jquery-3.3.1.min.js"></script>
 	
 
-<script type="text/javascript">
 
-$(function(){
- 	$("#subutton").on("click",function(){
+<c:forEach items="${submitList }" var="row">
+<script>
 
-  $.ajax({
-			url:"test1.do",
+var editor = CodeMirror.fromTextArea(document.getElementById("test${row.test_no }"), {
+    lineNumbers: true,
+    lineWrapping: true,
+     theme: "lesser-dark", 
+/*     val: textarea.value , */
+     readOnly: 'nocursor' 
+}); 
 
-			data:{submit : "sub", ass_orfile : ($("#class").val()+".java"), ass_writer : ${loginUser.mem_no}, ass_cate : $("#abc").val()},
 
-	          type : "post",
-	          success : function(result){
-	              if(result == "ok"){
-	                  alert("Success");
-	               }else{
-	                  alert("Fail");
-	               }	         
-	          },
-	          error : function(request,status, errorData){
-	             alert("error code : " + request.status + "\n"
-	                   + "message : " + request.responseText + "\n"
-	                   + "error : " + errorData);
-	          }
-		}); 
-	});  
-
-});
-</script>	
-
+</script>
+</c:forEach>
 
 
 <script>
@@ -525,9 +519,7 @@ function myFunction() {
 </div>
 
 </body>
-<script>
-window.onload=startass; 
-</script>
+
 </html>
 
 

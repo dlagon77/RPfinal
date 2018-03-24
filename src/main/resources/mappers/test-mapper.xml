@@ -74,7 +74,7 @@
 	</select>
 	
 		<insert id="insertTest" parameterType="Test"><![CDATA[
-		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,null,null,sysdate,#{test_orfile},'123abc.java',#{test_cate},#{test_title},0,null,null,null,null,#{test_writer},#{test_maker},null,6)
+		INSERT INTO TEST VALUES(TEST_SEQ.NEXTVAL,null,null,sysdate,#{test_orfile},'123abc.java',#{test_cate},#{test_title},0,null,null,#{test_res_cod},null,#{test_writer},#{test_maker},null,6)
 	]]></insert>
 
 	<insert id="makeTest" parameterType="Test"><![CDATA[
@@ -97,7 +97,7 @@
 
 	<select id="selectSubmitTest" resultMap="testResultMap" resultType="list">
 		<![CDATA[
-			select test_no, test_date, test_orfile, test_refile, test_cate, test_cor_cnt, test_writer, test_tcate_id, mem_name,test_maker
+			select test_no, test_date, test_orfile, test_refile, test_cate, test_cor_cnt, test_writer, test_tcate_id, mem_name,test_maker,test_res_cod
 			from test
 			join member on (test_writer = mem_no)
 			where test_cate = #{test_cate} and test_maker = #{test_maker}

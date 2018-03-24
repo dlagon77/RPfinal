@@ -403,7 +403,7 @@
 					
 						<td class="list_problem_id">${test_sub_no }</td>
 						<td>${row.test_reg_date }</td>
-						<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no}">${row.test_title }</a></td>
+						<td class="click-this"><a href="submitTestList.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no}&test_cate=${row.test_cate}&test_maker=${row.test_maker}">${row.test_title }</a></td>
 						<td>
 							<span class="badge badge-info">${row.test_cate }</span>
 						</td>

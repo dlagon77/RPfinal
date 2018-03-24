@@ -574,7 +574,7 @@ function myFunction() {
 		}
 		
 	}
-	;
+	
 	function checkTest() {
 	
 		var classname = document.getElementById("class").value;
@@ -756,7 +756,8 @@ function myFunction() {
 			var code=encodeURIComponent(editor.getValue());
 			var url = "submitTest.do?code=" + code + "&className=" + document.getElementById("class").value+"_test.java" + "&tutorno=" + document.getElementById("tutorno").value
 						+"&submit=sub"+"&test_orfile="+document.getElementById("class").value+"_test.java"+"&test_writer="+document.getElementById("teMem").value+"&test_cate="+document.getElementById("teCate").value
-						+"&test_maker="+document.getElementById("teTno").value+"&test_title="+document.getElementById("teTitle").value;
+						+"&test_maker="+document.getElementById("teTno").value+"&test_title="+document.getElementById("teTitle").value
+						+"&test_res_cod="+code  ;
 			
 			if(window.XMLHttpRequest){
 	           xmlhttp=new XMLHttpRequest();
