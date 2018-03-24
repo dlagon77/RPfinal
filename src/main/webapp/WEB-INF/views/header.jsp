@@ -264,7 +264,6 @@
 		<div class="modal fade" id="loginModal1q">
 			<div class="modal-dialog">
 
-				<!-- Modal content-->
 				<div class="container-login100">
 					<div class="wrap-login1000">
 						<form name="loginform" action="login.do" method="post" class="login100-form validate-form" onsubmit="checking()">
@@ -290,7 +289,90 @@
 								<div class="login100-form-bgbtn"></div>
 								<button class="login100-form-btn">Login</button>
 							</div>
+							<!-- <span class="login100-form-title p-b-48"> 
+								<img src="http://cfile24.uf.tistory.com/image/99669F3A5AADD1BE038E83" style="margin-top: 10px;">
+							</span> -->
+
+							<br>
 							
+							<div id="naverIdLogin">
+								<img width="280" src="/finalp/resources/img/Green.PNG" /></a>
+							</div>
+							
+
+							
+							<script type="text/javascript">
+								var naverLogin = new naver.LoginWithNaverId(
+										{
+											clientId : "YcGIdCw_YOhCrKGOU6JK",
+											callbackUrl : "http://127.0.0.1:8222/finalp/callback",
+											isPopup : false, /* 팝업을 통한 연동처리 여부 */
+											loginButton : {
+												color : "green",
+												type : 3,
+												height : 60
+											}
+										/* 로그인 버튼의 타입을 지정 */
+										});
+
+								/* 설정정보를 초기화하고 연동을 준비 */
+								naverLogin.init();
+								/* (4-1) 임의의 링크를 설정해줄 필요가 있는 경우 */
+								$("#gnbLogin").attr("href",
+										naverLogin.generateAuthorizeUrl());
+								/* (5) 현재 로그인 상태를 확인 */
+								window.addEventListener('load', function() {
+									naverLogin.getLoginStatus(function(status) {
+										if (status) {
+											/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+											setLoginStatus();
+										}
+									});
+								});
+
+								/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고 사용자 정보를 출력합니다. */
+								function setLoginStatus() {
+									var profileImage = naverLogin.user
+											.getProfileImage();
+									var nickName = naverLogin.user
+											.getNickName();
+									/*  		$("#naverIdLogin_loginButton").html('<br><br><img src="' + profileImage + '" height=50 /> <p>' + nickName + '님 반갑습니다.</p>'); */
+									$("#abc").html(
+											'<p>' + nickName + '님 반갑습니다.</p>');
+									$("#gnbLogin").html("Logout");
+									$("#gnbLogin").attr("href", "#");
+									/* (7) 로그아웃 버튼을 설정하고 동작을 정의합니다. */
+									$("#gnbLogin").click(function() {
+										naverLogin.logout();
+										location.reload();
+									});
+								}
+							</script>
+							
+							<div>
+								<a id="custom-login-btn" href="javascript:loginWithKakao()">
+									<img
+									src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
+									width="300" style="width:279px; height:53px;"/>
+								</a>
+								<script type='text/javascript'>
+									//<![CDATA[
+									// 사용할 앱의 JavaScript 키를 설정해 주세요.
+									Kakao.init('9c675fbee2aac24237dfc511478f613f');
+									function loginWithKakao() {
+										// 로그인 창을 띄웁니다.
+										Kakao.Auth.login({
+											success : function(authObj) {
+												alert(JSON.stringify(authObj));
+											},
+											fail : function(err) {
+												alert(JSON.stringify(err));
+											}
+										});
+									};
+									//]]>
+								</script>
+							</div> 
 							<div class="margin1">
 								<span class="txt1"> Don’t have an account? </span>
 								<a class="txt2" href="#"> &nbsp;Sign Up </a>
@@ -309,6 +391,7 @@
 			</div>
 		</div>
 		<!--===============================================================================================-->
+		
 							
 <!-- LOGIN MODAL TEST END-->
 		    </
