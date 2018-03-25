@@ -47,7 +47,7 @@
 		<hr>
 		
 		<!--리뷰 등록 템플릿 -->
-		<div class="message" style="display:flex;width:750px;margin-bottom: 50px;">
+		<div class="message" style="display:flex;margin-bottom: 50px;">
 			<button style="background: none;border: none;outline: none;display: flex;">
 				<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
 					<c:if test="${loginUser.mem_refile == null }">
