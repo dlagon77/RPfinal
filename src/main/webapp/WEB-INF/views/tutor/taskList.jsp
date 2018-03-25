@@ -229,7 +229,15 @@
 
 			  <form style="margin-top:7px;display:flex" action="search.do">
 			  <div>
-			  	<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  	<c:if test="${checkApply gt 0 }">
+			  		<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  	</c:if>
+			  	<c:if test="${checkApply <= 0 }">
+			  		<!-- <button type="submit" class="searchButton" style="outline:none" disabled><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button> -->
+			  		<button type="button" class="searchButton" data-toggle="tooltip" data-placement="top" title="수강생이 아닙니다!">
+					  <img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer">
+					</button>
+			  	</c:if>
 			  </div>
 			  <div>	
 			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
