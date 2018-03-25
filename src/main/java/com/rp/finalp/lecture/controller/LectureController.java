@@ -44,13 +44,15 @@ public class LectureController {
 	
 	@RequestMapping(value = "taskList.do", method = RequestMethod.GET)
 	public String taskListViewMethod(HttpServletRequest request,@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="mem_no") int mem_no,Model model,Lecture lecture) {
+		model.addAttribute("tutor_no",tutor_no);
+		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
 		int limit = 10;
-		int listCount = memberService.countApplyList(tutor_no);
+		int listCount = assignService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;
@@ -65,10 +67,14 @@ public class LectureController {
 		if(maxPage < endPage)
 			endPage = maxPage;
 		
-		model.addAttribute("tutor_no",tutor_no);
+		
 		model.addAttribute("mem_no",mem_no);
-		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("assignList",assignService.selectTutorAssList(map));
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);
@@ -108,7 +114,7 @@ public class LectureController {
 		}
 		
 		int limit = 10;
-		int listCount = testService.listCount();
+		int listCount = assignService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;
@@ -222,6 +228,8 @@ public class LectureController {
 		
 		int limit = 10;
 		int listCount = memberService.countApplyList(tutor_no);
+		int listAssCount = assignService.listCount(tutor_no);
+		int listTestCount = testService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;
@@ -239,6 +247,8 @@ public class LectureController {
 		
 		model.addAttribute("list",list);
 		model.addAttribute("limit",limit);
+		model.addAttribute("assCount",listAssCount);
+		model.addAttribute("testCount",listTestCount);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("maxPage",maxPage);
 		model.addAttribute("startPage",startPage);
@@ -295,8 +305,6 @@ public class LectureController {
 		model.addAttribute("maxPage",maxPage);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
-		System.out.println(startPage);
-		System.out.println(endPage);
 		return "tutor/classManageTask";
 	}
 	
@@ -326,7 +334,7 @@ public class LectureController {
 		}
 		
 		int limit = 10;
-		int listCount = testService.listCount();
+		int listCount = testService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;

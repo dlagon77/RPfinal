@@ -22,8 +22,8 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public int listCount() {
-		return testDao.listCount();
+	public int listCount(int tutor_no) {
+		return testDao.listCount(tutor_no);
 	}
 
 	@Override

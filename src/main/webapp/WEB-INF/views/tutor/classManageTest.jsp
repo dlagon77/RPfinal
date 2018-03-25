@@ -323,7 +323,7 @@
 	<div class="wrap">
 		
 		<!-- 내용 들어가는 부분 -->	
-		<div class="container">	
+		<div class="container" style="padding-top:20px">	
 			
 			<!-- 좌측 사이드 메뉴 -->
 			<div class="sideMenu">
@@ -350,7 +350,7 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -396,14 +396,30 @@
 				</thead>
 
 				<tbody>
-					<c:set value="0" var="test_sub_no"/>
+					<c:if test="${currentPage == 1 }">
+						<c:set value="0" var="test_sub_no"/>
+					</c:if>
+					<c:if test="${currentPage != 1 }">
+						<c:set value="${currentPage*10-9 }" var="test_sub_no"/>
+					</c:if>
+					
 					<c:forEach items="${testList }" var="row">
 					<c:set value="${test_sub_no+1 }" var="test_sub_no"/>
 					<tr>
-					
-						<td class="list_problem_id">${test_sub_no }</td>
+						<c:if test="${currentPage == 1 }">
+							<td class="list_problem_id">${test_sub_no }</td>
+						</c:if>
+						<c:if test="${currentPage !=1  }">
+							<td class="list_problem_id">${test_sub_no-1 }</td>
+						</c:if>
+
 						<td>${row.test_reg_date }</td>
-						<td class="click-this"><a href="submitTestList.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no}&test_cate=${row.test_cate}&test_maker=${row.test_maker}">${row.test_title }</a></td>
+						<c:if test="${currentPage == 1 }">
+							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no}">${row.test_title }</a></td>
+						</c:if>
+						<c:if test="${currentPage != 1 }">
+							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${test_sub_no-1}">${row.test_title }</a></td>
+						</c:if>
 						<td>
 							<span class="badge badge-info">${row.test_cate }</span>
 						</td>
@@ -418,6 +434,47 @@
 					</c:forEach>
 				</tbody>
 				</table>
+				
+				<!-- 페이지 번호 처리 -->
+					<div style="text-align:center;">
+						<c:url var="first" value="classManageTest.do">
+							<c:param name="currentPage" value="1" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<a href="${first }">[맨처음]</a>
+						<c:url var="prev" value="classManageTest.do">
+							<c:param name="currentPage" value="1" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<c:if test="${currentPage != 1 }">
+							<a href="${prev }">	[prev]</a>
+						</c:if>
+						<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+							<c:url var="page" value="classManageTest.do">
+								<c:param name="currentPage" value="${p }" />
+								<c:param name="tutor_no" value="${tutor_no }"/>
+							</c:url>
+							<c:if test="${p ne currentPage }">
+								<a href="${page }">	| ${p } |&nbsp; </a> 
+							</c:if>
+							<c:if test="${p eq currentPage }">	
+								<a href="${page }">	| <b>${p }</b> |&nbsp; </a>
+							</c:if>
+						</c:forEach>
+						<c:url var="next" value="classManageTest.do">
+							<c:param name="currentPage" value="${currentPage + 1 }" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<c:if test="${currentPage != endPage }">
+							<a href="${next }">	[next]</a>
+						</c:if>
+						
+						<c:url var="last" value="classManageTest.do">
+							<c:param name="currentPage" value="${maxPage }" />
+							<c:param name="tutor_no" value="${tutor_no }"/>
+						</c:url>
+						<a href="${last }">[맨끝]</a>
+					</div>
 
 					</div>
 					

@@ -126,7 +126,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -289,7 +289,26 @@
 			      <div class="text-center">
 			        <ul class="pagination" id="result-pagination">
 			          
-			        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
+			        <!-- <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul> -->
+			      	<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="search.do">
+						<c:param name="search_content" value="${search_content }" />
+						<c:param name="currentPage" value="${p }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				</ul>
 			      </div>
 			      
 			      <div style="width: 100%;">
@@ -313,7 +332,7 @@
 					 	<div class="inner-results">
 						    <h3><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_sub_no=${row.test_no }&test_no=${loginUser.mem_no}" style="font-size:20px">${row.test_no}번 - ${row.test_title }</a></h3>
 						    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
-						      <li>시간 제한: -초</li>
+						      <li>시간 제한: ${row.test_lec_id }초</li>
 						      <li>맞은 사람: ${row.test_cor_cnt}</li>
 						      <li>정답률: ${row.test_cor_cnt/Lecture.apply_count*100 }%</li>
 						    </ul>
@@ -331,7 +350,25 @@
 			      <div class="text-center">
 			        <ul class="pagination" id="result-pagination">
 			          
-			        <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul>
+			        <c:forEach var="p2" begin="${startPage2 }" end="${endPage2 }" step="1">
+					<c:url var="page" value="search.do">
+						<c:param name="search_content" value="${search_content }" />
+						<c:param name="currentPage2" value="${p2 }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p2 ne currentPage2 }">
+						<li>
+							<a href="${page }">${p2 }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p2 eq currentPage2 }">	
+						<li class="active">
+							<a href="${page }"><b>${p2 }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				</ul>
 			      </div>
 			      
 			      <div style="width: 100%;">

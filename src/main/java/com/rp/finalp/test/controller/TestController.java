@@ -159,7 +159,7 @@ public class TestController {
 		}
 		
 		int limit = 10;
-		int listCount = testService.listCount();
+		int listCount = testService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;
@@ -344,7 +344,7 @@ public class TestController {
 		}
 		
 		int limit = 10;
-		int listCount = testService.listCount();
+		int listCount = testService.listCount(tutor_no);
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
 		int endPage = startPage + limit -1;

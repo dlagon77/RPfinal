@@ -170,7 +170,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -556,7 +556,7 @@ function myFunction() {
 	    lineNumbers: true,
 	    lineWrapping: true,
 	     theme: "lesser-dark", 
-	    val: textarea.value 
+	    val: textarea.value
 	});
 	<!-- 코드미러 -->
 	

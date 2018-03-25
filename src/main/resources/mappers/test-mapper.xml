@@ -52,7 +52,7 @@
 	
 	<select id="listCount" resultType="integer"> 
 		<![CDATA[
-			SELECT COUNT(*) FROM TEST
+			SELECT COUNT(*) FROM TEST where test_maker=#{tutor_no} and test_writer is null
 		]]>		
 	</select>
 	<select id="selectTest" resultType="Test" parameterType="integer">
@@ -84,7 +84,9 @@
 	
 	<select id="searchTest" resultMap="testResultMap" resultType="list" parameterType="String">
 		<![CDATA[
-			select * from test where (upper(test_title) like '%'||upper('${search_content}')||'%' or upper(test_cate) like '%'||upper('${search_content}')||'%') and test_writer is null and test_maker = #{tutor_no}
+			select * from (select rownum rnum,test_no,test_comment,test_reg_date,test_date,test_orfile,test_refile,test_cate,test_title,test_cor_cnt,test_pro,test_answer,test_res_cod,test_res_ans,test_writer,test_maker,test_lec_id,test_tcate_id
+			from test where (upper(test_title) like '%'||upper('${search_content}')||'%' or upper(test_cate) like '%'||upper('${search_content}')||'%') and test_writer is null and test_maker = #{tutor_no})
+			where rnum>=#{startRow} and rnum <=#{endRow}
 		]]>
 	</select>
 

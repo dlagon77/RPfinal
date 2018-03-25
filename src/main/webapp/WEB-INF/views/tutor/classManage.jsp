@@ -111,7 +111,7 @@
 <body>
 <c:import url="../header.jsp" />
 	<div class="wrap">
-		<div class="container">	
+		<div class="container" style="padding-top: 20px;">	
 			
 			<div class="sideMenu">
 			
@@ -136,7 +136,7 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/emma.jpg" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -159,9 +159,9 @@
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
 						<li>수강생&nbsp;  ${ Lecture.apply_count }명</li>
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
-						<li>과제 &nbsp; 0개</li>
+						<li>과제 &nbsp; ${assCount }개</li>
 						<li><i class="xi-minus-thin  xi-rotate-90 xi-3x"></i></li>
-						<li>시험 &nbsp;	 0개</li>
+						<li>시험 &nbsp; ${testCount }개</li>
 					</ul>
 				</div>
 				

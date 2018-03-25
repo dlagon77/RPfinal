@@ -98,7 +98,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -274,7 +274,7 @@
 							<img height="45" width="45" src="/finalp/resources/img/logo2.PNG" style="display: block;margin-left: auto;margin-right: auto;">
 						</c:if>
 						<c:if test="${loginUser.mem_refile != null }">
-							<img height="45" width="45" src="/finalp/resources/img/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<img height="45" width="45" src="/finalp/resources/img/profileupload/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 						</c:if>
 					</div>
 				   </button>
@@ -303,7 +303,7 @@
 					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">
 						<button style="background: none;border: none;outline: none;display: flex;">
 						<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-							<img height="45" width="45" src="/finalp/resources/img/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<img height="45" width="45" src="/finalp/resources/img/profileupload/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 						</div>
 					   </button>
 					   <div>

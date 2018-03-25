@@ -19,8 +19,8 @@ public class TestDao {
 		return mybatis.selectList("testMapper.selectAll",map);
 	}
 	
-	public int listCount() {
-		int a=mybatis.selectOne("testMapper.listCount");
+	public int listCount(int tutor_no) {
+		int a=mybatis.selectOne("testMapper.listCount",tutor_no);
 		return a;
 	}
 	

@@ -323,7 +323,7 @@
 	<div class="wrap">
 		
 		<!-- 내용 들어가는 부분 -->	
-		<div class="container">	
+		<div class="container" style="padding-top: 20px;">	
 			
 			<!-- 좌측 사이드 메뉴 -->
 			<div class="sideMenu">
@@ -350,7 +350,7 @@
 			<div class="header">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 

@@ -142,7 +142,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -153,7 +153,7 @@
 
 				<c:if test="${loginUser.mem_no eq tutor_no }">
 					<div style="margin-top: 25px;margin-left:10px">
-						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);" onclick="location.href='classManage.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 							<img height="40" width="50" src="/finalp/resources/img/setting1.png">
 						</button>
 					</div>
@@ -250,18 +250,6 @@
 
 	<section class="about" id="about" style="width:1170px">
 
-		<div class="input-group mb-3" style="width:15%;float: right;margin-bottom:10px">
-		
-		  <select class="custom-select" id="inputGroupSelect02" style="width:100%">
-			<option selected>문제 분류 선택</option>
-			<option value="1">One</option>
-			<option value="2">Two</option>
-			<option value="3">Three</option>
-		  </select>
-		  
-		</div>
-
-		
 		<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
@@ -278,15 +266,29 @@
 				</thead>
 
 				<tbody>
-					<c:set value="0" var="test_no"/>
+					<c:if test="${currentPage == 1 }">
+						<c:set value="0" var="test_no"/>
+					</c:if>
+					<c:if test="${currentPage != 1 }">
+						<c:set value="${currentPage*10-9 }" var="test_no"/>
+					</c:if>
 					<c:forEach items="${testList }" var="row">
 					<c:set value="${test_no+1 }" var="test_no"/>
 					<tr>
 					
-					
-						<td class="list_problem_id">${test_no }</td>
+						<c:if test="${currentPage == 1 }">
+							<td class="list_problem_id">${test_no }</td>
+						</c:if>
+						<c:if test="${currentPage !=1  }">
+							<td class="list_problem_id">${test_no-1 }</td>
+						</c:if>
 						<td>${row.test_reg_date }</td>
-						<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no}">${row.test_title }</a></td>
+						<c:if test="${currentPage == 1 }">
+							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no}">${row.test_title }</a></td>
+						</c:if>
+						<c:if test="${currentPage != 1 }">
+							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no-1}">${row.test_title }</a></td>
+						</c:if>
 						<td>
 							<span class="badge badge-info">${row.test_cate }</span>
 						</td>
@@ -300,29 +302,33 @@
 			</div>
 			</div>
 
-		<div style="display:inline-flex;position: relative;left: 90%;">
-			<button class="taskRegButton">과제등록</button>
-		</div>
+		<c:if test="${loginUser.mem_no eq tutor_no }">
+			<div style="display:inline-flex;position: relative;left: 90%;">
+				<button class="taskRegButton" onclick="location.href='classManageTest.do?tutor_no=${tutor_no }'">test등록</button>
+			</div>
+		</c:if>
 		
 
 		<div class="col-md-12">
 			<div class="text-center">
 			<ul class="pagination">
-				<li class="active">
-					<a href="/problemset/1">1</a>
-				</li>
-				<li>
-					<a href="/problemset/2" id="next_page">2</a>
-				</li>
-				<li>
-					<a href="/problemset/3">3</a>
-				</li>
-				<li>
-					<a href="/problemset/4">4</a>
-				</li>
-				<li>
-					<a href="/problemset/5">5</a>
-				</li>
+				<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="taskList.do">
+						<c:param name="currentPage" value="${p }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
 			</ul>
 			</div>
 		</div>

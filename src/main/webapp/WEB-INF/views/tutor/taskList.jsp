@@ -142,7 +142,7 @@
 			<div class="col-lg-9" style="display: inline-flex">
 				<div class="profile" style="height: 96px;position: relative; display: inline-block; floar:left;">
 					<div class="user_image" style="width: 80px;height: 80px;margin: 20px 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<img height="80" width="80" src="/finalp/resources/img/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+						<img height="80" width="80" src="/finalp/resources/img/profileupload/${Lecture.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
 					</div>
 				</div>
 
@@ -154,7 +154,7 @@
 				<c:if test="${loginUser.mem_no eq tutor_no }">
 					<div style="margin-top: 25px;margin-left:10px">
 						<button style="border: 0;outline: 0;background-color: hsla(0, 0%, 97%, 1);">
-							<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManageLecture.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
+							<img height="40" width="50" src="/finalp/resources/img/setting1.png" onclick="location.href='classManage.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}'">
 						</button>
 					</div>
 				</c:if>
@@ -249,18 +249,6 @@
 
 	<section class="about" id="about" style="width:1170px">
 
-		<div class="input-group mb-3" style="width:15%;float: right;margin-bottom:10px">
-		
-		  <select class="custom-select" id="inputGroupSelect02" style="width:100%">
-			<option selected>문제 분류 선택</option>
-			<option value="1">One</option>
-			<option value="2">Two</option>
-			<option value="3">Three</option>
-		  </select>
-		  
-		</div>
-
-		
 		<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
@@ -277,15 +265,30 @@
 				</thead>
 
 				<tbody>
-					<c:set value="0" var="assign_no"/>
+					<c:if test="${currentPage == 1 }">
+						<c:set value="0" var="assign_no"/>
+					</c:if>
+					<c:if test="${currentPage != 1 }">
+						<c:set value="${currentPage*10-9 }" var="assign_no"/>
+					</c:if>
 					<c:forEach items="${assignList }" var="row">
 					<c:set value="${assign_no+1 }" var="assign_no"/>
 					<tr>
 					
 					
-						<td class="list_problem_id">${assign_no }</td>
+						<c:if test="${currentPage == 1 }">
+							<td class="list_problem_id">${assign_no }</td>
+						</c:if>
+						<c:if test="${currentPage !=1  }">
+							<td class="list_problem_id">${assign_no-1 }</td>
+						</c:if>
 						<td>${row.ass_reg_date }</td>
-						<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&mem_no=${loginUser.mem_no}">${row.ass_title }</a></td>
+						<c:if test="${currentPage == 1 }">
+							<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+						</c:if>
+						<c:if test="${currentPage != 1 }">
+							<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no-1}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+						</c:if>
 						<td>
 							<span class="badge badge-info">${row.ass_cate }</span>
 						</td>
@@ -310,10 +313,33 @@
 		<div class="col-md-12">
 			<div class="text-center">
 			<ul class="pagination">
+			<%-- <c:url var="first" value="taskList.do">
+				<c:param name="currentPage" value="1" />
+				<c:param name="tutor_no" value="${tutor_no }"/>
+				<c:param name="mem_no" value="${mem_no }"/>
+			</c:url>
 				<li class="active">
-					<a href="/problemset/1">1</a>
-				</li>
-				<li>
+					<a href="#" onclick="${first } return false">1</a>
+				</li> --%>
+				
+				<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="taskList.do">
+						<c:param name="currentPage" value="${p }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				<!-- <li>
 					<a href="/problemset/2" id="next_page">2</a>
 				</li>
 				<li>
@@ -324,7 +350,7 @@
 				</li>
 				<li>
 					<a href="/problemset/5">5</a>
-				</li>
+				</li> -->
 			</ul>
 			</div>
 		</div>
@@ -343,20 +369,23 @@
 	
 	<hr>
 
-	
-	
-	
-
-
-
-
-
 
 </div><!-- container about -->
 	
 	
 	<a href="#page-top" class="cd-top">Top</a>
 
+	<script>
+	$(document).ready(function () {
+        $("li").each(function () {
+            $(this).click(function () {
+                $(this).addClass("active");                      //클릭된 부분을 상단에 정의된 CCS인 selected클래스로 적용
+                $(this).siblings().removeClass("active");  //siblings:형제요소들,    removeClass:선택된 클래스의 특성을 없앰
+            });
+        });
+    });
+	</script>
+	
 	
 	<script>
 		// For Demo purposes only (show hover effect on mobile devices)
