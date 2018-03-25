@@ -135,6 +135,11 @@
 			select count(*) from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker = #{tutor_no}
 		]]>
 	</select>
+	<update id="updateAssCount" parameterType="Assignment">
+		<![CDATA[
+		update assignment set ass_cor_cnt = (select count(ass_writer) from assignment where ass_writer is not null and ass_maker = #{ass_maker} group by ass_writer) where ass_maker=#{ass_maker} and ass_cate=#{ass_cate} and ass_writer is null
+		]]>
+	</update>
 
 
 </mapper>

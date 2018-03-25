@@ -62,4 +62,10 @@ public class AssignDao {
 		return mybatis.selectOne("assignMapper.countAssSearch",map);
 	}
 
+	public int updateAssCount(Assignment ass) {
+		return mybatis.update("assignMapper.updateAssCount",ass);
+	}
+	
+	
+
 }

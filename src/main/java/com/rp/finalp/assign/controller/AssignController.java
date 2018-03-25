@@ -2,6 +2,7 @@ package com.rp.finalp.assign.controller;
 
 import java.io.BufferedInputStream;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -44,6 +46,21 @@ public class AssignController{
 	@Autowired
 	private AssignService assignService;
 	
+	@RequestMapping(value = "loginTestForm.do", method = RequestMethod.GET)
+	public String loginTest(Locale locale, Model model) {
+		//logger.info("Welcome home! The client locale is {}.", locale);
+
+		
+		return "loginTest";
+	}
+	@RequestMapping(value = "loginTestBackForm.do", method = RequestMethod.GET)
+	public String lobinTestBack(Locale locale, Model model) {
+		//logger.info("Welcome home! The client locale is {}.", locale);
+
+		
+		return "loginTestBack";
+	}
+	
 	@RequestMapping(value = "assInsertForm.do", method = RequestMethod.GET)
 	public String assInsertFormMethod() {
 		return "ass/ass";
@@ -53,6 +70,7 @@ public class AssignController{
 	public String assMakeFormMethod() {
 		return "ass/assMakeForm";
 	}
+	
 	
 	@RequestMapping(value = "compileAssign.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -97,6 +115,7 @@ public class AssignController{
 	
 	@RequestMapping(value = "runAssign.do", method = RequestMethod.POST)
 	public void runAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		response.setContentType("text/plain;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		String filename = request.getParameter("classname").trim();
 		String path = request.getSession().getServletContext().getRealPath("/");
@@ -106,7 +125,7 @@ public class AssignController{
 		Process exe = Runtime.getRuntime().exec(runcmd);
 		try{
 			exe.waitFor();
-			BufferedReader bin = new BufferedReader(new InputStreamReader(exe.getInputStream()));
+			BufferedReader bin = new BufferedReader(new InputStreamReader(exe.getInputStream(),"iso-8859-1"));
 			//에러처리
 			BufferedReader berr = new BufferedReader(new InputStreamReader(exe.getErrorStream()));
 			String res="";
@@ -135,7 +154,13 @@ public class AssignController{
 					}
 				}
 			}
-			out.print(res);
+		
+			byte[] resb=res.getBytes("iso-8859-1");
+			String op=new String(resb,"utf-8");
+			
+			
+			System.out.println(op);
+			out.print(op);
 			bin.close();
 			berr.close();
 			out.close();
@@ -145,7 +170,7 @@ public class AssignController{
 		}
 	}
 	
-	/*@RequestMapping("assList.do")
+/*	@RequestMapping("assList.do")
 	public String assListMethod(Model model, HttpServletRequest request) {
 		int currentPage = 1;
 		if(request.getParameter("currentPage")!=null) {
@@ -200,24 +225,6 @@ public class AssignController{
 		byte[] sourcecode = request.getParameter("code").getBytes();
 		fos.write(sourcecode);
 		String compilecmd ="javac -d " + path + "\\Files\\Classes\\" + tutorno + " \\" + path + "\\Files\\" + filename;
-/*		Process error = Runtime.getRuntime().exec(compilecmd);
-		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
-		String res="";
-		while(true){
-			String str = br.readLine();
-			if(str!=null){
-				res+=str;
-				res+="\n";
-			}
-			else{
-				break;
-			}
-		}
-		if(res.equals("")){
-			res="Compiled Successfully";
-		}*/
-/*		out.println(res);
-		br.close();*/
 		fos.close();
 	}
 	
@@ -270,6 +277,7 @@ public class AssignController{
 			HttpServletResponse response) throws IOException{
 		System.out.println(ass);
 		assignService.insertAss(ass);
+		assignService.updateAssCount(ass);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out=response.getWriter();
 		if(submit.equals("sub")) {
@@ -281,6 +289,8 @@ public class AssignController{
 		}
 		out.close();
 	}
+	
+
 
 	@RequestMapping(value="makeAss.do",method=RequestMethod.POST)
 	public String assMakeMethod(Assignment ass,

@@ -78,4 +78,9 @@ public class AssignServiceImpl implements AssignService{
 	public int countAssSearch(Map<String, Object> map) {
 		return assignDao.countAssSearch(map);
 	}
+
+	@Override
+	public int updateAssCount(Assignment ass) {
+		return assignDao.updateAssCount(ass);
+	}
 }

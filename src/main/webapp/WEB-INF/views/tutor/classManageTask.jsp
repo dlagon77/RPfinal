@@ -428,7 +428,7 @@
 						<td>
 							<span class="badge badge-info">${row.ass_cate }</span>
 						</td>
-						<td><a href="#">${row.ass_cor_cnt }</a></td>
+						<td>${row.ass_cor_cnt }</a></td>
 						<td>${row.ass_cor_cnt/Lecture.apply_count*100 }%</td>
 						<td><button class="deleteButton" type="button" data-toggle="modal" data-target="#deleteTaskModal" name="ass_no" value="${row.ass_no }">삭제</button></td>
 					</tr>

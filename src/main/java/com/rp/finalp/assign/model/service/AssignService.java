@@ -20,5 +20,6 @@ public interface AssignService {
 	int checkSubmit(Assignment ass);
 	List<Assignment> searchAss(Map<String, Object> map);
 	int countAssSearch(Map<String, Object> map);
+	int updateAssCount(Assignment ass);
 	
 }
