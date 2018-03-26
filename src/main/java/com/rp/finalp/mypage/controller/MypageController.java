@@ -291,10 +291,10 @@ public class MypageController {
 	}
 	
 	/* 관심분야 변경 */
-	@RequestMapping(value="	/changeMemInter.do")
+	@RequestMapping(value="/changeMemInter.do")
 	public void changeMemInter(Model model,@RequestParam(value="meminter",required=false)String mem_inter,
 			HttpServletResponse response, HttpSession session)throws Exception {
-		
+		System.out.println("changeMemInter진입성공");
 		int mem_no=0;
 		
 		if(session !=null) {	
@@ -313,7 +313,6 @@ public class MypageController {
 			out.append("fail");
 			out.flush();
 		}
-		
 		out.close();
 	}
 	
