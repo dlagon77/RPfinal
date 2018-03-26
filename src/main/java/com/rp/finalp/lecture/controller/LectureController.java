@@ -84,7 +84,7 @@ public class LectureController {
 	}
 	
 	@RequestMapping(value = "taskDetail.do", method = RequestMethod.GET)
-	public String taskDetailViewMethod(HttpServletRequest request,@RequestParam(value="ass_no") int ass_no,@RequestParam(value="ass_sub_no") int ass_sub_no,@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="ass_cate") String ass_cate,Model model,Lecture lecture) {
+	public String taskDetailViewMethod(HttpServletRequest request,@RequestParam(value="ass_no") int ass_no,@RequestParam(value="ass_sub_no") int ass_sub_no,@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("ass_no",ass_no);
@@ -95,10 +95,11 @@ public class LectureController {
 		model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("search_content", ass_cate);
+		map.put("search_content", request.getParameter("ass_cate"));
 		map.put("tutor_no", tutor_no);
-		
+		model.addAttribute("ass_cate",request.getParameter("ass_cate"));
 		model.addAttribute("linkedCategory",lectureService.linkedCategory(map));
+		
 		
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
@@ -145,6 +146,7 @@ public class LectureController {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("ass_no",ass_no);
 		model.addAttribute("ass_sub_no",ass_sub_no);
+		model.addAttribute("ass_cate",ass_cate);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("submitList",assignService.selectSubmitAss(map));
 		int checkApply=memberService.checkApply(lecture);

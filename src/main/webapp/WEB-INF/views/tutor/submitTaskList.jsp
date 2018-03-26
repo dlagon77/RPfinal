@@ -351,7 +351,7 @@
 
 			
 			<ul class="nav nav-pills no-print">
-				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${ass_sub_no }번</a></li>
+				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&ass_cate=${ass_cate }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${ass_sub_no }번</a></li>
 				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
 			</ul>
 
