@@ -16,37 +16,36 @@
 </head>
 <body>
 	<c:import url="../header.jsp" />
-<hr>
+	<div id="banner" style="height:305px;background-image: url('/finalp/resources/img/board.jpg');background-size:cover;"></div>
 	<div class="container">
         <table class="table table-striped table-hover">
-        <br>
-           <img src="/finalp/resources/img/QnaImg.jpg" height="100" width="450" style="display: block;margin-left: auto;margin-right: auto;">
-        
-           <h2 align="center">게시글 상세보기</h2>
-           
+        	<br>
            <header>
-        		<h1>${qbDetail.q_title }</h1>
+        		<h2 style="font-weight:700" align="center"><i class="xi-label"></i>&nbsp;${qbDetail.q_title }</h2>
     	   </header>
-        	<small><img src="/finalp/resources/img/boardWriter.png" height="20" width="22">&nbsp; <strong><span>${qbDetail.q_writer }</span></strong></small>&nbsp;
-        	<small><img src="/finalp/resources/img/Calendar-256.png" height="20" width="22">&nbsp;<strong><span>${qbDetail.q_date }</span></strong></small>&nbsp;
-        	<small><img src="/finalp/resources/img/search.png" height="20" width="22">&nbsp;<strong>${qbDetail.q_read_cnt }</strong></small>&nbsp;
+	        <br>
+	        <div style="float:right;">
+	        	<small><img src="/finalp/resources/img/boardWriter.png" height="20" width="22">&nbsp; <strong><span>${qbDetail.q_writer }</span></strong></small>&nbsp;&nbsp;&nbsp;
+	        	<small><img src="/finalp/resources/img/Calendar-256.png" height="20" width="22">&nbsp;<strong><span>${qbDetail.q_date }</span></strong></small>&nbsp;&nbsp;&nbsp;
+	        	<small><img src="/finalp/resources/img/search.png" height="20" width="22">&nbsp;<strong>${qbDetail.q_read_cnt }</strong></small>&nbsp;&nbsp;&nbsp;
+	        </div>
         	<%-- <small><img src="/finalp/resources/img/comment.png" height="20" width="22">&nbsp;<strong>${rlist }</strong></small> --%><br><hr>
     		<strong><h3>${qbDetail.q_content }</h3></strong>
    	    	
    	    	<br><br><br><br><hr>
-    	<div class="writeButton">            
-        	<a href='qblist.do' class="btn btn-success">목록으로</a> 
-        		<c:if test="${!empty sessionScope.loginUser }">  
-	        		<c:if test="${sessionScope.loginUser.mem_name eq qbDetail.q_writer}">
-	            		<a href='qbUpdateform.do?q_no=${ qbDetail.q_no}' class="btn btn-success">글 수정</a>
-            			<a href='qbDelete.do?q_no=${ qbDetail.q_no}' class="btn btn-success" style="color:white">글 삭제</a>
-            		</c:if>
-            			<a href='qbInsertform.do' class="btn btn-success">글 쓰기</a> 
-           	 	</c:if>           
-        </div>
-        <br><br>
+	    	<div class="writeButton">            
+	        	<a href='qblist.do' class="btn btn-warning"><i class="xi-bars xi-x"></i>&nbsp; 목록으로</a> 
+	        		<c:if test="${!empty sessionScope.loginUser }">  
+		        		<c:if test="${sessionScope.loginUser.mem_name eq qbDetail.q_writer}">
+		            		<a href='qbUpdateform.do?q_no=${ qbDetail.q_no}' class="btn btn-warning" style="color:white">글 수정</a>
+	            			<a href='qbDelete.do?q_no=${ qbDetail.q_no}' class="btn btn-warning" style="color:white">글 삭제</a>
+	            		</c:if>
+	            			<a href='qbInsertform.do' class="btn btn-warning"><i class="xi-pen xi-x"></i>&nbsp; 글 쓰기</a> 
+	           	 	</c:if>           
+	        </div>
+        
         		<table id="reply">
-   	      				<tr><hr>
+   	      				<tr>
 			       	<c:if test="${!empty rlist }">
 			       		<c:forEach var="rlist" items="${rlist }">
 					       	<td>
@@ -71,15 +70,15 @@
 			      		</c:forEach>
 			       	</c:if>		
    	      		</table><br><br>
-   	      		
    	      		<c:if test="${!empty sessionScope.loginUser }"> 
                 	<p><img src="/finalp/resources/img/comment.png" height="20" width="22">&nbsp;Comment</p>
 	         			<div class="form-group">
 	            	 		<textarea rows="5" cols="127" class="form-control" id="send"  placeholder="댓글을 작성하세요."></textarea>	            	 		
 	          			</div>
-				<button type="submit" onclick="replyPlus('${loginUser.mem_no}','${qbDetail.q_no}')"  class="btn btn-success" style="float:right;">댓글쓰기</button>
+					<button type="submit" onclick="replyPlus('${loginUser.mem_no}','${qbDetail.q_no}')"  class="btn btn-warning" style="float:right;"><i class="xi-send xi-x"></i>&nbsp;댓글등록</button>
            			
-           		</c:if>	
+           		</c:if>
+           		<br><br><br>
    	  		 </div>
 		</div>
   	 

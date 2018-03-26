@@ -157,6 +157,26 @@
 		.compileButton:hover{
 			background-color:#285e8e;
 		}
+		#deapply{
+			background-color: hsl(0, 0%, 93.3%);
+			color: hsla(0, 0%, 6.7%, .6);
+		}
+			#applyready{
+			background-color: burlywood;
+			border-radius: 2px;
+			color: white;
+			padding: 13px 20px;
+			white-space: nowrap;
+			font-size: 1.4rem;
+			font-weight: 500;
+			letter-spacing: .007px;
+			display: flex;
+			-ms-flex-direction: row;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			outline:none;
+			border:none;
+		}
 </style>
 </head>
 <body>

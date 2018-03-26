@@ -292,7 +292,7 @@
 						</c:if>
 						<td>${row.ass_reg_date }</td>
 						<c:if test="${currentPage == 1 }">
-							<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>
+							<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}&mem_no=${mem_no}">${row.ass_title }</a></td>
 						</c:if>
 						<c:if test="${currentPage != 1 }">
 							<td class="click-this"><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${assign_no-1}&ass_cate=${row.ass_cate}&ass_maker=${row.ass_maker}">${row.ass_title }</a></td>

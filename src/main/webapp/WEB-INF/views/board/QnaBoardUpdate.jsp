@@ -11,12 +11,27 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <meta charset="UTF-8">
 <title>글 수정하기</title>
+<style>
+	.wrap{
+		width: 100%;
+		background-color: hsla(0, 0%, 93.3%, .4);
+		height: 887px;
+	}
+	
+	.container{
+		background-color: white;
+		width: 900px;
+		height: 480px;
+	}
+</style>
 </head>
 <body>
 <c:import url="../header.jsp" />
-<hr> 
-    <h3 align="center">QnA 게시글수정</h3>
-    <div style="padding : 30px;">
+<div class="wrap">
+	
+	<div id="banner" style="height:305px;background-image: url('/finalp/resources/img/board.jpg');background-size:cover;"></div>
+    <div class="container" style="padding : 30px;">
+	    <h2 style="font-weight:700" align="center">QnA 게시글수정</h2>
         <form method="post" action="qbUpdate.do?q_no=${qboard.q_no }">
           <div class="form-group">
             <label>제목</label>
@@ -24,11 +39,12 @@
           </div>
           <div class="form-group">
             <label>내용</label>
-            <textarea name="q_content" class="form-control" rows="5" required></textarea>
+            <textarea name="q_content" class="form-control" rows="9" required></textarea>
           </div>
-          <a onclick="history.back()" class="btn btn-default">취소</a> 
-          <button type="submit" class="btn btn-default">수정</button>
+          <a onclick="history.back()" class="btn btn-warning" style="float:right; margin-left:5px;"><i class="xi-close-min xi-x"></i>&nbsp;취소</a> 
+          <button type="submit" class="btn btn-warning" style="float:right;"><i class="xi-pen xi-x"></i>&nbsp;수정</button>
         </form>
     </div>
+</div>
 </body>
 </html>

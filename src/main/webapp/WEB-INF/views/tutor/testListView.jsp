@@ -284,7 +284,7 @@
 						</c:if>
 						<td>${row.test_reg_date }</td>
 						<c:if test="${currentPage == 1 }">
-							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no}">${row.test_title }</a></td>
+							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no}&mem_no=${mem_no}">${row.test_title }</a></td>
 						</c:if>
 						<c:if test="${currentPage != 1 }">
 							<td class="click-this"><a href="testDetail.do?tutor_no=${tutor_no }&test_no=${row.test_no}&test_lec_id=${row.test_lec_id}&test_sub_no=${test_no-1}">${row.test_title }</a></td>
