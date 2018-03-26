@@ -322,40 +322,42 @@ public class MemberController {
 	
 	@RequestMapping("/search.do")
 	public String searchViewmMethod(HttpServletRequest request, Model model,Lecture lecture) {
-		int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
-		model.addAttribute("tutor_no",tutor_no);
-		model.addAttribute("mem_no",mem_no);
+	      int tutor_no = Integer.parseInt(request.getParameter("tutor_no"));
+	      int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+	      model.addAttribute("tutor_no",tutor_no);
+	      model.addAttribute("mem_no",mem_no);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search_content", request.getParameter("search_content"));
-		map.put("tutor_no", tutor_no);
-		
-		int listCount = assignService.countAssSearch(map);
-		
-		Map<String, Object> map2 = new HashMap<String, Object>();
-		map2.put("search_content", request.getParameter("search_content"));
-		map2.put("tutor_no", tutor_no);
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("search_content", request.getParameter("search_content"));
+	      map.put("tutor_no", tutor_no);
+	      
+	      int listCount = assignService.countAssSearch(map);
+	      
+	      Map<String, Object> map2 = new HashMap<String, Object>();
+	      map2.put("search_content", request.getParameter("search_content"));
+	      map2.put("tutor_no", tutor_no);
 
-		//test 검색 결과 페이지 네이션을 위한 변수들
-		int listCount2 = testService.countTestSearch(map);
-	
-		
-		model.addAttribute("search_content",request.getParameter("search_content"));
-		model.addAttribute("searchAssList",assignService.searchAss(map));
-		model.addAttribute("searchAssCount",assignService.countAssSearch(map));
-		
-		model.addAttribute("searchTestList",testService.searchTest(map));
-		model.addAttribute("searchTestCount",testService.countTestSearch(map));
-		
-		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
-		int checkApply=memberService.checkApply(lecture);
-		model.addAttribute("checkApply",checkApply);
-		int checkReady = memberService.checkReady(lecture);
-		model.addAttribute("checkReady",checkReady);
-	
-		return "tutor/search";
-	}
+	      //test 검색 결과 페이지 네이션을 위한 변수들
+	      int listCount2 = testService.countTestSearch(map);
+	   
+	      
+	      model.addAttribute("search_content",request.getParameter("search_content"));
+	      model.addAttribute("searchAssList",assignService.searchAss(map));
+	      model.addAttribute("searchAssCount",assignService.countAssSearch(map));
+	      
+	      model.addAttribute("searchTestList",testService.searchTest(map));
+	      model.addAttribute("searchTestCount",testService.countTestSearch(map));
+	      
+	      model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
+	      int checkApply=memberService.checkApply(lecture);
+	      model.addAttribute("checkApply",checkApply);
+	      int checkReady = memberService.checkReady(lecture);
+	      model.addAttribute("checkReady",checkReady);
+	      model.addAttribute("search_content", request.getParameter("search_content"));
+	      model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
+	      System.out.println(lectureService.selectChannelId(tutor_no));
+	      return "tutor/search";
+	   }
 	
 	//아이디 중복 확인
 	

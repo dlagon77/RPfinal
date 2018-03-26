@@ -92,6 +92,11 @@
 	<!-- icon관련 링크 -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<script src="/finalp/resources/mypage/logintestmodal/vendor/jquery/jquery-3.2.1.min.js"></script>
+	
 	<script>
 	function showDiv1(){
 		$("#section1").attr("style", "display:block");
@@ -108,11 +113,45 @@
 	function showDiv3(){
 		$("#section1").attr("style", "display:none");
 		$("#section2").attr("style", "display:none");
-		$("#section3").attr("style", "display:block");
+		$("#section3").attr("style", "display:block;padding-top: 0;");
 	}
 	
 </script>
+<script type="text/javascript">
+$( document ).ready(function(sGetToken) {
+	var $getval = $("#search_box").val();
+	var $search_content = '${search_content}';
+	
+	$("#get_view").empty();
+	$("#nav_view").empty();
+	
+	var channelId = '${channelId}';
+	var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance"
+						+ "&q="+ encodeURIComponent($search_content) +"&channelId="+channelId+"&key=AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw";
+	
+	$.ajax({
+		type: "POST",
+		url: sTargetUrl,
+		dataType: "jsonp",
+		success: function(jdata) {
+			console.log(jdata);
+			
+			$(jdata.items).each(function(i){
+				console.log(this.snippet.title);
+				console.log(this.snippet.videoId);
+				//var time = temp.substring(0,10);
+				$("#get_view").append("<p class='box' style='height: 200px;'><a href='lectureDetail.do?videoId="+this.snippet.videoId+"&videoTitle="+this.snippet.title+"&videoDescription="+this.snippet.description+"' style='font-size: 17px;'><img src='"+this.snippet.thumbnails.default.url+"' style='width: 20%;padding-right: 10px;'><span>"+this.snippet.title+"</span></a></p>");
+			});
+		},
+		error:function(xhr, textStatus) {
+			console.log(xhr.responseText);
+			alert("지금은 시스템 사정으로 인하여 요청하신 작업이 이루어지지 않았습니다.\n잠시후 다시 이용하세요.[2]");
+			return;
+		}
+	});
+});
 
+</script>
 </head>
 <body>
 <c:import url="../header.jsp" />
@@ -246,7 +285,7 @@
 			            <ul class="list-unstyled">
 			                <li><a id="ass" href="#" class="category-link active" onclick="showDiv1();" style="font-size:15px;">문제</a></li>
 			                <li><a id="test" href="#" class="category-link" onclick="showDiv2();" style="font-size:15px">test</a></li>
-			                <li><a href="#" class="category-link"  style="font-size:15px">강의</a></li>
+			                <li><a href="#" class="category-link"  style="font-size:15px" onclick="showDiv3();">강의</a></li>
 			            </ul>
 			        </div>
 			      </div>
@@ -288,7 +327,30 @@
 				 </div>
 				 
 			      <div class="margin-bottom-30"></div>
-			     
+			      <div class="text-center">
+			        <ul class="pagination" id="result-pagination">
+			          
+			        <!-- <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul> -->
+			      	<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="search.do">
+						<c:param name="search_content" value="${search_content }" />
+						<c:param name="currentPage" value="${p }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				</ul>
+			      </div>
 			      
 			      <div style="width: 100%;">
 			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -330,6 +392,29 @@
 				 </div>
 				 
 			      <div class="margin-bottom-30"></div>
+			      <div class="text-center">
+			        <ul class="pagination" id="result-pagination">
+			          
+			        <c:forEach var="p2" begin="${startPage2 }" end="${endPage2 }" step="1">
+					<c:url var="page" value="search.do">
+						<c:param name="search_content" value="${search_content }" />
+						<c:param name="currentPage2" value="${p2 }" />
+						<c:param name="tutor_no" value="${tutor_no }"/>
+						<c:param name="mem_no" value="${mem_no }"/>
+					</c:url>
+					<c:if test="${p2 ne currentPage2 }">
+						<li>
+							<a href="${page }">${p2 }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p2 eq currentPage2 }">	
+						<li class="active">
+							<a href="${page }"><b>${p2 }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				</ul>
+			      </div>
 			      
 			      <div style="width: 100%;">
 			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -347,7 +432,13 @@
 			
 			    </div><!-- section2 끝 -->
 			    
-			    
+			    <section class="col-md-10" id="section3" style="width:1284px;padding-top:0;display:none">
+		<div class="row">
+			<div id="get_view"></div>
+			<div id="nav_view"></div>
+		</div>
+	</section>
+	
 			    
 			    
 			    
@@ -359,13 +450,6 @@
 	
 	<hr>
 
-	<section class="about" id="about" style="width:1284px;padding-top:0">
-		<div class="row">
-
-			
-
-			</div>
-	</section>
 	
 
 
