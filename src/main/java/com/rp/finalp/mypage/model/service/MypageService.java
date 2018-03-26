@@ -6,6 +6,7 @@ import com.rp.finalp.assign.model.vo.Assignment;
 import com.rp.finalp.board.model.vo.QnaBoard;
 import com.rp.finalp.mypage.model.vo.InqBoard;
 import com.rp.finalp.mypage.model.vo.Message;
+import com.rp.finalp.mypage.model.vo.MyTestBoard;
 import com.rp.finalp.mypage.model.vo.MysubAssign;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
@@ -62,6 +63,15 @@ public interface MypageService {
 
 
 	public MysubAssign selectmyassigndetail(int sno);
+
+
+	int getListCountTest(String keyword, int mem_no);
+
+
+	List<Assignment> serviceMyTest(int startRow, int endRow, String keyword, int mem_no);
+
+
+	public MyTestBoard selectmyTestdetail(int sno);
 
 
 	

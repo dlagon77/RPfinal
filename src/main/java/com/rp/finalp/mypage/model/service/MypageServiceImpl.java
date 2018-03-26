@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
 import com.rp.finalp.mypage.model.vo.Message;
+import com.rp.finalp.mypage.model.vo.MyTestBoard;
 import com.rp.finalp.mypage.model.vo.MysubAssign;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
@@ -116,6 +117,21 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public MysubAssign selectmyassigndetail(int sno) {
 		return mypDao.selectmyassigndetail(sno);
+	}
+
+	@Override
+	public int getListCountTest(String keyword, int mem_no) {
+		return mypDao.getListCountTest(keyword, mem_no);
+	}
+
+	@Override
+	public List<Assignment> serviceMyTest(int currentPage, int limit, String keyword, int mem_no) {
+		return mypDao.serviceMyTest(currentPage,limit,keyword,mem_no);
+	}
+
+	@Override
+	public MyTestBoard selectmyTestdetail(int sno) {
+		return mypDao.selectmyTestdetail(sno);
 	}
 	
 	

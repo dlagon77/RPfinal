@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rp.finalp.mypage.model.vo.InqBoard;
 import com.rp.finalp.mypage.model.vo.Message;
+import com.rp.finalp.mypage.model.vo.MyTestBoard;
 import com.rp.finalp.mypage.model.vo.MysubAssign;
 import com.rp.finalp.mypage.model.vo.Mysubsc;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
@@ -51,6 +52,10 @@ public class MypageDao {
 			map.put("isKeyword", 1);
 			map.put("keyword", "%"+keyword+"%");
 		}
+		if(keyword.equals("")){
+			map.put("isKeyword", 0);
+//			map.put("keyword", "%"+keyword+"%");
+		}
 		if(mem_no !=0) {
 			map.put("mem_no", mem_no);
 		}
@@ -59,6 +64,7 @@ public class MypageDao {
 
 		public List<SelectQnaboard> serviceMyWrite(int startRow, int endRow, String keyword, int mem_no) 
 		{
+			System.out.println("serviceMyWrite mem_no>"+mem_no);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("startRow",startRow);
 			map.put("endRow",endRow);
@@ -131,6 +137,10 @@ public class MypageDao {
 				map.put("isKeyword", 1);
 				map.put("keyword", "%"+keyword+"%");
 			}
+			if(keyword.equals("")){
+				map.put("isKeyword", 0);
+//				map.put("keyword", "%"+keyword+"%");
+			}
 			if(mem_no !=0) {
 				map.put("mem_no", mem_no);
 			}
@@ -145,11 +155,20 @@ public class MypageDao {
 					map.put("keyword","%"+keyword+"%");
 					map.put("isKeyword",1);
 				}
+				if(keyword.equals("")){
+					map.put("isKeyword", 0);
+//					map.put("keyword", "%"+keyword+"%");
+				}
 				if(mem_no !=0) {
 					map.put("mem_no", mem_no);
-					map.put("ismemno", 1);
+//					map.put("ismemno", 1);
 				}
-				return mybatis.selectList("mypageMapper.serviceMyAssign", map);
+				List<Assignment> list = mybatis.selectList("mypageMapper.serviceMyAssign", map);
+				System.out.println("dao:"+list);
+				return list;
+//				return mybatis.selectList("mypageMapper.serviceMyAssign", map);
+				
+				
 			}
 		
 		public List<Message> selectMesList(int size){
@@ -163,5 +182,48 @@ public class MypageDao {
 		//내가제출한 과제 상세보기
 		public MysubAssign selectmyassigndetail(int sno) {
 			return mybatis.selectOne("mypageMapper.selectmyassigndetail",sno);
+		}
+
+		//내가 응시한 시험 목록
+		public int getListCountTest(String keyword, int mem_no) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(!keyword.equals("")){
+				map.put("isKeyword", 1);
+				map.put("keyword", "%"+keyword+"%");
+			}
+			if(keyword.equals("")){
+				map.put("isKeyword", 0);
+//				map.put("keyword", "%"+keyword+"%");
+			}
+			if(mem_no !=0) {
+				map.put("mem_no", mem_no);
+			}
+			return mybatis.selectOne("mypageMapper.getListCountTest", map);
+		}
+
+		public List<Assignment> serviceMyTest(int startRow, int endRow, String keyword, int mem_no) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("startRow",startRow);
+			map.put("endRow",endRow);
+			if(!keyword.equals("")){
+				map.put("keyword","%"+keyword+"%");
+				map.put("isKeyword",1);
+			}
+			if(keyword.equals("")){
+				map.put("isKeyword", 0);
+//				map.put("keyword", "%"+keyword+"%");
+			}
+			if(mem_no !=0) {
+				map.put("mem_no", mem_no);
+//				map.put("ismemno", 1);
+			}
+			List<Assignment> list = mybatis.selectList("mypageMapper.serviceMyTest", map);
+			System.out.println("dao:"+list);
+			return list;
+//			return mybatis.selectList("mypageMapper.serviceMyAssign", map);
+		}
+
+		public MyTestBoard selectmyTestdetail(int sno) {
+			return mybatis.selectOne("mypageMapper.selectmyTestdetail",sno);
 		}
 }

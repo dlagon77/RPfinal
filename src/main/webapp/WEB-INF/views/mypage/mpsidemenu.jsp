@@ -168,8 +168,8 @@ a:focus, a:hover, a:active {
                     <div class="top-news" >
                       <a href="${stusub}" id="stumysubc" class="btn grey" style="  display:  inline-flex;">
                       <div style="width:150px;">
-					<span>1 - 구독중인 강의</span>
-					My subscription
+					<span>1 - 구독중인 강사님</span>
+					My Subscription
 					</div>
 <!-- 			<i class="fas fa-desktop top-news-icon"></i> -->
 				<!-- <i class="fa fa-database top-news-icon "></i> -->
@@ -187,10 +187,10 @@ a:focus, a:hover, a:active {
 		</c:url>
 		  <div style="width:250px;">
 			<div class="top-news ">
-				<a href="${myassign }" class="btn blue-madison" style="  display:  inline-flex;"> 
+				<a href="${myassign }" class="btn grey" style="  display:  inline-flex;"> 
 				<div style="width:150px;">
                       <span>2 - 과제 제출 내역</span>
-                      <em>Task submission history</em>
+                      <em>Task Submission History</em>
                  </div>
 					 <!-- <i class="fa fa-cogs top-news-icon"></i>  -->
 					 <div style="width:80px;">
@@ -205,10 +205,10 @@ a:focus, a:hover, a:active {
 					</c:url>
             <div style="width:250px;">
 			<div class="top-news ">
-				<a href="${myqna }" class="btn blue-madison" style="  display:  inline-flex;">
+				<a href="${myqna }" class="btn grey" style="  display:  inline-flex;">
 				<div style="width:150px;">
                       <span>3 - Q&A 내가 쓴 글</span>
-                      <em>Task submission history</em>
+                      <em>My Q&A Board History</em>
                  </div>
 					 <!-- <i class="fa fa-cogs top-news-icon"></i>  -->
 					 <div style="width:80px;">
@@ -220,10 +220,10 @@ a:focus, a:hover, a:active {
              <!-- ============ -->
             <div style="width:250px;">
 			<div class="top-news ">
-				<a href="stumessage.do" class="btn blue-madison" style="  display:  inline-flex;">
+				<a href="myTestBoard.do" class="btn grey" style="  display:  inline-flex;">
 				<div style="width:150px;">
                       <span>4 - 내가 본 시험</span>
-                      <em>Task submission history</em>
+                      <em>My Test History</em>
                  </div>
 					 <!-- <i class="fa fa-cogs top-news-icon"></i>  -->
 					 <div style="width:80px;">
@@ -256,8 +256,8 @@ a:focus, a:hover, a:active {
 			<div class="top-news ">
 				<a href="${myadminque }" class="btn grey">
 <!-- 				<a href="mypagequestionPage.do" class="btn grey"> -->
-				<span>일대일 문의</span>
-				Get Coding!	 
+				<span>5 - 관리자 일대일 문의</span>
+				<em>Admin Question</em> 
 				<i class="fa fa-columns top-news-icon "></i>
 				</a>
 			</div>

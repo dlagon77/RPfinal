@@ -13,6 +13,8 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN STU_PROFILE ===  -->
 <script>
@@ -37,7 +39,7 @@
 			<div style="width:1200px;">
 				<!-- Main Content -->
 				<div class="headline">
-					<h2>내가쓴글테스트</h2>
+					<h2>내가 작성한 Q&A 게시물</h2>
 				</div>
 				<hr>
 
@@ -54,7 +56,7 @@
 						<table class="table table-striped table-bordered table-hover">
 							<tr>
 								<th class="qtable" style="width:100px;">글번호</th>
-								<th class="qtable" style="width:700px;">제목</th>
+								<th class="qtable" style="width:600px;">제목</th>
 								<th class="qtable" style="width:100px;">작성자</th>
 								<th class="qtable" style="width:200px;">등록일</th>
 								<th class="qtable" style="width:100px;">조회수</th>
@@ -149,6 +151,7 @@
 				<!-- End Side Column -->
 			</div>
 		</div>
+	</div>
 	</div>
 	</div>
 	<!-- === END CONTENT === -->

@@ -122,6 +122,8 @@ box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4p
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN STU_PROFILE ===  -->
 
@@ -210,6 +212,7 @@ $(document).ready(function() {
 	
 	<!-- === ACCODIAN TEST END ===  -->
 </section>
+</div>
 <!-- <script>
     function inqboardsubmit(){
     	var mem_no = ${sessionScope.loginUser.mem_no};

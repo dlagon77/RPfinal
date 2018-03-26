@@ -13,6 +13,8 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN mywriteqna_ModifyView ===  -->
 <script type="text/javascript">

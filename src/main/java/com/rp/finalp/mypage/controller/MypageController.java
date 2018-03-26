@@ -49,6 +49,66 @@ public class MypageController {
 		return "mypage/stusubmitlist";
 	}*/
 	
+	
+	
+	
+	
+	// 마이페이지 - 상세보기 : 과제 제출 게시판 글 보기 
+	@RequestMapping(value = "/myTestDetailView.do", method = RequestMethod.GET)
+	public String myTestboardDetail(Model model, @RequestParam("sno") int sno) {
+		model.addAttribute("mypassign", mypService.selectmyTestdetail(sno));
+		return "mypage/myTestDetailView";
+	}
+	
+	// 마이페이지 : 시험 응시 내역 내가 쓴글 리스트 조회 + 검색
+	@RequestMapping(value = "/myTestBoard.do")
+	public String myTestBoardlist(Model model, @RequestParam(value="page",required=true,defaultValue="1")int page,
+			@RequestParam(value="keyword",required=false,defaultValue="") String keyword,
+			@RequestParam(value="mem_no",required=false,defaultValue="1") int mem_no,
+			HttpSession session
+			) {
+		if(session !=null) {	
+			Member member = (Member)session.getAttribute("loginUser");
+			mem_no = member.getMem_no();
+		}
+		
+		int currentPage = page;
+		int limit = 10;
+		int listCount = mypService.getListCountTest(keyword,mem_no);
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		int startPage = ((int) ((double) currentPage / limit + 0.9) -1) * limit + 1;
+		int endPage = startPage + limit - 1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		List<Assignment> list = mypService.serviceMyTest(startRow,endRow,keyword,mem_no);
+		System.out.println(list);
+		if (maxPage < endPage)
+			endPage = maxPage;
+		
+		if(list.size()>0){
+			model.addAttribute("list", list);
+		}else{
+			model.addAttribute("result", 0);
+		}
+		System.out.println("listCount :"+listCount);                  
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("maxPage", maxPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("limit", limit);
+		model.addAttribute("keyword", keyword);
+		
+		return "mypage/myTestBoard";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	// 마이페이지 - 상세보기 : 과제 제출 게시판 글 보기 
 	@RequestMapping(value = "/detailMypAssignService.do", method = RequestMethod.GET)
 	public String mypageAssignDetail(Model model, @RequestParam("sno") int sno) {
@@ -69,7 +129,6 @@ public class MypageController {
 		}
 		
 		int currentPage = page;
-		System.out.println("currentPage : "+currentPage);
 		int limit = 10;
 		int listCount = mypService.getListCountSubAssign(keyword,mem_no);
 		int maxPage = (int) ((double) listCount / limit + 0.9);
@@ -78,7 +137,7 @@ public class MypageController {
 		int startRow = (currentPage - 1)*limit + 1;
 		int endRow = startRow + limit -1;
 		List<Assignment> list = mypService.serviceMyAssign(startRow,endRow,keyword,mem_no);
-		
+		System.out.println(list);
 		if (maxPage < endPage)
 			endPage = maxPage;
 		
@@ -87,7 +146,7 @@ public class MypageController {
 		}else{
 			model.addAttribute("result", 0);
 		}
-		                  
+		System.out.println("listCount :"+listCount);                  
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("maxPage", maxPage);
@@ -279,7 +338,6 @@ public class MypageController {
 		}
 		
 		int currentPage = page;
-		System.out.println("currentPage : "+currentPage);
 		int limit = 10;
 		int listCount = mypService.getListCount(keyword,mem_no);
 		int maxPage = (int) ((double) listCount / limit + 0.9);
@@ -288,7 +346,6 @@ public class MypageController {
 		int startRow = (currentPage - 1)*limit + 1;
 		int endRow = startRow + limit -1;
 		List<SelectQnaboard> list = mypService.serviceMyWrite(startRow,endRow,keyword,mem_no);
-		
 		if (maxPage < endPage)
 			endPage = maxPage;
 		
@@ -440,8 +497,6 @@ public class MypageController {
 			}
 			out.close();
 		}
-		
-		
 		
 		
 		/*	@RequestMapping("/stumypage.do")

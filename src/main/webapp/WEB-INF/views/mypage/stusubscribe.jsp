@@ -27,6 +27,9 @@ cursor:pointer;
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
+<!-- === BEGIN MPSIDEMENU ===  -->
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN STU_SUBSCRIBE ===  -->		
 <script>
@@ -106,6 +109,10 @@ cursor:pointer;
 		
 		<!--===== END DIV class panel-body ===== -->
 				</div>
+		<!--===== END DIV class panel panel-default ===== -->
+				
+				</div>
+		<!-- === END CONTAINER ABOUT ===  -->				
 		        <!-- 밑에 div 2개 지우지 말것. mypagemenu.js에서 닫는 용도-->
 		</div>
 	</div>

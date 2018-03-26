@@ -13,6 +13,8 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN mySubmitAssign_DetailView ===  -->
 
@@ -40,7 +42,7 @@
 			<div class="col-md-9">
 				<!-- Main Content -->
 				<div class="headline">
-					<h2>글 상세보기</h2>
+					<h2>과제 제출 상세보기</h2>
 				</div>
 				<hr>
 			

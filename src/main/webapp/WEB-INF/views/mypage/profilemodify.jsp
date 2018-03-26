@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>프로필수정페이지</title>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .tableone{
 text-align: -webkit-center;
@@ -27,7 +27,7 @@ display:  inline-flex;
 width:500px
 }
 section{
-padding:350px;
+padding:200px;
     padding-top: 0px;
     padding-bottom: 0px;
 	
@@ -49,7 +49,7 @@ box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4p
 }
 .largeboxfour{
 margin-top:20px;
-width:700px; height:400px;border:1px solid #E2E2E2; background-color:#FFF;
+width:700px; height:300px;border:1px solid #E2E2E2; background-color:#FFF;
 box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
 }
 .input-block {
@@ -91,9 +91,9 @@ input {
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
-
+<!-- === BEGIN DIV CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <!-- === BEGIN STU_PROFILE ===  -->
-
  <section style="padding-top: 20px;">
   <div class="largeboxone" style="margin-top: 40px;">
 	<div style="margin: 20px;">
@@ -171,10 +171,13 @@ input {
 </div>
 </div>
 </section>
-
+</div>
+<!-- === END DIV CONTAINER ABOUT ===  -->
 <!-- ==============================강사회원 로그인시 경력사항 변경======================================================= -->
 
 <c:if test="${Member.mem_cate eq 'T'}">
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <section style="margin-bottom: 40px;padding-top: 0px;">
 <div class="largeboxfour">
 	<div style="margin: 20px;">	
@@ -212,7 +215,8 @@ input {
 		</div>
 </div>
 </section>
-		
+</div>
+<!-- === END DIV CONTAINER ABOUT ===  -->		
 		
 </c:if>
 
@@ -262,6 +266,8 @@ function checkinter(){
 </script>
 
 <!-- ==비밀번호 변경== -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <section style="padding-top: 0px;">
 <div class="largeboxtwo">
 <div style="margin: 20px;">
@@ -294,6 +300,8 @@ function checkinter(){
 </div>
 </div>
 </section>
+</div>
+<!-- === END DIV CONTAINER ABOUT ===  -->
 
 <script>
 /* 마이페이지 - 프로필 비밀번호 변경 */
@@ -328,14 +336,15 @@ function changepwd(){
 </script>
 
 <!-- ==탈퇴하기== -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <section style="margin-bottom: 40px;padding-top: 0px;">
 <div class="largeboxfour">
 	<div style="margin: 20px;">
 		<div style="font-size: 20px;font-weight: 400;margin-bottom: 20px; color: #f44336!important;">탈퇴하기</div>
 		<p>탈퇴하실 경우 리프에서의 모든 수강 기록이 사라지게 되며,</p>
 	    <p>개인정보(이름, 이메일, 비밀번호, 생년월일 등)는 탈퇴 즉시 파기됩니다.</p>
-	    <p>단, 질문게시판이나 수강평과 같은 게시판형 기능에 남긴 게시글은 '탈퇴회원' 이름으로 변경됩니다.</p>
-	    <p>이를 원치 않으실 경우 반드시 해당 게시물을 삭제후 탈퇴 신청을 해주시기 바랍니다.</p>
+	    <p>질문게시판, 수강평 같은 게시판형 기능에 남긴 게시글도 탈퇴 즉시 파기됩니다.</p>
 	</div>
 		<div class="tablethr" style="margin-left: 450px;">
 					<ul>
@@ -349,6 +358,9 @@ function changepwd(){
 		</div>
 </div>
 </section>
+</div>
+<!-- === END DIV CONTAINER ABOUT ===  -->
+
 		<div class="modal fade" id="deleteMember-modal">
 			<div class="modal-dialog">
 
@@ -358,7 +370,7 @@ function changepwd(){
 					<h3>정말 탈퇴하시나요?</h3><br>
 					<h5>Leap 에서는 개인정보 보호 차원으로<br><br> 비밀번호를 한번 더 입력받고 있습니다.</h5><br>
 				 	<form action="mDelete.do" method="post" id="deleteMember">
-						<input type="password" id="mem_pwd" name="mem_pwd" placeholder="비밀번호를 입력해주세요." oninput="checkdelpwd()">
+						<input type="password" id="mem_pwdd" name="mem_pwd" placeholder="비밀번호를 입력해주세요." oninput="checkdelpwd()">
 						<input type="submit" name="mdelete" id="mdeleteid" value="탈퇴하기" disabled>
 				  	</form>
 						<div class="modal-footerr">
@@ -368,10 +380,12 @@ function changepwd(){
 				</div>
 			</div>
 		</div>
+		
+
 		<script>
 		
 		function checkdelpwd(){
-				 var mempass=document.getElementById("mem_pwd").value;
+				 var mempass=document.getElementById("mem_pwdd").value;
 					$.ajax({
 			 	  			url:"checkdelpwd.do",
 			 	  			data: { mempass : mempass },
@@ -396,12 +410,14 @@ function changepwd(){
 		</script>
 
 
-<!-- </div> -->
 
 
         <!-- 밑에 div 2개 지우지 말것. mypagemenu.js에서 닫는 용도-->
 		</div>
 	</div>
+	
+
+	
 	<!-- 밑에 div 1개 지우지 말것. header.jsp 닫는 용도 -->
 	</div>
 	

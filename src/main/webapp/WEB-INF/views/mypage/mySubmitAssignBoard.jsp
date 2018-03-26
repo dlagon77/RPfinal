@@ -13,6 +13,8 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../header.jsp" />
 <!-- === END HEADER ===  -->
+<!-- === BEGIN CONTAINER ABOUT ===  -->
+<div class="container about" style="display:flex;width:1284px;">
 <c:import url="mpsidemenu.jsp" />
 <!-- === BEGIN STU_PROFILE ===  -->
 <script>
@@ -84,9 +86,9 @@
 
 						<!-- 페이지 -->
 						
-					 	<c:url var="stusub" value="stumypage.do">
+				<%-- 	 	<c:url var="stusub" value="stumypage.do">
                            <c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
-                        </c:url>  
+                        </c:url>   --%>
 						
 						<div class="text-center">
 							<ul class="pagination">
@@ -130,7 +132,7 @@
  				<form action="/finalp/MyAssignBoardList.do" method="get" style="display:inline-flex;margin-left: 470px;">
 					<div align="right" style="width:200px;">
 						<c:if test="${keyword ne ''}">
-							 <c:url var="keyword1" value="selectQnaBoardList.do">
+							 <c:url var="keyword1" value="MyAssignBoardList.do">
 			                          	<c:param name="mem_no" value="${sessionScope.loginUser.mem_no }" />
 			               	</c:url> 
 								<span>&nbsp;&nbsp;&nbsp;&nbsp;검색어 <b>"${keyword}"</b></span>
