@@ -355,7 +355,6 @@ public class MemberController {
 	      model.addAttribute("checkReady",checkReady);
 	      model.addAttribute("search_content", request.getParameter("search_content"));
 	      model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
-	      System.out.println(lectureService.selectChannelId(tutor_no));
 	      return "tutor/search";
 	   }
 	

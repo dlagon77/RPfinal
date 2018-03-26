@@ -218,7 +218,6 @@ public class LectureController {
 	@RequestMapping("insertLectureReview.do")
 	public void insertLectureReviewMethod(Model model,Member member,HttpServletResponse response) throws IOException  {
 		PrintWriter out = response.getWriter();
-		System.out.println(member.toString());
 		int result = lectureService.insertLectureReview(member);
 		if(result>0) {
 			out.append("ok");

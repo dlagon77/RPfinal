@@ -193,27 +193,6 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
-<script>
-	function showDiv1(){
-		$("#section1").attr("style", "display:block");
-		$("#section2").attr("style", "display:none");
-/* 		$("#section3").attr("style", "display:none"); */
-	}
-	
-	function showDiv2(){
-		$("#section1").attr("style", "display:none");
-		$("#section2").attr("style", "display:block");
-/* 		$("#section3").attr("style", "display:none");  */
-	}
-	
-		
-/* 	function showDiv3(){
-		$("#section1").attr("style", "display:none");
-		$("#section2").attr("style", "display:none"); 
-		$("#section3").attr("style", "display:block");
-	} */
-	
-</script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
@@ -233,7 +212,6 @@
 				<hr>
 				<div class="menu">
 					<ul>
-						
 						<li><a href="classManage.do?tutor_no=${tutor_no}"><i class="xi-layout-aside-o xi-2x"></i><p>&nbsp;&nbsp;대쉬보드</p></a></li>
 						<hr/>
 						<li><a href="classManageLecture.do?tutor_no=${tutor_no}"><i style="color: black;" class="xi-play-circle-o xi-2x"></i><p style="color: black;">&nbsp;&nbsp;강의</p></a></li>
@@ -273,19 +251,13 @@
 				<div class="tabs tabs-style-bar">
 					<nav>
 						<ul>
-							<li><a href="#" name="item" onclick="showDiv1();" ><span>Overview</span></a></li>
-							<li><a href="#" name="item" onclick="showDiv2();"><span>Upload</span></a></li>
-<!-- 							<li><a href="#" name="item" onclick="showDiv3();"><span>Settings</span></a></li> -->
+							<li><a href="#" name="item"><span>Upload</span></a></li>
 						</ul>
 					</nav>
 				</div>
 				
-				<div id="section1" style="display:block;">
-				
-				</div>
-				
 				<!-- 강의 업로드 -->
-				<div id="section2" style="display:none;">
+				<div id="section1" style="display:block;">
 					<div class="uploadExplain">
 						<img style="box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;" width="700px;" height="350px;" src="/finalp/resources/img/lectureUpload.png">
 						<br><br>
@@ -318,21 +290,10 @@
 									<input type="text" class="form-control" id="inputPassword3" name="lec_con" placeholder="3.content"> 
 								</div> 
 							</div>
-							
-	
-							<!-- <div class="form-group"> 
-								<div class="col-sm-offset-2 col-sm-10"> 
-									<div class="checkbox"> 
-										<label> <input type="checkbox"> Remember me </label> 
-									</div> 
-								</div> 
-							</div>  -->
 							<input type="hidden" name ="tutor_no" value="${tutor_no}">
 							<div class="form-group"> 
 								<div class="col-sm-offset-2 col-sm-10"> 
 									<button type="submit" class="btn btn-success">강의 등록</button>
-									
-									
 								</div> 
 							</div> 
 						</form>
@@ -340,9 +301,6 @@
 					
 				</div>
 				<!-- 강의 업로드 끝 -->
-				
-					
-				
 			
 			<!-- 하단 주요내용 끝 -->
 			</div>

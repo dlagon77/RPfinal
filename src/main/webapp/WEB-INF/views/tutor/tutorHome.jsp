@@ -73,6 +73,106 @@
 			outline:none;
 			border:none;
 		}
+		/* ---------- */
+	.tabs {
+		position: relative;
+		overflow: hidden;
+		margin: 0 auto;
+		width: 100%;
+		font-weight: 300;
+		font-size: 1.25em;
+	}
+	.tabs nav {
+	text-align: center;
+	}
+	
+	.tabs nav ul {
+		position: relative;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: flex;
+		margin: 0 auto;
+		padding: 0;
+		max-width: 1200px;
+		list-style: none;
+		-ms-box-orient: horizontal;
+		-ms-box-pack: center;
+		-webkit-flex-flow: row wrap;
+		-moz-flex-flow: row wrap;
+		-ms-flex-flow: row wrap;
+		flex-flow: row wrap;
+		-webkit-justify-content: center;
+		-moz-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
+	}
+	
+	.tabs nav ul li {
+		position: relative;
+		z-index: 1;
+		display: block;
+		margin: 0;
+		text-align: center;
+		-webkit-flex: 1;
+		-moz-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+	}
+	
+	.tabs nav a {
+		position: relative;
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: 2.5;
+	}
+	
+	.tabs nav a span {
+		vertical-align: middle;
+		font-size: 0.75em;
+	}
+	
+	.tabs nav li.tab-current a {
+		color: #74777b;
+	}
+	
+	.tabs nav a:focus {
+		outline: none;
+	}
+	.tabs-style-bar nav {
+	background: rgba(40,44,42,0.05);
+	}
+	
+	.tabs-style-bar nav ul {
+		border: 4px solid transparent;
+	}
+	
+	.tabs-style-bar nav ul li a {
+		margin: 0 2px;
+		background-color: #f7f7f7;
+		color: #74777b;
+		transition: background-color 0.2s, color 0.2s;
+	}
+	
+	.tabs-style-bar nav ul li a:hover,
+	.tabs-style-bar nav ul li a:focus {
+		color: #2CC185;
+	}
+	
+	.tabs-style-bar nav ul li a span {
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-weight: 500;
+		font-size: 0.6em;
+	}
+	
+	.tabs-style-bar nav ul li.tab-current a {
+		background: #2CC185;
+		color: #fff;
+	}
 </style>
 
 	<!-- 별점플러그인 관련 링크 -->
@@ -86,6 +186,17 @@
 	
 
 </head>
+<script type="text/javascript">
+function showDiv1(){
+	$("#section1").attr("style", "display:block");
+	$("#section2").attr("style", "display:none");
+}
+
+function showDiv2(){
+	$("#section1").attr("style", "display:none");
+	$("#section2").attr("style", "display:block");
+}
+</script>
 <body>
 <c:import url="../header.jsp" />
 
@@ -240,135 +351,142 @@
 		<!--</div>-->
 	</section>
 	
-	<hr>
-	  <div id="container" style="text-align: center;">
-	  <h4 style="float:left">HTML/CSS</h4>
-	  <br><br>
-      <div id="box" style="font-size:15px">
-         <textarea class="innerbox html" placeholder="Enter HTML Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-right:20px"></textarea>
-         <textarea class="innerbox css" placeholder="Enter Css Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-bottom:30px"></textarea>
-            <div class="innerbox preview">
-               <iframe id="live_update" style="width: 100%;height: 300px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)">
-                  <!doctype html>
-                  <html lang="en">
-                  <head><meta charset="utf-8">
-                  </head>
-                  <body></body>
-                  </html>
-               </iframe>
-            </div><!-- /iframe holder -->
-      </div><!-- /box -->
-   </div><!-- /container -->
-
-    
 	
 	<hr>
-
-	<!--<div class="container">-->
-	<div style="display:flex">
-	<h4><div id="reviewCount">평가 ${reviewCount }개</div></h4>
+	<div class="tabs tabs-style-bar">
+		<nav>
+			<ul>
+				<li><a href="#" name="item" onclick="showDiv1();" ><span style="font-size: 13px; font-weight: 700;">댓글</span></a></li>
+				<li><a href="#" name="item" onclick="showDiv2();"><span style="font-size: 13px; font-weight: 700;">HTML/CSS 연습장</span></a></li>
+			</ul>
+		</nav>
 	</div>
-	<section class="about" id="about" style="width:1284px;padding-top:0">
-		<div class="row">
-
-			<div class="col-md-7 big-letter">
-				
-				<!--리뷰 등록 템플릿 -->
-				<div class="message" style="display:flex;width:750px;margin-bottom: 50px;">
-					<button style="background: none;border: none;outline: none;display: flex;">
-					<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-						<c:if test="${loginUser.mem_refile == null }">
-							<img height="45" width="45" src="/finalp/resources/img/logo2.PNG" style="display: block;margin-left: auto;margin-right: auto;">
-						</c:if>
-						<c:if test="${loginUser.mem_refile != null }">
-							<img height="45" width="45" src="/finalp/resources/img/profileupload/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
-						</c:if>
-					</div>
-				   </button>
-		
-					<form style="width:100%">
-					  <div class="form-group" style="font-size:15px;padding-top: 50px;">
-						<input type="text" class="messageInput" id="inputReviewContent" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
-						<select id="star">
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						</select>
-					  </div>
+	
+	<div id="section2" style="display:none;">
+	  	<div id="container" style="text-align: center;">
+		  <br><br>
+	      <div id="box" style="font-size:15px">
+	         <textarea class="innerbox html" placeholder="Enter HTML Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-right:20px"></textarea>
+	         <textarea class="innerbox css" placeholder="Enter Css Here" style="width: 45%;height: 200px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.42);margin-bottom:30px"></textarea>
+	            <div class="innerbox preview">
+	               <iframe id="live_update" style="width: 100%;height: 300px;box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12)">
+	                  <!doctype html>
+	                  <html lang="en">
+	                  <head><meta charset="utf-8">
+	                  </head>
+	                  <body></body>
+	                  </html>
+	               </iframe>
+	            </div><!-- /iframe holder -->
+	      </div><!-- /box -->
+	   </div><!-- /container -->
+	</div>
+    
+	
+	<div id="section1" style="display:block;">
+	
+		<!--<div class="container">-->
+		<div style="display:flex">
+		<h4><div id="reviewCount">평가 ${reviewCount }개</div></h4>
+		</div>
+		<section class="about" id="about" style="width:1284px;padding-top:0">
+			<div class="row">
+	
+				<div class="col-md-7 big-letter">
 					
-					  <button type="button" id="inputReviewButton" class="btn btn-primary" style="float:right" onclick="insertReview();">리뷰등록</button>
-					</form>
-				</div>
-				<!-- 리뷰 등록 템플릿 끝 -->
-				
-				<div id="review">
-				<c:forEach items="${review }" var="row">
-				<!-- 댓글 리스트 폼 -->
-				
-					<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">
+					<!--리뷰 등록 템플릿 -->
+					<div class="message" style="display:flex;width:750px;margin-bottom: 50px;">
 						<button style="background: none;border: none;outline: none;display: flex;">
 						<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
-							<img height="45" width="45" src="/finalp/resources/img/profileupload/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							<c:if test="${loginUser.mem_refile == null }">
+								<img height="45" width="45" src="/finalp/resources/img/logo2.PNG" style="display: block;margin-left: auto;margin-right: auto;">
+							</c:if>
+							<c:if test="${loginUser.mem_refile != null }">
+								<img height="45" width="45" src="/finalp/resources/img/profileupload/${loginUser.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							</c:if>
 						</div>
 					   </button>
-					   <div>
-						<span style="font-size:16px!important;font-weight:500;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
-					   	<p>${row.rev_con }</p>
-					   </div>
-					   <div style="margin-top:1%;position: absolute;left: 87%;">
-						   <select id="p${row.rev_no }">
+			
+						<form style="width:100%">
+						  <div class="form-group" style="font-size:15px;padding-top: 50px;">
+							<input type="text" class="messageInput" id="inputReviewContent" placeholder="리뷰 추가" style="border:none;outline:none;border-bottom: solid 1px black;width:100%">
+							<select id="star">
 							  <option value="1">1</option>
 							  <option value="2">2</option>
 							  <option value="3">3</option>
 							  <option value="4">4</option>
 							  <option value="5">5</option>
 							</select>
-						</div>
+						  </div>
+						
+						  <button type="button" id="inputReviewButton" class="btn btn-primary" style="float:right" onclick="insertReview();">리뷰등록</button>
+						</form>
 					</div>
-				
-				<!-- 댓글 리스트 폼 끝--> 
-				
-				</c:forEach>
-				</div>
-				
-
-
-			</div><!--col-md-7-->
-
-
-			<div class="col-md-5" style="width: 35%;float: right;">
-			<br>
-			<form action="#">
-				<div class="input-group mb-3">
-				  <div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">@제목</span>
-				  </div>
-				  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-				</div>
-				<br>
-				<div class="input-group mb-3">
-				  <div class="input-group-append">
-					<span class="input-group-text" id="basic-addon2">@강사님께 쪽지보내기</span>
-				  </div>
-				</div>
-				<textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
-				<br>
-				<button type="submit" class="btn btn-primary" style="float:right">쪽지보내기</button>
-				</div>
-				
-			</form>
-
-			</div>
-	</section>
+					<!-- 리뷰 등록 템플릿 끝 -->
+					
+					<div id="review">
+					<c:forEach items="${review }" var="row">
+					<!-- 댓글 리스트 폼 -->
+					
+						<div class="message" style="display:flex;width:750px;padding-bottom: 50px;font-size: 15px!important;">
+							<button style="background: none;border: none;outline: none;display: flex;">
+							<div class="user_image" style="width: 45px;height: 45px;cursor: pointer;margin: 0 8px;border-radius: 50%;background-color: transparent;overflow: hidden;">
+								<img height="45" width="45" src="/finalp/resources/img/profileupload/${row.mem_refile }" style="display: block;margin-left: auto;margin-right: auto;">
+							</div>
+						   </button>
+						   <div>
+							<span style="font-size:16px!important;font-weight:500;">${row.mem_name }&nbsp;&nbsp;<span style="color:gray;font-weight:400;font-size:14px!important">${row.rev_date }</span></span>
+						   	<p>${row.rev_con }</p>
+						   </div>
+						   <div style="margin-top:1%;position: absolute;left: 87%;">
+							   <select id="p${row.rev_no }">
+								  <option value="1">1</option>
+								  <option value="2">2</option>
+								  <option value="3">3</option>
+								  <option value="4">4</option>
+								  <option value="5">5</option>
+								</select>
+							</div>
+						</div>
+					
+					<!-- 댓글 리스트 폼 끝--> 
+					
+					</c:forEach>
+					</div>
+					
 	
-
-
-
-
-	<hr>
-
+	
+				</div><!--col-md-7-->
+	
+	
+				<div class="col-md-5" style="width: 35%;float: right;">
+				<br>
+				<form action="#">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1">@제목</span>
+					  </div>
+					  <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+					</div>
+					<br>
+					<div class="input-group mb-3">
+					  <div class="input-group-append">
+						<span class="input-group-text" id="basic-addon2">@강사님께 쪽지보내기</span>
+					  </div>
+					</div>
+					<textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
+					<br>
+					<button type="submit" class="btn btn-primary" style="float:right">쪽지보내기</button>
+					</div>
+					
+				</form>
+	
+				</div>
+		</section>
+		
+	
+		<hr>
+	</div>
 </div><!-- container about -->
 
 

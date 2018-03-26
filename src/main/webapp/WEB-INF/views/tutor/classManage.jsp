@@ -119,7 +119,6 @@
 				<hr>
 				<div class="menu">
 					<ul>
-						
 						<li><a href="classManage.do?tutor_no=${tutor_no }"><i style="color: black;" class="xi-layout-aside-o xi-2x"></i><p style="color: black;">&nbsp;&nbsp;대쉬보드</p></a></li>
 						<hr/>
 						<li><a href="classManageLecture.do?tutor_no=${tutor_no }"><i class="xi-play-circle-o xi-2x"></i><p>&nbsp;&nbsp;강의</p></a></li>
@@ -313,11 +312,6 @@
 						</c:url>
 						<a href="${last }">[맨끝]</a>
 					</div>
-					
-					
-					
-					
-					
 				</div>
 			</div>
 					
