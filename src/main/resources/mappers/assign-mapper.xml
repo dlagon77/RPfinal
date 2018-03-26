@@ -137,7 +137,7 @@
 	</select>
 	<update id="updateAssCount" parameterType="Assignment">
 		<![CDATA[
-		update assignment set ass_cor_cnt = (select count(ass_writer) from assignment where ass_writer is not null and ass_maker = #{ass_maker} group by ass_writer) where ass_maker=#{ass_maker} and ass_cate=#{ass_cate} and ass_writer is null
+		update assignment set ass_cor_cnt = (select count(ass_writer) from assignment where ass_writer is not null and ass_maker = #{ass_maker} and ass_cate=#{ass_cate} group by ass_writer) where ass_maker=#{ass_maker} and ass_cate=#{ass_cate} and ass_writer is null
 		]]>
 	</update>
 
