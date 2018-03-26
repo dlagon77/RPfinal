@@ -492,9 +492,7 @@ function myFunction() {
 </div>
 
 </body>
-<script>
-window.onload=assFunction; 
-</script>
+
 </html>
 
 
