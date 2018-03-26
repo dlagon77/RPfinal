@@ -326,58 +326,20 @@ public class MemberController {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("mem_no",mem_no);
-		
-		int currentPage = 1;
-		if(request.getParameter("currentPage")!=null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		int currentPage2 = 1;
-		if(request.getParameter("currentPage2")!=null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage2"));
-		}
-		
-		int limit = 10;
-		
-		
-		int startRow = (currentPage - 1)*limit + 1;
-		int endRow = startRow + limit -1;
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search_content", request.getParameter("search_content"));
 		map.put("tutor_no", tutor_no);
-		map.put("startRow", startRow);
-		map.put("endRow",endRow);
-		
 		
 		int listCount = assignService.countAssSearch(map);
-		
-		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
-		int endPage = startPage + limit -1;
-		int maxPage = (int)((double)listCount / limit + 0.9);
-		
-		if(maxPage < endPage)
-			endPage = maxPage;
-		
-		
-		int startRow2 = (currentPage - 1)*limit + 1;
-		int endRow2 = startRow + limit -1;
 		
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		map2.put("search_content", request.getParameter("search_content"));
 		map2.put("tutor_no", tutor_no);
-		map2.put("startRow2", startRow2);
-		map2.put("endRow2",endRow2);
-		
+
 		//test 검색 결과 페이지 네이션을 위한 변수들
 		int listCount2 = testService.countTestSearch(map);
-		int maxPage2 = (int)((double)listCount2 / limit + 0.9);
-		int startPage2 = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
-		int endPage2 = startPage + limit -1;
-		
-		
-		if(maxPage2 < endPage2)
-			endPage2 = maxPage2;
+	
 		
 		model.addAttribute("search_content",request.getParameter("search_content"));
 		model.addAttribute("searchAssList",assignService.searchAss(map));
@@ -391,15 +353,7 @@ public class MemberController {
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);
 		model.addAttribute("checkReady",checkReady);
-		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("maxPage",maxPage);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
-		
-		model.addAttribute("currentPage2",currentPage2);
-		model.addAttribute("maxPage2",maxPage2);
-		model.addAttribute("startPage2",startPage2);
-		model.addAttribute("endPage2",endPage2);
+	
 		return "tutor/search";
 	}
 	

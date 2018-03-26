@@ -124,9 +124,8 @@
 		
 	<select id="searchAss" resultMap="assResultMap" resultType="list" parameterType="String">
 		<![CDATA[
-			select * from (select rownum rnum,ass_no,ass_comment,ass_reg_date,ass_date,ass_orfile,ass_refile,ass_cate,ass_title,ass_cor_cnt,ass_pro,ass_answer,ass_hint,ass_res_cod,ass_res_ans,ass_writer,ass_maker,ass_lec_id,ass_tcate_id
-                from assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker =#{tutor_no})
-            where rnum>=#{startRow} and rnum <=#{endRow}
+			select * from 
+                assignment where (upper(ass_title) like '%'||upper('${search_content}')||'%' or upper(ass_cate) like '%'||upper('${search_content}')||'%') and ass_writer is null and ass_maker =#{tutor_no}
 		]]>
 	</select>
 	

@@ -288,30 +288,7 @@
 				 </div>
 				 
 			      <div class="margin-bottom-30"></div>
-			      <div class="text-center">
-			        <ul class="pagination" id="result-pagination">
-			          
-			        <!-- <li><a href="#" data-page="0">처음</a></li><li class="active"><a href="#" data-page="0">1</a></li><li class=""><a href="#" data-page="1">2</a></li><li class=""><a href="#" data-page="2">3</a></li><li class=""><a href="#" data-page="3">4</a></li><li><a href="#" data-page="49">마지막</a></li></ul> -->
-			      	<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
-					<c:url var="page" value="search.do">
-						<c:param name="search_content" value="${search_content }" />
-						<c:param name="currentPage" value="${p }" />
-						<c:param name="tutor_no" value="${tutor_no }"/>
-						<c:param name="mem_no" value="${mem_no }"/>
-					</c:url>
-					<c:if test="${p ne currentPage }">
-						<li>
-							<a href="${page }">${p }</a> 
-						</li>
-					</c:if>
-					<c:if test="${p eq currentPage }">	
-						<li class="active">
-							<a href="${page }"><b>${p }</b></a>
-						</li>
-					</c:if>
-				</c:forEach>
-				</ul>
-			      </div>
+			     
 			      
 			      <div style="width: 100%;">
 			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -353,29 +330,6 @@
 				 </div>
 				 
 			      <div class="margin-bottom-30"></div>
-			      <div class="text-center">
-			        <ul class="pagination" id="result-pagination">
-			          
-			        <c:forEach var="p2" begin="${startPage2 }" end="${endPage2 }" step="1">
-					<c:url var="page" value="search.do">
-						<c:param name="search_content" value="${search_content }" />
-						<c:param name="currentPage2" value="${p2 }" />
-						<c:param name="tutor_no" value="${tutor_no }"/>
-						<c:param name="mem_no" value="${mem_no }"/>
-					</c:url>
-					<c:if test="${p2 ne currentPage2 }">
-						<li>
-							<a href="${page }">${p2 }</a> 
-						</li>
-					</c:if>
-					<c:if test="${p2 eq currentPage2 }">	
-						<li class="active">
-							<a href="${page }"><b>${p2 }</b></a>
-						</li>
-					</c:if>
-				</c:forEach>
-				</ul>
-			      </div>
 			      
 			      <div style="width: 100%;">
 			    <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
