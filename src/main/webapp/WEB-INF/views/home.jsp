@@ -6,7 +6,7 @@
 <head>
     <title>Real Programmer</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/finalp/resources/css/assets/main.css" />
+	<link rel="stylesheet" href="/finalp/resources/css/assets/main2.css" />
 	
 	<style type="text/css">
 		#banner h1{
@@ -48,9 +48,9 @@
 						<!-- Tabbed Video Section -->
 							<div class="flex flex-tabs">
 								<ul class="tab-list">
-									<li><a href="#" data-tab="tab-1" class="active">JAVA</a></li>
-									<li><a href="#" data-tab="tab-2">ORACLE</a></li>
-									<li><a href="#" data-tab="tab-3">HTML/CSS</a></li>
+									<li><a href="#" data-tab="tab-1" class="active">JAVA/JSP</a></li>
+									<li><a href="#" data-tab="tab-2">HTML/CSS</a></li>
+									<li><a href="#" data-tab="tab-3">ORACLE</a></li>
 								</ul>
 								<div class="tabs">
 
@@ -59,62 +59,62 @@
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/DSwE-dDlS7k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/RwxMuTvnE9g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/KnwMSHHlJvo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/dMvfCCZ0KDo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/jAbAmbSttqc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/H5lqXi5JJgg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 										</div>
 
@@ -123,62 +123,62 @@
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/lVJMxaItv-A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/NSY17FBjYjs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/zUskelqlAOY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/76bI0rBUhQY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/hkVp_iAv_yw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/c1bMOyQnIpI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 										</div>
 
@@ -187,62 +187,62 @@
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic03.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/uLOhDsovML4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic02.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/1mzWq4uFJ8U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic01.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/cN7CYn9ZgQw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic06.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/rvjJkICWI7s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="" class="link"><span>Click Me</span></a>
+													<!-- <a href="" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic05.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/qcJL8HoabnI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 											<!-- Video Thumbnail -->
 												<div class="video col">
 													<div class="image fit">
-														<img src="/finalp/resources/img/images/pic04.jpg" alt="" />
+														<iframe src="https://www.youtube.com/embed/6RB35RV_Gro" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 														<div class="arrow">
 															<div class="icon fa-play"></div>
 														</div>
 													</div>
-													<a href="#" class="link"><span>Click Me</span></a>
+													<!-- <a href="#" class="link"><span>Click Me</span></a> -->
 												</div>
 										</div>
 
@@ -264,39 +264,48 @@
 							<div class="flex flex-3">
 								<div class="video col">
 									<div class="image fit">
-										<img src="/finalp/resources/img/images/pic09.jpg" alt="" />
-										<div class="arrow">
-											<div class="icon fa-play"></div>
-										</div>
+										<c:url var="tutorHome1" value="tutorHome.do">
+											<c:param name="tutor_no" value="6"></c:param>
+										</c:url>
+										<a href="${ tutorHome1 }"><img src="/finalp/resources/img/images/tutor01.jpg" alt="" /></a>
 									</div>
+									<h2 class="starTutorTitle">
+										임씨의 강의실
+									</h2>
+									<br>
 									<p class="caption">
-										Cras eget lacus sed mauris scelerisque tincidunt
+										JAVA 때려박아드리는 강의
 									</p>
-									<a href="#" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/finalp/resources/img/images/pic10.jpg" alt="" />
-										<div class="arrow">
-											<div class="icon fa-play"></div>
-										</div>
+										<c:url var="tutorHome2" value="tutorHome.do">
+											<c:param name="tutor_no" value="7"></c:param>
+										</c:url>
+										<a href="${ tutorHome2 }"><img src="/finalp/resources/img/images/tutor02.jpg" alt="" /></a>
 									</div>
+									<h2 class="starTutorTitle">
+										지혜로운 강의실
+									</h2>
+									<br>
 									<p class="caption">
-										Vivamus vulputate lacus non massa auctor lobortis
+										지혜롭게 스무스하게 HTML/CSS 배우기
 									</p>
-									<a href="#" class="link"><span>Click Me</span></a>
 								</div>
 								<div class="video col">
 									<div class="image fit">
-										<img src="/finalp/resources/img/images/pic11.jpg" alt="" />
-										<div class="arrow">
-											<div class="icon fa-play"></div>
-										</div>
+										<c:url var="tutorHome3" value="tutorHome.do">
+											<c:param name="tutor_no" value="2"></c:param>
+										</c:url>
+										<a href="${ tutorHome3 }"><img src="/finalp/resources/img/images/tutor03.jpg" alt="" /></a>
 									</div>
+									<h2 class="starTutorTitle">
+										쭈누의 강의실
+									</h2>
+									<br>
 									<p class="caption">
-										Nam eu nisi non ante sodales interdum a vitae neque
+										데이터 베이스 전문가 되기 첫걸음
 									</p>
-									<a href="#" class="link"><span>Click Me</span></a>
 								</div>
 							</div>
 					</div>
@@ -353,7 +362,11 @@
 			<script src="/finalp/resources/js/assets/skel.min.js"></script>
 			<script src="/finalp/resources/js/assets/util.js"></script>
 			<script src="/finalp/resources/js/assets/main.js"></script>
-
+			<script type="text/javascript">
+				function warning{
+					alert("로그인 후 이용해 주세요!");
+				}
+			</script>
 	</body>
 </html>
 

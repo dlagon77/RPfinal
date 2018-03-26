@@ -244,69 +244,6 @@
 	
 	<script type="text/javascript">
 		
-		/* var channelID = '${id}';
-		var apiKey = 'AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw';
-	
-		$.ajax({
-			url:'https://www.googleapis.com/youtube/v3/search?key=' + apiKey +'&channelId=' + channelID + '&part=snippet,id&order=date&maxResults=20',
-			dataType: 'jsonp',
-			success: function(data){
-				$.each(data.items, function(key, value){
-					var fragment = $(document.createDocumentFragment());
-					fragment
-						.append([
-							'<li>',
-								'<a href="#">',
-									'<div class="style1">',
-										'<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ value.id.videoId + '"frameborder="0" allowfullscreen></iframe>',
-									'</div>',
-									'<div class="style2">',
-										'<strong>' + value.snippet.title + '</strong>',
-									'</div>',
-								'</a>',
-							'</li>'
-						].join(''));
-					$('#results').append(fragment);
-				});
-			}
-		}) */
-	
-		/* var channelID = '${channelId}';
-		var apiKey = 'AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw';
-	
-		$.ajax({
-			url:'https://www.googleapis.com/youtube/v3/search?key=' + apiKey +'&channelId=' + channelID + '&part=snippet,id&order=date&maxResults=20',
-			dataType: 'jsonp',
-			success: function(data){
-				$.each(data.items, function(key, value){
-					var fragment = $(document.createDocumentFragment());
-					var temp = value.snippet.publishedAt;
-					var time = temp.substring(0,10);
-					fragment
-						.append([
-							'<li>',
-								'<a href="lectureDeatil.do?videoId='+value.id.videoId+'&videoTitle='+value.snippet.title+'">',
-									'<div class="styleVideoId">',
-										'<img src=\"//img.youtube.com/vi/'+value.id.videoId+'/mqdefault.jpg\">',
-									'</div>',
-									'<div class="styleTitle">',
-										'<strong>'+'&nbsp;&nbsp;&nbsp;' + value.snippet.title + '</strong>',
-									'</div>',
-									'<div class="styleDescription">',
-										'<p>'+'&nbsp;&nbsp;&nbsp;' + value.snippet.description + '</p>',
-									'</div>',
-									'<div class="styleTime">',
-										'<p>'+'&nbsp;&nbsp;&nbsp;' + time + '</p>',
-									'</div>',
-								
-								'</a>',
-							'</li>'
-						].join(''));
-					$('#results').append(fragment);
-				});
-			}
-		}) */
-		
 		var channelID = '${channelId}';
 		var apiKey = 'AIzaSyDMNDM5Kr0QdP2n9Rpb5xVn68waXWRsGmw';
 	

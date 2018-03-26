@@ -223,20 +223,18 @@
 				<div class="col-md-7 big-letter">
 				<iframe width="734" height="400" src="https://www.youtube.com/embed/${introduce.lec_link }" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				
-					<p style="font-size:14px;color:gray;float:right">
-						조회수 ${Lecture.lec_readcount }회
-					</p>
+					
 					<br>
 				</div>
 				<div class="col-md-5">
-					<h4>${Lecture.lec_title }</h4>
+					<h2>${introduce.lec_title }</h2>
 					<br>
 					<p>
-						${Lecture.lec_con }
+						${introduce.lec_con }
 					</p>
 					<br>
 					<img class="pull-right" src="/finalp/resources/img/logo2.PNG" alt="signature">
-					<p style="font-size:14px">자세히 보기</p>
+					
 				</div>
 			</div>
 		<!--</div>-->
