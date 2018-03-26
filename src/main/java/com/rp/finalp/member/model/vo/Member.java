@@ -39,7 +39,47 @@ public class Member implements java.io.Serializable{
 
 
 	private Date v_date;
+	
+	private String mem_app_status; //인증키 발급 상태
+	private String mem_app_key; //인증키
+	
 	public Member() {}
+
+	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
+			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
+			String mem_refile, String mem_career, String mem_class, String mem_content, String mem_channel_id,
+			int apply_count, int lecture_count, int tutor_id, int rev_star, String rev_con, Date rev_date, int rev_no,
+			String videoId, Date v_date, String mem_app_status, String mem_app_key) {
+		super();
+		this.mem_no = mem_no;
+		this.mem_id = mem_id;
+		this.mem_pwd = mem_pwd;
+		this.mem_name = mem_name;
+		this.mem_phone = mem_phone;
+		this.mem_age = mem_age;
+		this.mem_gen = mem_gen;
+		this.mem_birth = mem_birth;
+		this.mem_black = mem_black;
+		this.mem_cate = mem_cate;
+		this.mem_inter = mem_inter;
+		this.mem_orfile = mem_orfile;
+		this.mem_refile = mem_refile;
+		this.mem_career = mem_career;
+		this.mem_class = mem_class;
+		this.mem_content = mem_content;
+		this.mem_channel_id = mem_channel_id;
+		this.apply_count = apply_count;
+		this.lecture_count = lecture_count;
+		this.tutor_id = tutor_id;
+		this.rev_star = rev_star;
+		this.rev_con = rev_con;
+		this.rev_date = rev_date;
+		this.rev_no = rev_no;
+		this.videoId = videoId;
+		this.v_date = v_date;
+		this.mem_app_status = mem_app_status;
+		this.mem_app_key = mem_app_key;
+	}
 
 	public Member(int mem_no, String mem_id, String mem_pwd, String mem_name, String mem_phone, int mem_age,
 			String mem_gen, Date mem_birth, String mem_black, String mem_cate, String mem_inter, String mem_orfile,
@@ -339,6 +379,22 @@ public class Member implements java.io.Serializable{
 		this.tutor_id = tutor_id;
 	}
 
+	public String getMem_app_status() {
+		return mem_app_status;
+	}
+
+	public void setMem_app_status(String mem_app_status) {
+		this.mem_app_status = mem_app_status;
+	}
+
+	public String getMem_app_key() {
+		return mem_app_key;
+	}
+
+	public void setMem_app_key(String mem_app_key) {
+		this.mem_app_key = mem_app_key;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_pwd=" + mem_pwd + ", mem_name=" + mem_name
@@ -348,8 +404,10 @@ public class Member implements java.io.Serializable{
 				+ ", mem_class=" + mem_class + ", mem_content=" + mem_content + ", mem_channel_id=" + mem_channel_id
 				+ ", apply_count=" + apply_count + ", lecture_count=" + lecture_count + ", tutor_id=" + tutor_id
 				+ ", rev_star=" + rev_star + ", rev_con=" + rev_con + ", rev_date=" + rev_date + ", rev_no=" + rev_no
-				+ ", videoId=" + videoId + ", v_date=" + v_date + "]";
+				+ ", videoId=" + videoId + ", v_date=" + v_date + ", mem_app_status=" + mem_app_status
+				+ ", mem_app_key=" + mem_app_key + "]";
 	}
+
 
 	
 

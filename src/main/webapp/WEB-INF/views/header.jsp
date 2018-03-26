@@ -379,8 +379,8 @@
 							</div>
 							
 							<div class="margin2">
-								<a class="txt2" href="#"> forgot ID?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a> 
-								<a class="txt2" href="#"> forgot PW? </a>
+<!-- 								<a class="txt2" href="#"> forgot ID?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>  -->
+								<a class="txt2" href="findPwdForm.do"> forgot PW? </a>
 							</div>
 						</form>
 						<div class="modal-footerr">

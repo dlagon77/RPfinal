@@ -30,6 +30,8 @@
       <result property="mem_class" column="mem_class" />
       <result property="mem_content" column="mem_content" />
       <result property="mem_channel_id" column="mem_channel_id" />
+      <result property="mem_app_status" column="mem_app_status" />
+      <result property="mem_app_key" column="mem_app_key" />
     </resultMap> 
     
 
@@ -52,7 +54,7 @@
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
       #{mem_name}, #{mem_phone},#{mem_age}, #{mem_gen}, #{mem_birth},'N','T', #{mem_inter}, #{mem_orfile},
-      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content}, #{mem_channel_id})
+      #{mem_refile}, #{mem_career}, #{mem_class}, #{mem_content}, #{mem_channel_id},'false',#{mem_app_key})
       ]]>
    </insert>
    
@@ -60,7 +62,7 @@
       <![CDATA[
       INSERT INTO MEMBER VALUES (SEQ_MNO.NEXTVAL, #{mem_id},#{mem_pwd},
       #{mem_name}, #{mem_phone}, #{mem_age}, #{mem_gen}, #{mem_birth}, 'N','S', #{mem_inter}, #{mem_orfile},
-      #{mem_refile}, null, null, null, null)
+      #{mem_refile}, null, null, null, null,'false',#{mem_app_key})
       ]]>
    </insert>
    
@@ -271,4 +273,14 @@
 			                                      where mem_id = #{mem_id})
 		]]>
 	</select>
+	
+	<!-- 이메일 인증 -->
+	<update id="appMember" parameterType="Member">
+		update member set mem_app_status = 'true' where mem_app_key = #{mem_app_key}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" parameterType="Member">
+		update member set mem_pwd = #{mem_pwd} where mem_id = #{mem_id}
+	</update>
 </mapper>

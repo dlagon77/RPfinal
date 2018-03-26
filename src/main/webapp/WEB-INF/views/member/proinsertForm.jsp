@@ -227,7 +227,7 @@
             
             <div class="form-group">
               <label for="InputPassword2">비밀번호 재확인</label>
-              <input type="password" class="form-control" id="InputPassword2"  oninput="checkPwd()" name="mem_pwd" placeholder="비밀번호 재확인">
+              <input type="password" class="form-control" id="InputPassword2"  oninput="checkPwd()" placeholder="비밀번호 재확인">
               <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요!</p>
             </div>
 				

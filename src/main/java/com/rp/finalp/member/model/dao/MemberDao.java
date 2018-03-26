@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.vo.Member;
@@ -118,6 +119,18 @@ public class MemberDao {
 
 	public List<Member> sideListTutor(Member member) {
 		return mybatis.selectList("memberMapper.sideListTutor", member);
+	}
+	//이메일 인증
+	@Transactional
+	public int appMember(Member member) {
+		return mybatis.update("memberMapper.appMember", member);
+	}
+	
+	// 비밀번호 변경
+	@Transactional
+	public int updatePwd(Member member) {
+		System.out.println("dao:"+member);
+		return mybatis.update("memberMapper.updatePwd", member);
 	}
 }
 

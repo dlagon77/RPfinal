@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.vo.Member;
 
@@ -21,6 +23,8 @@ public interface MemberService {
 	int selectTutorCount();
 	int selectReviewCount(int tutor_no);
 	List<Member> selectReview(int tutor_no);
+	String create_key();
+	void send_mail(Member member, String div);
 	
 	
 	//아이디중복확인
@@ -44,5 +48,7 @@ public interface MemberService {
 	//승우 헤더 사이드 리스트
 	List<Member> sideListStudent(Member member);
 	List<Member> sideListTutor(Member member);
+	void appMember(Member member, HttpServletResponse response);
+	void findPwd(HttpServletResponse response, Member member);
 }
 

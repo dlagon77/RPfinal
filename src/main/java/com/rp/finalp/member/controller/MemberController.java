@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -118,7 +119,7 @@ public class MemberController {
 				
 				// 웹서버 컨테이너 경로 추출함 
 /*			    String root = request.getSession().getServletContext().getRealPath("/");*/
-				 String root = "C:/JHfinalProject/finalp/target/m2e-wtp/web-resources/";
+				 String root = "C:/finalProject/finalp/target/m2e-wtp/web-resources/";
 			    // 파일 저장 경로 정함
 			    String savePath = root + "uploadFiles/";
 			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
@@ -165,7 +166,7 @@ public class MemberController {
 				
 				// 웹서버 컨테이너 경로 추출함 
 /*			    String root = request.getSession().getServletContext().getRealPath("/");*/
-				 String root = "C:/JHfinalProject/finalp/target/m2e-wtp/web-resources/";
+				 String root = "C:/finalProject/finalp/target/m2e-wtp/web-resources/";
 			    // 파일 저장 경로 정함
 			    String savePath = root + "uploadFiles/";
 			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
@@ -367,5 +368,23 @@ public class MemberController {
 			int result = memberService.checkId(member);
 			System.out.println(result);
 			return String.valueOf(result);
+		}
+		
+		// 회원 인증
+		@RequestMapping(value = "/appMember.do", method = RequestMethod.POST)
+		public void approval_member(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
+			memberService.appMember(member, response);
+		}	
+		
+		// 비밀번호 찾기 폼
+		@RequestMapping(value = "/findPwdForm.do")
+		public String findPwdForm() throws Exception{
+			return "/member/findPwdForm";
+		}
+		
+		// 비밀번호 찾기
+		@RequestMapping(value = "/findPwd.do", method = RequestMethod.POST)
+		public void findPwd(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
+			memberService.findPwd(response, member);
 		}
 }

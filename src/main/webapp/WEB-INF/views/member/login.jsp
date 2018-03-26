@@ -55,8 +55,8 @@
 									<input type="submit" class="btn btn-primary btn-block">로그인
 								</form>
 								<div class="text-center">
-									<a class="d-block small mt-3" href="/semi/views/login/enrolll.html">회원가입하기</a> 
-										<a class="d-block small" href="/semi/views/login/findpwd.html">비밀번호찾기</a>
+									<a class="d-block small mt-3" href="proinsertpage.do">회원가입하기</a> 
+										<a class="d-block small" href="findPwdForm.do">비밀번호찾기</a>
 								</div>
 							</div>
 						</div>
