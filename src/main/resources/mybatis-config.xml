@@ -22,6 +22,7 @@
 		<typeAlias type="com.rp.finalp.mypage.model.vo.InqBoard" alias="InqBoard" />
 		<typeAlias type="com.rp.finalp.mypage.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.rp.finalp.mypage.model.vo.MysubAssign" alias="MysubAssign"/>
+		<typeAlias type="com.rp.finalp.mypage.model.vo.MyTestBoard" alias="MyTestBoard"/>
 		
 	</typeAliases>
 
