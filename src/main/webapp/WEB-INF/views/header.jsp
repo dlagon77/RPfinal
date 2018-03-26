@@ -238,7 +238,7 @@
                               </c:if>
                               <c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
                                  <li><a href="profpage.do">내 프로필(강사회원)</a></li>
-                                 <li><a href="tumypage.do">마이페이지</a></li>
+<!--                                  <li><a href="tumypage.do">마이페이지</a></li> -->
                                   <li><a href="tutorHome.do?tutor_no=${loginUser.mem_no }">내 강의실</a></li>
                                   <li><a href="#" onclick="document.getElementById('id01').style.display='block'">쪽지함</a></li>
                               </c:if>
