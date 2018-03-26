@@ -132,7 +132,7 @@
      	<c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
 	     	<span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">수강중인 강사</span>
      		<c:forEach var="list" items="${ sessionScope.sideListStudent }">
-  		     	<a href="#"><i class="xi-man xi-x"></i>&nbsp;${ list.mem_name }</a>	
+  		     	<a href="tutorHome.do?tutor_no=${list.mem_no }&mem_no=${loginUser.mem_no}"><i class="xi-man xi-x"></i>&nbsp;${ list.mem_name }</a>	
      		</c:forEach>
      	</c:if>
      </div>

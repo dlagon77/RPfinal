@@ -125,6 +125,28 @@
 	   		where tutor_no = #{tutor_no} and lec_cate = '소개'
 	   ]]>
    </select>
+   
+   
+   <resultMap id="LinkedCategoryMap" type="Lecture">
+  		<result property="tutor_no" column="tutor_no"/>
+  		<result property="lec_id" column="lec_id"/>
+  		<result property="lec_cate" column="lec_cate"/>
+  		<result property="lec_con" column="lec_con"/>
+  		<result property="lec_link" column="lec_link"/>
+  		<result property="lec_title" column="lec_title"/>
+  		<result property="lec_restrict" column="lec_restrict"/>
+  		<result property="lec_date" column="lec_date"/>
+  		<result property="lec_readcount" column="lec_readcount"/>
+	</resultMap>
+   
+   <select id="linkedCategory" resultMap="LinkedCategoryMap" parameterType="Lecture">
+		<![CDATA[
+			select * 
+			from lecture 
+			where (upper(lec_cate) like '%'||upper('${search_content}')||'%' or upper(lec_con) like '%'||upper('${search_content}')||'%' and tutor_no = #{tutor_no})
+		]]>
+	</select>
+	
 
 
 </mapper>

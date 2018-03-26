@@ -264,7 +264,7 @@
 			    
 			    <div id="section1" class="col-md-10"><!-- section1 시작 -->
 					
-					<c:if test="${checkApply gt 0 }">
+					<c:if test="${checkApply gt 0 or mem_no==tutor_no}">
 					
 			      <span class="results-number">검색 결과 ${searchAssCount }개</span>
 			      <div class="results">
@@ -323,14 +323,14 @@
 			<div class="margin-bottom-20"></div>
 			
 			</c:if>
-			<c:if test="${checkApply <= 0 }">
+			<c:if test="${checkApply <= 0 and mem_no!=tutor_no}">
 				<span class="results-number">수강을 해야 정확한 정보를 검색할 수 있습니다!!</span>
 			</c:if>
 			    </div><!-- section1 끝 -->
 			    
 			    
 			    <div id="section2" class="col-md-10" style="display:none"><!-- section2 시작 -->
-				<c:if test="${checkApply gt 0 }">
+				<c:if test="${checkApply gt 0  or mem_no==tutor_no}">
 			      <span class="results-number">검색 결과 ${searchTestCount }개</span>
 			      <div class="results">
 			 
@@ -386,7 +386,7 @@
 			</div>
 			<div class="margin-bottom-20"></div>
 			</c:if>
-			<c:if test="${checkApply <= 0 }">
+			<c:if test="${checkApply <= 0 and mem_no!=tutor_no}">
 				<span class="results-number">수강을 해야 정확한 정보를 검색할 수 있습니다!!</span>
 			</c:if>
 			

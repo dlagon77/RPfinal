@@ -2,6 +2,7 @@ package com.rp.finalp.lecture.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rp.finalp.lecture.model.vo.Lecture;
 import com.rp.finalp.member.model.vo.Member;
@@ -33,6 +34,8 @@ public interface LectureService {
 	int insertLectureReview(Member member);
 
 	Lecture selectIntroduce(int tutor_no);
+
+	List<Lecture> linkedCategory(HashMap<String, Object> map);
 
 	
 	

@@ -345,26 +345,6 @@
 			<ul class="nav nav-pills no-print">
 				<li class="active"><a href="/problem/1000">${ass_sub_no }번</a></li>
 				<li><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${ass_no}&ass_sub_no=${ass_sub_no}&ass_cate=${assignment.ass_cate}&mem_no=${loginUser.mem_no}&ass_maker=${tutor_no}">제출 답안</a></li>
-				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
-
-				<li class="dropdown">
-				<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">강의<b class="caret"></b></a>
-				<ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-								<li>
-							<a tabindex="-1" href="https://code.plus/course/3">
-								프로그래밍 대회에서 사용하는 Java
-							</a>
-						</li>
-							<li>
-							<a tabindex="-1" href="https://code.plus/course/4">
-								알고리즘 기초
-							</a>
-						</li>
-						
-					<li class="divider"></li>
-					<li><a tabindex="-1" href="#" class="lecture-request">강의 요청하기</a></li>
-				</ul>
-				</li>
 
 			</ul>
 
@@ -461,15 +441,19 @@
 				
 			</div>
 			
-			<section id="memo" style="padding-top:30px">
+			<section id="description" style="padding-top:30px">
 				<div class="headline">
-					<h2 style="width: 4%;font-weight:600">메모</h2>
+					<h2 style="width: 19%;font-weight:600">관련 강의 및 카테고리</h2>
 				</div>
-				<div style="font-size:medium; line-height:30px;" id="problem_description">
-					<p class="lead text-center" id="problem-memo-button"><a href="#" class="problem-memo-write">메모 작성하기</a></p>
+				<div id="linkedCategory" style="font-size:medium; line-height:30px;" id="problem_description">
+					<ul>
+							<c:forEach items="${linkedCategory }" var="row">
+								 <li><a href="lectureDeatil.do?videoId=${row.lec_link }&videoTitle=${row.lec_title }&videoDescription=${row.lec_con }&videoTime=${row.lec_date}">#${row.lec_cate}. ${row.lec_title }</a></li> 
+							</c:forEach>
+					</ul>
 				</div>
 			</section>
-			
+
 			<hr>
 
 		</div>
@@ -835,6 +819,7 @@ function myFunction() {
 		  }
 		}
 		</script>
+		
 		
 </div>
 

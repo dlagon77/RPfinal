@@ -353,28 +353,6 @@
 			<ul class="nav nav-pills no-print">
 				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${ass_sub_no }번</a></li>
 				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
-
-				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
-
-				<li class="dropdown">
-				<a class="dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">강의<b class="caret"></b></a>
-				<ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-								<li>
-							<a tabindex="-1" href="https://code.plus/course/3">
-								프로그래밍 대회에서 사용하는 Java
-							</a>
-						</li>
-							<li>
-							<a tabindex="-1" href="https://code.plus/course/4">
-								알고리즘 기초
-							</a>
-						</li>
-						
-					<li class="divider"></li>
-					<li><a tabindex="-1" href="#" class="lecture-request">강의 요청하기</a></li>
-				</ul>
-				</li>
-
 			</ul>
 
 			<c:if test="${checkSubmit gt 0 or tutor_no eq loginUser.mem_no}">

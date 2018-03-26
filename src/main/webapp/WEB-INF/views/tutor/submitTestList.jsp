@@ -359,7 +359,6 @@
 			<ul class="nav nav-pills no-print">
 				<li><a href="testDetail.do?ass_test_no=${test_test_no }&test_no=${test_no}&test_sub_no=${test_sub_no }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${test_sub_no }번</a></li>
 				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
-
 				<li><a href="/status/?from_problem=1&amp;problem_id=1000">채점 현황</a></li>
 
 				<li class="dropdown">

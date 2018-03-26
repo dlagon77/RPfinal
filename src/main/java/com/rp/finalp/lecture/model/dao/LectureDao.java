@@ -80,6 +80,11 @@ public class LectureDao {
 		return mybatis.selectOne("lectureMapper.selectIntroduce", tutor_no);
 	}
 
+
+	public List<Lecture> linkedCategory(HashMap<String, Object> map) {
+		return mybatis.selectList("lectureMapper.linkedCategory",map);
+	}
+
 	
 
 }

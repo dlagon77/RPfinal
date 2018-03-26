@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -83,13 +84,22 @@ public class LectureController {
 	}
 	
 	@RequestMapping(value = "taskDetail.do", method = RequestMethod.GET)
-	public String taskDetailViewMethod(@RequestParam(value="ass_no") int ass_no,@RequestParam(value="ass_sub_no") int ass_sub_no,@RequestParam(value="tutor_no") int tutor_no,Model model,Lecture lecture) {
+	public String taskDetailViewMethod(HttpServletRequest request,@RequestParam(value="ass_no") int ass_no,@RequestParam(value="ass_sub_no") int ass_sub_no,@RequestParam(value="tutor_no") int tutor_no,@RequestParam(value="ass_cate") String ass_cate,Model model,Lecture lecture) {
 		model.addAttribute("tutor_no",tutor_no);
 		model.addAttribute("Lecture",lectureService.selectTutorLecture(tutor_no));
 		model.addAttribute("ass_no",ass_no);
 		model.addAttribute("ass_sub_no",ass_sub_no);
 		Assignment test = assignService.assDetail(ass_no);
 		model.addAttribute("assignment",assignService.assDetail(ass_no));
+		
+		model.addAttribute("channelId", lectureService.selectChannelId(tutor_no));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("search_content", ass_cate);
+		map.put("tutor_no", tutor_no);
+		
+		model.addAttribute("linkedCategory",lectureService.linkedCategory(map));
+		
 		int checkApply=memberService.checkApply(lecture);
 		model.addAttribute("checkApply",checkApply);
 		int checkReady = memberService.checkReady(lecture);

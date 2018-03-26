@@ -564,16 +564,8 @@
 					
 					          <br><br>
 					          <div class="clearfix">
-					            
 					            <div class="pull-right">
-					              <a href="/course/draft/4412/" target="_blank" class="btn-flat">  
-					                  미리보기 
-					              </a>
-					    <input type="submit" value="제출">          
-					<!--   <button class="btn-flat" name="next" type="submit" >등록하기</button> -->
-					  <button class="btn-flat" type="submit" name="next" value="/teach/course/4412/content/introduction/">
-					    저장하고 다음 단계로</button>
-					
+					   	 			<input type="submit" value="등록" style="outline: none;border: none;background: none;color: darkcyan;font-size: 20px;">          
 					            </div>
 					          </div>
 					        </form>

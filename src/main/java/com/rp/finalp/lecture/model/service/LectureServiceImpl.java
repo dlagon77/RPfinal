@@ -80,6 +80,11 @@ public class LectureServiceImpl implements LectureService{
 	public Lecture selectIntroduce(int tutor_no) {
 		return lectureDao.selectIntroduce(tutor_no);
 	}
+
+	@Override
+	public List<Lecture> linkedCategory(HashMap<String, Object> map) {
+		return lectureDao.linkedCategory(map);
+	}
 	
 	
 	
