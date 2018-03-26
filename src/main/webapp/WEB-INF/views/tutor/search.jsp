@@ -271,7 +271,7 @@
 			 
 					 <c:forEach items="${searchAssList }" var="row">
 					 	<div class="inner-results">
-						    <h3><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${row.ass_no }&mem_no=${loginUser.mem_no}" style="font-size:20px">${row.ass_no}번 - ${row.ass_title }</a></h3>
+						    <h3><a href="taskDetail.do?tutor_no=${tutor_no }&ass_no=${row.ass_no}&ass_sub_no=${row.ass_no }&mem_no=${loginUser.mem_no}&ass_cate=${row.ass_cate}" style="font-size:20px">${row.ass_no}번 - ${row.ass_title }</a></h3>
 						    <ul class="list-inline up-ul" style="color: #999;font-size:13px">
 						      <li>시간 제한: -초</li>
 						      <li>맞은 사람: ${row.ass_cor_cnt}</li>
