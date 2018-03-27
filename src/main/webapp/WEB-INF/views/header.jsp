@@ -411,17 +411,19 @@
 					 </div>
 					</div>
 				
-				<div class="modal" id="myModal2${mes_no}" aria-hidden="true" style="display: none; z-index: 1060;">
-    				<div class="modal-dialog modal-lg">
+				<div class="modal" id="msgModal" aria-hidden="true" style="display: none; z-index: 1060;">
+    				<div class="modal-dialog">
 			          <div class="modal-content">
 			            <div class="modal-header">
-              				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-             				 <h4 class="modal-title">${mdetail.mes_title }</h4>
-		            			</div>
+              				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:black">×</button>
+             				 
+             				 <h2 class="modal-title"></h2>
+		            	</div>
 		            			<div class="container"></div>
 		            			<div class="modal-body">
-		              				${mdetail.mes_content }
+		              				
 		            			</div>
+		            	
 				            <div class="modal-footer">
 				              <a href="#" data-dismiss="modal" class="btn">Close</a>
 				            </div>
@@ -573,10 +575,10 @@ function smsglist(){
 	        			 smsg +=
 	        			 		"<tr>"
 		       					 +"<td>"
-		       					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+		       					  +"<c:url var='myMsg' value='#myModal2'>"
 								 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
-								 +"</c:url>"
-								 +"<a data-toggle='modal' href='#myModal2${mes_no}'>"
+								 +"</c:url>" 
+								 +"<a data-toggle='modal' onclick='msgDe("+json.msglist[i].mes_no+")'>"
 								 +decodeURIComponent(json.msglist[i].mes_title)	
 		       					 +"</a>"
 		       					 +"</td>"		       					 
@@ -605,6 +607,28 @@ function smsglist(){
 				});
 			};
 
+			function msgDe(no){
+				
+				$.ajax({
+					url:"myMsgDetail.do",
+					data:{"mes_no":no},
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						var jsonStr = JSON.stringify(result);
+			        	var json = JSON.parse(jsonStr);
+			        	$(".modal-title").text(json.mdetail[0].mes_title);
+			        	$(".modal-body").text(json.mdetail[0].mes_content);
+			        	$("#msgModal").modal();
+			        	
+					},error: function(request, status, errorData){
+	                    alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+	                 }
+				});
+				
+				
+			}
+			
 	function msglist(){
 		 $.ajax({
 			 url:"msgList.do",
@@ -621,10 +645,10 @@ function smsglist(){
 		        				 msg += 
 		        					 "<tr>"
 		        					 +"<td>"
-		        					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+		        					 +"<c:url var='myMsg' value='#myModal2'>"
 									 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
-									 +"</c:url>"
-									 +"<a data-toggle='modal' href='#myModal2${mes_no}'>"
+									 +"</c:url>" 
+									 +"<a data-toggle='modal' onclick='msgDe("+json.msglist[i].mes_no+")'>"
 									 +decodeURIComponent(json.msglist[i].mes_title)	
 		        					 +"</a>"
 		        					 +"</td>"
@@ -679,6 +703,7 @@ function smsglist(){
 		        }
 		        });
 			};	 
+
 
 </script>
 </body>

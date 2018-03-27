@@ -553,6 +553,7 @@ public class MypageController {
 					j.put("mes_no", m.getMes_no());
 					j.put("mes_title", m.getMes_title());
 					j.put("mes_writer", m.getMes_writer());
+					j.put("mes_content", m.getMes_content());
 					j.put("mes_date", mdate);
 					j.put("mes_receiver", m.getMes_receiver());
 					
@@ -560,7 +561,6 @@ public class MypageController {
 				}
 				
 				json.put("msglist", jarr);
-				
 				response.setContentType("application/json; charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println(json.toJSONString());
@@ -610,20 +610,19 @@ public class MypageController {
 			JSONObject json = new JSONObject();
 			JSONArray jarr = new JSONArray();
 			
-			List<Message> list = (List<Message>) mypService.msgListOne(mes_no);
-			for(Message m : list) {
+			Message m = mypService.msgListOne(mes_no);
+			
 				
 				JSONObject j = new JSONObject();
 				j.put("mes_title", m.getMes_title());
 				j.put("mes_content", m.getMes_content());
-				j.put("mes_date", m.getMes_date());
+				j.put("mes_date", m.getMes_date().toString());
 				
 				jarr.add(j);
 				
-				
-			}			
+						
 			json.put("mdetail", jarr);
-			System.out.println(list);
+			
 		
 			
 			response.setContentType("application/json; charset=utf-8");
