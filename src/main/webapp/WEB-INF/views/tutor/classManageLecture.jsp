@@ -293,7 +293,7 @@
 							<input type="hidden" name ="tutor_no" value="${tutor_no}">
 							<div class="form-group"> 
 								<div class="col-sm-offset-2 col-sm-10"> 
-									<button type="submit" class="btn btn-success">강의 등록</button>
+									<button type="submit" class="btn btn-primary">강의 등록</button>
 								</div> 
 							</div> 
 						</form>

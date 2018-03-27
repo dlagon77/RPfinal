@@ -159,7 +159,7 @@
 	
 	.tabs-style-bar nav ul li a:hover,
 	.tabs-style-bar nav ul li a:focus {
-		color: #2CC185;
+		color: #337ab7;
 	}
 	
 	.tabs-style-bar nav ul li a span {

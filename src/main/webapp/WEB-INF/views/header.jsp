@@ -126,7 +126,7 @@
      	<c:if test="${ sessionScope.loginUser.mem_cate eq 'T' }">
 	     	<span style="color:#9b9b9b;display: block;padding: 8px 24px;font-size: 1.4rem;font-weight: 500;letter-spacing: .007px;">내 수강생</span>
      		<c:forEach var="list" items="${ sessionScope.sideListTutor }">
-  		     	<a href="#"><i class="xi-school xi-x"></i>&nbsp;${ list.mem_name }</a>	
+  		     	<a href="#"><i class="xi-school xi-x"></i>&nbsp;&nbsp;&nbsp;${ list.mem_name }</a>	
      		</c:forEach>
      	</c:if>
      	<c:if test="${ sessionScope.loginUser.mem_cate eq 'S' }">
