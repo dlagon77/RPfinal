@@ -28,6 +28,7 @@ import com.rp.finalp.member.model.vo.Member;
 import com.rp.finalp.mypage.model.service.MypageService;
 import com.rp.finalp.mypage.model.vo.Message;
 import com.rp.finalp.mypage.model.vo.SelectQnaboard;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 
 @Controller
 public class MypageController {
@@ -603,8 +604,8 @@ public class MypageController {
 				out.close();
 		}
 		
-		@RequestMapping(value="/msgDetail.do")
-		public void msgDetailMethod(HttpServletResponse response, int mes_no) throws IOException {
+		@RequestMapping(value="/myMsgDetail.do", method=RequestMethod.POST)
+		public void msgDetailMethod(HttpServletResponse response, @RequestParam("mes_no") int mes_no) throws IOException {
 			
 			JSONObject json = new JSONObject();
 			JSONArray jarr = new JSONArray();
@@ -620,9 +621,10 @@ public class MypageController {
 				jarr.add(j);
 				
 				
-			}
-			
+			}			
 			json.put("mdetail", jarr);
+			System.out.println(list);
+		
 			
 			response.setContentType("application/json; charset=utf-8");
 			PrintWriter out = response.getWriter();
