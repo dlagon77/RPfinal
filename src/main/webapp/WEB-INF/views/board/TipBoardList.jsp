@@ -33,7 +33,7 @@
 				margin-top: 9px;
 			}
 			.container{
-				margin-top:30px;
+				margin-top:10px;
 			}
 			.search{
 				margin-top:100px;
@@ -56,6 +56,8 @@
 	<br>
 	
 	<div class="container">
+		<h2 style="text-align:center;">Tip 게시판</h2>
+		<br>
 		<div>
 			<table class="table table-striped table-hover">
 
@@ -99,78 +101,15 @@
         
         <div class="writeButton">
           <c:if test="${!empty sessionScope.loginUser }">    
-            <a href='tbInsertform.do' class="btn btn-warning"><i class="xi-pen xi-x"></i>&nbsp;글 쓰기</a>  
+            <a href='tbInsertform.do' class="btn btn-warning" style="color:white;"><i class="xi-pen xi-x"></i>&nbsp;글 쓰기</a>  
           </c:if>             
         </div>
 	   	
-	   	<div class="search">
-        	<form action="tbsearch.do" method="post">
-            <select name="qboption">
-                <option value="0">제목</option>
-                <option value="1">내용</option>
-                <option value="2">제목+내용</option>
-                <option value="3">작성자</option>
-            </select>
-            <input type="text" size="20" name="qbsearch" required/>&nbsp;
-            <input class="btn btn-warning" type="submit" value="검색"/>
-            
-	        </form>
-	        <br><br>
-    	</div>
-		
-			
-        <br><br>
+        
         <div class="col-md-12">
          <div class="text-center">
          <ul class="pagination">
-            <%-- <li>              
-	            <c:url var="first" value="tblist.do">
-					<c:param name="tcurrentPage" value="1" />
-				</c:url>
-				<c:if test="${tcurrentPage != 1}">
-					<a href="${first }">FIRST</a>
-				</c:if>
-            </li>
-            <li>
-               <c:url var="prev" value="tblist.do">
-					<c:param name="tcurrentPage" value="${tcurrentPage - 1 }" />
-			   </c:url>
-			   <c:if test="${tcurrentPage != 1}">
-					<a href="${prev }">PREV</a>
-			   </c:if>
-            </li>
-            <li>
-            <c:forEach var="p" begin="${tstartPage }" end="${tendPage }" step="1">
-					<c:url var="page" value="tblist.do">
-						<c:param name="tcurrentPage" value="${p }" />
-					</c:url>
-			   <c:if test="${p ne tcurrentPage }">
-					 	<a href="${page }">${p }</a> 
-			   </c:if>
-			</li>
-			<li>
-			   <c:if test="${p eq tcurrentPage }">	
-				 		<a href="${page }"><b>${p }</b></a>
-			   </c:if>
-			</c:forEach>
-			</li>
-            
-            <li>
-            	<c:if test="${tcurrentPage != tmaxPage }">
-              	<c:url var="next" value="tblist.do">
-					<c:param name="tcurrentPage" value="${tcurrentPage + 1 }" />
-				</c:url>
-					<a href="${next }">NEXT</a>
-            </li>
-            <li>
-               <c:url var="last" value="tblist.do">
-					<c:param name="tcurrentPage" value="${tmaxPage }" />
-			   </c:url>
-					<a href="${last }">END</a>
-			   </c:if>
-            </li> --%>
-            
-            
+          
             <c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
 					<c:url var="page" value="tblist.do">
 						<c:param name="currentPage" value="${p }" />
@@ -191,6 +130,21 @@
          </ul>
          	 </div>
     	 </div>
+    	 
+    	 <div class="search">
+        	<form action="tbsearch.do" method="post">
+            <select name="qboption">
+                <option value="0">제목</option>
+                <option value="1">내용</option>
+                <option value="2">제목+내용</option>
+                <option value="3">작성자</option>
+            </select>
+            <input type="text" size="20" name="qbsearch" required/>&nbsp;
+            <input class="btn btn-warning" type="submit" value="검색"/>
+            
+	        </form>
+	        <br><br>
+    	</div>
     	 <br>
     
 	</div>

@@ -9,6 +9,45 @@
 
 <style>
 * {box-sizing: border-box;}
+.wrap{
+	width: 100%;
+	background-color: hsla(0, 0%, 93.3%, .4);
+}
+
+.content{
+	width:1035px;
+	height: 889px;
+	background-color:white;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+
+}
+
+.explain{
+	padding-top: 60px;
+	
+}
+
+.header{
+	padding-top:60px;
+	padding-bottom: 20px;
+	text-align:center;	
+}
+
+.tutor{
+	width: 500px;
+	height: 300px;
+	border: 1px solid #eee;
+	display: block;
+}
+
+.student{
+	width: 500px;
+	height: 300px;
+	border: 1px solid #eee;
+	display: block;
+}
 
 .container {
   position: relative;
@@ -40,7 +79,7 @@
   font-size: 20px;
   padding: 20px;
   text-align: center;
-}
+} 
 
 .container:hover .overlay {
   opacity: 1;
@@ -103,31 +142,48 @@
 <body>
 <c:import url="../header.jsp" />
 	
-	<h2>회원가입분류</h2>
+	
 
-
-<div class="row" align="center">
- <div class="container">
-  <img src="/finalp/resources/img/teacher.png" alt="Avatar" class="image" align="center">
-  
-  <button onclick="goTeacher()" class="btn" style="left:250px; width:148px;"><span>강사회원</span></button>
-  <script>
-  	goTeacher=function(){
-  		location.href = "proinsertpage.do"
-  	}
-  </script>
- </div>
- 
- <div class="container" style="padding-left:250px;">
-  <img src="/finalp/resources/img/student.png" alt="Avatar" class="image" align="center">
-  
-  <button  onclick="goStudent()"  class="btn" style="left:500px; width:148px;"><span>학생회원</span></button>
-  <script>
-  	goStudent=function(){
-  		location.href = "stinsertpage.do"
-  	}
-  </script>
- </div>
+<div class="wrap">
+	<div class="content">
+		<div class="header">
+			<img src="/finalp/resources/img/logo5.png">
+			<hr>
+			<h2>가입방법중 하나를 선택하세요</h2>
+		</div>
+		<hr>
+		<div class="row" align="center">
+			<div class="container">
+			  	<div class="tutor">
+			  		<div class="explain">
+						<i class="xi-man xi-4x"></i>
+				  		<p>강사회원으로 가입 시 강의, 과제, 시험을 등록하며<br> 수강생을 관리 할 수 있습니다.</p>
+					</div>
+					<button onclick="goTeacher()" class="btn btn-primary" style="left:250px; width:300px; height: 50px;"><span>강사회원으로 가입</span></button>
+			  	</div>
+				<script>
+				goTeacher=function(){
+					location.href = "proinsertpage.do"
+				}
+				</script>
+			</div>
+		
+			<div class="container" style="padding-left:250px;">
+				<div class="student">
+					<div class="explain">
+						<i class="xi-school xi-4x"></i>
+				  		<p>수강생회원으로 가입 시 여러 강사들의 강의를 들으며<br>다른 회원들과 소통할 수 있습니다</p>
+					</div>
+					<button  onclick="goStudent()"  class="btn btn-primary" style="left:500px; width:300px; height: 50px;"><span>수강생회원으로 가입</span></button>
+				</div>			
+				<script>
+				goStudent=function(){
+					location.href = "stinsertpage.do"
+				}
+				</script>
+			</div>
+		</div>
+	</div>
 </div>
 
 </body>

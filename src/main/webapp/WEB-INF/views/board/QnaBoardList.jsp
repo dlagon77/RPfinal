@@ -33,7 +33,7 @@
 				margin-top: 9px;
 			}
 			.container{
-				margin-top:30px;
+				margin-top:10px;
 			}
 			.search{
 				margin-top:100px;
@@ -59,6 +59,8 @@
 	<br>
 	
 	<div class="container">
+		<h2 style="text-align:center;">QnA 게시판</h2>
+		<br>
 		<div>
 			<table class="table table-striped table-hover">
 			
@@ -107,7 +109,29 @@
 				</c:if>             
 			</div>
 			
-        	<div class="search">
+			<div class="col-md-12">
+         <div class="text-center">
+         <ul class="pagination">
+            <c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="qblist.do">
+						<c:param name="currentPage" value="${p }" />
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+         </ul>
+         	 </div>
+    	 </div>
+			
+			<div class="search">
 				<form action="qbsearch.do" method="post">
 				<select name="qboption">
 					<option value="0">제목</option>
@@ -119,60 +143,6 @@
 					<input class="btn btn-warning" type="submit" value="검색"/>
 				</form>
 				<br><br>
-			</div>
-			
-			<br><br>
-			<div class="col-md-12">
-				<div class="text-center">
-					<ul class="pagination">
-					<li>              
-						<c:url var="first" value="qblist.do">
-							<c:param name="currentPage" value="1" />
-						</c:url>
-						<c:if test="${currentPage != 1}">
-							<a href="${first }">FIRST</a>
-						</c:if>
-					</li>
-					<li>
-						<c:url var="prev" value="qblist.do">
-							<c:param name="currentPage" value="${currentPage - 1 }" />
-						</c:url>
-						<c:if test="${currentPage != 1}">
-							<a href="${prev }">PREV</a>
-						</c:if>
-					</li>
-					<li>
-						<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
-							<c:url var="page" value="qblist.do">
-								<c:param name="currentPage" value="${p }" />
-							</c:url>
-							<c:if test="${p ne currentPage }">
-								<a href="${page }">${p }</a> 
-							</c:if>
-					</li>
-					<li>
-							<c:if test="${p eq currentPage }">	
-								<a href="${page }"><b>${p }</b></a>
-							</c:if>
-						</c:forEach>
-					</li>
-					
-					<li>
-						<c:if test="${currentPage != maxPage }">
-							<c:url var="next" value="qblist.do">
-								<c:param name="currentPage" value="${currentPage + 1 }" />
-							</c:url>
-							<a href="${next }">NEXT</a>
-					</li>
-					<li>
-						<c:url var="last" value="qblist.do">
-							<c:param name="currentPage" value="${maxPage }" />
-						</c:url>
-						<a href="${last }">END</a>
-					</c:if>
-					</li>
-					</ul>
-				</div>
 			</div>
 			<br>
 	   	</div>

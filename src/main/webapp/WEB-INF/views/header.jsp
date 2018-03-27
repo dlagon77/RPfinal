@@ -143,7 +143,7 @@
             
             <img id="toggle" src="/finalp/resources/img/menu.png" alt="" style="margin-right:20px;float: left;height: 50px;padding: 15px 15px;font-size: 18px;line-height: 20px;" onclick="myFunction();">
             <a href="home.do">
-               <img src="/finalp/resources/img/logo2.PNG" alt="">
+               <img width="180px;" height="60px;"src="/finalp/resources/img/logo6.png" alt="">
             </a>
             <form style="margin-left:50px;margin-top:7px;display:flex">
                 <input type="text" placeholder="강좌를 검색해보세요" style="height: 35px;width:350px;padding: 0 15px;border: 1px solid #37474f;background: transparent;">
