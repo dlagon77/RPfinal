@@ -89,7 +89,7 @@ public class AdminController {
 		}
 	}
 	
-	@RequestMapping("/bSearch.do")
+	@RequestMapping(value="/bSearch.do",method=RequestMethod.POST)
 	public void boardSearchMethod(Model model,Board board,@RequestParam("check") String check
 			,@RequestParam("send") String send,HttpServletResponse response) throws IOException {
 		System.out.println(board.toString()+check+send);

@@ -115,7 +115,7 @@
 			 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">관리자 메뉴</a>
                
 			   <h1 style="margin-top:40px; font-family: 'Nanum Pen Script', cursive;"><i class="xi-paper-o xi-x"></i>&nbsp;게시물 관리</h1>
-			   <form style="margin-left:-30px;margin-bottom:10px;">
+			 
 			   
 			   <select id="bcateid" name="bcateid" style="height:29px; width:130px;margin-left:30px;"> 
 			   <option selected>게시판유형</option>
@@ -130,7 +130,7 @@
 				</select>
 				<input id="send" name="send" type="text" style="width:250px"/>
 				<input type="button" value="검색" onclick="search()"/>
-			   </form>
+			   
 			   <input type="hidden" id="bcheck" value="0"/>
 					<table>
 					  <thead>
@@ -207,26 +207,41 @@
     				if(json.blist[i].bcateid == 2){	
     					tag += 
     							"<tr>"
-							 		+"<td>QNA게시판</td><td>" + json.blist[i].bwriter
-    									+"</td><td>"+ json.blist[i].btitle +"</td><td>"
-							 			+"<c:url var='bdelete' value='bdelete.do'>"
+							 		+"<td>QNA게시판</td>"
+							 		+"<td>" 
+							 		+ json.blist[i].bwriter
+    								+"</td>"
+							 		+"<td>" 
+    								+"<a href='qbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+    								+ json.blist[i].btitle + "</a>"
+    								+"</td>"
+    								+"<td>"
+							 		+"<c:url var='bdelete' value='bdelete.do'>"
 							 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
 							 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
 							 			+"</c:url>"
-							 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
+							 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
 							 		+"</td>"
 								+"</tr>";
-    				}else{
-    					tag +=	"<tr>"
-								 	+"<td>꿀팁게시판</td><td>" + json.blist[i].bwriter 
-    								+ "</td><td>" +json.blist[i].btitle + "</td><td>"
-							 			+"<c:url var='bdelete' value='bdelete.do'>"
-							 				+"<c:param name='bno' value='"+ json.blist[i].bno +"'></c:param>"
-							 				+"<c:param name='bcateid' value='"+ json.blist[i].bcateid +"'></c:param>"
-							 			+"</c:url>"
-							 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
-							 		+"</td>"
-								+"</tr>";
+    				}else if(json.blist[i].bcateid == 3){
+    					tag +=	
+	    						"<tr>"
+						 		+"<td>꿀팁게시판</td>"
+						 		+"<td>" 
+						 		+ json.blist[i].bwriter
+								+"</td>"
+						 		+"<td>" 
+								+"<a href='tbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+								+ json.blist[i].btitle + "</a>"
+								+"</td>"
+								+"<td>"
+						 		+"<c:url var='bdelete' value='bdelete.do'>"
+						 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
+						 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
+						 			+"</c:url>"
+						 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
+						 		+"</td>"
+							+"</tr>";
     				}
     			}
     			
@@ -263,27 +278,42 @@
             			var tag = "";
             			for(var i =0; i < json.blist.length; i++){
             				if(json.blist[i].bcateid == 2){	
-            					tag += "<tr>"
-									 		+"<td>QNA게시판</td><td>" + json.blist[i].bwriter
-            									+"</td><td>"+ json.blist[i].btitle +"</td><td>"
-									 			+"<c:url var='bdelete' value='bdelete.do'>"
-									 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
-									 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
-									 			+"</c:url>"
-									 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
-									 		+"</td>"
-										+"</tr>";
-            				}else{
+            					tag += 
+            						"<tr>"
+							 		+"<td>QNA게시판</td>"
+							 		+"<td>" 
+							 		+ json.blist[i].bwriter
+    								+"</td>"
+							 		+"<td>" 
+    								+"<a href='qbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+    								+ json.blist[i].btitle + "</a>"
+    								+"</td>"
+    								+"<td>"
+							 		+"<c:url var='bdelete' value='bdelete.do'>"
+							 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
+							 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
+							 			+"</c:url>"
+							 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
+							 		+"</td>"
+								+"</tr>";
+            				}else if(json.blist[i].bcateid == 3){
             					tag +=	"<tr>"
-										 	+"<td>꿀팁게시판</td><td>" + json.blist[i].bwriter 
-            								+ "</td><td>" +json.blist[i].btitle + "</td><td>"
-									 			+"<c:url var='bdelete' value='bdelete.do'>"
-									 				+"<c:param name='bno' value='"+ json.blist[i].bno +"'></c:param>"
-									 				+"<c:param name='bcateid' value='"+ json.blist[i].bcateid +"'></c:param>"
-									 			+"</c:url>"
-									 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
-									 		+"</td>"
-										+"</tr>";
+							 		+"<td>꿀팁게시판</td>"
+							 		+"<td>" 
+							 		+ json.blist[i].bwriter
+    								+"</td>"
+							 		+"<td>" 
+    								+"<a href='tbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+    								+ json.blist[i].btitle + "</a>"
+    								+"</td>"
+    								+"<td>"
+							 		+"<c:url var='bdelete' value='bdelete.do'>"
+							 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
+							 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
+							 			+"</c:url>"
+							 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
+							 		+"</td>"
+								+"</tr>";
             				}
             			}
             			
@@ -298,17 +328,16 @@
     });
     
     function search(){
+    	
     	var bcateid = $("#bcateid option:selected").val();
     	var check = $("#check option:selected").val();
     	var send = $("#send").val();
-    	 
     	$.ajax({
     		url:"bSearch.do",
     		dataType:"json",
     		type:"post",
     		data:{"send":send,"check":check,"bcateid":bcateid},
     		success:function(result){
-    			
     			var jsonStr = JSON.stringify(result);
     			var json = JSON.parse(jsonStr);
     			var tag = "";
@@ -317,27 +346,41 @@
 	    				
 	    				if(json.blist[i].bcateid == 2){	
 	    					tag += 
-	    							"<tr>"
-								 		+"<td>QNA게시판</td><td>" + json.blist[i].bwriter
-	    									+"</td><td>"+ json.blist[i].btitle +"</td><td>"
-								 			+"<c:url var='bdelete' value='bdelete.do'>"
-								 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
-								 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
-								 			+"</c:url>"
-								 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
-								 		+"</td>"
-									+"</tr>";
+        						"<tr>"
+						 		+"<td>QNA게시판</td>"
+						 		+"<td>" 
+						 		+ json.blist[i].bwriter
+								+"</td>"
+						 		+"<td>" 
+								+"<a href='qbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+								+ json.blist[i].btitle + "</a>"
+								+"</td>"
+								+"<td>"
+						 		+"<c:url var='bdelete' value='bdelete.do'>"
+						 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
+						 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
+						 			+"</c:url>"
+						 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
+						 		+"</td>"
+							+"</tr>";
 	    				}else if(json.blist[i].bcateid == 3){
 	    					tag +=	"<tr>"
-									 	+"<td>꿀팁게시판</td><td>" + json.blist[i].bwriter 
-	    								+ "</td><td>" +json.blist[i].btitle + "</td><td>"
-								 			+"<c:url var='bdelete' value='bdelete.do'>"
-								 				+"<c:param name='bno' value='"+ json.blist[i].bno +"'></c:param>"
-								 				+"<c:param name='bcateid' value='"+ json.blist[i].bcateid +"'></c:param>"
-								 			+"</c:url>"
-								 			+"<button onclick='location.href='${bdelete}''>삭제</button>"
-								 		+"</td>"
-									+"</tr>";
+						 		+"<td>꿀팁게시판</td>"
+						 		+"<td>" 
+						 		+ json.blist[i].bwriter
+								+"</td>"
+						 		+"<td>" 
+								+"<a href='tbDetail.do?q_no=" + json.blist[i].bno + "'>" 
+								+ json.blist[i].btitle + "</a>"
+								+"</td>"
+								+"<td>"
+						 		+"<c:url var='bdelete' value='bdelete.do'>"
+						 				+"<c:param name='bno' value='" + json.blist[i].bno + "'></c:param>"
+						 				+"<c:param name='bcateid' value='" + json.blist[i].bcateid + "'></c:param>"
+						 			+"</c:url>"
+						 			+"<button onclick=location.href='bdelete.do?bno="+json.blist[i].bno+"&bcateid="+json.blist[i].bcateid+"&check=2'>삭제</button>"
+						 		+"</td>"
+							+"</tr>";
 	    				}		
     				}
 	    			$("#aa").html(tag);
