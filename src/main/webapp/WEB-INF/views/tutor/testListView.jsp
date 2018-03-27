@@ -313,7 +313,7 @@
 			<div class="text-center">
 			<ul class="pagination">
 				<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
-					<c:url var="page" value="taskList.do">
+					<c:url var="page" value="testList.do">
 						<c:param name="currentPage" value="${p }" />
 						<c:param name="tutor_no" value="${tutor_no }"/>
 						<c:param name="mem_no" value="${mem_no }"/>
