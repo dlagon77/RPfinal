@@ -1,12 +1,9 @@
 package com.rp.finalp.lecture.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -279,8 +276,10 @@ public class LectureController {
 	}
 	
 	@RequestMapping("insertLecture.do")
-	public void insertLectureMethod(Lecture lecture, Model model) {
+	public String insertLectureMethod(@RequestParam(value="tutor_no") int tutor_no, Lecture lecture, Model model) {
 		lectureService.insertLecture(lecture);
+		model.addAttribute("tutor_no",tutor_no);
+		return "redirect:classManageLecture.do";
 	}
 	
 	@RequestMapping("classManageTask.do")
