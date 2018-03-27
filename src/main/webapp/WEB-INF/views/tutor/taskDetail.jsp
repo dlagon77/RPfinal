@@ -320,9 +320,23 @@
 			  <a href="taskList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">과제</span><div class="selected"></div></a>
 			  <a href="testList.do?tutor_no=${tutor_no }&mem_no=${loginUser.mem_no}" class="navbar-brand" href="#" style="width:120px;color:gray"><span class="a">Test</span></a>
 
-			  <form style="margin-top:7px;display:flex">
-			  <span class="a"><button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button></span>
-				  <input class="searchLecture" type="text" placeholder="검색" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  <form style="margin-top:7px;display:flex" action="search.do">
+			  <div>
+			  	<c:if test="${checkApply gt 0 }">
+			  		<button type="submit" class="searchButton" style="outline:none"><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button>
+			  	</c:if>
+			  	<c:if test="${checkApply <= 0 }">
+			  		<!-- <button type="submit" class="searchButton" style="outline:none" disabled><img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer"></button> -->
+			  		<button type="button" class="searchButton" data-toggle="tooltip" data-placement="top" title="수강생이 아닙니다!">
+					  <img src="/finalp/resources/img/search.png" style="padding: 5px 30px;cursor:pointer">
+					</button>
+			  	</c:if>
+			  </div>
+			  <div>	
+			  	<input class="searchLecture" type="text" placeholder="검색" name="search_content" style="height: 35px;width: 150px;background: transparent;margin-left: -30px;">
+			  	<input type="hidden" name="tutor_no" value=${tutor_no } >
+			  	<input type="hidden" name="mem_no" value=${loginUser.mem_no }>
+			  </div>
 				</form>
 
 			</nav>

@@ -197,6 +197,7 @@
 			   		  FROM TIPBOARD 
 			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO)
 			   		  order by Tip_no desc)) 
+			   		  WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
 		 
 		]]>
 	</select>

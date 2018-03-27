@@ -123,7 +123,7 @@
         <div class="col-md-12">
          <div class="text-center">
          <ul class="pagination">
-            <li>              
+            <%-- <li>              
 	            <c:url var="first" value="tblist.do">
 					<c:param name="tcurrentPage" value="1" />
 				</c:url>
@@ -168,7 +168,26 @@
 			   </c:url>
 					<a href="${last }">END</a>
 			   </c:if>
-            </li>
+            </li> --%>
+            
+            
+            <c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
+					<c:url var="page" value="tblist.do">
+						<c:param name="currentPage" value="${p }" />
+					</c:url>
+					<c:if test="${p ne currentPage }">
+						<li>
+							<a href="${page }">${p }</a> 
+						</li>
+					</c:if>
+					<c:if test="${p eq currentPage }">	
+						<li class="active">
+							<a href="${page }"><b>${p }</b></a>
+						</li>
+					</c:if>
+				</c:forEach>
+            
+            
          </ul>
          	 </div>
     	 </div>
