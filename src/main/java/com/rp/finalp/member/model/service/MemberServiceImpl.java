@@ -211,7 +211,7 @@ public class MemberServiceImpl implements MemberService {
 				subject = "Leap 임시 비밀번호 입니다.";
 				msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 				msg += "<h3 style='color: blue;'>";
-				msg += member.getMem_name() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+				msg += "임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 				msg += "<p>임시 비밀번호 : ";
 				msg += member.getMem_pwd() + "</p></div>";
 			}
