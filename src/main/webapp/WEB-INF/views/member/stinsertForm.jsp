@@ -152,6 +152,7 @@
   </style>
 </head>
 <body>
+<c:import url="../header.jsp" />
  <article class="container">
         <div class="page-header">
           <h1>학생회원가입</h1>

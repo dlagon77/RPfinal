@@ -153,6 +153,7 @@
   </style>
 </head>
 <body>
+<c:import url="../header.jsp" />
  <article class="container">
         <div class="page-header">
           <h1>강사회원가입</h1>
