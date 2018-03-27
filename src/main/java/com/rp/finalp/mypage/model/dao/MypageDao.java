@@ -226,4 +226,8 @@ public class MypageDao {
 		public MyTestBoard selectmyTestdetail(int sno) {
 			return mybatis.selectOne("mypageMapper.selectmyTestdetail",sno);
 		}
+
+		public Member checkMeminfo(int mem_no) {
+			return mybatis.selectOne("mypageMapper.checkMeminfo", mem_no);
+		}
 }

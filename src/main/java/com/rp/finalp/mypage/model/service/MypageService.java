@@ -74,5 +74,8 @@ public interface MypageService {
 	public MyTestBoard selectmyTestdetail(int sno);
 
 
+	Member checkMeminfo(int mem_no);
+
+
 	
 }

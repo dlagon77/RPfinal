@@ -202,12 +202,13 @@ public class MypageController {
 	/* 헤더 ->  프로필페이지로 이동 - 기본값 프로필보기 */
 	@RequestMapping("/profpage.do")
 	public String moveToStuprofile(Model model, HttpSession session) {
+		int mem_no=0;
 		if(session !=null) {
 			Member member = (Member)session.getAttribute("loginUser");
-//			if(member.getMem_cate().equals("T")) {
-//				member.get
-//			}
-			model.addAttribute("Member", member);
+			mem_no = member.getMem_no();
+			Member info = mypService.checkMeminfo(mem_no);
+
+			model.addAttribute("Member", info);
 			return "mypage/profilemodify";
 		}
 		else {

@@ -133,6 +133,11 @@ public class MypageServiceImpl implements MypageService {
 	public MyTestBoard selectmyTestdetail(int sno) {
 		return mypDao.selectmyTestdetail(sno);
 	}
+
+	@Override
+	public Member checkMeminfo(int mem_no) {
+		return mypDao.checkMeminfo(mem_no);
+	}
 	
 	
 
