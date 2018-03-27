@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rp.finalp.board.model.service.QnaBoardService;
 import com.rp.finalp.board.model.vo.Q_Reply;
 import com.rp.finalp.board.model.vo.QnaBoard;
+import com.rp.finalp.board.model.vo.Tip;
 
 @Controller
 public class QnaBoardController {
@@ -106,9 +107,7 @@ public class QnaBoardController {
 	//게시글 수정
 	@RequestMapping(value="qbUpdate.do", method=RequestMethod.POST)
 	public String qbUpdateMethod(QnaBoard qboard) {
-		System.out.println(qboard.toString());
 		int a = qbService.updateQboard(qboard);
-		System.out.println(a);
 		return "redirect:qblist.do";
 	}
 	
@@ -184,6 +183,167 @@ public class QnaBoardController {
 					j.put("q_re_writer", r.getQ_re_writer());
 					j.put("q_no", r.getQ_no());
 					j.put("q_re_no", r.getQ_re_no());
+					jarr.add(j);
+				}
+				
+				json.put("rlist",jarr);
+				response.setContentType("application/json; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+				out.flush();
+				out.close();		
+			}
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/tbDetail.do")	
+	public String tbdetailMethod(Model model, int q_no){
+		model.addAttribute("qbDetail", qbService.selectqBoardOneTip(q_no));
+		model.addAttribute("rlist", qbService.QboardRlistTip(q_no));
+		
+		//조회수 증가
+		qbService.addReadCountTip(q_no);
+		return "board/TipBoardDetail";
+	}
+	//게시글 작성
+	@RequestMapping(value="/tbInsert.do", method=RequestMethod.POST)
+	public String tbinsert(QnaBoard qboard) {
+		qbService.insertQboardTip(qboard);
+		return "redirect:tblist.do";
+	}
+	//게시글 작성폼 이동 메소드
+	@RequestMapping("/tbInsertform.do")
+	public String tbinsertform() {
+		return "board/TipBoardInsert";
+	}
+	//게시글 삭제
+	@RequestMapping("/tbDelete.do")
+	public String tbdelete(int q_no) {
+		qbService.deleteQboardTip(q_no);
+		return "redirect:tblist.do";
+	}
+	//게시글 페이징처리후 리스트출력
+	@RequestMapping("tblist.do")
+	public String tbListPageMethod(Model model, HttpServletRequest request) {
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = qbService.listCountTip();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		
+		List<QnaBoard> list = qbService.selectQnaListTip(map);
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("qblist",list);
+		model.addAttribute("listCount", (int)listCount);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		
+		return "board/TipBoardList";
+	}
+	
+	//게시글 수정
+	@RequestMapping(value="tbUpdate.do", method=RequestMethod.POST)
+	public String tbUpdateMethod(QnaBoard qboard) {
+		System.out.println(qboard.toString());
+		int a = qbService.updateQboardTip(qboard);
+		System.out.println(a);
+		return "redirect:tblist.do";
+	}
+	
+	//게시글 수정폼 이동 메소드
+	@RequestMapping("/tbUpdateform.do")
+	public String tbupdateform(Model model,QnaBoard qboard) {
+		model.addAttribute("qboard", qboard);
+		return "board/TipBoardUpdate";
+	}
+	
+    //검색 기능
+	@RequestMapping(value="tbsearch.do", method=RequestMethod.POST)
+	public String tbSearchMethod(Model model, @RequestParam("qboption") int qboption, 
+									@RequestParam("qbsearch") String qbsearch, HttpServletRequest request) {		
+		
+		int currentPage = 1;
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int limit = 10;
+		int listCount = qbService.listCountTip();
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		int startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit +1;
+		int endPage = startPage + limit -1;
+		int startRow = (currentPage - 1)*limit + 1;
+		int endRow = startRow + limit -1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow",endRow);
+		
+		List<QnaBoard> list = qbService.selectQnaListTip(map);
+		
+		if(maxPage < endPage)
+			endPage = maxPage;
+		
+		model.addAttribute("qblist", qbService.qbsearchTip(qboption, qbsearch));
+		model.addAttribute("listCount", (int)listCount);
+		model.addAttribute("limit",limit);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		
+		
+		return "board/TipBoardList";
+	}
+	
+	//댓글 삭제
+	@RequestMapping(value="tbrDelete.do")
+	public String tbrdelete(@RequestParam("q_no") int qno, int q_re_no) {
+		qbService.deleteQboardReplyTip(q_re_no);
+		return "redirect:tbDetail.do?q_no="+qno;
+	}
+	
+	//댓글 입력
+	@RequestMapping(value="tbReply.do", method=RequestMethod.POST)
+	public void tbreply(Q_Reply qreply, HttpServletResponse response,@RequestParam("q_no") int qno) throws IOException {
+			int check = qbService.insertQboardReplyTip(qreply, qno);
+			if(check > 0 ) {
+				
+				List<Tip> list = qbService.QboardRlistTip(qno);
+				System.out.println(list.toString());
+				JSONObject json = new JSONObject();
+				JSONArray jarr = new JSONArray();
+			
+				for(Tip r : list) {
+					JSONObject j = new JSONObject();			
+		
+					j.put("t_re_con", r.getT_re_con());
+					j.put("t_re_date", r.getT_re_date().toString());
+					j.put("t_re_writer", r.getT_re_writer());
+					j.put("t_no", r.getT_no());
+					j.put("t_re_no", r.getT_re_no());
 					jarr.add(j);
 				}
 				

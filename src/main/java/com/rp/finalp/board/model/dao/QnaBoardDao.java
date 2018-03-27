@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rp.finalp.board.model.vo.Q_Reply;
 import com.rp.finalp.board.model.vo.QnaBoard;
+import com.rp.finalp.board.model.vo.Tip;
 
 @Repository("qnaBoardDao")
 public class QnaBoardDao {
@@ -81,6 +82,68 @@ public class QnaBoardDao {
 	}
 
 	
+	
+	
+	
+	public List<QnaBoard> selectQnaListTip(HashMap<String, Object> map){
+		return mybatis.selectList("boardMapper.selectAllTip", map);
+	}
+	
+	public Tip selectqBoardOneTip(int q_no){
+		return mybatis.selectOne("boardMapper.selectQbOneTip", q_no);
+	}
+	
+	public int deleteQboardTip(int q_no) {
+		return mybatis.delete("boardMapper.DeleteQbTip", q_no);
+	}
+	
+	public int insertQboardTip(QnaBoard qboard) {
+		return mybatis.insert("boardMapper.InsertQbTip", qboard);
+	}
+
+	public void addReadCountTip(int q_no) {
+		mybatis.update("boardMapper.RcUpdateQbTip", q_no);	
+	}
+	
+	public int listCountTip() {
+		return mybatis.selectOne("boardMapper.listCountTip");
+	}
+	
+	public int updateQboardTip(QnaBoard qboard) {
+		return mybatis.update("boardMapper.UpdateQbTip", qboard);
+	}
+	
+	public int insertQboardReplyTip(Q_Reply qreply, int qno) {
+		qreply.setQ_no(qno);
+		System.out.println(qreply.toString());
+		return mybatis.insert("boardMapper.rinsertTip", qreply);
+	}
+	
+	public int deleteQboardReplyTip(int q_re_no) {
+		return mybatis.delete("boardMapper.qbrdeleteTip", q_re_no);
+	}
+
+	public int updateQboardReplyTip(Q_Reply qreply) {
+		return mybatis.update("boardMapper.rupdateTip", qreply);
+	}
+
+	public List<QnaBoard> updateQboardTip(int qboption, String qbsearch) {
+		
+		if(qboption == 0) {
+		   return mybatis.selectList("boardMapper.qbstitleTip", qbsearch);
+		}else if(qboption == 1){
+		   return mybatis.selectList("boardMapper.qbscontentTip", qbsearch);
+		}else if(qboption == 2){
+		   return mybatis.selectList("boardMapper.qbstcTip", qbsearch);
+		}else {
+		   return mybatis.selectList("boardMapper.qbswriterTip", qbsearch);
+		}
+	}
+
+	public List<Tip> QboardRlistTip(int q_no) {		
+		return mybatis.selectList("boardMapper.qbrlistTip",q_no);
+	}
+
 	
 	
 }

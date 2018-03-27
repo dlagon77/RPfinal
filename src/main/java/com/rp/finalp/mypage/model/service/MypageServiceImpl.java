@@ -139,7 +139,20 @@ public class MypageServiceImpl implements MypageService {
 		return mypDao.checkMeminfo(mem_no);
 	}
 	
-	
+	@Override
+	public int insertMsg(Message msg, int mv) {
+		return mypDao.insertMes(msg,mv);
+	}
+
+	@Override
+	public List<Member> emailList() {
+		return mypDao.mEmailList();
+	}
+
+	@Override
+	public Message msgListOne(int mes_no) {
+		return mypDao.selectMesListOne(mes_no);
+	}
 
 	
 

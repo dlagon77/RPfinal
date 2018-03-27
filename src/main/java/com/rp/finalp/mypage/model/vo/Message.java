@@ -15,11 +15,12 @@ public class Message implements java.io.Serializable{
 	private String mes_writer; //쪽지작성자
 	private String mes_receiver; //쪽지수신자
 	private int mes_tcate_id; //쪽지카테고리
-	
+	private String email;
+	private int mes_receiver_no;
 	public Message() {}
 
 	public Message(int mes_no, String mes_title, String mes_content, Date mes_date, String mes_writer,
-			String mes_receiver, int mes_tcate_id) {
+			String mes_receiver, int mes_tcate_id,String email,int mes_receiver_no) {
 		super();
 		this.mes_no = mes_no;
 		this.mes_title = mes_title;
@@ -28,9 +29,26 @@ public class Message implements java.io.Serializable{
 		this.mes_writer = mes_writer;
 		this.mes_receiver = mes_receiver;
 		this.mes_tcate_id = mes_tcate_id;
+		this.email = email;
+		this.mes_receiver_no = mes_receiver_no;
+	}
+    
+	
+	public int getMes_receiver_no() {
+		return mes_receiver_no;
 	}
 
-	
+	public void setMes_receiver_no(int mes_receiver_no) {
+		this.mes_receiver_no = mes_receiver_no;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getMes_no() {
 		return mes_no;

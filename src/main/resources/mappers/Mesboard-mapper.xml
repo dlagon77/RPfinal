@@ -12,6 +12,7 @@
   		<result property="mes_writer" column="mes_writer"/>
   		<result property="mes_receiver" column="mes_receiver"/>
   		<result property="mes_tcate_id" column="mes_tcate_id"/>
+  		<result property="mes_receiver_no" column="mes_receiver_no"/>
 	</resultMap>
 	
 	<select id="selectAll" resultMap="MesboardResultMap" resultType="Message"
@@ -22,21 +23,15 @@
 				JOIN MEMBER M ON(M.MEM_NO=B.MES_WRITER)
 				JOIN MEMBER N ON(N.MEM_NO=B.MES_RECEIVER)
 				WHERE B.MES_WRITER = #{size} OR B.MES_RECEIVER = #{size}	
+		]]>	
+	</select>
+	
+	<select id="msgDetail" resultMap="MesboardResultMap">
+		<![CDATA[
+			SELECT mes_title, mes_content, mes_date
+			FROM MESBOARD 			   		  
+			WHERE mes_no = #{mes_no}
 		]]>
-		
-		<!-- <![CDATA[ 
-			SELECT * FROM 
-			(SELECT ROWNUM MNUM, mes_no, mes_title, mes_content,
-			  mes_date, mes_writer, mes_receiver, mes_tcate_id 
-			   FROM (SELECT mes_no, mes_title, mes_content,
-			  mes_date, mem_name as mes_writer, mes_receiver, mes_tcate_id  
-			   		  FROM MESBOARD 
-			   		  JOIN MEMBER ON (MES_WRITER=MEM_NO)
-			   		  JOIN MEMBER ON (MES_RECEIVER=MEM_NO)
-			   		  ORDER BY MES_NO DESC)) 
-		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
-		
-		]]> -->
 	</select>
 	
 	<select id="listCount" resultType="int"> 
@@ -44,5 +39,23 @@
 			SELECT COUNT(*) FROM MESBOARD 
 		]]>		
 	</select>
+	
+	<resultMap id="MailResultMap" type="Member">
+		<result property="mem_no" column="mem_no" />
+		<result property="mem_id" column="mem_id"/>
+		<result property="mem_name" column="mem_name" />
+	</resultMap>
+	
+	<select id="emailList" resultMap="MailResultMap" parameterType="Member">
+		<![CDATA[
+			SELECT mem_no, mem_id, mem_name FROM MEMBER
+		]]>
+	</select>
+
+	<insert id="msginsert" parameterType="Message" useGeneratedKeys="true">
+		<![CDATA[
+			INSERT INTO MESBOARD VALUES(seq_mnum.nextval, #{mes_title}, #{mes_content}, sysdate, #{mes_writer}, #{mes_receiver_no}, 7)
+		]]>
+	</insert>
 	
 </mapper>

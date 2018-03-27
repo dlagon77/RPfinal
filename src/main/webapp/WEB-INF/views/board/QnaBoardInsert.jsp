@@ -34,7 +34,8 @@
 	        <form method="post" id="QnaBoardInsert" name="QnaBoardInsert" action="qbInsert.do">
 	          <div class="form-group">
 	            <label>글쓴이</label>
-	            <input type="text" name="q_writer" readonly value="${ sessionScope.loginUser.mem_name}" class="form-control">
+	            <input type="text" readonly value="${ sessionScope.loginUser.mem_name}" class="form-control">
+	          	<input type="hidden" name="q_writer" value="${ sessionScope.loginUser.mem_no}" class="form-control">
 	          </div> 
 	          <div class="form-group">
 	            <label>제목</label>

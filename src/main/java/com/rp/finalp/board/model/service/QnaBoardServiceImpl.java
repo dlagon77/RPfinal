@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.rp.finalp.board.model.dao.QnaBoardDao;
 import com.rp.finalp.board.model.vo.Q_Reply;
 import com.rp.finalp.board.model.vo.QnaBoard;
+import com.rp.finalp.board.model.vo.Tip;
 
 @Service("qnaBoardService")
 public class QnaBoardServiceImpl implements QnaBoardService{
@@ -77,4 +78,63 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	}
 	
 	
+	
+	
+	
+	
+	@Override
+	public List<QnaBoard> selectQnaListTip(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return qbDao.selectQnaListTip(map);
+	}
+	@Override
+	public Tip selectqBoardOneTip(int q_no) {
+		// TODO Auto-generated method stub
+		return qbDao.selectqBoardOneTip(q_no);
+	}
+	@Override
+	public int insertQboardTip(QnaBoard qboard) {
+		// TODO Auto-generated method stub
+		return qbDao.insertQboardTip(qboard);
+	}
+	@Override
+	public int deleteQboardTip(int q_no) {
+		// TODO Auto-generated method stub
+		return qbDao.deleteQboardTip(q_no);
+	}
+	@Override
+	public void addReadCountTip(int q_no) {
+		// TODO Auto-generated method stub
+		qbDao.addReadCountTip(q_no);
+	}
+	@Override
+	public int listCountTip() {
+		// TODO Auto-generated method stub
+		return qbDao.listCountTip();
+	}
+	@Override
+	public int updateQboardTip(QnaBoard qboard) {
+		// TODO Auto-generated method stub
+		return qbDao.updateQboardTip(qboard);
+	}
+	@Override
+	public List<QnaBoard> qbsearchTip(int qboption, String qbsearch) {
+		// TODO Auto-generated method stub
+		return qbDao.updateQboardTip(qboption,qbsearch);
+	}
+	@Override
+	public int insertQboardReplyTip(Q_Reply qreply, int qno) {
+		// TODO Auto-generated method stub
+		return qbDao.insertQboardReplyTip(qreply,qno);
+	}
+	@Override
+	public List<Tip> QboardRlistTip(int q_no) {
+		// TODO Auto-generated method stub
+		return qbDao.QboardRlistTip(q_no);
+	}
+	@Override
+	public int deleteQboardReplyTip(int q_re_no) {
+		// TODO Auto-generated method stub
+		return qbDao.deleteQboardReplyTip(q_re_no);
+	}
 }

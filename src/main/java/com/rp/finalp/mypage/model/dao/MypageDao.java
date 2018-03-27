@@ -230,4 +230,16 @@ public class MypageDao {
 		public Member checkMeminfo(int mem_no) {
 			return mybatis.selectOne("mypageMapper.checkMeminfo", mem_no);
 		}
+		public int insertMes(Message msg, int mv) {
+			msg.setMes_receiver_no(mv);
+			return mybatis.insert("MesboardMapper.msginsert", msg);
+		}
+
+		public List<Member> mEmailList(){
+			return mybatis.selectList("MesboardMapper.emailList");
+		}
+
+		public Message selectMesListOne(int mes_no) {
+			return mybatis.selectOne("MesboardMapper.msgDetail", mes_no);
+		}
 }

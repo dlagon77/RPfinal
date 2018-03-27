@@ -76,6 +76,11 @@ public interface MypageService {
 
 	Member checkMeminfo(int mem_no);
 
+	int insertMsg(Message msg, int mv);
 
+	List<Member> emailList();
+
+
+	Message msgListOne(int mes_no);
 	
 }

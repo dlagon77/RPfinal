@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.rp.finalp.board.model.vo.Q_Reply;
 import com.rp.finalp.board.model.vo.QnaBoard;
+import com.rp.finalp.board.model.vo.Tip;
 
 public interface QnaBoardService {
 
@@ -33,4 +34,28 @@ public interface QnaBoardService {
 
 	int deleteQboardReply(int q_re_no);
    
+	
+	
+	
+	List<QnaBoard> selectQnaListTip(HashMap<String, Object> map);
+
+	Tip selectqBoardOneTip(int q_no);
+	
+	int insertQboardTip(QnaBoard qboard);
+
+	int deleteQboardTip(int q_no);
+
+	void addReadCountTip(int q_no);
+
+	int listCountTip();
+
+	int updateQboardTip(QnaBoard qboard);
+
+	List<QnaBoard> qbsearchTip(int qboption, String qbsearch);
+	
+	int insertQboardReplyTip(Q_Reply qreply, int qno);
+
+	List<Tip> QboardRlistTip(int q_no);
+
+	int deleteQboardReplyTip(int q_re_no);
 }

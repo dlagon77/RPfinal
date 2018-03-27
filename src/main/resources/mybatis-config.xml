@@ -23,7 +23,7 @@
 		<typeAlias type="com.rp.finalp.mypage.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.rp.finalp.mypage.model.vo.MysubAssign" alias="MysubAssign"/>
 		<typeAlias type="com.rp.finalp.mypage.model.vo.MyTestBoard" alias="MyTestBoard"/>
-		
+		<typeAlias type="com.rp.finalp.board.model.vo.Tip" alias="Tip"/>
 	</typeAliases>
 
 	<mappers>

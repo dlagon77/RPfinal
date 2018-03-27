@@ -141,7 +141,7 @@
 	</resultMap>
 	
     <insert id="rinsert" parameterType="Q_Reply">
-        INSERT INTO Q_REPLY VALUES (seq_qreply.NEXTVAL, #{q_no}, #{q_re_con}, sysdate, #{q_re_writer})
+        INSERT INTO Q_REPLY VALUES (seq_qreply.NEXTVAL, #{q_no}, #{q_re_con}, sysdate, #{q_re_writer},9)
     </insert>
     
  
@@ -159,4 +159,164 @@
     	]]>
     </delete>
 
+
+
+
+
+
+	<resultMap id="TipboardResultMap" type="Tip">
+  		<result property="tip_no" column="tip_no"/>
+  		<result property="tip_title" column="tip_title"/>
+  		<result property="tip_content" column="tip_content"/>
+  		<result property="tip_read_cnt" column="tip_read_cnt"/>
+  		<result property="tip_date" column="tip_date"/>
+  		<result property="tip_writer" column="tip_writer"/>
+	</resultMap>
+	
+<resultMap id="TipResultMap" type="Tip">
+  		<result property="t_re_no" column="t_re_no"/>
+  		<result property="t_no" column="t_no"/>
+  		<result property="t_re_con" column="t_re_con"/>
+  		<result property="t_re_date" column="t_re_date"/>
+  		<result property="t_re_writer" column="t_re_writer"/>
+  		<result property="mem_no" column="mem_no"/>
+	</resultMap>
+
+
+
+<select id="selectAllTip" resultMap="TipboardResultMap"  
+		parameterType="java.util.HashMap">
+		<![CDATA[ 
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM, TIP_no, 
+					TIP_title, TIP_content, TIP_read_cnt, TIP_date,
+					TIP_writer 
+			   FROM (SELECT TIP_no, TIP_title, 
+			   				TIP_content, TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO)
+			   		  order by Tip_no desc)) 
+		 
+		]]>
+	</select>
+	
+	<select id="listCountTip" resultType="int"> 
+		<![CDATA[
+			SELECT COUNT(*) FROM TIPBOARD 
+		]]>		
+	</select>
+	
+	<select id="selectQbOneTip" resultMap="TipboardResultMap" parameterType="int">
+		<![CDATA[
+			SELECT * 
+			FROM (SELECT TIP_no, TIP_title, 
+			   				TIP_content, TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO)
+			   		  order by TIP_no desc)
+			WHERE TIP_no = #{q_no}
+		]]>
+	</select>
+	
+    <insert id="InsertQbTip" parameterType="QnaBoard" useGeneratedKeys="true" >
+		<![CDATA[
+			INSERT INTO TIPBOARD VALUES (seq_tnum.nextval, #{q_title}, 
+			#{q_content}, 0, SYSDATE, #{q_writer}, 3)		
+		]]>
+	</insert>
+	
+    <delete id="DeleteQbTip">
+    	<![CDATA[
+    		DELETE FROM TIPBOARD WHERE TIP_NO = #{q_no}
+    	]]>
+    </delete>
+    
+    <update id="RcUpdateQbTip">
+    	<![CDATA[
+    		UPDATE TIPBOARD SET TIP_READ_CNT = TIP_READ_CNT + 1
+    		WHERE TIP_NO = #{q_no}
+    	]]>
+    </update>
+    
+    <update id="UpdateQbTip" parameterType="QnaBoard" >
+    	<![CDATA[
+    		UPDATE TIPBOARD SET
+            TIP_TITLE = #{q_title}, TIP_CONTENT = #{q_content} 
+            WHERE TIP_NO = #{q_no}
+    	]]>
+    </update>
+    
+    <select id="qbstitleTip" resultMap="TipboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT TIP_no, TIP_title, 
+			   				TIP_content, TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO))
+    		WHERE TIP_TITLE LIKE '%'||#{q_title}||'%' 
+    		ORDER BY TIP_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbscontentTip" resultMap="TipboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT TIP_no,TIP_title, 
+			   				TIP_content,TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO))
+	  		WHERE TIP_CONTENT LIKE '%'||#{q_content}||'%' 
+    		ORDER BY TIP_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbstcTip" resultMap="TipboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT TIP_no, TIP_title, 
+			   				TIP_content, TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (Q_WRITER=MEM_NO))
+    		WHERE TIP_TITLE LIKE '%'||#{q_title}||'%' OR TIP_CONTENT LIKE '%'||#{q_content}||'%' 
+    		ORDER BY TIP_NO DESC
+    	]]>
+    </select>
+    
+    <select id="qbswriterTip" resultMap="TipboardResultMap" resultType="list" 
+		parameterType="java.util.HashMap">
+    	<![CDATA[
+    		SELECT * FROM (SELECT TIP_no, TIP_title, 
+			   				TIP_content, TIP_read_cnt, 
+			   				TIP_date, mem_name as TIP_writer 
+			   		  FROM TIPBOARD 
+			   		  JOIN MEMBER ON (TIP_WRITER=MEM_NO))
+    		WHERE TIP_WRITER LIKE '%'||#{q_writer}||'%' 
+    		ORDER BY TIP_NO DESC
+    	]]>
+    </select>
+
+
+    <insert id="rinsertTip" parameterType="Q_Reply">
+        INSERT INTO T_REPLY VALUES (seq_treply.NEXTVAL, #{q_no}, #{q_re_con}, sysdate, #{q_re_writer},3)
+    </insert>
+    
+ 
+    <select id="qbrlistTip" resultMap="TipResultMap" >
+        SELECT T_re_no, t_no, t_re_con, t_re_date, mem_name as t_re_writer, mem_no
+        FROM T_Reply
+        JOIN MEMBER ON (mem_no=t_re_writer)
+        WHERE T_NO = #{q_no} ORDER BY T_RE_DATE DESC
+    </select> 
+
+	<delete id="qbrdeleteTip">
+    	<![CDATA[
+    		DELETE FROM T_REPLY 
+    		WHERE T_RE_NO = #{q_re_no}
+    	]]>
+    </delete>
 </mapper>

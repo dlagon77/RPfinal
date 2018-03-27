@@ -14,21 +14,50 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 	<style type="text/css">
-		.container{
-			margin-top:30px;
-		}
-		.search{
-			margin-top:100px;
-			margin-left:350px;
+			#navbar{
+				 overflow: hidden;
+			}
+			.sticky{
+				position: fixed;
+				top: 60px;
+				width: 100%
+			}
+			.navbar-brand{
+					font-size:16px!important;
+			}
+			.navbar-brand .a:hover {
+				color:black;
+			}
+			.selected{
+				border-bottom: solid 2px darkcyan;
+				margin-top: 9px;
+			}
+			.container{
+				margin-top:30px;
+			}
+			.search{
+				margin-top:100px;
+				margin-left:350px;
 		
-		}
+			}
 		
+
 	</style>
 </head>
 <body>
 <c:import url="../header.jsp" />
 
 	<div id="banner" style="height:305px;background-image: url('/finalp/resources/img/board.jpg');background-size:cover;"></div>
+	<br>
+		<div style="margin-left: 130pt">
+			<nav class="navbar sticky-top navbar-light bg-light" style="display:flex">
+			  <a href="qblist.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">QnA Board</span><div class="selected"></div></a>
+			  <a href="tblist.do" class="navbar-brand" style="width:120px;color:gray"><span class="a">Tip Board</span></a>
+
+			</nav>
+		</div>
+	<br>
+	
 	<div class="container">
 		<div>
 			<table class="table table-striped table-hover">

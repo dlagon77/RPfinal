@@ -566,5 +566,69 @@ public class MypageController {
 				out.flush();
 				out.close();
 		}
+		
+		/* 쪽지 작성 */
+		@RequestMapping(value="/mesInsert.do", method=RequestMethod.POST)
+		public String sendMsg(Model model, Message msg, @RequestParam("emlist") int mv) {
+			
+			mypService.insertMsg(msg, mv);
+			return "redirect:home.do";
+		}
+		
+		/* 이메일리스트 셀렉트박스에 불러오기 */
+		@RequestMapping(value="/EmailList.do", method=RequestMethod.POST)
+		public void eList(Model model, HttpServletResponse response) throws IOException {	
+				JSONObject json = new JSONObject();
+				JSONArray jarr = new JSONArray();
+				
+				List<Member> list = mypService.emailList();
+				for(Member m : list) {
+					
+					JSONObject j = new JSONObject();
+					j.put("mem_no", m.getMem_no());
+					j.put("mem_id", m.getMem_id());
+					j.put("mem_name", m.getMem_name());
+					
+					jarr.add(j);
+					
+					
+				}
+				
+				json.put("maillist", jarr);
+				
+				response.setContentType("application/json; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+				out.flush();
+				out.close();
+		}
+		
+		@RequestMapping(value="/msgDetail.do")
+		public void msgDetailMethod(HttpServletResponse response, int mes_no) throws IOException {
+			
+			JSONObject json = new JSONObject();
+			JSONArray jarr = new JSONArray();
+			
+			List<Message> list = (List<Message>) mypService.msgListOne(mes_no);
+			for(Message m : list) {
+				
+				JSONObject j = new JSONObject();
+				j.put("mes_title", m.getMes_title());
+				j.put("mes_content", m.getMes_content());
+				j.put("mes_date", m.getMes_date());
+				
+				jarr.add(j);
+				
+				
+			}
+			
+			json.put("mdetail", jarr);
+			
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println(json.toJSONString());
+			out.flush();
+			out.close();
+	}
 }
 

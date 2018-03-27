@@ -407,8 +407,9 @@
 			   <div class="w3-bar w3-border-bottom">
 				   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Send');smsglist();">보낸쪽지함</button>
 				   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Receiver');msglist();">받은쪽지함</button>
+			   	   <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'SendMessage');emailList();">쪽지쓰기</button>	
 			   </div>
-			
+				
 				  <div id="Send" class="w3-container city">
 				  	 <div class="w3-container">
 				  		<h4 style="margin:13px">쪽지함(발신)</h4>
@@ -445,69 +446,43 @@
     					
 				    	</tbody>
 				  	</table>
-				 <!--  쪽지함 모달 END -->
-					   
-					   	<!-- 페이징 처리 START -->
-					   <%-- <div class="col-md-12">
-					        <div class="text-center">
-					         	<ul class="pagination">
-			            			<li>              
-				            			<c:url var="first" value="msgList.do">
-											<c:param name="currentPage" value="1" />
-										</c:url>
-										<c:if test="${currentPage != 1}">
-											<a href="${first }">FIRST</a>
-										</c:if>
-			            			</li>
-			            			
-			            			<li>
-							            <c:url var="prev" value="msgList.do">
-											<c:param name="currentPage" value="${currentPage - 1 }" />
-										</c:url>
-									    <c:if test="${currentPage != 1}">
-											<a href="${prev }">PREV</a>
-									    </c:if>
-			            			</li>
-			            			
-			            			<li>
-			            				<c:forEach var="p" begin="${startPage }" end="${endPage }" step="1">
-											<c:url var="page" value="msgList.do">
-												<c:param name="currentPage" value="${p }" />
-											</c:url>
-						  					<c:if test="${p ne currentPage }">
-								 				<a href="${page }">${p }</a> 
-						   					</c:if>
-									</li>
-									
-									<li>
-											<c:if test="${p eq currentPage }">	
-											 	<a href="${page }"><b>${p }</b></a>
-										    </c:if>
-										</c:forEach>
-									</li>
-			            
-			            			<li>
-			            					<c:if test="${currentPage != maxPage }">
-								              	<c:url var="next" value="msgList.do">
-													<c:param name="currentPage" value="${currentPage + 1 }" />
-												</c:url>
-												<a href="${next }">NEXT</a>
-			            			</li>
-			            			
-			            			<li>
-							               	<c:url var="last" value="msgList.do">
-													<c:param name="currentPage" value="${maxPage }" />
-										   	</c:url>
-											<a href="${last }">END</a>
-						   					</c:if>
-			           				</li>
-			         		</ul>
-			         	 </div>
-			    	 </div> --%>
-				   </div>
-				   		<!-- 페이징 처리 END -->
 				</div>
-						<br><br>
+				   		
+				</div>
+				
+				<div id="SendMessage" class="w3-container city">
+				     <div class="w3-container">
+				  		<h4 style="margin:13px">쪽지쓰기</h4>					
+    					<form method="post" action="mesInsert.do">
+					          <div class="form-group">
+						            <label>Title</label>
+						            <input type="text" name="mes_title" class="form-control" placeholder="제목을 입력하세요." required>
+						      </div>
+					          <div class="form-group">
+						            <label>Content</label>
+						            <textarea name="mes_content" class="form-control" rows="5" placeholder="내용을 입력하세요." required></textarea>
+					          </div>
+					          <div class="form-group">
+						            <label>Writer</label>
+						            <input type="text" readonly value="${ sessionScope.loginUser.mem_name }" class="form-control">
+						            <input type="hidden" name="mes_writer" readonly value="${ sessionScope.loginUser.mem_no}" class="form-control">
+					          </div>
+					          <div class="form-group">
+						            <label>Receiver</label><br>
+						        		<select id="emlist" name="emlist">
+						        		
+						        		</select>
+					          </div>  
+					          
+					          <div class="writebutton">
+					          <a href='home.do' class="btn btn-default">취소</a> 
+					          <button type="submit" class="btn btn-default">작성</button>     
+					          </div>   
+        				</form>				 
+				    </div>
+				   		
+				</div>
+						<br>
 					 	<!-- 쪽지함 CLOSE 버튼 -->	
 					  <div class="w3-container w3-light-grey w3-padding">
 					   		<button class="w3-button w3-right w3-white w3-border" 
@@ -517,8 +492,9 @@
 					 </div>
 					</div>
 				
-					
-					  <!-- 쪽지하 ㅁ모달 끝 -->
+				
+					  <!-- 페이징 처리 END -->
+
 
 	   <script>
 	      // For Demo purposes only (show hover effect on mobile devices)
@@ -646,9 +622,57 @@ function openCity(evt, cityName) {
   evt.currentTarget.classList.add("w3-light-grey");
 }
 	
-/*  $(document).ready(function(){ */
-	function smsglist(){
-		$.ajax({
+function smsglist(){
+	$.ajax({
+		 url:"msgList.do",
+         dataType:"json",
+         type:"post",
+         data:{"mem_no":${sessionScope.loginUser.mem_no}},
+         success:function(result){
+        	 var jsonStr = JSON.stringify(result);
+        	 var json = JSON.parse(jsonStr);
+        	 var smsg = "";
+        	 var loginUser = "${sessionScope.loginUser.mem_name}";
+        	 if( json.msglist.length > 0){
+	        	 for(var i = 0; i < json.msglist.length; i++){
+	        		 if(json.msglist[i].mes_writer == loginUser){
+	        			 smsg +=
+	        			 		"<tr>"
+		       					 +"<td>"
+		       					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+								 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
+								 +"</c:url>"
+								 +"<a data-toggle='modal' href='#myModal2${myMsg }'>"
+								 +decodeURIComponent(json.msglist[i].mes_title)	
+		       					 +"</a>"
+		       					 +"</td>"		       					 
+		       					 +"<td>"
+		       					 +decodeURIComponent(json.msglist[i].mes_writer)
+		       					 +"</td>"
+		       					 +"<td>"
+		       					 +decodeURIComponent(json.msglist[i].mes_receiver)
+		       					 +"</td>"
+		       					 +"<td>"
+		       					 +json.msglist[i].mes_date
+		       					 +"</td>"
+					       		 +"</tr>";
+					       	}
+	        			 }	
+				       }else{
+				    	   smsg +=
+	        		  			+"<tr>"
+	        		  			+"<td colspan='4'>조회된 결과가없습니다.</td>"
+	        		  			+"</tr>";
+				        	}
+				        	 
+				        	 $("#smsg").html(smsg);
+				         }
+	         
+				});
+			};
+
+	function msglist(){
+		 $.ajax({
 			 url:"msgList.do",
 	         dataType:"json",
 	         type:"post",
@@ -656,91 +680,71 @@ function openCity(evt, cityName) {
 	         success:function(result){
 	        	 var jsonStr = JSON.stringify(result);
 	        	 var json = JSON.parse(jsonStr);
-	        	 var smsg = "";
-	        	 var loginUser = "${sessionScope.loginUser.mem_name}";
+	        	 var msg = "";
 	        	 if( json.msglist.length > 0){
 		        	 for(var i = 0; i < json.msglist.length; i++){
-		        		 if(json.msglist[i].mes_writer == loginUser){
-		        			 smsg +=
-		        			 		"<tr>"
-			       					 +"<td>"
-			       					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
+		        		 if(json.msglist[i].mes_receiver == "${sessionScope.loginUser.mem_name}"){
+		        				 msg += 
+		        					 "<tr>"
+		        					 +"<td>"
+		        					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
 									 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
 									 +"</c:url>"
-									 +"<a href='${myMsg }'>"
+									 +"<a data-toggle='modal' href='#myModal2${myMsg }'>"
 									 +decodeURIComponent(json.msglist[i].mes_title)	
-			       					 +"</a>"
-			       					 +"</td>"		       					 
-			       					 +"<td>"
-			       					 +decodeURIComponent(json.msglist[i].mes_writer)
-			       					 +"</td>"
-			       					 +"<td>"
-			       					 +decodeURIComponent(json.msglist[i].mes_receiver)
-			       					 +"</td>"
-			       					 +"<td>"
+		        					 +"</a>"
+		        					 +"</td>"
+		        					 +"<td>"
+		        					 +decodeURIComponent(json.msglist[i].mes_writer)
+		        					 +"</td>"	
+		        					 +"<td>"
 			       					 +json.msglist[i].mes_date
 			       					 +"</td>"
-						       		 +"</tr>";
-						       	}
-		        			 }	
-					       }else{
-					    	   smsg +=
-		        		  			+"<tr>"
-		        		  			+"<td colspan='4'>조회된 결과가없습니다.</td>"
-		        		  			+"</tr>";
-					        	}
-					        	 
-					        	 $("#smsg").html(smsg);
-					         }
-		         
-					});
-				};
-	
- 	function msglist(){
-			 $.ajax({
-				 url:"msgList.do",
-		         dataType:"json",
-		         type:"post",
-		         data:{"mem_no":${sessionScope.loginUser.mem_no}},
-		         success:function(result){
-		        	 var jsonStr = JSON.stringify(result);
-		        	 var json = JSON.parse(jsonStr);
-		        	 var msg = "";
-		        	 if( json.msglist.length > 0){
-			        	 for(var i = 0; i < json.msglist.length; i++){
-			        		 if(json.msglist[i].mes_receiver == "${sessionScope.loginUser.mem_name}"){
-			        				 msg += 
-			        					 "<tr>"
-			        					 +"<td>"
-			        					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
-										 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
-										 +"</c:url>"
-										 +"<a href='${myMsg }'>"
-										 +decodeURIComponent(json.msglist[i].mes_title)	
-			        					 +"</a>"
-			        					 +"</td>"
-			        					 +"<td>"
-			        					 +decodeURIComponent(json.msglist[i].mes_writer)
-			        					 +"</td>"	
-			        					 +"<td>"
-				       					 +json.msglist[i].mes_date
-				       					 +"</td>"
-			        					 +"</tr>";
-			        					 
-			        		 	}
-			        		 }
-		        	 }else{
-		 		  		msg +=
-				  			+"<tr>"
-				  			+"<td colspan='3'>조회된 결과가없습니다.</td>"
-				  			+"</tr>";
-					 }
-        	 			$("#msg").html(msg);
-			         },error: function(request, status, errorData){
-			             alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData); 	 
-			         }
-        	 	});
-			};
+		        					 +"</tr>";
+		        					 
+		        		 	}
+		        		 }
+	        	 }else{
+	 		  		msg +=
+			  			+"<tr>"
+			  			+"<td colspan='3'>조회된 결과가없습니다.</td>"
+			  			+"</tr>";
+				 }
+    	 			$("#msg").html(msg);
+		         },error: function(request, status, errorData){
+		             alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData); 	 
+		         }
+    	 	});
+		};
+		
+		function emailList(){
+			$.ajax({
+				url:"EmailList.do",
+		        dataType:"json",
+		        type:"post",
+		        success:function(result){
+		        	var jsonStr = JSON.stringify(result);
+		        	var json = JSON.parse(jsonStr);
+		        	var emlist = "";
+		        	if( json.maillist.length > 0){
+		        		for(var i = 0; i<json.maillist.length; i++){
+		        			emlist +=
+		            			+ "<option value='' selected='selected' disabled='disabled'>이메일 선택"
+		        				+"</option>"
+		            			+ "<option value='"
+		            			+json.maillist[i].mem_no
+		            			+"'>"
+		            			+json.maillist[i].mem_id
+		            			+'('+json.maillist[i].mem_name+')'			            		
+		            			+ "</option>"
+		        		}
+		        	}
+		        	$("#emlist").html(emlist);
+		        },error: function(request, status, errorData){
+		             alert("error code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + errorData);
+		        }
+		        });
+			};	 
 
 </script>
 </body>
