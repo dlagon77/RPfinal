@@ -121,9 +121,9 @@ public class MemberController {
 ////				 String root = "C:/finalProject/finalp/target/m2e-wtp/web-resources/";
 			    // 파일 저장 경로 정함
 //			    String savePath = root + "uploadFiles/";
-				String root = request.getSession().getServletContext().getRealPath("/");
-				String savePath = root + "resources/img/profileupload/";
-
+				 String root = "C:/finalProject/finalp/src/main/webapp/";
+				    // 파일 저장 경로 정함
+				    String savePath = root + "resources/img/profileupload/";
 				//스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
 			 
 				
@@ -168,10 +168,10 @@ public class MemberController {
 				
 				// 웹서버 컨테이너 경로 추출함 
 /*			    String root = request.getSession().getServletContext().getRealPath("/");*/
-				 String root = "C:/finalProject/finalp/target/m2e-wtp/web-resources/";
+				 String root = "C:/finalProject/finalp/src/main/webapp/";
 			    // 파일 저장 경로 정함
-			    String savePath = root + "uploadFiles/";
-			    //스프링에서는 프로젝트\target\m2e-wtp\web-resources\ 아래에 폴더를 만들어야 함
+			    String savePath = root + "resources/img/profileupload/";
+
 			 
 				
 				if(!uploadFile.isEmpty()){
