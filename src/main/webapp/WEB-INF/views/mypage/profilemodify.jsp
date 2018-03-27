@@ -49,7 +49,7 @@ box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4p
 }
 .largeboxfour{
 margin-top:20px;
-width:700px; height:300px;border:1px solid #E2E2E2; background-color:#FFF;
+width:700px; height:400px;border:1px solid #E2E2E2; background-color:#FFF;
 box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
 }
 .input-block {
@@ -246,6 +246,7 @@ function changecareer(){
 /* 관심분야 변경 */
 function checkinter(){
 	 var meminter=document.getElementById("mem_inter").value;
+	 console.log(meminter);
 		$.ajax({
   	  			url:"changeMemInter.do",
   	  			data: { meminter : meminter },

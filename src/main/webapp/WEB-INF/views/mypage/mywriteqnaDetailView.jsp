@@ -79,7 +79,7 @@
 			<div class="col-md-9">
 				<!-- Main Content -->
 				<div class="headline">
-					<h2>글 상세보기</h2>
+					<h2>내가 쓴 Q&A 글 상세보기</h2>
 				</div>
 				<hr>
 				<label>작성자 <span class="color-red">*</span>

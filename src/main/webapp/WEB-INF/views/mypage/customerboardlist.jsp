@@ -160,15 +160,16 @@ box-shadow: 0 4px 5px 0 rgba(0,0,0,0.1), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4p
 	                <div class="row toggle" id="dropdown-detail-${g.count}" data-toggle="detail-${g.count}">
 	                    <div style="margin-left:20px;">
 	                       	<p>질문 제목: ${x.inq_title}</p>
+	                       	<p>질문 날짜: ${x.inq_date }</p>
 	                    </div>
 	                    <div style="margin-right:20px;"><i class="fa fa-chevron-down pull-right"></i>
 	                    <c:if test="${x.inq_yn eq 'Y'}">
-	                    <p style="color:red;">
+	                    <p style="color:red;margin-left:20px;">
 							답변완료	                    
 	                    </p>
 	                    </c:if>
 	                    <c:if test="${x.inq_yn eq 'N'}">
-						 <p style="color:#8181F7;">	답변대기</p>	                    
+						 <p style="color:#8181F7;margin-left:20px;" >	답변대기</p>	                    
 	                    </c:if>
 	                    </div>
 	                </div>
