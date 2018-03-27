@@ -59,7 +59,7 @@
 			<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">관리자 메뉴</a>
 				<div class="row">
 
-					<h1 style="margin-top:40px;">문의 관리</h1>
+					<h1 style="margin-top:40px;">통계확인</h1>
 				</div>
 
 				<div class="row">
