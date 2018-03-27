@@ -352,7 +352,7 @@
 			
 			<ul class="nav nav-pills no-print">
 				<li><a href="taskDetail.do?ass_sub_no=${ass_sub_no }&ass_no=${ass_no}&ass_cate=${ass_cate }&tutor_no=${tutor_no}&mem_no=${loginUser.mem_no}">${ass_sub_no }번</a></li>
-				<li class="active"><a href="/problem/status/1000">제출 답안</a></li>
+				<li class="active"><a href="submitTaskList.do?tutor_no=${tutor_no }&ass_no=${ass_no}&ass_sub_no=${ass_sub_no}&ass_cate=${assignment.ass_cate}&mem_no=${loginUser.mem_no}&ass_maker=${tutor_no}">제출 답안</a></li>
 			</ul>
 
 			<c:if test="${checkSubmit gt 0 or tutor_no eq loginUser.mem_no}">
