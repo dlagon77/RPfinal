@@ -470,7 +470,7 @@
 					          <div class="form-group">
 						            <label>Receiver</label><br>
 						        		<select id="emlist" name="emlist">
-						        		
+						        			
 						        		</select>
 					          </div>  
 					          
@@ -492,8 +492,23 @@
 					 </div>
 					</div>
 				
-				
-					  <!-- 페이징 처리 END -->
+				<div class="modal" id="myModal2${mes_no}" aria-hidden="true" style="display: none; z-index: 1060;">
+    				<div class="modal-dialog modal-lg">
+			          <div class="modal-content">
+			            <div class="modal-header">
+              				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+             				 <h4 class="modal-title">${mdetail.mes_title }</h4>
+		            			</div>
+		            			<div class="container"></div>
+		            			<div class="modal-body">
+		              				${mdetail.mes_content }
+		            			</div>
+				            <div class="modal-footer">
+				              <a href="#" data-dismiss="modal" class="btn">Close</a>
+				            </div>
+			          </div>
+			        </div>
+			    </div>
 
 
 	   <script>
@@ -642,7 +657,7 @@ function smsglist(){
 		       					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
 								 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
 								 +"</c:url>"
-								 +"<a data-toggle='modal' href='#myModal2${myMsg }'>"
+								 +"<a data-toggle='modal' href='#myModal2${mes_no}'>"
 								 +decodeURIComponent(json.msglist[i].mes_title)	
 		       					 +"</a>"
 		       					 +"</td>"		       					 
@@ -690,7 +705,7 @@ function smsglist(){
 		        					 +"<c:url var='myMsg' value='myMsgDetail.do'>"
 									 +"<c:param name='mes_no' value='"+ json.msglist[i].mes_no + "'/>"
 									 +"</c:url>"
-									 +"<a data-toggle='modal' href='#myModal2${myMsg }'>"
+									 +"<a data-toggle='modal' href='#myModal2${mes_no}'>"
 									 +decodeURIComponent(json.msglist[i].mes_title)	
 		        					 +"</a>"
 		        					 +"</td>"
@@ -729,7 +744,7 @@ function smsglist(){
 		        	if( json.maillist.length > 0){
 		        		for(var i = 0; i<json.maillist.length; i++){
 		        			emlist +=
-		            			+ "<option value='' selected='selected' disabled='disabled'>이메일 선택"
+		            			+ "<option selected>이메일 선택"
 		        				+"</option>"
 		            			+ "<option value='"
 		            			+json.maillist[i].mem_no
