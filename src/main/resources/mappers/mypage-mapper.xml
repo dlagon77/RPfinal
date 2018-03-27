@@ -120,22 +120,11 @@
 	
 	<select id="serviceMyWrite" parameterType="hashmap" resultType="list"	resultMap="resultQnaBoardSer">
 	<![CDATA[
-		SELECT * from
-		(SELECT rownum rnum, a.* FROM myqnaboard a 
+		SELECT * from myqnaboard where mem_no = #{mem_no}
 		]]>
 		<if test="isKeyword == 1">
 			<![CDATA[
-			where q_title like #{keyword} 
-			]]>
-		</if>
-	
-		<![CDATA[
-			order by q_no desc)
-			where rnum>= #{startRow} and rnum<=#{endRow}
-	  	]]>
-		<if test="ismemno == 1">
-			<![CDATA[
-			 	and mem_no = #{mem_no}
+			and q_title like #{keyword} 
 			]]>
 		</if>
 	</select>
@@ -227,26 +216,15 @@
 	<select id="serviceMyAssign" parameterType="hashmap" resultType="list" resultMap="MysubassResultMap">
 		<![CDATA[
 		SELECT mem_name,ass_title,ass_cate,ASS_DATE,ASS_NO,ass_maker,ass_writer from
-		(SELECT rownum rnum, a.* FROM assignment a 
+		assignment a 
+		inner join member on mem_no = ass_maker
+		    and ass_writer=#{mem_no}
 		]]>
-		<if test="isKeyword == 1">
+	  	<if test="isKeyword == 1">
 			<![CDATA[
 			where ASS_TITLE like #{keyword} 
 			]]>
 		</if>
-	
-		<![CDATA[
-			order by ASS_NO desc)
-			inner join member on mem_no = ass_maker
-		    and ass_writer=#{mem_no}
-	  	]]>
-<!-- 			where rnum> = #{startRow} and rnum< = #{endRow} -->
-<!-- 			and ass_maker = #{ass_maker} -->
-<!-- 		<if test="ismemno == 1"> -->
-<!-- 			<![CDATA[ -->
-<!-- 			 	and ass_writer = #{mem_no} -->
-<!-- 			]]> -->
-<!-- 		</if> -->
 	</select>
 	
 	<!-- 마이페이지 내가 제출한 과제 상세보기 -->
@@ -275,38 +253,30 @@
 	
 	<select id="serviceMyTest" parameterType="hashmap" resultType="list" resultMap="MytestboardResultMap">
 		<![CDATA[
-		SELECT 	
-	* from
-		(SELECT rownum rnum, t.* FROM test t 
+		SELECT 	* from test 
+		 inner join member on mem_no = test_maker
+		    and test_writer=#{mem_no}
 		]]>
-		<if test="isKeyword == 1">
+	  		<if test="isKeyword == 1">
 			<![CDATA[
 			where test_title like #{keyword} 
 			]]>
 		</if>
-	
-		<![CDATA[
-			order by test_no desc)
-			inner join member on mem_no = test_maker
-		    and test_writer=#{mem_no}
-	  	]]>
-<!-- 			where rnum> = #{startRow} and rnum< = #{endRow} -->
-<!-- 			and ass_maker = #{ass_maker} -->
-<!-- 		<if test="ismemno == 1"> -->
-<!-- 			<![CDATA[ -->
-<!-- 			 	and ass_writer = #{mem_no} -->
-<!-- 			]]> -->
-<!-- 		</if> -->
 	</select>
 	
 		<!-- 마이페이지 내가 제출한 과제 상세보기 -->
 	<select id="selectmyTestdetail" parameterType="_int" resultType="MyTestBoard" resultMap="MytestboardResultMap">
-	<![CDATA[
-		SELECT * FROM test where TEST_NO = #{sno} 
-	]]>
+		<![CDATA[
+			SELECT * FROM test where TEST_NO = #{sno} 
+		]]>
 	</select>
 	
+	  <select id="checkMeminfo" resultType="Member" parameterType="Member">
+      <![CDATA[
+         SELECT * FROM MEMBER 
+         WHERE mem_no = #{mem_no} 
+      ]]>
+   </select>
 	
-
 
 </mapper>
