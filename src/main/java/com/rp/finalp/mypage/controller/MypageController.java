@@ -573,7 +573,7 @@ public class MypageController {
 		public String sendMsg(Model model, Message msg, @RequestParam("emlist") int mv) {
 			
 			mypService.insertMsg(msg, mv);
-			return "redirect:home.do";
+			return "redirect:qblist.do";
 		}
 		
 		/* 이메일리스트 셀렉트박스에 불러오기 */

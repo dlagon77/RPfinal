@@ -58,8 +58,8 @@
 						 	    &nbsp;<img src="/finalp/resources/img/Calendar-256.png" height="20" width="22">&nbsp;	 
 						 			<strong>
 						 				<span>${rlist.t_re_date }</span>
-						 				<c:if test="${sessionScope.loginUser.mem_name eq qbDetail.tip_writer}">
-					            			<a href='tbrDelete.do?q_no=${ rlist.t_no }&q_re_no=${ rlist.t_re_no}' class="btn btn-success">삭제</a>
+						 				<c:if test="${sessionScope.loginUser.mem_name eq rlist.t_re_writer}">
+					            			<a href='tbrDelete.do?q_no=${ rlist.t_no }&q_re_no=${ rlist.t_re_no}' class="btn btn-warning">삭제</a>
 					            		</c:if>
 						 			</strong>
 					 				<br>
@@ -89,7 +89,7 @@
 	function replyPlus(mem_no,q_no){
 		var send = $("#send").val();
 		if(send == ""){
-			console.log("댓글을 입력해주세요.");
+			alert("댓글을 입력해주세요.");
 		}else{
 		
 		  $.ajax({
@@ -113,11 +113,17 @@
 			 				 +"<strong><span>"
 			 				 +decodeURIComponent(json.rlist[i].t_re_date)
 			 				 +"</span>"
+			 				 +"<c:if test="
+			 				 +'${sessionScope.loginUser.mem_name}'
+			 				 +'=='
+			 				 +decodeURIComponent(json.rlist[i].t_re_writer)
+			 				 +">"
 		            		 +"&nbsp;&nbsp;<a href='tbrDelete.do?q_no="
 		            		 +json.rlist[i].t_no
 		            		 +"&q_re_no="
 		            		 +json.rlist[i].t_re_no
 		            		 +"' class='btn btn-warning'>삭제</a>"
+		            		 +"</c:if>"
 		            		 +"</strong>"
 			 				 +"<br>"
 			 				 +"<small><span>"
@@ -126,8 +132,10 @@
 			 				 +"<hr></td>"       			
 			      			+"</tr>";
 				}
+				alert("댓글이 등록되었습니다.");
 				$("#reply").html(tag);
 				$("#send").val("");
+				
 			},error: function(request, status, errorData){
 				alert("error code : " + request.status + "\n" 
 						+ "message : " + request.responsText 

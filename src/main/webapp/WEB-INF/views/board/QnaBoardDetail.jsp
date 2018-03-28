@@ -56,8 +56,8 @@
 						 	    &nbsp;<img src="/finalp/resources/img/Calendar-256.png" height="20" width="22">&nbsp;	 
 						 			<strong>
 						 				<span>${rlist.q_re_date }</span>
-						 				<c:if test="${sessionScope.loginUser.mem_name eq qbDetail.q_writer}">
-					            			<a href='qbrDelete.do?q_no=${ rlist.q_no }&q_re_no=${ rlist.q_re_no}' class="btn btn-success">삭제</a>
+						 				<c:if test="${sessionScope.loginUser.mem_name eq rlist.q_re_writer}">
+					            			<a href='qbrDelete.do?q_no=${ rlist.q_no }&q_re_no=${ rlist.q_re_no}' class="btn btn-warning">삭제</a>
 					            		</c:if>
 						 			</strong>
 					 				<br>
@@ -87,7 +87,7 @@
 	function replyPlus(mem_no,q_no){
 		var send = $("#send").val();
 		if(send == ""){
-			console.log("댓글을 입력해주세요.");
+			alert("댓글을 입력해주세요.");
 		}else{
 		
 		  $.ajax({
@@ -96,10 +96,11 @@
 			type:"post",
 			data:{"q_re_writer":mem_no,"q_re_con":send,"q_no":q_no},
 			success:function(result){	
-		;
+						
 				var jsonstr = JSON.stringify(result);
 				var json = JSON.parse(jsonstr);
 				var tag = "";
+				var mn = "${sessionScope.loginUser.mem_name}";
 				for(var i=0; i<json.rlist.length; i++){
 					tag += "<tr>"
 			       			 +"<hr>"
@@ -111,11 +112,17 @@
 			 				 +"<strong><span>"
 			 				 +decodeURIComponent(json.rlist[i].q_re_date)
 			 				 +"</span>"
+			 				 +"<c:if test="
+			 				 +'${sessionScope.loginUser.mem_name}'
+			 				 +'=='
+			 				 +decodeURIComponent(json.rlist[i].q_re_writer)
+			 				 +">"
 		            		 +"&nbsp;&nbsp;<a href='qbrDelete.do?q_no="
 		            		 +json.rlist[i].q_no
 		            		 +"&q_re_no="
 		            		 +json.rlist[i].q_re_no
-		            		 +"' class='btn btn-warning'>삭제</a>"
+		            		 +"' class='btn btn-warning'>삭제</a>"	
+		            		 +"</c:if>"		            		 
 		            		 +"</strong>"
 			 				 +"<br>"
 			 				 +"<small><span>"
@@ -124,6 +131,7 @@
 			 				 +"<hr></td>"       			
 			      			+"</tr>";
 				}
+				alert("댓글이 등록되었습니다.");
 				$("#reply").html(tag);
 				$("#send").val("");
 			},error: function(request, status, errorData){
