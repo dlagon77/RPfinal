@@ -118,6 +118,7 @@ public class TestController {
 				}
 				else{
 					res+=temp;
+					res+="\n";
 				}
 			}
 			if(res.equals("")){
