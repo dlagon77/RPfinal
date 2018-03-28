@@ -100,8 +100,9 @@
 				var jsonstr = JSON.stringify(result);
 				var json = JSON.parse(jsonstr);
 				var tag = "";
-				var mn = "${sessionScope.loginUser.mem_name}";
+				
 				for(var i=0; i<json.rlist.length; i++){
+					if("${sessionScope.loginUser.mem_name}" == decodeURIComponent(json.rlist[i].q_re_writer)){
 					tag += "<tr>"
 			       			 +"<hr>"
 			       			 +"<td><img src='/finalp/resources/img/boardWriter.png' height='20' width='22'>&nbsp;"
@@ -112,17 +113,7 @@
 			 				 +"<strong><span>"
 			 				 +decodeURIComponent(json.rlist[i].q_re_date)
 			 				 +"</span>"
-			 				 +"<c:if test="
-			 				 +'${sessionScope.loginUser.mem_name}'
-			 				 +'=='
-			 				 +decodeURIComponent(json.rlist[i].q_re_writer)
-			 				 +">"
-		            		 +"&nbsp;&nbsp;<a href='qbrDelete.do?q_no="
-		            		 +json.rlist[i].q_no
-		            		 +"&q_re_no="
-		            		 +json.rlist[i].q_re_no
-		            		 +"' class='btn btn-warning'>삭제</a>"	
-		            		 +"</c:if>"		            		 
+		            		 +"&nbsp;&nbsp;<a class='btn btn-warning' href='qbrDelete.do?q_no="+json.rlist[i].q_no+"&q_re_no="+json.rlist[i].q_re_no+"'>삭제</a>"	            		 
 		            		 +"</strong>"
 			 				 +"<br>"
 			 				 +"<small><span>"
@@ -130,6 +121,25 @@
 			 				 +"</span></small>"
 			 				 +"<hr></td>"       			
 			      			+"</tr>";
+					}else{
+						tag += "<tr>"
+			       			 +"<hr>"
+			       			 +"<td><img src='/finalp/resources/img/boardWriter.png' height='20' width='22'>&nbsp;"
+			 				 +"<strong><span>"
+			 				 +decodeURIComponent(json.rlist[i].q_re_writer)
+			 				 +"</span></strong>" 
+			 				 +"<img src='/finalp/resources/img/Calendar-256.png' height='20' width='22'>&nbsp;"
+			 				 +"<strong><span>"
+			 				 +decodeURIComponent(json.rlist[i].q_re_date)
+			 				 +"</span>"            		 
+		            		 +"</strong>"
+			 				 +"<br>"
+			 				 +"<small><span>"
+			 				 +decodeURIComponent(json.rlist[i].q_re_con)
+			 				 +"</span></small>"
+			 				 +"<hr></td>"       			
+			      			+"</tr>";
+					}
 				}
 				alert("댓글이 등록되었습니다.");
 				$("#reply").html(tag);
