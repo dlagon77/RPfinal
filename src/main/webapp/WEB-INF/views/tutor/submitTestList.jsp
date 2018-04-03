@@ -450,7 +450,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("test${row.test_no 
     lineWrapping: true,
      theme: "lesser-dark", 
 /*     val: textarea.value , */
-     readOnly: 'nocursor' 
+     readOnly: 'nocursor' 		//값 수정 못하게
 }); 
 
 
@@ -478,6 +478,7 @@ function myFunction() {
 }
 
 </script>
+
 
 
 	<script>

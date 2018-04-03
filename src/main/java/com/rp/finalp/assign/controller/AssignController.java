@@ -74,35 +74,35 @@ public class AssignController{
 	
 	@RequestMapping(value = "compileAssign.do", method = RequestMethod.POST)
 	public void compileAssignMethod(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		String path = request.getSession().getServletContext().getRealPath("/");
-		PrintWriter out = response.getWriter();
-		String filename = request.getParameter("className")+".java";
-		File fn = new File(path+"//Files");
-		fn.mkdirs();
-		fn = new File(path+"//Files//"+filename);
-		FileOutputStream fos = new FileOutputStream(fn);
-		System.out.println(request.getParameter("code"));
-		byte[] sourcecode = request.getParameter("code").getBytes();
-		fos.write(sourcecode);
-		String compilecmd ="javac -d " + path + "\\Files\\Classes\\ " + path + "\\Files\\" + filename;
+		String path = request.getSession().getServletContext().getRealPath("/");//루트경로
+		PrintWriter out = response.getWriter();	//웹단에 출력
+		String filename = request.getParameter("className")+".java";	//.java로 파일저장
+		File fn = new File(path+"//Files");	//폴더만들기1
+		fn.mkdirs();	//폴더만들기2
+		fn = new File(path+"//Files//"+filename);	//폴더에 파일넣기1
+		FileOutputStream fos = new FileOutputStream(fn);	//폴더에 파일넣기2(스트림열기)
+		System.out.println(request.getParameter("code"));	//코드를 콘솔에 찍어보기
+		byte[] sourcecode = request.getParameter("code").getBytes();	//코드를 바이트배열로 만들기
+		fos.write(sourcecode);	//폴더에파일넣기3(파일에 코드 쓰기)
+		String compilecmd ="javac -d " + path + "\\Files\\Classes\\ " + path + "\\Files\\" + filename;//도스상에서 컴파일 하는 실행구문과 동일한 스트링
 		//에러에 대한 처리
-		Process error = Runtime.getRuntime().exec(compilecmd);
-		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));
+		Process error = Runtime.getRuntime().exec(compilecmd);//이 구문을 쓰면 프로세스상에서 컴파일 실행됨
+		BufferedReader br = new BufferedReader(new InputStreamReader(error.getErrorStream()));//프로세스로 실행한 컴파일을 불러오는 스트림 열기
 		String res="";
 		while(true){
-			String str = br.readLine();
+			String str = br.readLine();//한줄씩 일거오기
 			if(str!=null){
-				res+=str;
-				res+="\n";
+				res+=str;//읽어온거 res에 담기
+				res+="\n";//줄바꿈해서 읽어오는거니까 필수
 			}
 			else{
 				break;
 			}
 		}
 		if(res.equals("")){
-			res="Compiled Successfully";
+			res="Compiled Successfully";	//컴파일이 성공하면 웹단에 출력될 구문
 		}
-		out.println(res);
+		out.println(res); //웹단에 출력
 		br.close();
 		fos.close();
 		/*
@@ -121,13 +121,13 @@ public class AssignController{
 		String path = request.getSession().getServletContext().getRealPath("/");
 		File fn = new File(path+"//Files//Classes");
 		fn.mkdirs();
-		String runcmd = "java -cp " + path + "\\Files\\Classes\\ " + filename;
-		Process exe = Runtime.getRuntime().exec(runcmd);
+		String runcmd = "java -cp " + path + "\\Files\\Classes\\ " + filename;//도스상에서 컴파일 이후에 실행하는 구문(코드실행구문)
+		Process exe = Runtime.getRuntime().exec(runcmd);//실행된걸 프로세스로 실행
 		try{
 			exe.waitFor();
-			BufferedReader bin = new BufferedReader(new InputStreamReader(exe.getInputStream(),"iso-8859-1"));
+			BufferedReader bin = new BufferedReader(new InputStreamReader(exe.getInputStream()));	//프로세스로 실행한 결과 
 			//에러처리
-			BufferedReader berr = new BufferedReader(new InputStreamReader(exe.getErrorStream()));
+			BufferedReader berr = new BufferedReader(new InputStreamReader(exe.getErrorStream()));	//에러관련 스트림열기
 			String res="";
 /*			while(true){
 				String temp=bin.readLine();
@@ -156,11 +156,8 @@ public class AssignController{
 			}
 		
 			byte[] resb=res.getBytes("iso-8859-1");
-			String op=new String(resb,"utf-8");
-			
-			
-			System.out.println(op);
-			out.print(op);
+
+			out.print(resb);
 			bin.close();
 			berr.close();
 			out.close();

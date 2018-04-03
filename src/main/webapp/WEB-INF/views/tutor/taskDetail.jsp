@@ -597,8 +597,8 @@ function  compile() {
         }  
 
         xmlhttp.onreadystatechange=function(){
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){//컴파일이 제대로 되었다면
+            	document.getElementById("output").innerHTML=xmlhttp.responseText; //컴파일된 구문을 id가 output인 태그에 값 출력                      
             }
         }
         xmlhttp.open("POST",url,true);
@@ -655,7 +655,7 @@ function  compileTest() {
 
         xmlhttp.onreadystatechange=function(){
             if(xmlhttp.readyState==4 && xmlhttp.status==200){
-            	document.getElementById("output").innerHTML=xmlhttp.responseText;                       
+            	document.getElementById("output").innerHTML=xmlhttp.responseText;   //jquery에서 반환된 값이 data에 담긴것과 같은 구문                    
             }
         }
         xmlhttp.open("POST",url,true);
@@ -762,6 +762,7 @@ function subtest() {
 	}
 	console.log("submited !!");
 }
+
 <!-- /컴파일러 자바스크립트 -->
 
 <!-- 제출시 디비로 값 보내기 -->

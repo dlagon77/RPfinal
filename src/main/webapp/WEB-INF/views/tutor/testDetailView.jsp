@@ -534,13 +534,14 @@ function myFunction() {
 	<script type="text/javascript">
 	<!-- 코드미러 -->
 	var textarea=document.getElementById('maincode');
-	var editor = CodeMirror.fromTextArea(textarea, {
+	var editor = CodeMirror.fromTextArea(textarea, {	//코드미러는 앞으로 editor로 씀
 	    lineNumbers: true,
 	    lineWrapping: true,
 	     theme: "lesser-dark", 
 	    val: textarea.value
 	});
 	<!-- 코드미러 -->
+
 	
 	<!-- 컴파일러 자바스크립트 -->
 	function check() {
@@ -574,7 +575,7 @@ function myFunction() {
 	
 	function  compile() {
 		console.log("compiling");
-		if(editor.getValue()==""){
+		if(editor.getValue()==""){	//editor가 코드미러고 코드미러상의 값은 .getValue로 가져온다.
 			alert("Insert some code please !");
 		}
 		else{
@@ -727,7 +728,7 @@ function myFunction() {
 		console.log("submited !!");
 	}
 	
-	function subtest() {
+	function subtest() {	//시간되면 디비에 값 넣고, 
 		console.log("submiting");
 		if(editor.getValue()==""){
 			alert("Insert some code please !");
